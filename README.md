@@ -373,7 +373,7 @@ parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.p
 
 For reference, this is our model, visually speaking
 
-<!-- ![](models-drawings/model.png) -->
+![](man/figures/holzinger_model.png)
 
 ### Latent model
 
