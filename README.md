@@ -344,7 +344,7 @@ lavaan_reg(fit.path) |>
   nice_table(highlight = TRUE)
 ```
 
-<img src="man/figures/README-path-1.png" width="30%" />
+<img src="man/figures/README-indirect1-1.png" width="30%" />
 
 ``` r
 # We only kept significant regressions. Good (for this demo).
@@ -358,8 +358,9 @@ nice_fit(fit.path)
 nice_table(nice_fit(fit.path))
 ```
 
-``` r
+<img src="man/figures/README-path2-1.png" width="50%" />
 
+``` r
 # Let's get the indirect effects only
 parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.path)$op == ":="),]
 #>                     lhs op                rhs                label    est    se
@@ -369,8 +370,6 @@ parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.p
 #> 15 -2.081  0.037   -0.050   -0.001 -0.026  -0.033  -0.033
 #> 16  3.117  0.002    0.052    0.230  0.141   0.066   0.066
 ```
-
-<img src="man/figures/README-path2-1.png" width="50%" />
 
 For reference, this is our model, visually speaking
 

@@ -135,7 +135,7 @@ cat(model.path)
 
 Here, if we check the mediation section of the model, we see that it has been "augmented" with the path names. Those are `speed_a`, `textual_a`, `visual_a`, and `visual_b`. The logic for the determination of the path names is predictable: it is always the dependent variable (on the left) followed by letters, which represent the number of the explanatory variable (on the right).
 
-```{r}
+```{r indirect1}
 (indirect <- list(age_visual_speed = c("speed_a", "visual_a"),
                   grade_visual_textual = c("textual_a", "visual_b")))
 
@@ -154,7 +154,7 @@ lavaan_reg(fit.path) |>
   nice_table(highlight = TRUE)
 ```
 
-<img src="man/figures/README-path-1.png" width="30%" />
+<img src="man/figures/README-indirect1-1.png" width="30%" />
 
 ```{r path2}
 # We only kept significant regressions. Good (for this demo).
@@ -165,12 +165,15 @@ nice_fit(fit.path)
 # We can get it prettier with `rempsyc::nice_table`
 nice_table(nice_fit(fit.path))
 
+```
+
+<img src="man/figures/README-path2-1.png" width="50%" />
+
+```{r indirect2}
 # Let's get the indirect effects only
 parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.path)$op == ":="),]
 
 ```
-
-<img src="man/figures/README-path2-1.png" width="50%" />
 
 For reference, this is our model, visually speaking
 
