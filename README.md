@@ -544,7 +544,7 @@ summary(fit.latent, fit.measures = TRUE)
 #>     grade_vsl_txtl    0.246    0.075    3.256    0.001
 ```
 
-### Compare performance of all models
+### Compare fit of all models
 
 Finally, we can compare our fits by a wrapper around `nice_fit` that
 also gives optional reference values.

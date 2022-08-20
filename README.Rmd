@@ -193,7 +193,7 @@ fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRU
 summary(fit.latent, fit.measures = TRUE)
 ```
 
-### Compare performance of all models
+### Compare fit of all models
 
 Finally, we can compare our fits by a wrapper around `nice_fit` that also gives optional reference values.
 
