@@ -13,7 +13,7 @@
 #' @keywords lavaan, structural equation modeling, path analysis, CFA
 #' @export
 #' @examples
-#' (latent <- list(visual = paste0("x", 1:3),
+#' (latent <- list(visual = paste0("x",  1:3),
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))
 #'
