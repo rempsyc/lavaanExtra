@@ -2,15 +2,7 @@
 #'
 #' @description Vector-based lavaan syntax interpreter.
 #'
-#' @param mediation Mediation	indicators (`~` symbol: "is regressed on"). Differs from
-#'                  argument `regression` because path names can be optionally
-#'                  specified automatically with argument `label`.
-#' @param regression Regression indicators (`~` symbol: "is regressed on").
-#' @param covariance (Residual) (co)variance indicators (`~~` symbol: "is correlated with").
-#' @param indirect Indirect effect indicators (`:=` symbol: "indirect effect defined as").
-#' @param latent Latent variable indicators (`=~` symbol: "is measured by").
-#' @param intercept Intercept indicators (`~ 1` symbol: "intercept").
-#' @param label Logical, whether to display path names for the mediation argument.
+#' @param fit lavaan fit object to extract fit indices from
 #' @keywords lavaan, structural equation modeling, path analysis, CFA
 #' @export
 #' @examples

@@ -138,7 +138,6 @@ head(data)
 #> 
 #> $visual
 #> [1] "ageyr" "grade"
-
 (regression <- list(speed = IV,
                     textual = IV))
 #> $speed
@@ -146,7 +145,6 @@ head(data)
 #> 
 #> $textual
 #> [1] "ageyr" "grade"
-
 (covariance <- list(speed = "textual",
                     ageyr = "grade"))
 #> $speed
@@ -195,6 +193,10 @@ model. Let’s make the non-saturated path analysis model next.
 
 Because we use `lavaanExtra`, we don’t have to redefine the entire
 model: simply what we want to update. In this case, the regressions.
+However, we also want to specify and test our indirect effects
+(mediation). For this, we have to obtain the path names by setting
+`label = TRUE`. This will allow us to define our indirect effects and
+feed them back to `write_lavaan`.
 
 ``` r
 (regression <- list(speed = "grade",
@@ -206,15 +208,15 @@ model: simply what we want to update. In this case, the regressions.
 #> [1] "ageyr" "grade"
 # We check that we have removed "ageyr" correctly from "speed". OK.
 
-# We can run the model again.
-model.path <- write_lavaan(mediation, regression, covariance)
+# We can run the model again. However, we set `label = TRUE` to get the path names
+model.path <- write_lavaan(mediation, regression, covariance, label = TRUE)
 cat(model.path)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ visual
-#> textual ~ visual
-#> visual ~ ageyr + grade
+#> speed ~ speed_a*visual
+#> textual ~ textual_a*visual
+#> visual ~ visual_a*ageyr + visual_b*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -229,6 +231,51 @@ cat(model.path)
 #> ageyr ~~ grade
 # We check that we have removed "ageyr" correctly from "speed" in the 
 # regression section. OK.
+```
+
+Here, if we check the mediation section of the model, we see that it has
+been “augmented” with the path names. Those are `speed_a`, `textual_a`,
+`visual_a`, and `visual_b`. The logic for the determination of the path
+names is predictable: it is always the dependent variable (on the left)
+followed by letters, which represent the number of the explanatory
+variable (on the right).
+
+``` r
+(indirect <- list(age_visual_speed = c("speed_a", "visual_a"),
+                  grade_visual_textual = c("textual_a", "visual_b")))
+#> $age_visual_speed
+#> [1] "speed_a"  "visual_a"
+#> 
+#> $grade_visual_textual
+#> [1] "textual_a" "visual_b"
+
+# We run the model again, with the indirect effects
+model.path <- write_lavaan(mediation, regression, covariance, indirect, label = TRUE)
+cat(model.path)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ speed_a*visual
+#> textual ~ textual_a*visual
+#> visual ~ visual_a*ageyr + visual_b*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+#> 
+#> ##################################################
+#> # [--------Mediations (indirect effects)---------]
+#> 
+#> age_visual_speed := speed_a * visual_a
+#> grade_visual_textual := textual_a * visual_b
 
 # Fit the model with `lavaan`
 fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
@@ -259,12 +306,12 @@ summary(fit.path)
 #> Regressions:
 #>                    Estimate  Std.Err  z-value  P(>|z|)
 #>   speed ~                                             
-#>     visual            0.192    0.050    3.862    0.000
+#>     visual  (spd_)    0.192    0.050    3.862    0.000
 #>   textual ~                                           
-#>     visual            0.286    0.063    4.519    0.000
+#>     visual  (txt_)    0.286    0.063    4.519    0.000
 #>   visual ~                                            
-#>     ageyr            -0.134    0.054   -2.470    0.014
-#>     grade             0.493    0.114    4.306    0.000
+#>     ageyr  (visl_)   -0.134    0.054   -2.470    0.014
+#>     grade  (vsl_b)    0.493    0.114    4.306    0.000
 #>   speed ~                                             
 #>     grade             0.533    0.087    6.111    0.000
 #>   textual ~                                           
@@ -285,6 +332,11 @@ summary(fit.path)
 #>    .visual            0.723    0.059   12.247    0.000
 #>     ageyr             1.103    0.090   12.247    0.000
 #>     grade             0.249    0.020   12.247    0.000
+#> 
+#> Defined Parameters:
+#>                    Estimate  Std.Err  z-value  P(>|z|)
+#>     age_visual_spd   -0.026    0.012   -2.081    0.037
+#>     grade_vsl_txtl    0.141    0.045    3.117    0.002
 
 # Get regression parameters only and make it pretty with `rempsyc::nice_table`
 lavaan_reg(fit.path) |> 
@@ -297,15 +349,31 @@ lavaan_reg(fit.path) |>
 # We only kept significant regressions. Good (for this demo).
 
 # Get fit indices
-nice_fit(fit)
-#>    chi2 df     p   CFI   TLI RMSEA  SRMR     AIC     BIC
-#> x 2.351  1 0.125 0.991 0.822 0.205 0.002 481.967 511.282
+nice_fit(fit.path)
+#>    chi2 df     p CFI   TLI RMSEA  SRMR      AIC     BIC
+#> x 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.64
 
 # We can get it prettier with `rempsyc::nice_table`
-nice_table(nice_fit(fit))
+nice_table(nice_fit(fit.path))
+```
+
+``` r
+
+# Let's get the indirect effects only
+parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.path)$op == ":="),]
+#>                     lhs op                rhs                label    est    se
+#> 15     age_visual_speed :=   speed_a*visual_a     age_visual_speed -0.026 0.012
+#> 16 grade_visual_textual := textual_a*visual_b grade_visual_textual  0.141 0.045
+#>         z pvalue ci.lower ci.upper std.lv std.all std.nox
+#> 15 -2.081  0.037   -0.050   -0.001 -0.026  -0.033  -0.033
+#> 16  3.117  0.002    0.052    0.230  0.141   0.066   0.066
 ```
 
 <img src="man/figures/README-path2-1.png" width="50%" />
+
+For reference, this is our model, visually speaking
+
+<!-- ![](models-drawings/model.png) -->
 
 ### Latent model
 
@@ -326,7 +394,7 @@ everything again. We can simply define our latent variables and proceed.
 #> $speed
 #> [1] "x7" "x8" "x9"
 
-model.latent <- write_lavaan(mediation, regression, covariance, latent = latent)
+model.latent <- write_lavaan(mediation, regression, covariance, indirect, latent, label = TRUE)
 cat(model.latent)
 #> ##################################################
 #> # [---------------Latent variables---------------]
@@ -338,9 +406,9 @@ cat(model.latent)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ visual
-#> textual ~ visual
-#> visual ~ ageyr + grade
+#> speed ~ speed_a*visual
+#> textual ~ textual_a*visual
+#> visual ~ visual_a*ageyr + visual_b*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -353,6 +421,12 @@ cat(model.latent)
 #> 
 #> speed ~~ textual
 #> ageyr ~~ grade
+#> 
+#> ##################################################
+#> # [--------Mediations (indirect effects)---------]
+#> 
+#> age_visual_speed := speed_a * visual_a
+#> grade_visual_textual := textual_a * visual_b
 
 library(lavaan)
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
@@ -428,12 +502,12 @@ summary(fit.latent, fit.measures = TRUE)
 #> Regressions:
 #>                    Estimate  Std.Err  z-value  P(>|z|)
 #>   speed ~                                             
-#>     visual            0.255    0.066    3.843    0.000
+#>     visual  (spd_)    0.255    0.066    3.843    0.000
 #>   textual ~                                           
-#>     visual            0.398    0.087    4.579    0.000
+#>     visual  (txt_)    0.398    0.087    4.579    0.000
 #>   visual ~                                            
-#>     ageyr            -0.177    0.068   -2.611    0.009
-#>     grade             0.618    0.145    4.273    0.000
+#>     ageyr  (visl_)   -0.177    0.068   -2.611    0.009
+#>     grade  (vsl_b)    0.618    0.145    4.273    0.000
 #>   speed ~                                             
 #>     grade             0.462    0.096    4.824    0.000
 #>   textual ~                                           
@@ -463,6 +537,11 @@ summary(fit.latent, fit.measures = TRUE)
 #>    .visual            0.752    0.140    5.357    0.000
 #>    .textual           0.668    0.083    8.045    0.000
 #>    .speed             0.312    0.067    4.622    0.000
+#> 
+#> Defined Parameters:
+#>                    Estimate  Std.Err  z-value  P(>|z|)
+#>     age_visual_spd   -0.045    0.020   -2.228    0.026
+#>     grade_vsl_txtl    0.246    0.075    3.256    0.001
 ```
 
 ### Compare performance of all models

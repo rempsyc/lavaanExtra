@@ -7,21 +7,7 @@
 lavaan_reg(fit)
 }
 \arguments{
-\item{mediation}{Mediation    indicators (\code{~} symbol: "is regressed on"). Differs from
-argument \code{regression} because path names can be optionally
-specified automatically with argument \code{label}.}
-
-\item{regression}{Regression indicators (\code{~} symbol: "is regressed on").}
-
-\item{covariance}{(Residual) (co)variance indicators (\verb{~~} symbol: "is correlated with").}
-
-\item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect effect defined as").}
-
-\item{latent}{Latent variable indicators (\verb{=~} symbol: "is measured by").}
-
-\item{intercept}{Intercept indicators (\code{~ 1} symbol: "intercept").}
-
-\item{label}{Logical, whether to display path names for the mediation argument.}
+\item{fit}{lavaan fit object to extract fit indices from}
 }
 \description{
 Vector-based lavaan syntax interpreter.
