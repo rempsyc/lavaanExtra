@@ -43,6 +43,13 @@ example](#regression-example)<a name = 'Regression example'/>
 
 [SEM example](#sem-example)<a name = 'SEM example'/>
 
+[Saturated model](#saturated-model)<a name = 'Saturated model'/>
+
+[Path analysis
+model](#path-analysis-model)<a name = 'Path analysis model'/>
+
+[Latent model](#latent-model)<a name = 'Latent model'/>
+
 ## Regression example
 
 ``` r

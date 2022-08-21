@@ -54,6 +54,9 @@ install.packages("lavaanExtra", repos = c(
 section.1 <- "Regression example"
 section.2 <- "CFA example"
 section.3 <- "SEM example"
+section.4 <- "Saturated model"
+section.5 <- "Path analysis model"
+section.6 <- "Latent model"
 
 cute_cat <- function(x, header.level = 1){ 
   cat(rep("#", header.level), " ", x, sep = "")
@@ -68,7 +71,7 @@ cute_TOC <- function(section) {
 }
 
 invisible(lapply(list(
-  section.1, section.2, section.3), 
+  section.1, section.2, section.3, section.4, section.5, section.6), 
   cute_TOC))
 
 ```
