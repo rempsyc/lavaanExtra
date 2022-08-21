@@ -571,14 +571,14 @@
 <p>Finally, we can compare our fits by a wrapper around <code>nice_fit</code> that also gives optional reference values.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Default output</span></span>
-<span><span class="fu"><a href="reference/compare_fit.html">compare_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span><span class="op">)</span></span>
+<span><span class="fu">compare_fit</span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           Model    chi2 df     p   CFI   TLI RMSEA  SRMR      AIC      BIC</span></span>
 <span><span class="co">#&gt; 1 fit.saturated   0.000  0    NA 1.000 1.000 0.000 0.000 3483.460 3539.017</span></span>
 <span><span class="co">#&gt; 2      fit.path   0.327  1 0.568 1.000 1.028 0.000 0.007 3481.787 3533.640</span></span>
 <span><span class="co">#&gt; 3    fit.latent 118.917 37 0.000 0.924 0.888 0.086 0.061 8638.789 8746.198</span></span>
 <span></span>
 <span><span class="co"># With `nice_table = TRUE`</span></span>
-<span><span class="fu"><a href="reference/compare_fit.html">compare_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">compare_fit</span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-compare-1.png" width="90%"></p>
 </div>
 </div>
