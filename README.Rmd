@@ -164,7 +164,7 @@ lavaan_reg(fit.path) |>
 <img src="man/figures/README-indirect1-1.png" width="30%" />
 
 ```{r path2}
-# We only kept significant regressions. Good (for this demo).
+# We only kept significant regressions—good (for this demo).
 
 # Get fit indices
 nice_fit(fit.saturated, fit.path)
@@ -174,7 +174,7 @@ nice_fit(fit.saturated, fit.path, nice_table = TRUE)
 
 ```
 
-<img src="man/figures/README-path2-1.png" width="50%" />
+<img src="man/figures/README-path2-1.png" width="90%" />
 
 ```{r indirect2}
 # Let's get the indirect effects only
@@ -201,19 +201,14 @@ cat(model.latent)
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
               auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 summary(fit.latent, fit.measures = TRUE)
-```
 
-### Compare fit of all models
-
-Finally, we can compare our fits by a wrapper around `nice_fit` that also gives optional reference values.
-
-```{r compare}
-# Default output
+# Get fit indices
 nice_fit(fit.saturated, fit.path, fit.latent)
 
-# With `nice_table = TRUE`
+# We can get it prettier with `rempsyc::nice_table`
 nice_fit(fit.saturated, fit.path, fit.latent, nice_table = TRUE)
+
 
 ```
 
-<img src="man/figures/README-compare-1.png" width="90%" />
+<img src="man/figures/README-latent-1.png" width="90%" />

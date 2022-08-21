@@ -25,7 +25,7 @@
 lavaan_reg <- function(fit) {
   x <- lavaan::parameterEstimates(fit, standardized = TRUE)
   x <- x[which(x["op"] == "~"),]
-  x <- x[c("lhs", "rhs", "est", "pvalue")]
+  x <- x[c("lhs", "rhs", "std.all", "pvalue")]
   names(x) <- c("Outcome", "Predictor", "B", "p")
   x
 }

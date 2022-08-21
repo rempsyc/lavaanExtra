@@ -111,25 +111,25 @@
 <span></span>
 <span><span class="co"># Get regression parameters only</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    Outcome Predictor       B     p</span></span>
-<span><span class="co">#&gt; 1      mpg       cyl  -0.111 0.891</span></span>
-<span><span class="co">#&gt; 2      mpg      disp   0.013 0.339</span></span>
-<span><span class="co">#&gt; 3      mpg        hp  -0.021 0.241</span></span>
-<span><span class="co">#&gt; 4      mpg      drat   0.787 0.550</span></span>
-<span><span class="co">#&gt; 5      mpg        wt  -3.715 0.015</span></span>
-<span><span class="co">#&gt; 6      mpg      qsec   0.821 0.177</span></span>
-<span><span class="co">#&gt; 7      mpg        vs   0.318 0.854</span></span>
-<span><span class="co">#&gt; 8      mpg        am   2.520 0.132</span></span>
-<span><span class="co">#&gt; 9      mpg      gear   0.655 0.587</span></span>
-<span><span class="co">#&gt; 10     mpg      carb  -0.199 0.761</span></span>
-<span><span class="co">#&gt; 11    disp        hp   0.753 0.000</span></span>
-<span><span class="co">#&gt; 12    disp      drat   4.189 0.795</span></span>
-<span><span class="co">#&gt; 13    disp        wt  84.409 0.000</span></span>
-<span><span class="co">#&gt; 14    disp      qsec -15.794 0.018</span></span>
-<span><span class="co">#&gt; 15    disp        vs -23.533 0.240</span></span>
-<span><span class="co">#&gt; 16    disp        am -11.946 0.556</span></span>
-<span><span class="co">#&gt; 17    disp      gear  -1.376 0.924</span></span>
-<span><span class="co">#&gt; 18    disp      carb -30.657 0.000</span></span>
+<span><span class="co">#&gt;    Outcome Predictor      B     p</span></span>
+<span><span class="co">#&gt; 1      mpg       cyl -0.033 0.891</span></span>
+<span><span class="co">#&gt; 2      mpg      disp  0.274 0.339</span></span>
+<span><span class="co">#&gt; 3      mpg        hp -0.244 0.241</span></span>
+<span><span class="co">#&gt; 4      mpg      drat  0.070 0.550</span></span>
+<span><span class="co">#&gt; 5      mpg        wt -0.603 0.015</span></span>
+<span><span class="co">#&gt; 6      mpg      qsec  0.243 0.177</span></span>
+<span><span class="co">#&gt; 7      mpg        vs  0.027 0.854</span></span>
+<span><span class="co">#&gt; 8      mpg        am  0.209 0.132</span></span>
+<span><span class="co">#&gt; 9      mpg      gear  0.080 0.587</span></span>
+<span><span class="co">#&gt; 10     mpg      carb -0.053 0.761</span></span>
+<span><span class="co">#&gt; 11    disp        hp  0.416 0.000</span></span>
+<span><span class="co">#&gt; 12    disp      drat  0.018 0.795</span></span>
+<span><span class="co">#&gt; 13    disp        wt  0.666 0.000</span></span>
+<span><span class="co">#&gt; 14    disp      qsec -0.228 0.018</span></span>
+<span><span class="co">#&gt; 15    disp        vs -0.096 0.240</span></span>
+<span><span class="co">#&gt; 16    disp        am -0.048 0.556</span></span>
+<span><span class="co">#&gt; 17    disp      gear -0.008 0.924</span></span>
+<span><span class="co">#&gt; 18    disp      carb -0.400 0.000</span></span>
 <span></span>
 <span><span class="co"># We can get it prettier with `rempsyc::nice_table`</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rempsyc.remi-theriault.com" class="external-link">rempsyc</a></span><span class="op">)</span></span>
@@ -379,16 +379,17 @@
 <span>  <span class="fu"><a href="https://rempsyc.remi-theriault.com/reference/nice_table.html" class="external-link">nice_table</a></span><span class="op">(</span>highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect1-1.png" width="30%"></p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># We only kept significant regressions. Good (for this demo).</span></span>
+<code class="sourceCode R"><span><span class="co"># We only kept significant regressions—good (for this demo).</span></span>
 <span></span>
 <span><span class="co"># Get fit indices</span></span>
-<span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.path</span><span class="op">)</span></span>
-<span><span class="co">#&gt;    chi2 df     p CFI   TLI RMSEA  SRMR      AIC     BIC</span></span>
-<span><span class="co">#&gt; x 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.64</span></span>
+<span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span><span class="op">)</span></span>
+<span><span class="co">#&gt;           Model  chi2 df     p CFI   TLI RMSEA  SRMR      AIC      BIC</span></span>
+<span><span class="co">#&gt; 1 fit.saturated 0.000  0    NA   1 1.000     0 0.000 3483.460 3539.017</span></span>
+<span><span class="co">#&gt; 2      fit.path 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.640</span></span>
 <span></span>
 <span><span class="co"># We can get it prettier with `rempsyc::nice_table`</span></span>
-<span><span class="fu"><a href="https://rempsyc.remi-theriault.com/reference/nice_table.html" class="external-link">nice_table</a></span><span class="op">(</span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.path</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-path2-1.png" width="50%"></p>
+<span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-path2-1.png" width="90%"></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's get the indirect effects only</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit.path</span>, standardized <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/parameterEstimates.html" class="external-link">parameterEstimates</a></span><span class="op">(</span><span class="va">fit.path</span><span class="op">)</span><span class="op">$</span><span class="va">op</span> <span class="op">==</span> <span class="st">":="</span><span class="op">)</span>,<span class="op">]</span></span>
@@ -452,7 +453,6 @@
 <span><span class="co">#&gt; age_visual_speed := speed_a * visual_a</span></span>
 <span><span class="co">#&gt; grade_visual_textual := textual_a * visual_b</span></span>
 <span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="va">fit.latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.latent</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>              auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">fit.latent</span>, fit.measures <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -565,23 +565,18 @@
 <span><span class="co">#&gt; Defined Parameters:</span></span>
 <span><span class="co">#&gt;                    Estimate  Std.Err  z-value  P(&gt;|z|)</span></span>
 <span><span class="co">#&gt;     age_visual_spd   -0.045    0.020   -2.228    0.026</span></span>
-<span><span class="co">#&gt;     grade_vsl_txtl    0.246    0.075    3.256    0.001</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="compare-fit-of-all-models">Compare fit of all models<a class="anchor" aria-label="anchor" href="#compare-fit-of-all-models"></a>
-</h3>
-<p>Finally, we can compare our fits by a wrapper around <code>nice_fit</code> that also gives optional reference values.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Default output</span></span>
-<span><span class="fu"><a href="reference/compare_fit.html">compare_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     grade_vsl_txtl    0.246    0.075    3.256    0.001</span></span>
+<span></span>
+<span><span class="co"># Get fit indices</span></span>
+<span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           Model    chi2 df     p   CFI   TLI RMSEA  SRMR      AIC      BIC</span></span>
 <span><span class="co">#&gt; 1 fit.saturated   0.000  0    NA 1.000 1.000 0.000 0.000 3483.460 3539.017</span></span>
 <span><span class="co">#&gt; 2      fit.path   0.327  1 0.568 1.000 1.028 0.000 0.007 3481.787 3533.640</span></span>
 <span><span class="co">#&gt; 3    fit.latent 118.917 37 0.000 0.924 0.888 0.086 0.061 8638.789 8746.198</span></span>
 <span></span>
-<span><span class="co"># With `nice_table = TRUE`</span></span>
-<span><span class="fu"><a href="reference/compare_fit.html">compare_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-compare-1.png" width="90%"></p>
+<span><span class="co"># We can get it prettier with `rempsyc::nice_table`</span></span>
+<span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-latent-1.png" width="90%"></p>
 </div>
 </div>
 </div>

@@ -62,25 +62,25 @@ fit <- lavaan(mtcars.model, data = mtcars, auto.var = TRUE)
 
 # Get regression parameters only
 lavaan_reg(fit)
-#>    Outcome Predictor       B     p
-#> 1      mpg       cyl  -0.111 0.891
-#> 2      mpg      disp   0.013 0.339
-#> 3      mpg        hp  -0.021 0.241
-#> 4      mpg      drat   0.787 0.550
-#> 5      mpg        wt  -3.715 0.015
-#> 6      mpg      qsec   0.821 0.177
-#> 7      mpg        vs   0.318 0.854
-#> 8      mpg        am   2.520 0.132
-#> 9      mpg      gear   0.655 0.587
-#> 10     mpg      carb  -0.199 0.761
-#> 11    disp        hp   0.753 0.000
-#> 12    disp      drat   4.189 0.795
-#> 13    disp        wt  84.409 0.000
-#> 14    disp      qsec -15.794 0.018
-#> 15    disp        vs -23.533 0.240
-#> 16    disp        am -11.946 0.556
-#> 17    disp      gear  -1.376 0.924
-#> 18    disp      carb -30.657 0.000
+#>    Outcome Predictor      B     p
+#> 1      mpg       cyl -0.033 0.891
+#> 2      mpg      disp  0.274 0.339
+#> 3      mpg        hp -0.244 0.241
+#> 4      mpg      drat  0.070 0.550
+#> 5      mpg        wt -0.603 0.015
+#> 6      mpg      qsec  0.243 0.177
+#> 7      mpg        vs  0.027 0.854
+#> 8      mpg        am  0.209 0.132
+#> 9      mpg      gear  0.080 0.587
+#> 10     mpg      carb -0.053 0.761
+#> 11    disp        hp  0.416 0.000
+#> 12    disp      drat  0.018 0.795
+#> 13    disp        wt  0.666 0.000
+#> 14    disp      qsec -0.228 0.018
+#> 15    disp        vs -0.096 0.240
+#> 16    disp        am -0.048 0.556
+#> 17    disp      gear -0.008 0.924
+#> 18    disp      carb -0.400 0.000
 
 # We can get it prettier with `rempsyc::nice_table`
 library(rempsyc)
@@ -354,18 +354,19 @@ lavaan_reg(fit.path) |>
 <img src="man/figures/README-indirect1-1.png" width="30%" />
 
 ``` r
-# We only kept significant regressions. Good (for this demo).
+# We only kept significant regressions—good (for this demo).
 
 # Get fit indices
-nice_fit(fit.path)
-#>    chi2 df     p CFI   TLI RMSEA  SRMR      AIC     BIC
-#> x 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.64
+nice_fit(fit.saturated, fit.path)
+#>           Model  chi2 df     p CFI   TLI RMSEA  SRMR      AIC      BIC
+#> 1 fit.saturated 0.000  0    NA   1 1.000     0 0.000 3483.460 3539.017
+#> 2      fit.path 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.640
 
 # We can get it prettier with `rempsyc::nice_table`
-nice_table(nice_fit(fit.path))
+nice_fit(fit.saturated, fit.path, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-path2-1.png" width="50%" />
+<img src="man/figures/README-path2-1.png" width="90%" />
 
 ``` r
 # Let's get the indirect effects only
@@ -435,7 +436,6 @@ cat(model.latent)
 #> age_visual_speed := speed_a * visual_a
 #> grade_visual_textual := textual_a * visual_b
 
-library(lavaan)
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
               auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 summary(fit.latent, fit.measures = TRUE)
@@ -549,23 +549,16 @@ summary(fit.latent, fit.measures = TRUE)
 #>                    Estimate  Std.Err  z-value  P(>|z|)
 #>     age_visual_spd   -0.045    0.020   -2.228    0.026
 #>     grade_vsl_txtl    0.246    0.075    3.256    0.001
-```
 
-### Compare fit of all models
-
-Finally, we can compare our fits by a wrapper around `nice_fit` that
-also gives optional reference values.
-
-``` r
-# Default output
-compare_fit(fit.saturated, fit.path, fit.latent)
+# Get fit indices
+nice_fit(fit.saturated, fit.path, fit.latent)
 #>           Model    chi2 df     p   CFI   TLI RMSEA  SRMR      AIC      BIC
 #> 1 fit.saturated   0.000  0    NA 1.000 1.000 0.000 0.000 3483.460 3539.017
 #> 2      fit.path   0.327  1 0.568 1.000 1.028 0.000 0.007 3481.787 3533.640
 #> 3    fit.latent 118.917 37 0.000 0.924 0.888 0.086 0.061 8638.789 8746.198
 
-# With `nice_table = TRUE`
-compare_fit(fit.saturated, fit.path, fit.latent, nice_table = TRUE)
+# We can get it prettier with `rempsyc::nice_table`
+nice_fit(fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-compare-1.png" width="90%" />
+<img src="man/figures/README-latent-1.png" width="90%" />
