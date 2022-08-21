@@ -1,8 +1,14 @@
 #' @title Extract relevant fit indices from lavaan model
 #'
-#' @description Vector-based lavaan syntax interpreter.
+#' @description Compares fit from one or several lavaan models. Also
+#' optionally includes references values. The reference fit values are
+#' based on Schreiber et al. (2006).
 #'
-#' @param fit lavaan fit object to extract fit indices from
+#' Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King, J. (2006). Reporting structural equation modeling and confirmatory factor analysis results: A review. *The Journal of educational research*, *99*(6), 323-338. https://doi.org/10.3200/JOER.99.6.323-338
+#'
+#' @param ... lavaan model objects to extract fit indices from
+#' @param nice_table Logical, whether to print the table as a `rempsyc::nice_table`
+#'                   as well as print the reference values at the bottom of the table.
 #' @keywords lavaan, structural equation modeling, path analysis, CFA
 #' @export
 #' @examples
@@ -22,7 +28,49 @@
 #'               auto.cov.lv.x=TRUE)
 #' nice_fit(fit)
 
-nice_fit <- function(fit) {
+nice_fit <- function(..., nice_table = FALSE){
+  x <- lapply(list(...), nice_fit_internal)
+  df <- do.call(rbind, x)
+  Model <- sapply(match.call(expand.dots = FALSE)$`...`, as.character)
+  df <- cbind(Model, df)
+  row.names(df) <- NULL
+  if (nice_table) {
+    if (isFALSE(requireNamespace("rempsyc", quietly = TRUE))) {
+      cat("The package `rempsyc` is required for this feature\n",
+          "Would you like to install it?")
+      if (utils::menu(c("Yes", "No")) == 1) {
+        utils::install.packages('rempsyc', repos = c(
+          rempsyc = 'https://rempsyc.r-universe.dev',
+          CRAN = 'https://cloud.r-project.org'))
+      } else (stop(
+        'The `nice_table` feature relies on the `rempsyc` package.
+    You can install it manually with:
+    install.packages("rempsyc", repos = c(
+          rempsyc = "https://rempsyc.r-universe.dev",
+          CRAN = "https://cloud.r-project.org")'))
+    }
+    table <- nice_table(df)
+    table <- flextable::add_footer_row(table, values = c(Model = "Ideal Value",
+                                                         Chi2 = "(\u03C72 / df",
+                                                         df = "< 2 or 3)",
+                                                         p = "> .05",
+                                                         CFI = "\u2265 .95",
+                                                         TLI = "\u2265 .95",
+                                                         RMSEA = "< .06-.08",
+                                                         SRMR = "\u2264 .08",
+                                                         AIC = "Smaller is better",
+                                                         BIC = "Smaller is better"),
+                                       colwidths = rep(1, length(table$col_keys)))
+    table <- flextable::bold(table, part = "footer")
+    table <- flextable::align(table, align = "center", part = "all")
+    table <- flextable::font(table, part = "all", fontname = "Times New Roman")
+    table <- flextable::hline(table, i = nrow(df))
+    df <- table
+  }
+  df
+}
+
+nice_fit_internal <- function(fit) {
   x <- lavaan::fitMeasures(fit, c("chisq", "df", "pvalue", "cfi", "tli",
                                   "rmsea", "srmr", "aic", "bic"))
   x <- round(x, 3)

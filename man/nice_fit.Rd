@@ -4,13 +4,20 @@
 \alias{nice_fit}
 \title{Extract relevant fit indices from lavaan model}
 \usage{
-nice_fit(fit)
+nice_fit(..., nice_table = FALSE)
 }
 \arguments{
-\item{fit}{lavaan fit object to extract fit indices from}
+\item{...}{lavaan model objects to extract fit indices from}
+
+\item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
+as well as print the reference values at the bottom of the table.}
 }
 \description{
-Vector-based lavaan syntax interpreter.
+Compares fit from one or several lavaan models. Also
+optionally includes references values. The reference fit values are
+based on Schreiber et al. (2006).
+
+Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King, J. (2006). Reporting structural equation modeling and confirmatory factor analysis results: A review. \emph{The Journal of educational research}, \emph{99}(6), 323-338. https://doi.org/10.3200/JOER.99.6.323-338
 }
 \examples{
 (latent <- list(visual = paste0("x", 1:3),
