@@ -1,36 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>/404.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/404.html</loc>
   </url>
   <url>
-    <loc>/authors.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/authors.html</loc>
   </url>
   <url>
-    <loc>/index.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/index.html</loc>
   </url>
   <url>
-    <loc>/LICENSE-text.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>/LICENSE.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/LICENSE.html</loc>
   </url>
   <url>
-    <loc>/reference/compare_fit.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/compare_fit.html</loc>
   </url>
   <url>
-    <loc>/reference/index.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/index.html</loc>
   </url>
   <url>
-    <loc>/reference/lavaan_reg.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_cov.html</loc>
   </url>
   <url>
-    <loc>/reference/nice_fit.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_ind.html</loc>
   </url>
   <url>
-    <loc>/reference/write_lavaan.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_reg.html</loc>
   </url>
   <url>
-    <loc>/TODOS.html</loc>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/nice_fit.html</loc>
+  </url>
+  <url>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/write_lavaan.html</loc>
+  </url>
+  <url>
+    <loc>https://lavaanExtra.remi-theriault.com/TODOS.html</loc>
   </url>
 </urlset>

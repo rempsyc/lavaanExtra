@@ -28,7 +28,7 @@
 #'               auto.cov.lv.x=TRUE)
 #' nice_fit(fit)
 
-nice_fit <- function(..., nice_table = FALSE){
+nice_fit <- function(..., nice_table = FALSE) {
   x <- lapply(list(...), nice_fit_internal)
   df <- do.call(rbind, x)
   Model <- sapply(match.call(expand.dots = FALSE)$`...`, as.character)
@@ -49,10 +49,11 @@ nice_fit <- function(..., nice_table = FALSE){
           rempsyc = "https://rempsyc.r-universe.dev",
           CRAN = "https://cloud.r-project.org")'))
     }
-    table <- nice_table(df)
+    table <- rempsyc::nice_table(df)
     table <- flextable::add_footer_row(table, values = c(Model = "Ideal Value",
-                                                         Chi2 = "(\u03C72 / df",
-                                                         df = "< 2 or 3)",
+                                                         chi2 = "\u2014",
+                                                         df = "\u2014",
+                                                         chi2.df = "< 2 or 3",
                                                          p = "> .05",
                                                          CFI = "\u2265 .95",
                                                          TLI = "\u2265 .95",
@@ -73,9 +74,11 @@ nice_fit <- function(..., nice_table = FALSE){
 nice_fit_internal <- function(fit) {
   x <- lavaan::fitMeasures(fit, c("chisq", "df", "pvalue", "cfi", "tli",
                                   "rmsea", "srmr", "aic", "bic"))
-  x <- round(x, 3)
   x <- as.data.frame(t(as.data.frame(x)))
-  names(x)[(c(1, 3, 4:9))] <- c("chi2", "p", toupper(names(x)[4:9]))
+  chi2.df <- x$chisq / x$df
+  x <- cbind(x[1:2], chi2.df, x[3:9])
+  x <- round(x, 3)
+  names(x)[(c(1, 4:10))] <- c("chi2", "p", toupper(names(x)[5:10]))
   x
 }
 

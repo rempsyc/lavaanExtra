@@ -34,17 +34,26 @@ install.packages("lavaanExtra", repos = c(
   CRAN = "https://cloud.r-project.org"))
 ```
 
+## Overview
+
+[Regression
+example](#regression-example)<a name = 'Regression example'/>
+
+[CFA example](#cfa-example)<a name = 'CFA example'/>
+
+[SEM example](#sem-example)<a name = 'SEM example'/>
+
 ## Regression example
 
 ``` r
 # Define our regression terms
-(regression <- list(mpg = names(mtcars)[-1],
-                    disp = names(mtcars)[-c(1:3)]))
+(regression <- list(mpg = names(mtcars)[2:5],
+                    disp = names(mtcars)[4:7]))
 #> $mpg
-#>  [1] "cyl"  "disp" "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear" "carb"
+#> [1] "cyl"  "disp" "hp"   "drat"
 #> 
 #> $disp
-#> [1] "hp"   "drat" "wt"   "qsec" "vs"   "am"   "gear" "carb"
+#> [1] "hp"   "drat" "wt"   "qsec"
 
 # Load library, write the model, and check it
 library(lavaanExtra)
@@ -53,45 +62,161 @@ cat(mtcars.model)
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
 #> 
-#> mpg ~ cyl + disp + hp + drat + wt + qsec + vs + am + gear + carb
-#> disp ~ hp + drat + wt + qsec + vs + am + gear + carb
+#> mpg ~ cyl + disp + hp + drat
+#> disp ~ hp + drat + wt + qsec
 
 # Fit the model with `lavaan`
 library(lavaan)
-fit <- lavaan(mtcars.model, data = mtcars, auto.var = TRUE)
+fit.reg <- lavaan(mtcars.model, data = mtcars, auto.var = TRUE)
 
 # Get regression parameters only
-lavaan_reg(fit)
-#>    Outcome Predictor      B     p
-#> 1      mpg       cyl -0.033 0.891
-#> 2      mpg      disp  0.274 0.339
-#> 3      mpg        hp -0.244 0.241
-#> 4      mpg      drat  0.070 0.550
-#> 5      mpg        wt -0.603 0.015
-#> 6      mpg      qsec  0.243 0.177
-#> 7      mpg        vs  0.027 0.854
-#> 8      mpg        am  0.209 0.132
-#> 9      mpg      gear  0.080 0.587
-#> 10     mpg      carb -0.053 0.761
-#> 11    disp        hp  0.416 0.000
-#> 12    disp      drat  0.018 0.795
-#> 13    disp        wt  0.666 0.000
-#> 14    disp      qsec -0.228 0.018
-#> 15    disp        vs -0.096 0.240
-#> 16    disp        am -0.048 0.556
-#> 17    disp      gear -0.008 0.924
-#> 18    disp      carb -0.400 0.000
+lavaan_reg(fit.reg)
+#>   Outcome Predictor      B     p
+#> 1     mpg       cyl -0.242 0.244
+#> 2     mpg      disp -0.287 0.123
+#> 3     mpg        hp -0.264 0.128
+#> 4     mpg      drat  0.192 0.159
+#> 5    disp        hp  0.175 0.177
+#> 6    disp      drat -0.177 0.034
+#> 7    disp        wt  0.614 0.000
+#> 8    disp      qsec -0.186 0.061
 
-# We can get it prettier with `rempsyc::nice_table`
-library(rempsyc)
-#> Tutorials: https://remi-theriault.com/tutorials
-#> Bug report, support, special request: https://github.com/rempsyc/rempsyc/issues
-#> 
-#> Suggested APA citation: Thériault, R. (2022). rempsyc: Convenience functions for psychology (R package version 0.0.5.8) [Computer software]. https://rempsyc.remi-theriault.com
-nice_table(lavaan_reg(fit), highlight = TRUE)
+# We can get it prettier with the `rempsyc::nice_table` integration
+lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
 ```
 
 <img src="man/figures/README-reg-1.png" width="30%" />
+
+## CFA example
+
+``` r
+# Define latent variables
+(latent <- list(visual = paste0("x", 1:3),
+                textual = paste0("x", 4:6),
+                speed = paste0("x", 7:9)))
+#> $visual
+#> [1] "x1" "x2" "x3"
+#> 
+#> $textual
+#> [1] "x4" "x5" "x6"
+#> 
+#> $speed
+#> [1] "x7" "x8" "x9"
+
+# Write the model, and check it
+cfa.model <- write_lavaan(latent = latent)
+cat(cfa.model)
+#> ##################################################
+#> # [---------------Latent variables---------------]
+#> 
+#> visual =~ x1 + x2 + x3
+#> textual =~ x4 + x5 + x6
+#> speed =~ x7 + x8 + x9
+
+# Fit the model with `lavaan`
+fit.cfa <- cfa(cfa.model, data = HolzingerSwineford1939)
+
+# Get the summary output
+summary(fit.cfa, fit.measures = TRUE)
+#> lavaan 0.6-12 ended normally after 35 iterations
+#> 
+#>   Estimator                                         ML
+#>   Optimization method                           NLMINB
+#>   Number of model parameters                        21
+#> 
+#>   Number of observations                           301
+#> 
+#> Model Test User Model:
+#>                                                       
+#>   Test statistic                                85.306
+#>   Degrees of freedom                                24
+#>   P-value (Chi-square)                           0.000
+#> 
+#> Model Test Baseline Model:
+#> 
+#>   Test statistic                               918.852
+#>   Degrees of freedom                                36
+#>   P-value                                        0.000
+#> 
+#> User Model versus Baseline Model:
+#> 
+#>   Comparative Fit Index (CFI)                    0.931
+#>   Tucker-Lewis Index (TLI)                       0.896
+#> 
+#> Loglikelihood and Information Criteria:
+#> 
+#>   Loglikelihood user model (H0)              -3737.745
+#>   Loglikelihood unrestricted model (H1)      -3695.092
+#>                                                       
+#>   Akaike (AIC)                                7517.490
+#>   Bayesian (BIC)                              7595.339
+#>   Sample-size adjusted Bayesian (BIC)         7528.739
+#> 
+#> Root Mean Square Error of Approximation:
+#> 
+#>   RMSEA                                          0.092
+#>   90 Percent confidence interval - lower         0.071
+#>   90 Percent confidence interval - upper         0.114
+#>   P-value RMSEA <= 0.05                          0.001
+#> 
+#> Standardized Root Mean Square Residual:
+#> 
+#>   SRMR                                           0.065
+#> 
+#> Parameter Estimates:
+#> 
+#>   Standard errors                             Standard
+#>   Information                                 Expected
+#>   Information saturated (h1) model          Structured
+#> 
+#> Latent Variables:
+#>                    Estimate  Std.Err  z-value  P(>|z|)
+#>   visual =~                                           
+#>     x1                1.000                           
+#>     x2                0.554    0.100    5.554    0.000
+#>     x3                0.729    0.109    6.685    0.000
+#>   textual =~                                          
+#>     x4                1.000                           
+#>     x5                1.113    0.065   17.014    0.000
+#>     x6                0.926    0.055   16.703    0.000
+#>   speed =~                                            
+#>     x7                1.000                           
+#>     x8                1.180    0.165    7.152    0.000
+#>     x9                1.082    0.151    7.155    0.000
+#> 
+#> Covariances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)
+#>   visual ~~                                           
+#>     textual           0.408    0.074    5.552    0.000
+#>     speed             0.262    0.056    4.660    0.000
+#>   textual ~~                                          
+#>     speed             0.173    0.049    3.518    0.000
+#> 
+#> Variances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)
+#>    .x1                0.549    0.114    4.833    0.000
+#>    .x2                1.134    0.102   11.146    0.000
+#>    .x3                0.844    0.091    9.317    0.000
+#>    .x4                0.371    0.048    7.779    0.000
+#>    .x5                0.446    0.058    7.642    0.000
+#>    .x6                0.356    0.043    8.277    0.000
+#>    .x7                0.799    0.081    9.823    0.000
+#>    .x8                0.488    0.074    6.573    0.000
+#>    .x9                0.566    0.071    8.003    0.000
+#>     visual            0.809    0.145    5.564    0.000
+#>     textual           0.979    0.112    8.737    0.000
+#>     speed             0.384    0.086    4.451    0.000
+
+# Get fit indices
+nice_fit(fit.cfa)
+#>     Model   chi2 df chi2.df p   CFI   TLI RMSEA  SRMR     AIC      BIC
+#> 1 fit.cfa 85.306 24   3.554 0 0.931 0.896 0.092 0.065 7517.49 7595.339
+
+# We can get it prettier with the `rempsyc::nice_table` integration
+nice_fit(fit.cfa, nice_table = TRUE)
+```
+
+<img src="man/figures/README-cfa-1.png" width="90%" />
 
 ## SEM example
 
@@ -186,9 +311,8 @@ cat(fit.saturated)
 # Fit the model with `lavaan`
 fit.saturated <- lavaan(fit.saturated, data = data, auto.var = TRUE)
 
-# Get regression parameters only and make it pretty with `rempsyc::nice_table`
-lavaan_reg(fit.saturated) |> 
-  nice_table(highlight = TRUE)
+# Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
+lavaan_reg(fit.saturated, nice_table = TRUE, highlight = TRUE)
 ```
 
 <img src="man/figures/README-saturated-1.png" width="30%" />
@@ -288,67 +412,8 @@ cat(model.path)
 # Fit the model with `lavaan`
 fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
 
-# We can get the fit summary if necessary, but the output is a bit long
-summary(fit.path)
-#> lavaan 0.6-12 ended normally after 21 iterations
-#> 
-#>   Estimator                                         ML
-#>   Optimization method                           NLMINB
-#>   Number of model parameters                        14
-#> 
-#>                                                   Used       Total
-#>   Number of observations                           300         301
-#> 
-#> Model Test User Model:
-#>                                                       
-#>   Test statistic                                 0.327
-#>   Degrees of freedom                                 1
-#>   P-value (Chi-square)                           0.568
-#> 
-#> Parameter Estimates:
-#> 
-#>   Standard errors                             Standard
-#>   Information                                 Expected
-#>   Information saturated (h1) model          Structured
-#> 
-#> Regressions:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>   speed ~                                             
-#>     visual  (spd_)    0.192    0.050    3.862    0.000
-#>   textual ~                                           
-#>     visual  (txt_)    0.286    0.063    4.519    0.000
-#>   visual ~                                            
-#>     ageyr  (visl_)   -0.134    0.054   -2.470    0.014
-#>     grade  (vsl_b)    0.493    0.114    4.306    0.000
-#>   speed ~                                             
-#>     grade             0.533    0.087    6.111    0.000
-#>   textual ~                                           
-#>     ageyr            -0.410    0.060   -6.851    0.000
-#>     grade             0.765    0.129    5.926    0.000
-#> 
-#> Covariances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>  .speed ~~                                            
-#>    .textual           0.091    0.040    2.254    0.024
-#>   ageyr ~~                                            
-#>     grade             0.268    0.034    7.885    0.000
-#> 
-#> Variances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>    .speed             0.546    0.045   12.247    0.000
-#>    .textual           0.872    0.071   12.247    0.000
-#>    .visual            0.723    0.059   12.247    0.000
-#>     ageyr             1.103    0.090   12.247    0.000
-#>     grade             0.249    0.020   12.247    0.000
-#> 
-#> Defined Parameters:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>     age_visual_spd   -0.026    0.012   -2.081    0.037
-#>     grade_vsl_txtl    0.141    0.045    3.117    0.002
-
-# Get regression parameters only and make it pretty with `rempsyc::nice_table`
-lavaan_reg(fit.path) |> 
-  nice_table(highlight = TRUE)
+# Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
+lavaan_reg(fit.path, nice_table = TRUE, highlight = TRUE)
 ```
 
 <img src="man/figures/README-indirect1-1.png" width="30%" />
@@ -356,28 +421,53 @@ lavaan_reg(fit.path) |>
 ``` r
 # We only kept significant regressions—good (for this demo).
 
-# Get fit indices
-nice_fit(fit.saturated, fit.path)
-#>           Model  chi2 df     p CFI   TLI RMSEA  SRMR      AIC      BIC
-#> 1 fit.saturated 0.000  0    NA   1 1.000     0 0.000 3483.460 3539.017
-#> 2      fit.path 0.327  1 0.568   1 1.028     0 0.007 3481.787 3533.640
+# Get covariance indices
+lavaan_cov(fit.path)
+#>    Variable.1 Variable.2     r     p
+#> 8       speed    textual 0.131 0.024
+#> 9       ageyr      grade 0.511 0.000
+#> 10      speed      speed 0.824 0.000
+#> 11    textual    textual 0.765 0.000
+#> 12     visual     visual 0.942 0.000
+#> 13      ageyr      ageyr 1.000 0.000
+#> 14      grade      grade 1.000 0.000
 
-# We can get it prettier with `rempsyc::nice_table`
-nice_fit(fit.saturated, fit.path, nice_table = TRUE)
+# We can get it prettier with the `rempsyc::nice_table` integration
+lavaan_cov(fit.path, nice_table = TRUE)
+```
+
+<img src="man/figures/README-covariance-1.png" width="30%" />
+
+``` r
+# Get fit indices
+nice_fit(fit.cfa, fit.saturated, fit.path)
+#>           Model   chi2 df chi2.df     p   CFI   TLI RMSEA  SRMR      AIC
+#> 1       fit.cfa 85.306 24   3.554 0.000 0.931 0.896 0.092 0.065 7517.490
+#> 2 fit.saturated  0.000  0     NaN    NA 1.000 1.000 0.000 0.000 3483.460
+#> 3      fit.path  0.327  1   0.327 0.568 1.000 1.028 0.000 0.007 3481.787
+#>        BIC
+#> 1 7595.339
+#> 2 3539.017
+#> 3 3533.640
+
+# We can get it prettier with the `rempsyc::nice_table` integration
+nice_fit(fit.cfa, fit.saturated, fit.path, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-path2-1.png" width="90%" />
 
 ``` r
 # Let's get the indirect effects only
-parameterEstimates(fit.path, standardized = TRUE)[which(parameterEstimates(fit.path)$op == ":="),]
-#>                     lhs op                rhs                label    est    se
-#> 15     age_visual_speed :=   speed_a*visual_a     age_visual_speed -0.026 0.012
-#> 16 grade_visual_textual := textual_a*visual_b grade_visual_textual  0.141 0.045
-#>         z pvalue ci.lower ci.upper std.lv std.all std.nox
-#> 15 -2.081  0.037   -0.050   -0.001 -0.026  -0.033  -0.033
-#> 16  3.117  0.002    0.052    0.230  0.141   0.066   0.066
+lavaan_ind(fit.path)
+#>         Indirect.Effect              Paths      B     p
+#> 15     age_visual_speed   speed_a*visual_a -0.033 0.037
+#> 16 grade_visual_textual textual_a*visual_b  0.066 0.002
+
+# We can get it prettier with the `rempsyc::nice_table` integration
+lavaan_ind(fit.path, nice_table = TRUE)
 ```
+
+<img src="man/figures/README-indirect2-1.png" width="50%" />
 
 For reference, this is our model, visually speaking
 
@@ -388,21 +478,12 @@ For reference, this is our model, visually speaking
 Finally, perhaps we change our mind and decide to run a full SEM
 instead, with latent variables. Fear not: we don’t have to redo
 everything again. We can simply define our latent variables and proceed.
+In this example, we have *already* defined our latent variable for our
+CFA earlier, so we don’t even need to write that again!
 
 ``` r
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
-#> $visual
-#> [1] "x1" "x2" "x3"
-#> 
-#> $textual
-#> [1] "x4" "x5" "x6"
-#> 
-#> $speed
-#> [1] "x7" "x8" "x9"
-
-model.latent <- write_lavaan(mediation, regression, covariance, indirect, latent, label = TRUE)
+model.latent <- write_lavaan(mediation, regression, covariance, 
+                             indirect, latent, label = TRUE)
 cat(model.latent)
 #> ##################################################
 #> # [---------------Latent variables---------------]
@@ -436,129 +517,30 @@ cat(model.latent)
 #> age_visual_speed := speed_a * visual_a
 #> grade_visual_textual := textual_a * visual_b
 
+# Run model
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
               auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
-summary(fit.latent, fit.measures = TRUE)
-#> lavaan 0.6-12 ended normally after 36 iterations
-#> 
-#>   Estimator                                         ML
-#>   Optimization method                           NLMINB
-#>   Number of model parameters                        29
-#> 
-#>                                                   Used       Total
-#>   Number of observations                           300         301
-#> 
-#> Model Test User Model:
-#>                                                       
-#>   Test statistic                               118.917
-#>   Degrees of freedom                                37
-#>   P-value (Chi-square)                           0.000
-#> 
-#> Model Test Baseline Model:
-#> 
-#>   Test statistic                              1138.683
-#>   Degrees of freedom                                55
-#>   P-value                                        0.000
-#> 
-#> User Model versus Baseline Model:
-#> 
-#>   Comparative Fit Index (CFI)                    0.924
-#>   Tucker-Lewis Index (TLI)                       0.888
-#> 
-#> Loglikelihood and Information Criteria:
-#> 
-#>   Loglikelihood user model (H0)              -4290.394
-#>   Loglikelihood unrestricted model (H1)      -4230.936
-#>                                                       
-#>   Akaike (AIC)                                8638.789
-#>   Bayesian (BIC)                              8746.198
-#>   Sample-size adjusted Bayesian (BIC)         8654.228
-#> 
-#> Root Mean Square Error of Approximation:
-#> 
-#>   RMSEA                                          0.086
-#>   90 Percent confidence interval - lower         0.069
-#>   90 Percent confidence interval - upper         0.103
-#>   P-value RMSEA <= 0.05                          0.000
-#> 
-#> Standardized Root Mean Square Residual:
-#> 
-#>   SRMR                                           0.061
-#> 
-#> Parameter Estimates:
-#> 
-#>   Standard errors                             Standard
-#>   Information                                 Expected
-#>   Information saturated (h1) model          Structured
-#> 
-#> Latent Variables:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>   visual =~                                           
-#>     x1                1.000                           
-#>     x2                0.553    0.100    5.530    0.000
-#>     x3                0.722    0.110    6.574    0.000
-#>   textual =~                                          
-#>     x4                1.000                           
-#>     x5                1.110    0.064   17.376    0.000
-#>     x6                0.912    0.054   16.774    0.000
-#>   speed =~                                            
-#>     x7                1.000                           
-#>     x8                1.120    0.143    7.843    0.000
-#>     x9                0.947    0.126    7.538    0.000
-#> 
-#> Regressions:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>   speed ~                                             
-#>     visual  (spd_)    0.255    0.066    3.843    0.000
-#>   textual ~                                           
-#>     visual  (txt_)    0.398    0.087    4.579    0.000
-#>   visual ~                                            
-#>     ageyr  (visl_)   -0.177    0.068   -2.611    0.009
-#>     grade  (vsl_b)    0.618    0.145    4.273    0.000
-#>   speed ~                                             
-#>     grade             0.462    0.096    4.824    0.000
-#>   textual ~                                           
-#>     ageyr            -0.378    0.062   -6.141    0.000
-#>     grade             0.659    0.135    4.876    0.000
-#> 
-#> Covariances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>  .textual ~~                                          
-#>    .speed             0.047    0.039    1.201    0.230
-#>   ageyr ~~                                            
-#>     grade             0.268    0.034    7.885    0.000
-#> 
-#> Variances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>    .x1                0.538    0.117    4.606    0.000
-#>    .x2                1.135    0.102   11.102    0.000
-#>    .x3                0.846    0.091    9.256    0.000
-#>    .x4                0.362    0.047    7.775    0.000
-#>    .x5                0.438    0.057    7.692    0.000
-#>    .x6                0.373    0.043    8.668    0.000
-#>    .x7                0.744    0.079    9.457    0.000
-#>    .x8                0.462    0.069    6.692    0.000
-#>    .x9                0.621    0.067    9.229    0.000
-#>     ageyr             1.103    0.090   12.247    0.000
-#>     grade             0.249    0.020   12.247    0.000
-#>    .visual            0.752    0.140    5.357    0.000
-#>    .textual           0.668    0.083    8.045    0.000
-#>    .speed             0.312    0.067    4.622    0.000
-#> 
-#> Defined Parameters:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>     age_visual_spd   -0.045    0.020   -2.228    0.026
-#>     grade_vsl_txtl    0.246    0.075    3.256    0.001
 
 # Get fit indices
-nice_fit(fit.saturated, fit.path, fit.latent)
-#>           Model    chi2 df     p   CFI   TLI RMSEA  SRMR      AIC      BIC
-#> 1 fit.saturated   0.000  0    NA 1.000 1.000 0.000 0.000 3483.460 3539.017
-#> 2      fit.path   0.327  1 0.568 1.000 1.028 0.000 0.007 3481.787 3533.640
-#> 3    fit.latent 118.917 37 0.000 0.924 0.888 0.086 0.061 8638.789 8746.198
+nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent)
+#>           Model    chi2 df chi2.df     p   CFI   TLI RMSEA  SRMR      AIC
+#> 1       fit.cfa  85.306 24   3.554 0.000 0.931 0.896 0.092 0.065 7517.490
+#> 2 fit.saturated   0.000  0     NaN    NA 1.000 1.000 0.000 0.000 3483.460
+#> 3      fit.path   0.327  1   0.327 0.568 1.000 1.028 0.000 0.007 3481.787
+#> 4    fit.latent 118.917 37   3.214 0.000 0.924 0.888 0.086 0.061 8638.789
+#>        BIC
+#> 1 7595.339
+#> 2 3539.017
+#> 3 3533.640
+#> 4 8746.198
 
-# We can get it prettier with `rempsyc::nice_table`
-nice_fit(fit.saturated, fit.path, fit.latent, nice_table = TRUE)
+# We can get it prettier with the `rempsyc::nice_table` integration
+nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-latent-1.png" width="90%" />
+
+## Support me and this package
+
+Thank you for your support. You can support me and this package here:
+<https://github.com/sponsors/rempsyc>
