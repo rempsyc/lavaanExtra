@@ -82,8 +82,10 @@ invisible(lapply(list(
 (regression <- list(mpg = names(mtcars)[2:5],
                     disp = names(mtcars)[4:7]))
 
-# Load library, write the model, and check it
+# Load library
 library(lavaanExtra)
+
+# Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
 cat(mtcars.model)
 
@@ -138,7 +140,6 @@ Here is a structural equation model example. We start with a path analysis first
 The first step is usually to look at the saturated `lavaan` model.
 
 ```{r saturated}
-
 # Calculate scale averages
 data <- HolzingerSwineford1939
 data$visual <- rowMeans(data[paste0("x", 1:3)])

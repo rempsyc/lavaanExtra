@@ -62,9 +62,11 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 #> $disp
 #> [1] "hp"   "drat" "wt"   "qsec"
 
-# Load library, write the model, and check it
+# Load library
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.0.9) [Computer software]. https://lavaanExtra.remi-theriault.com/
+
+# Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
 cat(mtcars.model)
 #> ##################################################
@@ -236,7 +238,6 @@ analysis first.
 The first step is usually to look at the saturated `lavaan` model.
 
 ``` r
-
 # Calculate scale averages
 data <- HolzingerSwineford1939
 data$visual <- rowMeans(data[paste0("x", 1:3)])
