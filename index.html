@@ -106,6 +106,26 @@
 <span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="why-use-lavaanextra">Why use <code>lavaanExtra</code>?<a class="anchor" aria-label="anchor" href="#why-use-lavaanextra"></a>
+</h2>
+<ol style="list-style-type: decimal">
+<li>
+<strong>Reusable code</strong>. Don’t repeat yourself anymore when you only want to change a few things when comparing and fitting models.</li>
+<li>
+<strong>Shorter code</strong>. Because of point 1, you can have shorter code, since you write it once and simply reuse it. For items with similar patterns, you can also use <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> with appropriate item numbers instead of typing each one every time.</li>
+<li>
+<strong>Less error-prone code</strong>. Because of point 1, you can have less risk of human errors since you don’t have possibly multiple different version of the same thing (which makes it easier to correct too).</li>
+<li>
+<strong>Better control over your code</strong>. Because of point 1, you are in control of the whole flow. You change it once, and it will change it everywhere else in the script, without having to change it manually for each model.</li>
+<li>
+<strong>More readable code</strong>. Because of point 1, other people (but also yourself) only have to process the information the first time to make sure it’s been specified correctly, and not every time you check the new models.</li>
+<li>
+<strong>Prettier code</strong>. Because it will format the model for you in a pretty way, every time. You don’t have to worry about manually making your model good-looking and readable anymore.</li>
+<li>
+<strong>More accessible code</strong>. You don’t have to remember the exact syntax (although it is recommended) for it to work. It uses intuitive variable names that most people can understand. This benefit is most apparent for beginners, but it also saves precious typing time for veterans.</li>
+</ol>
+</div>
+<div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p><a href="#regression-example">Regression example</a><a name="Regression%20example"></a></p>
