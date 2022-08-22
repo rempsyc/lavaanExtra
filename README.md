@@ -64,6 +64,7 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 # Load library, write the model, and check it
 library(lavaanExtra)
+#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.0.9) [Computer software]. https://lavaanExtra.remi-theriault.com/
 mtcars.model <- write_lavaan(regression = regression)
 cat(mtcars.model)
 #> ##################################################
