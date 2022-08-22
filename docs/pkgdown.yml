@@ -2,7 +2,7 @@ pandoc: '2.18'
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-08-22T14:04Z
+last_built: 2022-08-22T14:27Z
 urls:
   reference: https://lavaanExtra.remi-theriault.com/reference
   article: https://lavaanExtra.remi-theriault.com/articles
