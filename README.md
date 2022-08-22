@@ -34,6 +34,35 @@ install.packages("lavaanExtra", repos = c(
   CRAN = "https://cloud.r-project.org"))
 ```
 
+## Why use `lavaanExtra`?
+
+1.  **Reusable code**. Don’t repeat yourself anymore when you only want
+    to change a few things when comparing and fitting models.
+2.  **Shorter code**. Because of point 1, you can have shorter code,
+    since you write it once and simply reuse it. For items with similar
+    patterns, you can also use `paste0()` with appropriate item numbers
+    instead of typing each one every time.
+3.  **Less error-prone code**. Because of point 1, you can have less
+    risk of human errors since you don’t have possibly multiple
+    different version of the same thing (which makes it easier to
+    correct too).
+4.  **Better control over your code**. Because of point 1, you are in
+    control of the whole flow. You change it once, and it will change it
+    everywhere else in the script, without having to change it manually
+    for each model.
+5.  **More readable code**. Because of point 1, other people (but also
+    yourself) only have to process the information the first time to
+    make sure it’s been specified correctly, and not every time you
+    check the new models.
+6.  **Prettier code**. Because it will format the model for you in a
+    pretty way, every time. You don’t have to worry about manually
+    making your model good-looking and readable anymore.
+7.  **More accessible code**. You don’t have to remember the exact
+    syntax (although it is recommended) for it to work. It uses
+    intuitive variable names that most people can understand. This
+    benefit is most apparent for beginners, but it also saves precious
+    typing time for veterans.
+
 ## Overview
 
 [Regression
