@@ -11,7 +11,8 @@ write_lavaan(
   indirect = NULL,
   latent = NULL,
   intercept = NULL,
-  label = FALSE
+  label = FALSE,
+  use.letters = FALSE
 )
 }
 \arguments{
@@ -30,6 +31,8 @@ specified automatically with argument \code{label}.}
 \item{intercept}{Intercept indicators (\code{~ 1} symbol: "intercept").}
 
 \item{label}{Logical, whether to display path names for the mediation argument.}
+
+\item{use.letters}{Logical, for the labels, whether to use letters instead of the variable names.}
 }
 \description{
 Vector-based lavaan syntax interpreter.

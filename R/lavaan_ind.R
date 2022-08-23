@@ -14,17 +14,13 @@
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))
 #'
-#' (regression <- list(ageyr = c("visual", "textual", "speed"),
-#'                     grade = c("visual", "textual", "speed")))
-#'
 #' (mediation <- list(speed = "visual",
 #'                    textual = "visual",
 #'                    visual = c("ageyr", "grade")))
 #'
-#' (indirect <- list(age_visual_speed = c("speed_a", "visual_a"),
-#'                   grade_visual_textual = c("textual_a", "visual_b")))
+#' (indirect <- list(M = "visual", DV = c("speed", "textual")))
 #'
-#' HS.model <- write_lavaan(mediation, regression, indirect = indirect,
+#' HS.model <- write_lavaan(mediation, indirect = indirect,
 #'                          latent = latent, label = TRUE)
 #' cat(HS.model)
 #'

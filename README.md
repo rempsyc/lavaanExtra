@@ -291,15 +291,16 @@ head(data)
 #> 6 4.347826 6.65 7.500000 4.194444 1.619048 6.165942
 
 # Define our variables
-(m <- "visual")
+(M <- "visual")
 #> [1] "visual"
 (IV <- c("ageyr", "grade"))
 #> [1] "ageyr" "grade"
-#(DV <- c("speed", "textual"))
+(DV <- c("speed", "textual"))
+#> [1] "speed"   "textual"
 
 # Define our lavaan lists
-(mediation <- list(speed = m,
-                   textual = m,
+(mediation <- list(speed = M,
+                   textual = M,
                    visual = IV))
 #> $speed
 #> [1] "visual"
@@ -325,8 +326,8 @@ head(data)
 #> [1] "grade"
 
 # Write the model, and check it
-fit.saturated <- write_lavaan(mediation, regression, covariance)
-cat(fit.saturated)
+model.saturated <- write_lavaan(mediation, regression, covariance)
+cat(model.saturated)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
@@ -345,9 +346,230 @@ cat(fit.saturated)
 #> 
 #> speed ~~ textual
 #> ageyr ~~ grade
+```
 
+This looks good so far, but we might also want to check our indirect
+effects (mediations). For this, we have to obtain the path names by
+setting `label = TRUE`. This will allow us to define our indirect
+effects and feed them back to `write_lavaan`.
+
+``` r
+# We can run the model again. However, we set `label = TRUE` to get the path names
+model.saturated <- write_lavaan(mediation, regression, covariance, label = TRUE)
+cat(model.saturated)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ ageyr + grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+```
+
+Here, if we check the mediation section of the model, we see that it has
+been “augmented” with the path names. Those are `visual_speed`,
+`visual_textual`, `ageyr_visual`, and `grade_visual`. The logic for the
+determination of the path names is predictable: it is always the
+predictor variable, on the left, followed by the predicted variable, on
+the right. So if we were to test all possible indirect effects, we would
+define our `indirect` object as such:
+
+``` r
+# Define indirect object
+(indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
+                  ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
+                  grade_visual_speed = c("grade_visual", "visual_speed"),
+                  grade_visual_textual = c("grade_visual", "visual_textual")))
+#> $ageyr_visual_speed
+#> [1] "ageyr_visual" "visual_speed"
+#> 
+#> $ageyr_visual_textual
+#> [1] "ageyr_visual"   "visual_textual"
+#> 
+#> $grade_visual_speed
+#> [1] "grade_visual" "visual_speed"
+#> 
+#> $grade_visual_textual
+#> [1] "grade_visual"   "visual_textual"
+
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, covariance, 
+                                indirect, label = TRUE)
+cat(model.saturated)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ ageyr + grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+#> 
+#> ##################################################
+#> # [--------Mediations (indirect effects)---------]
+#> 
+#> ageyr_visual_speed := ageyr_visual * visual_speed
+#> ageyr_visual_textual := ageyr_visual * visual_textual
+#> grade_visual_speed := grade_visual * visual_speed
+#> grade_visual_textual := grade_visual * visual_textual
+```
+
+If preferred (e.g., when dealing with long variable names), one can
+choose to use letters for the predictor variables. Note however that
+this tends to be somewhat more confusing and ambiguous.
+
+``` r
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, covariance, 
+                                label = TRUE, use.letters = TRUE)
+cat(model.saturated)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ speed_a*visual
+#> textual ~ textual_a*visual
+#> visual ~ visual_a*ageyr + visual_b*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ ageyr + grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+```
+
+In this case, the path names are `a_speed`, `a_textual`, `a_visual`, and
+`b_visual`. So we would define our `indirect` object as such:
+
+``` r
+# Define indirect object
+(indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
+                  ageyr_visual_textual = c("a_visual", "a_textual"),
+                  grade_visual_speed = c("b_visual", "a_speed"),
+                  grade_visual_textual = c("b_visual", "a_textual")))
+#> $ageyr_visual_speed
+#> [1] "a_visual" "a_speed" 
+#> 
+#> $ageyr_visual_textual
+#> [1] "a_visual"  "a_textual"
+#> 
+#> $grade_visual_speed
+#> [1] "b_visual" "a_speed" 
+#> 
+#> $grade_visual_textual
+#> [1] "b_visual"  "a_textual"
+
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, covariance, 
+                                indirect, label = TRUE, use.letters = TRUE)
+cat(model.saturated)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ speed_a*visual
+#> textual ~ textual_a*visual
+#> visual ~ visual_a*ageyr + visual_b*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ ageyr + grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+#> 
+#> ##################################################
+#> # [--------Mediations (indirect effects)---------]
+#> 
+#> ageyr_visual_speed := a_visual * a_speed
+#> ageyr_visual_textual := a_visual * a_textual
+#> grade_visual_speed := b_visual * a_speed
+#> grade_visual_textual := b_visual * a_textual
+```
+
+There is also an experimental feature that attempts to produce the
+indirect effects automatically. This feature requires specifying your
+dependent and mediator variables as “DV” and “M”, respectively, in the
+`indirect` object. In our case, we have already defined those earlier,
+so we can just feed the proper objects.
+
+``` r
+# Define indirect object
+(indirect <- list(M = M, 
+                  DV = DV))
+#> $M
+#> [1] "visual"
+#> 
+#> $DV
+#> [1] "speed"   "textual"
+
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, covariance, 
+                                indirect, label = TRUE)
+cat(model.saturated)
+#> ##################################################
+#> # [-----------Mediations (named paths)-----------]
+#> 
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> speed ~ ageyr + grade
+#> textual ~ ageyr + grade
+#> 
+#> ##################################################
+#> # [------------------Covariances-----------------]
+#> 
+#> speed ~~ textual
+#> ageyr ~~ grade
+#> 
+#> ##################################################
+#> # [--------Mediations (indirect effects)---------]
+#> 
+#> ageyr_visual_speed := ageyr_visual * visual_speed
+#> ageyr_visual_textual := ageyr_visual * visual_textual
+#> grade_visual_speed := grade_visual * visual_speed
+#> grade_visual_textual := grade_visual * visual_textual
+```
+
+We are now satisfied with our model, so we can finally fit it!
+
+``` r
 # Fit the model with `lavaan`
-fit.saturated <- lavaan(fit.saturated, data = data, auto.var = TRUE)
+fit.saturated <- lavaan(model.saturated, data = data, auto.var = TRUE)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.saturated, nice_table = TRUE, highlight = TRUE)
@@ -362,11 +584,8 @@ model. Let’s make the non-saturated path analysis model next.
 ### Path analysis model
 
 Because we use `lavaanExtra`, we don’t have to redefine the entire
-model: simply what we want to update. In this case, the regressions.
-However, we also want to specify and test our indirect effects
-(mediation). For this, we have to obtain the path names by setting
-`label = TRUE`. This will allow us to define our indirect effects and
-feed them back to `write_lavaan`.
+model: simply what we want to update. In this case, the regressions and
+the indirect effects.
 
 ``` r
 (regression <- list(speed = "grade",
@@ -378,15 +597,15 @@ feed them back to `write_lavaan`.
 #> [1] "ageyr" "grade"
 # We check that we have removed "ageyr" correctly from "speed". OK.
 
-# We can run the model again. However, we set `label = TRUE` to get the path names
+# We can run the model again, setting `label = TRUE` to get the path names
 model.path <- write_lavaan(mediation, regression, covariance, label = TRUE)
 cat(model.path)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ speed_a*visual
-#> textual ~ textual_a*visual
-#> visual ~ visual_a*ageyr + visual_b*grade
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -401,33 +620,26 @@ cat(model.path)
 #> ageyr ~~ grade
 # We check that we have removed "ageyr" correctly from "speed" in the 
 # regression section. OK.
-```
 
-Here, if we check the mediation section of the model, we see that it has
-been “augmented” with the path names. Those are `speed_a`, `textual_a`,
-`visual_a`, and `visual_b`. The logic for the determination of the path
-names is predictable: it is always the dependent variable (on the left)
-followed by letters, which represent the number of the explanatory
-variable (on the right).
-
-``` r
-(indirect <- list(age_visual_speed = c("speed_a", "visual_a"),
-                  grade_visual_textual = c("textual_a", "visual_b")))
+# Define just our indirect effects of interest
+(indirect <- list(age_visual_speed = c("visual_speed", "ageyr_visual"),
+                  grade_visual_textual = c("visual_textual", "grade_visual")))
 #> $age_visual_speed
-#> [1] "speed_a"  "visual_a"
+#> [1] "visual_speed" "ageyr_visual"
 #> 
 #> $grade_visual_textual
-#> [1] "textual_a" "visual_b"
+#> [1] "visual_textual" "grade_visual"
 
 # We run the model again, with the indirect effects
-model.path <- write_lavaan(mediation, regression, covariance, indirect, label = TRUE)
+model.path <- write_lavaan(mediation, regression, covariance, 
+                           indirect, label = TRUE)
 cat(model.path)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ speed_a*visual
-#> textual ~ textual_a*visual
-#> visual ~ visual_a*ageyr + visual_b*grade
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -444,8 +656,8 @@ cat(model.path)
 #> ##################################################
 #> # [--------Mediations (indirect effects)---------]
 #> 
-#> age_visual_speed := speed_a * visual_a
-#> grade_visual_textual := textual_a * visual_b
+#> age_visual_speed := visual_speed * ageyr_visual
+#> grade_visual_textual := visual_textual * grade_visual
 
 # Fit the model with `lavaan`
 fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
@@ -497,15 +709,27 @@ nice_fit(fit.cfa, fit.saturated, fit.path, nice_table = TRUE)
 ``` r
 # Let's get the indirect effects only
 lavaan_ind(fit.path)
-#>         Indirect.Effect              Paths      B     p
-#> 15     age_visual_speed   speed_a*visual_a -0.033 0.037
-#> 16 grade_visual_textual textual_a*visual_b  0.066 0.002
+#>         Indirect.Effect                       Paths      B     p
+#> 15     age_visual_speed   visual_speed*ageyr_visual -0.033 0.037
+#> 16 grade_visual_textual visual_textual*grade_visual  0.066 0.002
 
 # We can get it prettier with the `rempsyc::nice_table` integration
 lavaan_ind(fit.path, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="50%" />
+
+``` r
+# Get modification indices only
+head(inspect(fit.path, "mi"))
+#>       lhs op     rhs    mi    epc sepc.lv sepc.all sepc.nox
+#> 17  speed ~~  visual 0.326  0.147   0.147    0.234    0.234
+#> 18  speed ~~   ageyr 0.326  0.022   0.022    0.029    0.029
+#> 19  speed ~~   grade 0.326 -0.021  -0.021   -0.056   -0.056
+#> 25  speed  ~ textual 0.326 -0.067  -0.067   -0.087   -0.087
+#> 26  speed  ~   ageyr 0.326  0.027   0.027    0.035    0.035
+#> 28 visual  ~   speed 0.326  0.269   0.269    0.250    0.250
+```
 
 For reference, this is our model, visually speaking
 
@@ -533,9 +757,9 @@ cat(model.latent)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ speed_a*visual
-#> textual ~ textual_a*visual
-#> visual ~ visual_a*ageyr + visual_b*grade
+#> speed ~ visual_speed*visual
+#> textual ~ visual_textual*visual
+#> visual ~ ageyr_visual*ageyr + grade_visual*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -552,8 +776,8 @@ cat(model.latent)
 #> ##################################################
 #> # [--------Mediations (indirect effects)---------]
 #> 
-#> age_visual_speed := speed_a * visual_a
-#> grade_visual_textual := textual_a * visual_b
+#> age_visual_speed := visual_speed * ageyr_visual
+#> grade_visual_textual := visual_textual * grade_visual
 
 # Run model
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 

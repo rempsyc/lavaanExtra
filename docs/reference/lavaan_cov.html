@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -29,6 +29,9 @@
     <span class="fa fa-home"></span>
      
   </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="../news/index.html">Changelog</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="../TODOS.html">To-dos</a>
@@ -119,29 +122,15 @@ as well as print the reference values at the bottom of the table.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "visual"  "textual" "speed"  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="st">"visual"</span>,</span></span>
-<span class="r-in"><span>                   textual <span class="op">=</span> <span class="st">"visual"</span>,</span></span>
-<span class="r-in"><span>                   visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">(</span><span class="va">covariance</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="st">"textual"</span>, ageyr <span class="op">=</span> <span class="st">"grade"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "visual"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "textual"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $textual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "visual"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $visual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "ageyr" "grade"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $ageyr</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "grade"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed_a"</span>, <span class="st">"visual_a"</span><span class="op">)</span>,</span></span>
-<span class="r-in"><span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"textual_a"</span>, <span class="st">"visual_b"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $age_visual_speed</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "speed_a"  "visual_a"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $grade_visual_textual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "textual_a" "visual_b" </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>,</span></span>
+<span class="r-in"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">regression</span>, covariance <span class="op">=</span> <span class="va">covariance</span>,</span></span>
 <span class="r-in"><span>                         latent <span class="op">=</span> <span class="va">latent</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##################################################</span>
@@ -152,23 +141,16 @@ as well as print the reference values at the bottom of the table.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> speed =~ x7 + x8 + x9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##################################################</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # [-----------Mediations (named paths)-----------]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> speed ~ speed_a*visual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> textual ~ textual_a*visual</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> visual ~ visual_a*ageyr + visual_b*grade</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ##################################################</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> # [---------Regressions (Direct effects)---------]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ageyr ~ visual + textual + speed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> grade ~ visual + textual + speed</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##################################################</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # [--------Mediations (indirect effects)---------]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # [------------------Covariances-----------------]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> age_visual_speed := speed_a * visual_a</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> grade_visual_textual := textual_a * visual_b</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> speed ~~ textual</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ageyr ~~ grade</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></span>
@@ -179,20 +161,24 @@ as well as print the reference values at the bottom of the table.</p></dd>
 <span class="r-in"><span>              auto.cov.lv.x<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">lavaan_cov</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    Variable.1 Variable.2     r     p</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20         x1         x1 0.395 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21         x2         x2 0.820 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22         x3         x3 0.667 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23         x4         x4 0.268 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24         x5         x5 0.264 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25         x6         x6 0.311 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26         x7         x7 0.641 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27         x8         x8 0.437 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28         x9         x9 0.610 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29      ageyr      ageyr 2.082 0.060</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30      grade      grade 0.964 0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31     visual     visual 3.087 0.190</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32    textual    textual 1.755 0.191</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33      speed      speed 0.812 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16    textual      speed 0.268 0.001</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17      ageyr      grade 0.533 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18         x1         x1 0.395 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19         x2         x2 0.820 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20         x3         x3 0.667 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21         x4         x4 0.268 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22         x5         x5 0.264 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23         x6         x6 0.311 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24         x7         x7 0.641 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25         x8         x8 0.437 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26         x9         x9 0.610 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27      ageyr      ageyr 0.839 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28      grade      grade 0.809 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29     visual     visual 1.000 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30    textual    textual 1.000 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31      speed      speed 1.000 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32     visual    textual 0.458 0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33     visual      speed 0.438 0.000</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

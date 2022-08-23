@@ -11,6 +11,7 @@
 #' @param latent Latent variable indicators (`=~` symbol: "is measured by").
 #' @param intercept Intercept indicators (`~ 1` symbol: "intercept").
 #' @param label Logical, whether to display path names for the mediation argument.
+#' @param use.letters Logical, for the labels, whether to use letters instead of the variable names.
 #' @keywords lavaan, structural equation modeling, path analysis, CFA
 #' @export
 #' @examples
@@ -29,14 +30,20 @@
 
 write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
                          indirect = NULL, latent = NULL, intercept = NULL,
-                         label = FALSE) {
+                         label = FALSE, use.letters = FALSE) {
   hashtag <- sprintf("%s\n", paste0(rep("#", 50), collapse = ""))
   process_vars <- function(x, symbol, label = label, collapse = " + ", title) {
-    if(label) {
+    if(isTRUE(label)) {
       labels <- paste0(names(x))
-      x <- lapply(seq(x), function(i) {
-        paste0(labels[i], "_", letters[seq(length(x[[i]]))], "*", x[[i]])
-      })
+      if (isTRUE(use.letters)) {
+        x <- lapply(seq(x), function(i) {
+          paste0(letters[seq(length(x[[i]]))], "_", labels[i], "*", x[[i]])
+          })
+      } else {
+        x <- lapply(seq(x), function(i) {
+          paste0(x[[i]], "_", labels[i], "*", x[[i]])
+        })
+      }
       x <- stats::setNames(x, labels)
     }
     x <- lapply(x, paste0, collapse = collapse)
@@ -47,6 +54,34 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
   if (!is.null(latent)) {
     latent <- process_vars(latent, symbol = "=~", label = FALSE, title =
                              "[---------------Latent variables---------------]")
+  }
+  if (!is.null(indirect)) {
+    if (all(names(indirect) %in% c("M", "DV"))) {
+      x <- mediation
+      labels <- paste0(names(x))
+      if (isTRUE(use.letters)) {
+        x <- lapply(seq(x), function(i) {
+          paste0(letters[seq(length(x[[i]]))], "_", labels[i])
+        })
+      } else {
+        x <- lapply(seq(x), function(i) {
+          paste0(x[[i]], "_", labels[i])
+        })
+      }
+      x <- stats::setNames(x, labels)
+      y <- unlist(x[indirect$M])
+      z <- gsub("[^_]*$", "", y)
+      indirect.names <- paste0(rep(z, each = length(unlist(x[indirect$DV]))),
+                               unlist(x[indirect$DV]))
+      indirect <- paste(rep(y, each = length(unlist(x[indirect$DV]))),
+                        "*", unlist(x[indirect$DV]))
+      indirect.list <- as.list(indirect)
+      indirect <- stats::setNames(indirect.list, indirect.names)
+    }
+    indirect <- process_vars(indirect, symbol = ":=", label = FALSE,
+                             collapse = " * ", title =
+                               "[--------Mediations (indirect effects)---------]")
+    label <- TRUE
   }
   if (!is.null(mediation)) {
     mediation <- process_vars(mediation, symbol = "~", label = label, title =
@@ -59,11 +94,6 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
   if (!is.null(covariance)) {
     covariance <- process_vars(covariance, symbol = "~~", label = FALSE, title =
                                  "[------------------Covariances-----------------]")
-  }
-  if (!is.null(indirect)) {
-    indirect <- process_vars(indirect, symbol = ":=", label = FALSE,
-                             collapse = " * ", title =
-                               "[--------Mediations (indirect effects)---------]")
   }
   if (!is.null(intercept)) {
     title = "[------------------Intercepts------------------]"

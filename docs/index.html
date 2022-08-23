@@ -38,7 +38,7 @@
     
     <a class="navbar-brand me-2" href="index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,6 +52,9 @@
     <span class="fa fa-home"></span>
      
   </a>
+</li>
+<li class="nav-item">
+  <a class="nav-link" href="news/index.html">Changelog</a>
 </li>
 <li class="nav-item">
   <a class="nav-link" href="TODOS.html">To-dos</a>
@@ -346,15 +349,16 @@
 <span><span class="co">#&gt; 6 4.347826 6.65 7.500000 4.194444 1.619048 6.165942</span></span>
 <span></span>
 <span><span class="co"># Define our variables</span></span>
-<span><span class="op">(</span><span class="va">m</span> <span class="op">&lt;-</span> <span class="st">"visual"</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "visual"</span></span>
 <span><span class="op">(</span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "ageyr" "grade"</span></span>
-<span><span class="co">#(DV &lt;- c("speed", "textual"))</span></span>
+<span><span class="op">(</span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] "speed"   "textual"</span></span>
 <span></span>
 <span><span class="co"># Define our lavaan lists</span></span>
-<span><span class="op">(</span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">m</span>,</span>
-<span>                   textual <span class="op">=</span> <span class="va">m</span>,</span>
+<span><span class="op">(</span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>,</span>
+<span>                   textual <span class="op">=</span> <span class="va">M</span>,</span>
 <span>                   visual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $speed</span></span>
 <span><span class="co">#&gt; [1] "visual"</span></span>
@@ -380,8 +384,8 @@
 <span><span class="co">#&gt; [1] "grade"</span></span>
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
-<span><span class="va">fit.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">fit.saturated</span><span class="op">)</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -399,10 +403,197 @@
 <span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; speed ~~ textual</span></span>
-<span><span class="co">#&gt; ageyr ~~ grade</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span></code></pre></div>
+<p>This looks good so far, but we might also want to check our indirect effects (mediations). For this, we have to obtain the path names by setting <code>label = TRUE</code>. This will allow us to define our indirect effects and feed them back to <code>write_lavaan</code>.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># We can run the model again. However, we set `label = TRUE` to get the path names</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; textual ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~~ textual</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span></code></pre></div>
+<p>Here, if we check the mediation section of the model, we see that it has been “augmented” with the path names. Those are <code>visual_speed</code>, <code>visual_textual</code>, <code>ageyr_visual</code>, and <code>grade_visual</code>. The logic for the determination of the path names is predictable: it is always the predictor variable, on the left, followed by the predicted variable, on the right. So if we were to test all possible indirect effects, we would define our <code>indirect</code> object as such:</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ageyr_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr_visual"</span>, <span class="st">"visual_speed"</span><span class="op">)</span>,</span>
+<span>                  ageyr_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr_visual"</span>, <span class="st">"visual_textual"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grade_visual"</span>, <span class="st">"visual_speed"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grade_visual"</span>, <span class="st">"visual_textual"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $ageyr_visual_speed</span></span>
+<span><span class="co">#&gt; [1] "ageyr_visual" "visual_speed"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ageyr_visual_textual</span></span>
+<span><span class="co">#&gt; [1] "ageyr_visual"   "visual_textual"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade_visual_speed</span></span>
+<span><span class="co">#&gt; [1] "grade_visual" "visual_speed"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade_visual_textual</span></span>
+<span><span class="co">#&gt; [1] "grade_visual"   "visual_textual"</span></span>
 <span></span>
-<span><span class="co"># Fit the model with `lavaan`</span></span>
-<span><span class="va">fit.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">fit.saturated</span>, data <span class="op">=</span> <span class="va">data</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
+<span>                                <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; textual ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~~ textual</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
+<span><span class="co">#&gt; ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
+<span><span class="co">#&gt; grade_visual_speed := grade_visual * visual_speed</span></span>
+<span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span></code></pre></div>
+<p>If preferred (e.g., when dealing with long variable names), one can choose to use letters for the predictor variables. Note however that this tends to be somewhat more confusing and ambiguous.</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
+<span>                                label <span class="op">=</span> <span class="cn">TRUE</span>, use.letters <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ speed_a*visual</span></span>
+<span><span class="co">#&gt; textual ~ textual_a*visual</span></span>
+<span><span class="co">#&gt; visual ~ visual_a*ageyr + visual_b*grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; textual ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~~ textual</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span></code></pre></div>
+<p>In this case, the path names are <code>a_speed</code>, <code>a_textual</code>, <code>a_visual</code>, and <code>b_visual</code>. So we would define our <code>indirect</code> object as such:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ageyr_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a_visual"</span>, <span class="st">"a_speed"</span><span class="op">)</span>,</span>
+<span>                  ageyr_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a_visual"</span>, <span class="st">"a_textual"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b_visual"</span>, <span class="st">"a_speed"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b_visual"</span>, <span class="st">"a_textual"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $ageyr_visual_speed</span></span>
+<span><span class="co">#&gt; [1] "a_visual" "a_speed" </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $ageyr_visual_textual</span></span>
+<span><span class="co">#&gt; [1] "a_visual"  "a_textual"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade_visual_speed</span></span>
+<span><span class="co">#&gt; [1] "b_visual" "a_speed" </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $grade_visual_textual</span></span>
+<span><span class="co">#&gt; [1] "b_visual"  "a_textual"</span></span>
+<span></span>
+<span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
+<span>                                <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span>, use.letters <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ speed_a*visual</span></span>
+<span><span class="co">#&gt; textual ~ textual_a*visual</span></span>
+<span><span class="co">#&gt; visual ~ visual_a*ageyr + visual_b*grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; textual ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~~ textual</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ageyr_visual_speed := a_visual * a_speed</span></span>
+<span><span class="co">#&gt; ageyr_visual_textual := a_visual * a_textual</span></span>
+<span><span class="co">#&gt; grade_visual_speed := b_visual * a_speed</span></span>
+<span><span class="co">#&gt; grade_visual_textual := b_visual * a_textual</span></span></code></pre></div>
+<p>There is also an experimental feature that attempts to produce the indirect effects automatically. This feature requires specifying your dependent and mediator variables as “DV” and “M”, respectively, in the <code>indirect</code> object. In our case, we have already defined those earlier, so we can just feed the proper objects.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">M</span>, </span>
+<span>                  DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $M</span></span>
+<span><span class="co">#&gt; [1] "visual"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $DV</span></span>
+<span><span class="co">#&gt; [1] "speed"   "textual"</span></span>
+<span></span>
+<span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
+<span>                                <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; textual ~ ageyr + grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Covariances-----------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; speed ~~ textual</span></span>
+<span><span class="co">#&gt; ageyr ~~ grade</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
+<span><span class="co">#&gt; ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
+<span><span class="co">#&gt; grade_visual_speed := grade_visual * visual_speed</span></span>
+<span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span></code></pre></div>
+<p>We are now satisfied with our model, so we can finally fit it!</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Fit the model with `lavaan`</span></span>
+<span><span class="va">fit.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.saturated</span>, data <span class="op">=</span> <span class="va">data</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.saturated</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -412,8 +603,8 @@
 <div class="section level3">
 <h3 id="path-analysis-model">Path analysis model<a class="anchor" aria-label="anchor" href="#path-analysis-model"></a>
 </h3>
-<p>Because we use <code>lavaanExtra</code>, we don’t have to redefine the entire model: simply what we want to update. In this case, the regressions. However, we also want to specify and test our indirect effects (mediation). For this, we have to obtain the path names by setting <code>label = TRUE</code>. This will allow us to define our indirect effects and feed them back to <code>write_lavaan</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<p>Because we use <code>lavaanExtra</code>, we don’t have to redefine the entire model: simply what we want to update. In this case, the regressions and the indirect effects.</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="op">(</span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="st">"grade"</span>,</span>
 <span>                    textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $speed</span></span>
@@ -423,15 +614,15 @@
 <span><span class="co">#&gt; [1] "ageyr" "grade"</span></span>
 <span><span class="co"># We check that we have removed "ageyr" correctly from "speed". OK.</span></span>
 <span></span>
-<span><span class="co"># We can run the model again. However, we set `label = TRUE` to get the path names</span></span>
+<span><span class="co"># We can run the model again, setting `label = TRUE` to get the path names</span></span>
 <span><span class="va">model.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; speed ~ speed_a*visual</span></span>
-<span><span class="co">#&gt; textual ~ textual_a*visual</span></span>
-<span><span class="co">#&gt; visual ~ visual_a*ageyr + visual_b*grade</span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
@@ -445,26 +636,27 @@
 <span><span class="co">#&gt; speed ~~ textual</span></span>
 <span><span class="co">#&gt; ageyr ~~ grade</span></span>
 <span><span class="co"># We check that we have removed "ageyr" correctly from "speed" in the </span></span>
-<span><span class="co"># regression section. OK.</span></span></code></pre></div>
-<p>Here, if we check the mediation section of the model, we see that it has been “augmented” with the path names. Those are <code>speed_a</code>, <code>textual_a</code>, <code>visual_a</code>, and <code>visual_b</code>. The logic for the determination of the path names is predictable: it is always the dependent variable (on the left) followed by letters, which represent the number of the explanatory variable (on the right).</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed_a"</span>, <span class="st">"visual_a"</span><span class="op">)</span>,</span>
-<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"textual_a"</span>, <span class="st">"visual_b"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># regression section. OK.</span></span>
+<span></span>
+<span><span class="co"># Define just our indirect effects of interest</span></span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual_speed"</span>, <span class="st">"ageyr_visual"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual_textual"</span>, <span class="st">"grade_visual"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $age_visual_speed</span></span>
-<span><span class="co">#&gt; [1] "speed_a"  "visual_a"</span></span>
+<span><span class="co">#&gt; [1] "visual_speed" "ageyr_visual"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $grade_visual_textual</span></span>
-<span><span class="co">#&gt; [1] "textual_a" "visual_b"</span></span>
+<span><span class="co">#&gt; [1] "visual_textual" "grade_visual"</span></span>
 <span></span>
 <span><span class="co"># We run the model again, with the indirect effects</span></span>
-<span><span class="va">model.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="va">model.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
+<span>                           <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.path</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; speed ~ speed_a*visual</span></span>
-<span><span class="co">#&gt; textual ~ textual_a*visual</span></span>
-<span><span class="co">#&gt; visual ~ visual_a*ageyr + visual_b*grade</span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
@@ -481,8 +673,8 @@
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; age_visual_speed := speed_a * visual_a</span></span>
-<span><span class="co">#&gt; grade_visual_textual := textual_a * visual_b</span></span>
+<span><span class="co">#&gt; age_visual_speed := visual_speed * ageyr_visual</span></span>
+<span><span class="co">#&gt; grade_visual_textual := visual_textual * grade_visual</span></span>
 <span></span>
 <span><span class="co"># Fit the model with `lavaan`</span></span>
 <span><span class="va">fit.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.path</span>, data <span class="op">=</span> <span class="va">data</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -490,7 +682,7 @@
 <span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect1-1.png" width="30%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># We only kept significant regressions—good (for this demo).</span></span>
 <span></span>
 <span><span class="co"># Get covariance indices</span></span>
@@ -507,7 +699,7 @@
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_cov.html">lavaan_cov</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-covariance-1.png" width="30%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get fit indices</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span><span class="op">)</span></span>
 <span><span class="co">#&gt;           Model   chi2 df chi2.df     p   CFI   TLI RMSEA  SRMR      AIC</span></span>
@@ -522,16 +714,26 @@
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-path2-1.png" width="90%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Let's get the indirect effects only</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.path</span><span class="op">)</span></span>
-<span><span class="co">#&gt;         Indirect.Effect              Paths      B     p</span></span>
-<span><span class="co">#&gt; 15     age_visual_speed   speed_a*visual_a -0.033 0.037</span></span>
-<span><span class="co">#&gt; 16 grade_visual_textual textual_a*visual_b  0.066 0.002</span></span>
+<span><span class="co">#&gt;         Indirect.Effect                       Paths      B     p</span></span>
+<span><span class="co">#&gt; 15     age_visual_speed   visual_speed*ageyr_visual -0.033 0.037</span></span>
+<span><span class="co">#&gt; 16 grade_visual_textual visual_textual*grade_visual  0.066 0.002</span></span>
 <span></span>
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect2-1.png" width="50%"></p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get modification indices only</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavInspect.html" class="external-link">inspect</a></span><span class="op">(</span><span class="va">fit.path</span>, <span class="st">"mi"</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt;       lhs op     rhs    mi    epc sepc.lv sepc.all sepc.nox</span></span>
+<span><span class="co">#&gt; 17  speed ~~  visual 0.326  0.147   0.147    0.234    0.234</span></span>
+<span><span class="co">#&gt; 18  speed ~~   ageyr 0.326  0.022   0.022    0.029    0.029</span></span>
+<span><span class="co">#&gt; 19  speed ~~   grade 0.326 -0.021  -0.021   -0.056   -0.056</span></span>
+<span><span class="co">#&gt; 25  speed  ~ textual 0.326 -0.067  -0.067   -0.087   -0.087</span></span>
+<span><span class="co">#&gt; 26  speed  ~   ageyr 0.326  0.027   0.027    0.035    0.035</span></span>
+<span><span class="co">#&gt; 28 visual  ~   speed 0.326  0.269   0.269    0.250    0.250</span></span></code></pre></div>
 <p>For reference, this is our model, visually speaking</p>
 <p><img src="reference/figures/holzinger_model.png"></p>
 </div>
@@ -539,7 +741,7 @@
 <h3 id="latent-model">Latent model<a class="anchor" aria-label="anchor" href="#latent-model"></a>
 </h3>
 <p>Finally, perhaps we change our mind and decide to run a full SEM instead, with latent variables. Fear not: we don’t have to redo everything again. We can simply define our latent variables and proceed. In this example, we have <em>already</em> defined our latent variable for our CFA earlier, so we don’t even need to write that again!</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
 <span>                             <span class="va">indirect</span>, <span class="va">latent</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.latent</span><span class="op">)</span></span>
@@ -553,9 +755,9 @@
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; speed ~ speed_a*visual</span></span>
-<span><span class="co">#&gt; textual ~ textual_a*visual</span></span>
-<span><span class="co">#&gt; visual ~ visual_a*ageyr + visual_b*grade</span></span>
+<span><span class="co">#&gt; speed ~ visual_speed*visual</span></span>
+<span><span class="co">#&gt; textual ~ visual_textual*visual</span></span>
+<span><span class="co">#&gt; visual ~ ageyr_visual*ageyr + grade_visual*grade</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [---------Regressions (Direct effects)---------]</span></span>
@@ -572,8 +774,8 @@
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; age_visual_speed := speed_a * visual_a</span></span>
-<span><span class="co">#&gt; grade_visual_textual := textual_a * visual_b</span></span>
+<span><span class="co">#&gt; age_visual_speed := visual_speed * ageyr_visual</span></span>
+<span><span class="co">#&gt; grade_visual_textual := visual_textual * grade_visual</span></span>
 <span></span>
 <span><span class="co"># Run model</span></span>
 <span><span class="va">fit.latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.latent</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>

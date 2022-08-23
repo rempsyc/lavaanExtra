@@ -23,6 +23,8 @@ navbar:
   left:
   - icon: fa-home
     href: index.html
+  - text: Changelog
+    href: news/index.html
   - text: To-dos
     href: TODOS.html
 
