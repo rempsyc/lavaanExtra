@@ -1,0 +1,256 @@
+---
+title: "Example lavaan models"
+author: "Rémi Thériault"
+date: "August 24, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Example lavaan models}
+  %\VignetteEngine{knitr::knitr}
+---
+
+This article attempts to reproduce several different possible `lavaan` models. We start with the source itself: The lavaan project at https://lavaan.ugent.be. Let's start by loading both packages.
+
+```{r}
+library(lavaan)
+library(lavaanExtra)
+```
+
+## Example 1 (Model syntax 1): 
+Source: https://lavaan.ugent.be/tutorial/syntax1.html
+
+`lavaan`:
+```{r}
+myModel <- ' # regressions
+             y1 + y2 ~ f1 + f2 + x1 + x2
+                  f1 ~ f2 + f3
+                  f2 ~ f3 + x1 + x2
+
+             # latent variable definitions 
+               f1 =~ y1 + y2 + y3 
+               f2 =~ y4 + y5 + y6 
+               f3 =~ y7 + y8 + y9 + y10
+
+             # variances and covariances 
+               y1 ~~ y1 
+               y1 ~~ y2 
+               f1 ~~ f2
+
+             # intercepts 
+               y1 ~ 1 
+               f1 ~ 1
+           '
+```
+
+`lavaanExtra`:
+```{r}
+#y <- paste0(rep(c("f", "x"), each = 2), 1:2)
+regression <- list(y1 = c("f1", "f2", "x1", "x2"),
+                   y2 = c("f1", "f2", "x1", "x2"),
+                   f1 = c("f2", "f3"),
+                   f2 = c("f3", "x1", "x2"))
+latent <- list(f1 = paste0("y", 1:3),
+               f2 = paste0("y", 4:6), 
+               f3 = paste0("y", 7:10))
+covariance <- list(y1 = "y1",
+                   y1 = "y2",
+                   f1 = "f2")
+intercept <- c("y1", "f1")
+myModel <- write_lavaan(regression = regression,
+                        latent = latent,
+                        covariance = covariance,
+                        intercept = intercept)
+cat(myModel)
+```
+
+## Example 2 (A CFA example): 
+Source: https://lavaan.ugent.be/tutorial/cfa.html
+
+`lavaan`:
+```{r}
+HS.model <- ' visual  =~ x1 + x2 + x3 
+              textual =~ x4 + x5 + x6
+              speed   =~ x7 + x8 + x9 '
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(visual = paste0("x", 1:3),
+               textual = paste0("x", 4:6),
+               speed = paste0("x", 7:9))
+myModel <- write_lavaan(latent = latent)
+cat(myModel)
+```
+
+## Example 3 (A SEM example): 
+Source: https://lavaan.ugent.be/tutorial/sem.html
+
+`lavaan`:
+```{r}
+model <- '
+  # measurement model
+    ind60 =~ x1 + x2 + x3
+    dem60 =~ y1 + y2 + y3 + y4
+    dem65 =~ y5 + y6 + y7 + y8
+  # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+  # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+'
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(ind60 = paste0("x", 1:3),
+               dem60 = paste0("y", 1:4),
+               dem65 = paste0("y", 5:8))
+regression <- list(dem60 = "ind60",
+                   dem65 = c("ind60", "dem60"))
+covariance <- list(y1 = "y5",
+                   y2 = c("y4", "y6"),
+                   y3 = "y7",
+                   y4 = "y8",
+                   y6 = "y8")
+model <- write_lavaan(latent = latent, regression = regression, 
+                      covariance = covariance)
+cat(model)
+```
+
+## Example 4 (Model syntax 2): 
+Source: https://lavaan.ugent.be/tutorial/syntax2.html
+
+#### Example 4.1
+
+`lavaan`:
+```{r}
+model <- '
+# three-factor model
+  visual =~ x1 + x2 + x3
+  textual =~ x4 + x5 + x6
+  speed   =~ NA*x7 + x8 + x9
+# orthogonal factors
+  visual ~~ 0*speed
+  textual ~~ 0*speed
+# fix variance of speed factor
+  speed ~~ 1*speed
+'
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(visual = paste0("x", 1:3),
+               textual = paste0("x", 4:6),
+               speed = c("NA*x7", "x8", "x9"))
+covariance <- list(visual = "0*speed",
+                   textual = "0*speed",
+                   speed = "1*speed")
+model <- write_lavaan(latent = latent, covariance = covariance)
+cat(model)
+```
+
+#### Example 4.2
+
+`lavaan`:
+```{r}
+model <- '
+visual  =~ x1 + start(0.8)*x2 + start(1.2)*x3
+textual =~ x4 + start(0.5)*x5 + start(1.0)*x6
+speed   =~ x7 + start(0.7)*x8 + start(1.8)*x9
+'
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(visual = c("x1", "start(0.8)*x2", "start(1.2)*x3"),
+               textual = c("x4", "start(0.5)*x5", "start(1.0)*x6"),
+               speed = c("x7", "start(0.7)*x8", "start(1.8)*x9"))
+model <- write_lavaan(latent = latent)
+cat(model)
+```
+
+#### Example 4.3
+
+`lavaan`:
+```{r}
+model <- '
+f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4
+'
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(f = c("y1", "y2", "myLabel*y3", "start(0.5)*y3", "y4"))
+model <- write_lavaan(latent = latent)
+cat(model)
+```
+
+#### Example 4.4
+
+`lavaan`:
+```{r}
+model <- '
+visual  =~ x1 + v2*x2 + v2*x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+'
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(visual = c("x1", "v2*x2", "v2*x3"),
+               textual = paste0("x", 4:6),
+               speed = paste0("x", 7:9))
+model <- write_lavaan(latent = latent)
+cat(model)
+```
+
+#### Example 4.5
+
+`lavaan`:
+```{r}
+model <- '
+visual  =~ x1 + x2 + equal("visual=~x2")*x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+'
+lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
+       auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+```
+
+`lavaanExtra`:
+```{r}
+latent <- list(visual = c("x1", "x2", "equal('visual=~x2')*x3"),
+               textual = paste0("x", 4:6),
+               speed = paste0("x", 7:9))
+model <- write_lavaan(latent = latent)
+cat(model)
+lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
+       auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+```
+
+#### Example 4.6
+
+`lavaan`:
+```{r}
+model.constr <- ' # model with labeled parameters
+                    y ~ b1*x1 + b2*x2 + b3*x3
+                  # constraints
+                    b1 == (b2 + b3)^2
+                    b1 > exp(b2 + b3) '
+```
+
+`lavaanExtra`:
+```{r}
+regression <- list(y = c("b1*x1", "b2*x2", "b3*x3"))
+model <- write_lavaan(regression = regression)
+cat(model)
+```
+
+> Need to add support for equality contraints!
+

@@ -23,6 +23,11 @@ navbar:
   left:
   - icon: fa-home
     href: index.html
+  - text: Tutorials
+    href: articles/index.html
+    menu:
+      - text: Example lavaan models
+        href: articles/example.html
   - text: Functions
     href: reference/index.html
   - text: Changelog
