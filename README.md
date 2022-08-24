@@ -826,7 +826,7 @@ cat(model.intercept)
 This is an experimental package in a *very* early stage. Any feedback or
 feature request is appreciated, and the package will likely change and
 evolve over time based on community feedback. Feel free to open an issue
-or discussion to discuss your questions or concerns.
+or discussion to share your questions or concerns.
 
 ## Support me and this package
 
