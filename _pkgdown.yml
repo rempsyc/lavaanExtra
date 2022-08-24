@@ -15,7 +15,7 @@ navbar:
     href: https://twitter.com/rempsyc
     aria-label: Twitter
   - icon: fa-github
-    href: https://github.com/rempsyc/rempsyc/
+    href: https://github.com/rempsyc/lavaanExtra
     aria-label: GitHub
   - icon: fa-coffee
     href: https://github.com/sponsors/rempsyc
