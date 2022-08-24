@@ -460,9 +460,47 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## y ~ b1*x1 + b2*x2 + b3*x3</span></span></code></pre>
 <blockquote>
-<p>Need to add support for equality contraints!</p>
+<p>Need to add support for equality and greater/smaller than constraints!</p>
 </blockquote>
 </div>
+</div>
+<div class="section level2">
+<h2 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
+</h2>
+<p><a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
+<p><code>lavaan</code>:</p>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">' # direct effect</span></span>
+<span><span class="st">             Y ~ c*X</span></span>
+<span><span class="st">           # mediator</span></span>
+<span><span class="st">             M ~ a*X</span></span>
+<span><span class="st">             Y ~ b*M</span></span>
+<span><span class="st">           # indirect effect (a*b)</span></span>
+<span><span class="st">             ab := a*b</span></span>
+<span><span class="st">           # total effect</span></span>
+<span><span class="st">             total := c + (a*b)</span></span>
+<span><span class="st">         '</span></span></code></pre></div>
+<p><code>lavaanExtra</code>:</p>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="st">"c*X"</span>,</span>
+<span>                  M <span class="op">=</span> <span class="st">"a*X"</span>,</span>
+<span>                  Y <span class="op">=</span> <span class="st">"b*M"</span><span class="op">)</span></span>
+<span><span class="va">indirect</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ab <span class="op">=</span> <span class="st">"a*b"</span>,</span>
+<span>                total <span class="op">=</span> <span class="st">"c + (a*b)"</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, indirect <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## Y ~ c*X</span></span>
+<span><span class="co">## M ~ a*X</span></span>
+<span><span class="co">## Y ~ b*M</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ab := a*b</span></span>
+<span><span class="co">## total := c + (a*b)</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
