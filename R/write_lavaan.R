@@ -81,7 +81,6 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
     indirect <- process_vars(indirect, symbol = ":=", label = FALSE,
                              collapse = " * ", title =
                                "[--------Mediations (indirect effects)---------]")
-    label <- TRUE
   }
   if (!is.null(mediation)) {
     mediation <- process_vars(mediation, symbol = "~", label = label, title =

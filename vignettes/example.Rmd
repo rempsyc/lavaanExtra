@@ -252,4 +252,32 @@ model <- write_lavaan(regression = regression)
 cat(model)
 ```
 
-> Need to add support for equality contraints!
+> Need to add support for equality and greater/smaller than constraints!
+
+## Example 5 (Mediation)
+https://lavaan.ugent.be/tutorial/mediation.html
+
+`lavaan`:
+```{r}
+model <- ' # direct effect
+             Y ~ c*X
+           # mediator
+             M ~ a*X
+             Y ~ b*M
+           # indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b)
+         '
+```
+
+`lavaanExtra`:
+```{r}
+mediation <- list(Y = "c*X",
+                  M = "a*X",
+                  Y = "b*M")
+indirect = list(ab = "a*b",
+                total = "c + (a*b)")
+model <- write_lavaan(mediation, indirect = indirect)
+cat(model)
+```
