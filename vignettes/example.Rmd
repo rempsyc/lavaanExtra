@@ -255,7 +255,7 @@ cat(model)
 > Need to add support for equality and greater/smaller than constraints!
 
 ## Example 5 (Mediation)
-https://lavaan.ugent.be/tutorial/mediation.html
+Source: https://lavaan.ugent.be/tutorial/mediation.html
 
 `lavaan`:
 ```{r}
@@ -281,3 +281,20 @@ indirect = list(ab = "a*b",
 model <- write_lavaan(mediation, indirect = indirect)
 cat(model)
 ```
+
+## Example 6 (Multilevel SEM)
+Source: https://lavaan.ugent.be/tutorial/multilevel.html
+
+`lavaan`:
+```{r}
+model <- '
+    level: 1
+        fw =~ y1 + y2 + y3
+        fw ~ x1 + x2 + x3
+    level: 2
+        fb =~ y1 + y2 + y3
+        fb ~ w1 + w2
+'
+```
+
+Note that `lavaanExtra` does not support multilevel models yet!
