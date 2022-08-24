@@ -253,4 +253,3 @@ cat(model)
 ```
 
 > Need to add support for equality contraints!
-
