@@ -328,7 +328,7 @@ lavaan_ind(fit.path, nice_table = TRUE)
 
 ```{r mi}
 # Get modification indices only
-head(inspect(fit.path, "mi"))
+modindices(fit.path, sort = TRUE, maximum.number = 5)
 ```
 
 For reference, this is our model, visually speaking

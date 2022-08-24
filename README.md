@@ -721,14 +721,13 @@ lavaan_ind(fit.path, nice_table = TRUE)
 
 ``` r
 # Get modification indices only
-head(inspect(fit.path, "mi"))
+modindices(fit.path, sort = TRUE, maximum.number = 5)
 #>       lhs op     rhs    mi    epc sepc.lv sepc.all sepc.nox
-#> 17  speed ~~  visual 0.326  0.147   0.147    0.234    0.234
-#> 18  speed ~~   ageyr 0.326  0.022   0.022    0.029    0.029
+#> 29 visual  ~ textual 0.326  1.622   1.622    1.975    1.975
+#> 35  grade  ~ textual 0.326 -0.228  -0.228   -0.488   -0.488
+#> 34  grade  ~   speed 0.326 -0.038  -0.038   -0.062   -0.062
 #> 19  speed ~~   grade 0.326 -0.021  -0.021   -0.056   -0.056
 #> 25  speed  ~ textual 0.326 -0.067  -0.067   -0.087   -0.087
-#> 26  speed  ~   ageyr 0.326  0.027   0.027    0.035    0.035
-#> 28 visual  ~   speed 0.326  0.269   0.269    0.250    0.250
 ```
 
 For reference, this is our model, visually speaking
