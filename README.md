@@ -79,6 +79,8 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 [Latent model](#latent-model)<a name = 'Latent model'/>
 
+[Intercepts](#intercepts)<a name = 'Intercepts'/>
+
 ## Regression example
 
 ``` r
@@ -800,6 +802,31 @@ nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-latent-1.png" width="90%" />
+
+#### Intercepts
+
+Finally, intercepts can also be specified (more simply), e.g.:
+
+``` r
+
+intercept <- c("mpg", "cyl", "disp")
+
+model.intercept <- write_lavaan(intercept = intercept)
+cat(model.intercept)
+#> ##################################################
+#> # [------------------Intercepts------------------]
+#> 
+#> mpg ~ 1
+#> cyl ~ 1
+#> disp ~ 1
+```
+
+### Final note
+
+This is an experimental package in a *very* early stage. Any feedback or
+feature request is appreciated, and the package will likely change and
+evolve over time based on community feedback. Feel free to open an issue
+or discussion to discuss your questions or concerns.
 
 ## Support me and this package
 

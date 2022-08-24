@@ -66,6 +66,7 @@ section.3 <- "SEM example"
 section.4 <- "Saturated model"
 section.5 <- "Path analysis model"
 section.6 <- "Latent model"
+section.7 <- "Intercepts"
 
 cute_cat <- function(x, header.level = 1){ 
   cat(rep("#", header.level), " ", x, sep = "")
@@ -80,7 +81,8 @@ cute_TOC <- function(section) {
 }
 
 invisible(lapply(list(
-  section.1, section.2, section.3, section.4, section.5, section.6), 
+  section.1, section.2, section.3, section.4, section.5, 
+  section.6, section.7), 
   cute_TOC))
 
 ```
@@ -358,6 +360,22 @@ nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 
 <img src="man/figures/README-latent-1.png" width="90%" />
 
+
+#### Intercepts
+
+Finally, intercepts can also be specified (more simply), e.g.:
+
+```{r}
+
+intercept <- c("mpg", "cyl", "disp")
+
+model.intercept <- write_lavaan(intercept = intercept)
+cat(model.intercept)
+
+```
+
+### Final note
+This is an experimental package in a *very* early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to discuss your questions or concerns.
 
 ## Support me and this package
 

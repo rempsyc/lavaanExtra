@@ -142,6 +142,7 @@
 <p><a href="#saturated-model">Saturated model</a><a name="Saturated%20model"></a></p>
 <p><a href="#path-analysis-model">Path analysis model</a><a name="Path%20analysis%20model"></a></p>
 <p><a href="#latent-model">Latent model</a><a name="Latent%20model"></a></p>
+<p><a href="#intercepts">Intercepts</a><a name="Intercepts"></a></p>
 </div>
 <div class="section level2">
 <h2 id="regression-example">Regression example<a class="anchor" aria-label="anchor" href="#regression-example"></a>
@@ -799,6 +800,28 @@
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-latent-1.png" width="90%"></p>
+<div class="section level4">
+<h4 id="intercepts">Intercepts<a class="anchor" aria-label="anchor" href="#intercepts"></a>
+</h4>
+<p>Finally, intercepts can also be specified (more simply), e.g.:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span></span>
+<span><span class="va">intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span>, <span class="st">"disp"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model.intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">intercept</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.intercept</span><span class="op">)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------------Intercepts------------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; mpg ~ 1</span></span>
+<span><span class="co">#&gt; cyl ~ 1</span></span>
+<span><span class="co">#&gt; disp ~ 1</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level3">
+<h3 id="final-note">Final note<a class="anchor" aria-label="anchor" href="#final-note"></a>
+</h3>
+<p>This is an experimental package in a <em>very</em> early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to discuss your questions or concerns.</p>
 </div>
 </div>
 <div class="section level2">
