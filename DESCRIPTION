@@ -21,6 +21,7 @@ Suggests:
     flextable,
     knitr,
     rmarkdown,
+    markdown,
     testthat (>= 3.0.0),
 Config/testthat/edition: 3
 Encoding: UTF-8
