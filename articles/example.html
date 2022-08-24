@@ -467,7 +467,7 @@
 <div class="section level2">
 <h2 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
 </h2>
-<p><a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
+<p>Source: <a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">' # direct effect</span></span>
@@ -501,6 +501,22 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## ab := a*b</span></span>
 <span><span class="co">## total := c + (a*b)</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="example-6-multilevel-sem">Example 6 (Multilevel SEM)<a class="anchor" aria-label="anchor" href="#example-6-multilevel-sem"></a>
+</h2>
+<p>Source: <a href="https://lavaan.ugent.be/tutorial/multilevel.html" class="external-link uri">https://lavaan.ugent.be/tutorial/multilevel.html</a></p>
+<p><code>lavaan</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">    level: 1</span></span>
+<span><span class="st">        fw =~ y1 + y2 + y3</span></span>
+<span><span class="st">        fw ~ x1 + x2 + x3</span></span>
+<span><span class="st">    level: 2</span></span>
+<span><span class="st">        fb =~ y1 + y2 + y3</span></span>
+<span><span class="st">        fb ~ w1 + w2</span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<p>Note that <code>lavaanExtra</code> does not support multilevel models yet!</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
