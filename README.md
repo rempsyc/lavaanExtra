@@ -93,7 +93,7 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 # Load library
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.0.9) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.1.0) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
@@ -264,7 +264,7 @@ analysis first.
 
 ### Saturated model
 
-The first step is usually to look at the saturated `lavaan` model.
+One might decide to look at the saturated `lavaan` model first.
 
 ``` r
 # Calculate scale averages
@@ -447,9 +447,9 @@ cat(model.saturated)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ speed_a*visual
-#> textual ~ textual_a*visual
-#> visual ~ visual_a*ageyr + visual_b*grade
+#> speed ~ a_speed*visual
+#> textual ~ a_textual*visual
+#> visual ~ a_visual*ageyr + b_visual*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -492,9 +492,9 @@ cat(model.saturated)
 #> ##################################################
 #> # [-----------Mediations (named paths)-----------]
 #> 
-#> speed ~ speed_a*visual
-#> textual ~ textual_a*visual
-#> visual ~ visual_a*ageyr + visual_b*grade
+#> speed ~ a_speed*visual
+#> textual ~ a_textual*visual
+#> visual ~ a_visual*ageyr + b_visual*grade
 #> 
 #> ##################################################
 #> # [---------Regressions (Direct effects)---------]
@@ -669,7 +669,7 @@ lavaan_reg(fit.path, nice_table = TRUE, highlight = TRUE)
 <img src="man/figures/README-indirect1-1.png" width="30%" />
 
 ``` r
-# We only kept significant regressions—good (for this demo).
+# We only kept significant regressions. Good (for this demo).
 
 # Get covariance indices
 lavaan_cov(fit.path)
