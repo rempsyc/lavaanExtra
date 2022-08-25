@@ -38,7 +38,7 @@
     
     <a class="navbar-brand me-2" href="index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -806,29 +806,46 @@
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-latent-1.png" width="90%"></p>
-<div class="section level4">
-<h4 id="intercepts">Intercepts<a class="anchor" aria-label="anchor" href="#intercepts"></a>
-</h4>
-<p>Finally, intercepts can also be specified (more simply), e.g.:</p>
+</div>
+</div>
+</div>
+<div class="section level1">
+<h1 id="special-cases">Special cases<a class="anchor" aria-label="anchor" href="#special-cases"></a>
+</h1>
+<p>Finally, intercepts and various constraints can also be specified, e.g.:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span><span class="va">intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span>, <span class="st">"disp"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mpg"</span>, <span class="st">"cyl"</span>, <span class="st">"disp"</span><span class="op">)</span></span>
+<span><span class="va">constraint.equal</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"(b2 + b3)^2"</span><span class="op">)</span></span>
+<span><span class="va">constraint.smaller</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"exp(b2 + b3)"</span><span class="op">)</span></span>
+<span><span class="va">constraint.larger</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"exp(b2 + b3)"</span><span class="op">)</span></span>
+<span><span class="va">custom</span> <span class="op">&lt;-</span> <span class="st">"y1 + y2 ~ f1 + f2 + x1 + x2"</span></span>
 <span></span>
-<span><span class="va">model.intercept</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>intercept <span class="op">=</span> <span class="va">intercept</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.intercept</span><span class="op">)</span></span>
+<span><span class="va">model.custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  intercept <span class="op">=</span> <span class="va">intercept</span>, constraint.equal <span class="op">=</span> <span class="va">constraint.equal</span>, </span>
+<span>  constraint.smaller <span class="op">=</span> <span class="va">constraint.smaller</span>, </span>
+<span>  constraint.larger <span class="op">=</span> <span class="va">constraint.larger</span>, custom <span class="op">=</span> <span class="va">custom</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.custom</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [------------------Intercepts------------------]</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; mpg ~ 1</span></span>
 <span><span class="co">#&gt; cyl ~ 1</span></span>
-<span><span class="co">#&gt; disp ~ 1</span></span></code></pre></div>
-</div>
-</div>
+<span><span class="co">#&gt; disp ~ 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [-----------------Constraints------------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; b1 == (b2 + b3)^2</span></span>
+<span><span class="co">#&gt; b1 &lt; exp(b2 + b3)</span></span>
+<span><span class="co">#&gt; b1 &gt; exp(b2 + b3)</span></span>
+<span><span class="co">#&gt; ##################################################</span></span>
+<span><span class="co">#&gt; # [------------Custom Specifications-------------]</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; y1 + y2 ~ f1 + f2 + x1 + x2</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="final-note">Final note<a class="anchor" aria-label="anchor" href="#final-note"></a>
 </h3>
 <p>This is an experimental package in a <em>very</em> early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to share your questions or concerns.</p>
-</div>
 </div>
 <div class="section level2">
 <h2 id="support-me-and-this-package">Support me and this package<a class="anchor" aria-label="anchor" href="#support-me-and-this-package"></a>
@@ -836,6 +853,7 @@
 <p>Thank you for your support. You can support me and this package here: <a href="https://github.com/sponsors/rempsyc" class="external-link uri">https://github.com/sponsors/rempsyc</a></p>
 </div>
 </div>
+
   </main><aside class="col-md-3"><div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
