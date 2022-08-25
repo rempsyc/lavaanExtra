@@ -252,8 +252,6 @@ model <- write_lavaan(regression = reg, constraint.equal = cstr1,
 cat(model)
 ```
 
-> **Need to add support for equality and greater/smaller than constraints!**
-
 ## Example 5 (Mediation)
 Source: https://lavaan.ugent.be/tutorial/mediation.html
 
