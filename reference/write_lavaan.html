@@ -94,6 +94,9 @@
 <span>  indirect <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  latent <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  intercept <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  constraint.equal <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  constraint.smaller <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  constraint.larger <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  custom <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  use.letters <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -128,8 +131,20 @@ specified automatically with argument <code>label</code>.</p></dd>
 <dd><p>Intercept indicators (<code>~ 1</code> symbol: "intercept").</p></dd>
 
 
+<dt>constraint.equal</dt>
+<dd><p>Equality indicators (<code>==</code> symbol).</p></dd>
+
+
+<dt>constraint.smaller</dt>
+<dd><p>Smaller than indicators (<code>&lt;</code> symbol).</p></dd>
+
+
+<dt>constraint.larger</dt>
+<dd><p>Greater than indicators (<code>&gt;</code> symbol).</p></dd>
+
+
 <dt>custom</dt>
-<dd><p>Custom specifications. Takes a single string just like regular
+<dd><p>Custom specifications. Takes a <em>single</em> string just like regular
 <code>lavaan</code> syntax would. Always added at the end of the model.</p></dd>
 
 
