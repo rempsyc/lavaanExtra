@@ -10,6 +10,9 @@
 #' @param indirect Indirect effect indicators (`:=` symbol: "indirect effect defined as").
 #' @param latent Latent variable indicators (`=~` symbol: "is measured by").
 #' @param intercept Intercept indicators (`~ 1` symbol: "intercept").
+#' @param constraint.equal Equality indicators (`==` symbol).
+#' @param constraint.smaller Smaller than indicators (`<` symbol).
+#' @param constraint.larger Greater than indicators (`>` symbol).
 #' @param custom Custom specifications. Takes a *single* string just like regular
 #'               `lavaan` syntax would. Always added at the end of the model.
 #' @param label Logical, whether to display path names for the mediation argument.

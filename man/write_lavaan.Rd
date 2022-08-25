@@ -11,6 +11,9 @@ write_lavaan(
   indirect = NULL,
   latent = NULL,
   intercept = NULL,
+  constraint.equal = NULL,
+  constraint.smaller = NULL,
+  constraint.larger = NULL,
   custom = NULL,
   label = FALSE,
   use.letters = FALSE
@@ -31,7 +34,13 @@ specified automatically with argument \code{label}.}
 
 \item{intercept}{Intercept indicators (\code{~ 1} symbol: "intercept").}
 
-\item{custom}{Custom specifications. Takes a single string just like regular
+\item{constraint.equal}{Equality indicators (\code{==} symbol).}
+
+\item{constraint.smaller}{Smaller than indicators (\code{<} symbol).}
+
+\item{constraint.larger}{Greater than indicators (\code{>} symbol).}
+
+\item{custom}{Custom specifications. Takes a \emph{single} string just like regular
 \code{lavaan} syntax would. Always added at the end of the model.}
 
 \item{label}{Logical, whether to display path names for the mediation argument.}
