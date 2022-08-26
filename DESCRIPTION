@@ -19,6 +19,8 @@ Imports:
 Suggests: 
     rempsyc,
     flextable,
+    lavaanPlot,
+    rlang,
     knitr,
     rmarkdown,
     markdown,
