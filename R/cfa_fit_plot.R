@@ -50,7 +50,7 @@ cfa_fit_plot <- function(model, data, covs = FALSE,
   # Fit model
   fit <- lavaan::cfa(model, data = data, estimator = "MLR", missing = "fiml", std.lv = TRUE)
   print(summary(fit, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE))
-  lavaan:::print.lavaan.summary(summary(fit))
+  #lavaan::print.lavaan.summary(summary(fit))
   # Plot the model
   # lavaanPlot::lavaanPlot(model = fit,
   #                        node_options = list(shape = "box", fontname = "Helvetica"),
