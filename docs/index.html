@@ -223,8 +223,8 @@
 <span><span class="co">#&gt; textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">#&gt; speed =~ x7 + x8 + x9</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Fit the model fit and plot to PDF with `lavaanExtra::cfa_fit_plot`</span></span>
-<span><span class="co"># to get the factor loadings</span></span>
+<code class="sourceCode R"><span><span class="co"># Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`</span></span>
+<span><span class="co"># to get the factor loadings visually (as PDF)</span></span>
 <span><span class="va">fit.cfa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cfa_fit_plot.html">cfa_fit_plot</a></span><span class="op">(</span><span class="va">cfa.model</span>, <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/cfaplot.png" width="30%"></p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; lavaan 0.6-12 ended normally after 35 iterations</span></span>
@@ -660,13 +660,13 @@
 <span><span class="co"># regression section. OK.</span></span>
 <span></span>
 <span><span class="co"># Define just our indirect effects of interest</span></span>
-<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual_speed"</span>, <span class="st">"ageyr_visual"</span><span class="op">)</span>,</span>
-<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual_textual"</span>, <span class="st">"grade_visual"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>age_visual_speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr_visual"</span>, <span class="st">"visual_speed"</span><span class="op">)</span>,</span>
+<span>                  grade_visual_textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"grade_visual"</span>, <span class="st">"visual_textual"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; $age_visual_speed</span></span>
-<span><span class="co">#&gt; [1] "visual_speed" "ageyr_visual"</span></span>
+<span><span class="co">#&gt; [1] "ageyr_visual" "visual_speed"</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $grade_visual_textual</span></span>
-<span><span class="co">#&gt; [1] "visual_textual" "grade_visual"</span></span>
+<span><span class="co">#&gt; [1] "grade_visual"   "visual_textual"</span></span>
 <span></span>
 <span><span class="co"># We run the model again, with the indirect effects</span></span>
 <span><span class="va">model.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
@@ -694,8 +694,8 @@
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; age_visual_speed := visual_speed * ageyr_visual</span></span>
-<span><span class="co">#&gt; grade_visual_textual := visual_textual * grade_visual</span></span>
+<span><span class="co">#&gt; age_visual_speed := ageyr_visual * visual_speed</span></span>
+<span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span>
 <span></span>
 <span><span class="co"># Fit the model with `lavaan`</span></span>
 <span><span class="va">fit.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.path</span>, data <span class="op">=</span> <span class="va">data</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -739,8 +739,8 @@
 <code class="sourceCode R"><span><span class="co"># Let's get the indirect effects only</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.path</span><span class="op">)</span></span>
 <span><span class="co">#&gt;         Indirect.Effect                       Paths      B     p</span></span>
-<span><span class="co">#&gt; 15     age_visual_speed   visual_speed*ageyr_visual -0.033 0.037</span></span>
-<span><span class="co">#&gt; 16 grade_visual_textual visual_textual*grade_visual  0.066 0.002</span></span>
+<span><span class="co">#&gt; 15     age_visual_speed   ageyr_visual*visual_speed -0.033 0.037</span></span>
+<span><span class="co">#&gt; 16 grade_visual_textual grade_visual*visual_textual  0.066 0.002</span></span>
 <span></span>
 <span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -794,8 +794,8 @@
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [--------Mediations (indirect effects)---------]</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; age_visual_speed := visual_speed * ageyr_visual</span></span>
-<span><span class="co">#&gt; grade_visual_textual := visual_textual * grade_visual</span></span>
+<span><span class="co">#&gt; age_visual_speed := ageyr_visual * visual_speed</span></span>
+<span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span>
 <span></span>
 <span><span class="co"># Run model</span></span>
 <span><span class="va">fit.latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model.latent</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>

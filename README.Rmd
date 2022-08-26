@@ -129,8 +129,8 @@ cat(cfa.model)
 ```
 
 ```{r cfaplot2, eval = FALSE}
-# Fit the model fit and plot to PDF with `lavaanExtra::cfa_fit_plot`
-# to get the factor loadings
+# Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings visually (as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 ```
 
@@ -285,8 +285,8 @@ cat(model.path)
 # regression section. OK.
 
 # Define just our indirect effects of interest
-(indirect <- list(age_visual_speed = c("visual_speed", "ageyr_visual"),
-                  grade_visual_textual = c("visual_textual", "grade_visual")))
+(indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
+                  grade_visual_textual = c("grade_visual", "visual_textual")))
 
 # We run the model again, with the indirect effects
 model.path <- write_lavaan(mediation, regression, covariance, 

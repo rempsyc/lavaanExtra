@@ -156,8 +156,8 @@ cat(cfa.model)
 ```
 
 ``` r
-# Fit the model fit and plot to PDF with `lavaanExtra::cfa_fit_plot`
-# to get the factor loadings
+# Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings visually (as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 ```
 
@@ -641,13 +641,13 @@ cat(model.path)
 # regression section. OK.
 
 # Define just our indirect effects of interest
-(indirect <- list(age_visual_speed = c("visual_speed", "ageyr_visual"),
-                  grade_visual_textual = c("visual_textual", "grade_visual")))
+(indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
+                  grade_visual_textual = c("grade_visual", "visual_textual")))
 #> $age_visual_speed
-#> [1] "visual_speed" "ageyr_visual"
+#> [1] "ageyr_visual" "visual_speed"
 #> 
 #> $grade_visual_textual
-#> [1] "visual_textual" "grade_visual"
+#> [1] "grade_visual"   "visual_textual"
 
 # We run the model again, with the indirect effects
 model.path <- write_lavaan(mediation, regression, covariance, 
@@ -675,8 +675,8 @@ cat(model.path)
 #> ##################################################
 #> # [--------Mediations (indirect effects)---------]
 #> 
-#> age_visual_speed := visual_speed * ageyr_visual
-#> grade_visual_textual := visual_textual * grade_visual
+#> age_visual_speed := ageyr_visual * visual_speed
+#> grade_visual_textual := grade_visual * visual_textual
 
 # Fit the model with `lavaan`
 fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
@@ -729,8 +729,8 @@ nice_fit(fit.cfa, fit.saturated, fit.path, nice_table = TRUE)
 # Let's get the indirect effects only
 lavaan_ind(fit.path)
 #>         Indirect.Effect                       Paths      B     p
-#> 15     age_visual_speed   visual_speed*ageyr_visual -0.033 0.037
-#> 16 grade_visual_textual visual_textual*grade_visual  0.066 0.002
+#> 15     age_visual_speed   ageyr_visual*visual_speed -0.033 0.037
+#> 16 grade_visual_textual grade_visual*visual_textual  0.066 0.002
 
 # We can get it prettier with the `rempsyc::nice_table` integration
 lavaan_ind(fit.path, nice_table = TRUE)
@@ -794,8 +794,8 @@ cat(model.latent)
 #> ##################################################
 #> # [--------Mediations (indirect effects)---------]
 #> 
-#> age_visual_speed := visual_speed * ageyr_visual
-#> grade_visual_textual := visual_textual * grade_visual
+#> age_visual_speed := ageyr_visual * visual_speed
+#> grade_visual_textual := grade_visual * visual_textual
 
 # Run model
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
