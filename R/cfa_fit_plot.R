@@ -1,6 +1,6 @@
 #' @title Fit and plot CFA simultaneously
 #'
-#' @description Print and save CAF fit, as well as plot CFA loadings, simultaneously.
+#' @description Print and save CFA fit, as well as plot CFA loadings, simultaneously.
 #'
 #' @param model CFA model to fit.
 #' @param data Data set on which to fit the CFA model.
@@ -11,6 +11,8 @@
 #' @param file.name Optional, if one wants something different than the default
 #'                  file name. Defaults to saving to the "/model" subfolder of
 #'                  the working directory. If it doesn't exist, it creates it.
+#'                  It saves to pdf per default, so the .pdf extension should not
+#'                  be specified as it will add it automatically.
 #' @keywords CFA, lavaan, plot, fit
 #' @export
 #' @examples
@@ -24,6 +26,9 @@
 #' library(lavaan)
 #' fit <- cfa_fit_plot(HS.model, HolzingerSwineford1939)
 #' @import lavaan
+#' @section Illustrations:
+#'
+#' \if{html}{\figure{cfaplot.png}{options: width="400"}}
 
 cfa_fit_plot <- function(model, data, covs = FALSE, remove.items = "", file.name,
                          estimator = "MLR"){

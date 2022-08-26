@@ -25,13 +25,21 @@ without having to redefine it completely again.}
 
 \item{file.name}{Optional, if one wants something different than the default
 file name. Defaults to saving to the "/model" subfolder of
-the working directory. If it doesn't exist, it creates it.}
+the working directory. If it doesn't exist, it creates it.
+It saves to pdf per default, so the .pdf extension should not
+be specified as it will add it automatically.}
 
 \item{estimator}{What estimator to use for the CFA.}
 }
 \description{
-Print and save CAF fit, as well as plot CFA loadings, simultaneously.
+Print and save CFA fit, as well as plot CFA loadings, simultaneously.
 }
+\section{Illustrations}{
+
+
+\if{html}{\figure{cfaplot.png}{options: width="400"}}
+}
+
 \examples{
 (latent <- list(visual = paste0("x", 1:3),
                 textual = paste0("x", 4:6),
