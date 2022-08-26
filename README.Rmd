@@ -66,7 +66,7 @@ section.3 <- "SEM example"
 section.4 <- "Saturated model"
 section.5 <- "Path analysis model"
 section.6 <- "Latent model"
-section.7 <- "Intercepts"
+section.7 <- "Special cases"
 
 cute_cat <- function(x, header.level = 1){ 
   cat(rep("#", header.level), " ", x, sep = "")
@@ -117,7 +117,7 @@ lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
 
 ## CFA example
 
-```{r cfa}
+```{r cfaplot1}
 # Define latent variables
 (latent <- list(visual = paste0("x", 1:3),
                 textual = paste0("x", 4:6),
@@ -126,13 +126,22 @@ lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
 # Write the model, and check it
 cfa.model <- write_lavaan(latent = latent)
 cat(cfa.model)
+```
 
-# Fit the model with `lavaan`
-fit.cfa <- cfa(cfa.model, data = HolzingerSwineford1939)
+```{r cfaplot2, eval = FALSE}
+# Fit the model fit and plot to PDF with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings
+fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
+```
 
-# Get the summary output
-summary(fit.cfa, fit.measures = TRUE)
+<img src="man/figures/cfaplot.png" width="30%" />
 
+```{r cfaplot3, echo = FALSE}
+fit.cfa <- cfa(cfa.model, HolzingerSwineford1939)
+summary(fit.cfa, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE)
+```
+
+```{r cfa2}
 # Get fit indices
 nice_fit(fit.cfa)
 
@@ -141,7 +150,7 @@ nice_fit(fit.cfa, nice_table = TRUE)
 
 ```
 
-<img src="man/figures/README-cfa-1.png" width="90%" />
+<img src="man/figures/README-cfa2-1.png" width="90%" />
 
 ## SEM example
 

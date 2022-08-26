@@ -126,7 +126,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
                                         header = NULL, spacer = "\n")
     }
     constraint <- paste0(header, constraint.equal, constraint.smaller,
-                         constraint.larger)
+                         constraint.larger, "\n")
   }
   if (!is.null(custom)) {
     title = "[------------Custom Specifications-------------]"

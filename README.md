@@ -79,7 +79,7 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 [Latent model](#latent-model)<a name = 'Latent model'/>
 
-[Intercepts](#intercepts)<a name = 'Intercepts'/>
+[Special cases](#special-cases)<a name = 'Special cases'/>
 
 ## Regression example
 
@@ -95,7 +95,7 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 # Load library
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.1.0) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.3) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
@@ -153,101 +153,118 @@ cat(cfa.model)
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6
 #> speed =~ x7 + x8 + x9
+```
 
-# Fit the model with `lavaan`
-fit.cfa <- cfa(cfa.model, data = HolzingerSwineford1939)
+``` r
+# Fit the model fit and plot to PDF with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings
+fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
+```
 
-# Get the summary output
-summary(fit.cfa, fit.measures = TRUE)
-#> lavaan 0.6-12 ended normally after 35 iterations
-#> 
-#>   Estimator                                         ML
-#>   Optimization method                           NLMINB
-#>   Number of model parameters                        21
-#> 
-#>   Number of observations                           301
-#> 
-#> Model Test User Model:
-#>                                                       
-#>   Test statistic                                85.306
-#>   Degrees of freedom                                24
-#>   P-value (Chi-square)                           0.000
-#> 
-#> Model Test Baseline Model:
-#> 
-#>   Test statistic                               918.852
-#>   Degrees of freedom                                36
-#>   P-value                                        0.000
-#> 
-#> User Model versus Baseline Model:
-#> 
-#>   Comparative Fit Index (CFI)                    0.931
-#>   Tucker-Lewis Index (TLI)                       0.896
-#> 
-#> Loglikelihood and Information Criteria:
-#> 
-#>   Loglikelihood user model (H0)              -3737.745
-#>   Loglikelihood unrestricted model (H1)      -3695.092
-#>                                                       
-#>   Akaike (AIC)                                7517.490
-#>   Bayesian (BIC)                              7595.339
-#>   Sample-size adjusted Bayesian (BIC)         7528.739
-#> 
-#> Root Mean Square Error of Approximation:
-#> 
-#>   RMSEA                                          0.092
-#>   90 Percent confidence interval - lower         0.071
-#>   90 Percent confidence interval - upper         0.114
-#>   P-value RMSEA <= 0.05                          0.001
-#> 
-#> Standardized Root Mean Square Residual:
-#> 
-#>   SRMR                                           0.065
-#> 
-#> Parameter Estimates:
-#> 
-#>   Standard errors                             Standard
-#>   Information                                 Expected
-#>   Information saturated (h1) model          Structured
-#> 
-#> Latent Variables:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>   visual =~                                           
-#>     x1                1.000                           
-#>     x2                0.554    0.100    5.554    0.000
-#>     x3                0.729    0.109    6.685    0.000
-#>   textual =~                                          
-#>     x4                1.000                           
-#>     x5                1.113    0.065   17.014    0.000
-#>     x6                0.926    0.055   16.703    0.000
-#>   speed =~                                            
-#>     x7                1.000                           
-#>     x8                1.180    0.165    7.152    0.000
-#>     x9                1.082    0.151    7.155    0.000
-#> 
-#> Covariances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>   visual ~~                                           
-#>     textual           0.408    0.074    5.552    0.000
-#>     speed             0.262    0.056    4.660    0.000
-#>   textual ~~                                          
-#>     speed             0.173    0.049    3.518    0.000
-#> 
-#> Variances:
-#>                    Estimate  Std.Err  z-value  P(>|z|)
-#>    .x1                0.549    0.114    4.833    0.000
-#>    .x2                1.134    0.102   11.146    0.000
-#>    .x3                0.844    0.091    9.317    0.000
-#>    .x4                0.371    0.048    7.779    0.000
-#>    .x5                0.446    0.058    7.642    0.000
-#>    .x6                0.356    0.043    8.277    0.000
-#>    .x7                0.799    0.081    9.823    0.000
-#>    .x8                0.488    0.074    6.573    0.000
-#>    .x9                0.566    0.071    8.003    0.000
-#>     visual            0.809    0.145    5.564    0.000
-#>     textual           0.979    0.112    8.737    0.000
-#>     speed             0.384    0.086    4.451    0.000
+<img src="man/figures/cfaplot.png" width="30%" />
 
+    #> lavaan 0.6-12 ended normally after 35 iterations
+    #> 
+    #>   Estimator                                         ML
+    #>   Optimization method                           NLMINB
+    #>   Number of model parameters                        21
+    #> 
+    #>   Number of observations                           301
+    #> 
+    #> Model Test User Model:
+    #>                                                       
+    #>   Test statistic                                85.306
+    #>   Degrees of freedom                                24
+    #>   P-value (Chi-square)                           0.000
+    #> 
+    #> Model Test Baseline Model:
+    #> 
+    #>   Test statistic                               918.852
+    #>   Degrees of freedom                                36
+    #>   P-value                                        0.000
+    #> 
+    #> User Model versus Baseline Model:
+    #> 
+    #>   Comparative Fit Index (CFI)                    0.931
+    #>   Tucker-Lewis Index (TLI)                       0.896
+    #> 
+    #> Loglikelihood and Information Criteria:
+    #> 
+    #>   Loglikelihood user model (H0)              -3737.745
+    #>   Loglikelihood unrestricted model (H1)      -3695.092
+    #>                                                       
+    #>   Akaike (AIC)                                7517.490
+    #>   Bayesian (BIC)                              7595.339
+    #>   Sample-size adjusted Bayesian (BIC)         7528.739
+    #> 
+    #> Root Mean Square Error of Approximation:
+    #> 
+    #>   RMSEA                                          0.092
+    #>   90 Percent confidence interval - lower         0.071
+    #>   90 Percent confidence interval - upper         0.114
+    #>   P-value RMSEA <= 0.05                          0.001
+    #> 
+    #> Standardized Root Mean Square Residual:
+    #> 
+    #>   SRMR                                           0.065
+    #> 
+    #> Parameter Estimates:
+    #> 
+    #>   Standard errors                             Standard
+    #>   Information                                 Expected
+    #>   Information saturated (h1) model          Structured
+    #> 
+    #> Latent Variables:
+    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    #>   visual =~                                                             
+    #>     x1                1.000                               0.900    0.772
+    #>     x2                0.554    0.100    5.554    0.000    0.498    0.424
+    #>     x3                0.729    0.109    6.685    0.000    0.656    0.581
+    #>   textual =~                                                            
+    #>     x4                1.000                               0.990    0.852
+    #>     x5                1.113    0.065   17.014    0.000    1.102    0.855
+    #>     x6                0.926    0.055   16.703    0.000    0.917    0.838
+    #>   speed =~                                                              
+    #>     x7                1.000                               0.619    0.570
+    #>     x8                1.180    0.165    7.152    0.000    0.731    0.723
+    #>     x9                1.082    0.151    7.155    0.000    0.670    0.665
+    #> 
+    #> Covariances:
+    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    #>   visual ~~                                                             
+    #>     textual           0.408    0.074    5.552    0.000    0.459    0.459
+    #>     speed             0.262    0.056    4.660    0.000    0.471    0.471
+    #>   textual ~~                                                            
+    #>     speed             0.173    0.049    3.518    0.000    0.283    0.283
+    #> 
+    #> Variances:
+    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+    #>    .x1                0.549    0.114    4.833    0.000    0.549    0.404
+    #>    .x2                1.134    0.102   11.146    0.000    1.134    0.821
+    #>    .x3                0.844    0.091    9.317    0.000    0.844    0.662
+    #>    .x4                0.371    0.048    7.779    0.000    0.371    0.275
+    #>    .x5                0.446    0.058    7.642    0.000    0.446    0.269
+    #>    .x6                0.356    0.043    8.277    0.000    0.356    0.298
+    #>    .x7                0.799    0.081    9.823    0.000    0.799    0.676
+    #>    .x8                0.488    0.074    6.573    0.000    0.488    0.477
+    #>    .x9                0.566    0.071    8.003    0.000    0.566    0.558
+    #>     visual            0.809    0.145    5.564    0.000    1.000    1.000
+    #>     textual           0.979    0.112    8.737    0.000    1.000    1.000
+    #>     speed             0.384    0.086    4.451    0.000    1.000    1.000
+    #> 
+    #> R-Square:
+    #>                    Estimate
+    #>     x1                0.596
+    #>     x2                0.179
+    #>     x3                0.338
+    #>     x4                0.725
+    #>     x5                0.731
+    #>     x6                0.702
+    #>     x7                0.324
+    #>     x8                0.523
+    #>     x9                0.442
+
+``` r
 # Get fit indices
 nice_fit(fit.cfa)
 #>     Model   chi2 df chi2.df p   CFI   TLI RMSEA  SRMR     AIC      BIC
@@ -257,7 +274,7 @@ nice_fit(fit.cfa)
 nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-cfa-1.png" width="90%" />
+<img src="man/figures/README-cfa2-1.png" width="90%" />
 
 ## SEM example
 
@@ -832,6 +849,7 @@ cat(model.custom)
 #> b1 == (b2 + b3)^2
 #> b1 < exp(b2 + b3)
 #> b1 > exp(b2 + b3)
+#> 
 #> ##################################################
 #> # [------------Custom Specifications-------------]
 #> 
