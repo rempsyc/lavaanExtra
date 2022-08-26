@@ -22,6 +22,7 @@ Suggests:
     lavaanPlot,
     DiagrammeRsvg,
     rsvg,
+    png,
     rlang,
     knitr,
     rmarkdown,
