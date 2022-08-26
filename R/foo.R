@@ -10,7 +10,9 @@
 #' library(lavaan)
 #' fit <- lavaan::cfa(model = HS.model, data = HolzingerSwineford1939)
 #' foo(fit)
+#' @import lavaan
 
 foo <- function(fit){
   print(summary(fit))
+  #lavaan:::print.lavaan.summary(summary(fit))
 }

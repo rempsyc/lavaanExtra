@@ -4,7 +4,14 @@
 \alias{cfa_fit_plot}
 \title{Fit and plot CFA simultaneously}
 \usage{
-cfa_fit_plot(model, data, covs = FALSE, remove.items = "", file.name)
+cfa_fit_plot(
+  model,
+  data,
+  covs = FALSE,
+  remove.items = "",
+  file.name,
+  estimator = "MLR"
+)
 }
 \arguments{
 \item{model}{CFA model to fit.}
@@ -19,6 +26,8 @@ without having to redefine it completely again.}
 \item{file.name}{Optional, if one wants something different than the default
 file name. Defaults to saving to the "/model" subfolder of
 the working directory. If it doesn't exist, it creates it.}
+
+\item{estimator}{What estimator to use for the CFA.}
 }
 \description{
 Print and save CAF fit, as well as plot CFA loadings, simultaneously.
