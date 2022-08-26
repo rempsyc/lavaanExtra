@@ -21,6 +21,7 @@ Suggests:
     flextable,
     lavaanPlot,
     DiagrammeRsvg,
+    rsvg,
     rlang,
     knitr,
     rmarkdown,
