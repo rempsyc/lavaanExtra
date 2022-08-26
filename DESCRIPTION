@@ -20,6 +20,7 @@ Suggests:
     rempsyc,
     flextable,
     lavaanPlot,
+    DiagrammeRsvg,
     rlang,
     knitr,
     rmarkdown,
