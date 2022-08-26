@@ -1,8 +1,8 @@
-#' @title Extract relevant indirect effects indices from lavaan model
+#' @title Extract relevant covariance indices from lavaan model
 #'
-#' @description Extract relevant indirect effects indices from lavaan model.
+#' @description Extract relevant covariance indices from lavaan model.
 #'
-#' @param fit lavaan fit object to extract fit indices from
+#' @param fit lavaan fit object to extract covariance indices from
 #' @param nice_table Logical, whether to print the table as a `rempsyc::nice_table`
 #'                   as well as print the reference values at the bottom of the table.
 #' @param ... Arguments to be passed to `rempsyc::nice_table`

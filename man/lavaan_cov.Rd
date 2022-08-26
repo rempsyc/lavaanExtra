@@ -2,12 +2,12 @@
 % Please edit documentation in R/lavaan_cov.R
 \name{lavaan_cov}
 \alias{lavaan_cov}
-\title{Extract relevant indirect effects indices from lavaan model}
+\title{Extract relevant covariance indices from lavaan model}
 \usage{
 lavaan_cov(fit, nice_table = FALSE, ...)
 }
 \arguments{
-\item{fit}{lavaan fit object to extract fit indices from}
+\item{fit}{lavaan fit object to extract covariance indices from}
 
 \item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
 as well as print the reference values at the bottom of the table.}
@@ -15,7 +15,7 @@ as well as print the reference values at the bottom of the table.}
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }
 \description{
-Extract relevant indirect effects indices from lavaan model.
+Extract relevant covariance indices from lavaan model.
 }
 \examples{
 
