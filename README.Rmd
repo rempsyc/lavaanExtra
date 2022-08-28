@@ -128,18 +128,13 @@ cfa.model <- write_lavaan(latent = latent)
 cat(cfa.model)
 ```
 
-```{r cfaplot2, eval = FALSE}
+```{r cfaplot2}
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
-# to get the factor loadings visually (as PDF)
+# to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 ```
 
 <img src="man/figures/cfaplot.png" width="30%" />
-
-```{r cfaplot3, echo = FALSE}
-fit.cfa <- cfa(cfa.model, HolzingerSwineford1939)
-summary(fit.cfa, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE)
-```
 
 ```{r cfa2}
 # Get fit indices
@@ -151,6 +146,35 @@ nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-cfa2-1.png" width="90%" />
+
+But let's say you had a bad fit and wanted to remove the three items with the lowest loadings, you can do so without have to respecify the model, only what items you wish to remove:
+
+```{r cfaplot4}
+# Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings visually (as PDF)
+fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
+                         remove.items = paste0("x", c(2:3, 7)))
+```
+
+<img src="man/figures/cfaplot2.png" width="30%" />
+
+Let's compare the fit to see if it's better now:
+
+```{r cfaplot5}
+nice_fit(fit.cfa, fit.cfa2, nice_table = TRUE)
+```
+
+<img src="man/figures/README-cfaplot5-1.png" width="90%" />
+
+It is! If you like this table, you may also wish to save it to Word. Also easy:
+
+```{r cfaplot6}
+# Save fit table as an object
+fit_table <- nice_fit(fit.cfa, fit.cfa2, nice_table = TRUE)
+
+# Save fit table to Word!
+save_as_docx(fit_table, path = "fit_table.docx")
+```
 
 ## SEM example
 

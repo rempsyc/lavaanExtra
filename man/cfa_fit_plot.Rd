@@ -8,9 +8,11 @@ cfa_fit_plot(
   model,
   data,
   covs = FALSE,
+  estimator = "MLR",
   remove.items = "",
+  save.as.pdf = FALSE,
   file.name,
-  estimator = "MLR"
+  ...
 )
 }
 \arguments{
@@ -20,16 +22,23 @@ cfa_fit_plot(
 
 \item{covs}{Logical, whether to include covariances on the lavaan plot.}
 
+\item{estimator}{What estimator to use for the CFA.}
+
 \item{remove.items}{Optional, if one wants to remove items from the CFA model
 without having to redefine it completely again.}
 
-\item{file.name}{Optional, if one wants something different than the default
-file name. Defaults to saving to the "/model" subfolder of
-the working directory. If it doesn't exist, it creates it.
-It saves to pdf per default, so the .pdf extension should not
-be specified as it will add it automatically.}
+\item{save.as.pdf}{Logical, whether to save as PDF for a high-resolution,
+scalable vector graphic quality plot. Defaults to
+saving to the "/model" subfolder of the working directory.
+If it doesn't exist, it creates it. Then automatically
+open the created PDF in the default browser. Defaults to false.}
 
-\item{estimator}{What estimator to use for the CFA.}
+\item{file.name}{Optional (when \code{save.as.pdf} is set to \code{TRUE}), if one wants
+something different than the default file name. It saves to
+pdf per default, so the .pdf extension should not be specified
+as it will add it automatically.}
+
+\item{...}{Arguments to be passed to function \code{lavaan::cfa}.}
 }
 \description{
 Print and save CFA fit, as well as plot CFA loadings, simultaneously.

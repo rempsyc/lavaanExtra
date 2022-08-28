@@ -28,6 +28,9 @@
     <loc>https://lavaanExtra.remi-theriault.com/news/index.html</loc>
   </url>
   <url>
+    <loc>https://lavaanExtra.remi-theriault.com/README.knit.html</loc>
+  </url>
+  <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/cfa_fit_plot.html</loc>
   </url>
   <url>
@@ -50,6 +53,9 @@
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/nice_fit.html</loc>
+  </url>
+  <url>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/save_as_x.html</loc>
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/write_lavaan.html</loc>

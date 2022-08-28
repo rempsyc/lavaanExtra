@@ -6,13 +6,18 @@
 #' @param data Data set on which to fit the CFA model.
 #' @param covs Logical, whether to include covariances on the lavaan plot.
 #' @param estimator What estimator to use for the CFA.
+#' @param ... Arguments to be passed to function `lavaan::cfa`.
 #' @param remove.items Optional, if one wants to remove items from the CFA model
 #'                     without having to redefine it completely again.
-#' @param file.name Optional, if one wants something different than the default
-#'                  file name. Defaults to saving to the "/model" subfolder of
-#'                  the working directory. If it doesn't exist, it creates it.
-#'                  It saves to pdf per default, so the .pdf extension should not
-#'                  be specified as it will add it automatically.
+#' @param save.as.pdf Logical, whether to save as PDF for a high-resolution,
+#'                    scalable vector graphic quality plot. Defaults to
+#'                    saving to the "/model" subfolder of the working directory.
+#'                    If it doesn't exist, it creates it. Then automatically
+#'                    open the created PDF in the default browser. Defaults to false.
+#' @param file.name Optional (when `save.as.pdf` is set to `TRUE`), if one wants
+#'                  something different than the default file name. It saves to
+#'                  pdf per default, so the .pdf extension should not be specified
+#'                  as it will add it automatically.
 #' @keywords CFA, lavaan, plot, fit
 #' @export
 #' @examples
@@ -30,10 +35,10 @@
 #'
 #' \if{html}{\figure{cfaplot.png}{options: width="400"}}
 
-cfa_fit_plot <- function(model, data, covs = FALSE, remove.items = "", file.name,
-                         estimator = "MLR"){
+cfa_fit_plot <- function(model, data, covs = FALSE, estimator = "MLR", remove.items = "",
+                         save.as.pdf = FALSE, file.name, ...){
   rlang::check_installed(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png"), reason = "for this function.")
-  if(missing(file.name)) {
+  if(missing(file.name) && isTRUE(save.as.pdf)) {
     prefix <- deparse(substitute(model))
     time <- gsub(":", ".", Sys.time())
     file.name <- paste0("models/cfa_", prefix, "_", time)
@@ -55,7 +60,7 @@ cfa_fit_plot <- function(model, data, covs = FALSE, remove.items = "", file.name
     model <- gsub(remove.items3, "", model)
   }
   # Fit model
-  fit <- lavaan::cfa(model, data = data, estimator = estimator, missing = "fiml", std.lv = TRUE)
+  fit <- lavaan::cfa(model, data = data, estimator = estimator, ...)
   print(summary(fit, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE))
   # Plot the model
   lavaanPlot::lavaanPlot(model = fit,
@@ -65,11 +70,15 @@ cfa_fit_plot <- function(model, data, covs = FALSE, remove.items = "", file.name
                          stand = TRUE,
                          covs = covs,
                          stars = list("regress"),
-                         graph_options=list(rankdir="LR"),
+                         graph_options = list(rankdir = "LR"),
                          sig = .05) -> my.plot
   # # Save file
-  lavaanPlot::embed_plot_pdf(my.plot, paste0(file.name, ".pdf"))
-  utils::browseURL(paste0(file.name, ".pdf"))
+  if(isTRUE(save.as.pdf)) {
+    lavaanPlot::embed_plot_pdf(my.plot, paste0(file.name, ".pdf"))
+    utils::browseURL(paste0(file.name, ".pdf"))
+  } else {
+    print(my.plot)
+  }
   fit
 }
 

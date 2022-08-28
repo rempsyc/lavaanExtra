@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,9 +91,11 @@
 <span>  <span class="va">model</span>,</span>
 <span>  <span class="va">data</span>,</span>
 <span>  covs <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  estimator <span class="op">=</span> <span class="st">"MLR"</span>,</span>
 <span>  remove.items <span class="op">=</span> <span class="st">""</span>,</span>
+<span>  save.as.pdf <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  <span class="va">file.name</span>,</span>
-<span>  estimator <span class="op">=</span> <span class="st">"MLR"</span></span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -111,21 +113,32 @@
 <dd><p>Logical, whether to include covariances on the lavaan plot.</p></dd>
 
 
+<dt>estimator</dt>
+<dd><p>What estimator to use for the CFA.</p></dd>
+
+
 <dt>remove.items</dt>
 <dd><p>Optional, if one wants to remove items from the CFA model
 without having to redefine it completely again.</p></dd>
 
 
+<dt>save.as.pdf</dt>
+<dd><p>Logical, whether to save as PDF for a high-resolution,
+scalable vector graphic quality plot. Defaults to
+saving to the "/model" subfolder of the working directory.
+If it doesn't exist, it creates it. Then automatically
+open the created PDF in the default browser. Defaults to false.</p></dd>
+
+
 <dt>file.name</dt>
-<dd><p>Optional, if one wants something different than the default
-file name. Defaults to saving to the "/model" subfolder of
-the working directory. If it doesn't exist, it creates it.
-It saves to pdf per default, so the .pdf extension should not
-be specified as it will add it automatically.</p></dd>
+<dd><p>Optional (when <code>save.as.pdf</code> is set to <code>TRUE</code>), if one wants
+something different than the default file name. It saves to
+pdf per default, so the .pdf extension should not be specified
+as it will add it automatically.</p></dd>
 
 
-<dt>estimator</dt>
-<dd><p>What estimator to use for the CFA.</p></dd>
+<dt>...</dt>
+<dd><p>Arguments to be passed to function <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">lavaan::cfa</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -165,14 +178,13 @@ be specified as it will add it automatically.</p></dd>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> This is lavaan 0.6-12</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> lavaan is FREE software! Please report any bugs.</span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu">cfa_fit_plot</span><span class="op">(</span><span class="va">HS.model</span>, <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 42 iterations</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> lavaan 0.6-12 ended normally after 35 iterations</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Estimator                                         ML</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Optimization method                           NLMINB</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Number of model parameters                        30</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Number of model parameters                        21</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Number of observations                           301</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Number of missing patterns                         1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Model Test User Model:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                               Standard      Robust</span>
@@ -200,15 +212,15 @@ be specified as it will add it automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Loglikelihood and Information Criteria:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Loglikelihood user model (H0)              -3737.745   -3737.745</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Scaling correction factor                                  1.093</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Scaling correction factor                                  1.133</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for the MLR correction                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   Loglikelihood unrestricted model (H1)      -3695.092   -3695.092</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Scaling correction factor                                  1.043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Scaling correction factor                                  1.051</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       for the MLR correction                                      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                                                                   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Akaike (AIC)                                7535.490    7535.490</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Bayesian (BIC)                              7646.703    7646.703</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample-size adjusted Bayesian (BIC)         7551.560    7551.560</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Akaike (AIC)                                7517.490    7517.490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Bayesian (BIC)                              7595.339    7595.339</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Sample-size adjusted Bayesian (BIC)         7528.739    7528.739</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Root Mean Square Error of Approximation:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -223,7 +235,7 @@ be specified as it will add it automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Standardized Root Mean Square Residual:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   SRMR                                           0.060       0.060</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   SRMR                                           0.065       0.065</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Parameter Estimates:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
@@ -234,40 +246,25 @@ be specified as it will add it automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Latent Variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   visual =~                                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x1                0.900    0.100    8.973    0.000    0.900    0.772</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x2                0.498    0.088    5.681    0.000    0.498    0.424</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x3                0.656    0.080    8.151    0.000    0.656    0.581</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x1                1.000                               0.900    0.772</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x2                0.554    0.132    4.191    0.000    0.498    0.424</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x3                0.729    0.141    5.170    0.000    0.656    0.581</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   textual =~                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x4                0.990    0.061   16.150    0.000    0.990    0.852</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x5                1.102    0.055   20.146    0.000    1.102    0.855</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x6                0.917    0.058   15.767    0.000    0.917    0.838</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x4                1.000                               0.990    0.852</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x5                1.113    0.066   16.946    0.000    1.102    0.855</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x6                0.926    0.061   15.089    0.000    0.917    0.838</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   speed =~                                                              </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x7                0.619    0.086    7.193    0.000    0.619    0.570</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x8                0.731    0.093    7.875    0.000    0.731    0.723</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     x9                0.670    0.099    6.761    0.000    0.670    0.665</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x7                1.000                               0.619    0.570</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x8                1.180    0.130    9.046    0.000    0.731    0.723</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     x9                1.082    0.266    4.060    0.000    0.670    0.665</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Covariances:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   visual ~~                                                             </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     textual           0.459    0.073    6.258    0.000    0.459    0.459</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.471    0.119    3.954    0.000    0.471    0.471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     textual           0.408    0.099    4.110    0.000    0.459    0.459</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.262    0.060    4.366    0.000    0.471    0.471</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   textual ~~                                                            </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.283    0.085    3.311    0.001    0.283    0.283</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Intercepts:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x1                4.936    0.067   73.473    0.000    4.936    4.235</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x2                6.088    0.068   89.855    0.000    6.088    5.179</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x3                2.250    0.065   34.579    0.000    2.250    1.993</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x4                3.061    0.067   45.694    0.000    3.061    2.634</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x5                4.341    0.074   58.452    0.000    4.341    3.369</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x6                2.186    0.063   34.667    0.000    2.186    1.998</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x7                4.186    0.063   66.766    0.000    4.186    3.848</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x8                5.527    0.058   94.854    0.000    5.527    5.467</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    .x9                5.374    0.058   92.546    0.000    5.374    5.334</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     visual            0.000                               0.000    0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     textual           0.000                               0.000    0.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.000                               0.000    0.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.173    0.056    3.081    0.002    0.283    0.283</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Variances:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate  Std.Err  z-value  P(&gt;|z|)   Std.lv  Std.all</span>
@@ -280,9 +277,9 @@ be specified as it will add it automatically.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .x7                0.799    0.097    8.222    0.000    0.799    0.676</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .x8                0.488    0.120    4.080    0.000    0.488    0.477</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    .x9                0.566    0.119    4.768    0.000    0.566    0.558</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     visual            1.000                               1.000    1.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     textual           1.000                               1.000    1.000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             1.000                               1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     visual            0.809    0.180    4.486    0.000    1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     textual           0.979    0.121    8.075    0.000    1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     speed             0.384    0.107    3.596    0.000    1.000    1.000</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> R-Square:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                    Estimate</span>

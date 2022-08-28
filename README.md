@@ -95,7 +95,7 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 # Load library
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.3) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
@@ -157,112 +157,125 @@ cat(cfa.model)
 
 ``` r
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
-# to get the factor loadings visually (as PDF)
+# to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
+#> lavaan 0.6-12 ended normally after 35 iterations
+#> 
+#>   Estimator                                         ML
+#>   Optimization method                           NLMINB
+#>   Number of model parameters                        21
+#> 
+#>   Number of observations                           301
+#> 
+#> Model Test User Model:
+#>                                               Standard      Robust
+#>   Test Statistic                                85.306      87.132
+#>   Degrees of freedom                                24          24
+#>   P-value (Chi-square)                           0.000       0.000
+#>   Scaling correction factor                                  0.979
+#>     Yuan-Bentler correction (Mplus variant)                       
+#> 
+#> Model Test Baseline Model:
+#> 
+#>   Test statistic                               918.852     880.082
+#>   Degrees of freedom                                36          36
+#>   P-value                                        0.000       0.000
+#>   Scaling correction factor                                  1.044
+#> 
+#> User Model versus Baseline Model:
+#> 
+#>   Comparative Fit Index (CFI)                    0.931       0.925
+#>   Tucker-Lewis Index (TLI)                       0.896       0.888
+#>                                                                   
+#>   Robust Comparative Fit Index (CFI)                         0.930
+#>   Robust Tucker-Lewis Index (TLI)                            0.895
+#> 
+#> Loglikelihood and Information Criteria:
+#> 
+#>   Loglikelihood user model (H0)              -3737.745   -3737.745
+#>   Scaling correction factor                                  1.133
+#>       for the MLR correction                                      
+#>   Loglikelihood unrestricted model (H1)      -3695.092   -3695.092
+#>   Scaling correction factor                                  1.051
+#>       for the MLR correction                                      
+#>                                                                   
+#>   Akaike (AIC)                                7517.490    7517.490
+#>   Bayesian (BIC)                              7595.339    7595.339
+#>   Sample-size adjusted Bayesian (BIC)         7528.739    7528.739
+#> 
+#> Root Mean Square Error of Approximation:
+#> 
+#>   RMSEA                                          0.092       0.093
+#>   90 Percent confidence interval - lower         0.071       0.073
+#>   90 Percent confidence interval - upper         0.114       0.115
+#>   P-value RMSEA <= 0.05                          0.001       0.001
+#>                                                                   
+#>   Robust RMSEA                                               0.092
+#>   90 Percent confidence interval - lower                     0.072
+#>   90 Percent confidence interval - upper                     0.114
+#> 
+#> Standardized Root Mean Square Residual:
+#> 
+#>   SRMR                                           0.065       0.065
+#> 
+#> Parameter Estimates:
+#> 
+#>   Standard errors                             Sandwich
+#>   Information bread                           Observed
+#>   Observed information based on                Hessian
+#> 
+#> Latent Variables:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>   visual =~                                                             
+#>     x1                1.000                               0.900    0.772
+#>     x2                0.554    0.132    4.191    0.000    0.498    0.424
+#>     x3                0.729    0.141    5.170    0.000    0.656    0.581
+#>   textual =~                                                            
+#>     x4                1.000                               0.990    0.852
+#>     x5                1.113    0.066   16.946    0.000    1.102    0.855
+#>     x6                0.926    0.061   15.089    0.000    0.917    0.838
+#>   speed =~                                                              
+#>     x7                1.000                               0.619    0.570
+#>     x8                1.180    0.130    9.046    0.000    0.731    0.723
+#>     x9                1.082    0.266    4.060    0.000    0.670    0.665
+#> 
+#> Covariances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>   visual ~~                                                             
+#>     textual           0.408    0.099    4.110    0.000    0.459    0.459
+#>     speed             0.262    0.060    4.366    0.000    0.471    0.471
+#>   textual ~~                                                            
+#>     speed             0.173    0.056    3.081    0.002    0.283    0.283
+#> 
+#> Variances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>    .x1                0.549    0.156    3.509    0.000    0.549    0.404
+#>    .x2                1.134    0.112   10.135    0.000    1.134    0.821
+#>    .x3                0.844    0.100    8.419    0.000    0.844    0.662
+#>    .x4                0.371    0.050    7.382    0.000    0.371    0.275
+#>    .x5                0.446    0.057    7.870    0.000    0.446    0.269
+#>    .x6                0.356    0.047    7.658    0.000    0.356    0.298
+#>    .x7                0.799    0.097    8.222    0.000    0.799    0.676
+#>    .x8                0.488    0.120    4.080    0.000    0.488    0.477
+#>    .x9                0.566    0.119    4.768    0.000    0.566    0.558
+#>     visual            0.809    0.180    4.486    0.000    1.000    1.000
+#>     textual           0.979    0.121    8.075    0.000    1.000    1.000
+#>     speed             0.384    0.107    3.596    0.000    1.000    1.000
+#> 
+#> R-Square:
+#>                    Estimate
+#>     x1                0.596
+#>     x2                0.179
+#>     x3                0.338
+#>     x4                0.725
+#>     x5                0.731
+#>     x6                0.702
+#>     x7                0.324
+#>     x8                0.523
+#>     x9                0.442
 ```
 
 <img src="man/figures/cfaplot.png" width="30%" />
-
-    #> lavaan 0.6-12 ended normally after 35 iterations
-    #> 
-    #>   Estimator                                         ML
-    #>   Optimization method                           NLMINB
-    #>   Number of model parameters                        21
-    #> 
-    #>   Number of observations                           301
-    #> 
-    #> Model Test User Model:
-    #>                                                       
-    #>   Test statistic                                85.306
-    #>   Degrees of freedom                                24
-    #>   P-value (Chi-square)                           0.000
-    #> 
-    #> Model Test Baseline Model:
-    #> 
-    #>   Test statistic                               918.852
-    #>   Degrees of freedom                                36
-    #>   P-value                                        0.000
-    #> 
-    #> User Model versus Baseline Model:
-    #> 
-    #>   Comparative Fit Index (CFI)                    0.931
-    #>   Tucker-Lewis Index (TLI)                       0.896
-    #> 
-    #> Loglikelihood and Information Criteria:
-    #> 
-    #>   Loglikelihood user model (H0)              -3737.745
-    #>   Loglikelihood unrestricted model (H1)      -3695.092
-    #>                                                       
-    #>   Akaike (AIC)                                7517.490
-    #>   Bayesian (BIC)                              7595.339
-    #>   Sample-size adjusted Bayesian (BIC)         7528.739
-    #> 
-    #> Root Mean Square Error of Approximation:
-    #> 
-    #>   RMSEA                                          0.092
-    #>   90 Percent confidence interval - lower         0.071
-    #>   90 Percent confidence interval - upper         0.114
-    #>   P-value RMSEA <= 0.05                          0.001
-    #> 
-    #> Standardized Root Mean Square Residual:
-    #> 
-    #>   SRMR                                           0.065
-    #> 
-    #> Parameter Estimates:
-    #> 
-    #>   Standard errors                             Standard
-    #>   Information                                 Expected
-    #>   Information saturated (h1) model          Structured
-    #> 
-    #> Latent Variables:
-    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    #>   visual =~                                                             
-    #>     x1                1.000                               0.900    0.772
-    #>     x2                0.554    0.100    5.554    0.000    0.498    0.424
-    #>     x3                0.729    0.109    6.685    0.000    0.656    0.581
-    #>   textual =~                                                            
-    #>     x4                1.000                               0.990    0.852
-    #>     x5                1.113    0.065   17.014    0.000    1.102    0.855
-    #>     x6                0.926    0.055   16.703    0.000    0.917    0.838
-    #>   speed =~                                                              
-    #>     x7                1.000                               0.619    0.570
-    #>     x8                1.180    0.165    7.152    0.000    0.731    0.723
-    #>     x9                1.082    0.151    7.155    0.000    0.670    0.665
-    #> 
-    #> Covariances:
-    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    #>   visual ~~                                                             
-    #>     textual           0.408    0.074    5.552    0.000    0.459    0.459
-    #>     speed             0.262    0.056    4.660    0.000    0.471    0.471
-    #>   textual ~~                                                            
-    #>     speed             0.173    0.049    3.518    0.000    0.283    0.283
-    #> 
-    #> Variances:
-    #>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
-    #>    .x1                0.549    0.114    4.833    0.000    0.549    0.404
-    #>    .x2                1.134    0.102   11.146    0.000    1.134    0.821
-    #>    .x3                0.844    0.091    9.317    0.000    0.844    0.662
-    #>    .x4                0.371    0.048    7.779    0.000    0.371    0.275
-    #>    .x5                0.446    0.058    7.642    0.000    0.446    0.269
-    #>    .x6                0.356    0.043    8.277    0.000    0.356    0.298
-    #>    .x7                0.799    0.081    9.823    0.000    0.799    0.676
-    #>    .x8                0.488    0.074    6.573    0.000    0.488    0.477
-    #>    .x9                0.566    0.071    8.003    0.000    0.566    0.558
-    #>     visual            0.809    0.145    5.564    0.000    1.000    1.000
-    #>     textual           0.979    0.112    8.737    0.000    1.000    1.000
-    #>     speed             0.384    0.086    4.451    0.000    1.000    1.000
-    #> 
-    #> R-Square:
-    #>                    Estimate
-    #>     x1                0.596
-    #>     x2                0.179
-    #>     x3                0.338
-    #>     x4                0.725
-    #>     x5                0.731
-    #>     x6                0.702
-    #>     x7                0.324
-    #>     x8                0.523
-    #>     x9                0.442
 
 ``` r
 # Get fit indices
@@ -275,6 +288,143 @@ nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-cfa2-1.png" width="90%" />
+
+But let’s say you had a bad fit and wanted to remove the three items
+with the lowest loadings, you can do so without have to respecify the
+model, only what items you wish to remove:
+
+``` r
+# Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
+# to get the factor loadings visually (as PDF)
+fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
+                         remove.items = paste0("x", c(2:3, 7)))
+#> lavaan 0.6-12 ended normally after 29 iterations
+#> 
+#>   Estimator                                         ML
+#>   Optimization method                           NLMINB
+#>   Number of model parameters                        14
+#> 
+#>   Number of observations                           301
+#> 
+#> Model Test User Model:
+#>                                               Standard      Robust
+#>   Test Statistic                                 8.442       7.313
+#>   Degrees of freedom                                 7           7
+#>   P-value (Chi-square)                           0.295       0.397
+#>   Scaling correction factor                                  1.154
+#>     Yuan-Bentler correction (Mplus variant)                       
+#> 
+#> Model Test Baseline Model:
+#> 
+#>   Test statistic                               674.095     599.025
+#>   Degrees of freedom                                15          15
+#>   P-value                                        0.000       0.000
+#>   Scaling correction factor                                  1.125
+#> 
+#> User Model versus Baseline Model:
+#> 
+#>   Comparative Fit Index (CFI)                    0.998       0.999
+#>   Tucker-Lewis Index (TLI)                       0.995       0.999
+#>                                                                   
+#>   Robust Comparative Fit Index (CFI)                         0.999
+#>   Robust Tucker-Lewis Index (TLI)                            0.999
+#> 
+#> Loglikelihood and Information Criteria:
+#> 
+#>   Loglikelihood user model (H0)              -2429.864   -2429.864
+#>   Scaling correction factor                                  1.137
+#>       for the MLR correction                                      
+#>   Loglikelihood unrestricted model (H1)      -2425.644   -2425.644
+#>   Scaling correction factor                                  1.143
+#>       for the MLR correction                                      
+#>                                                                   
+#>   Akaike (AIC)                                4887.729    4887.729
+#>   Bayesian (BIC)                              4939.628    4939.628
+#>   Sample-size adjusted Bayesian (BIC)         4895.228    4895.228
+#> 
+#> Root Mean Square Error of Approximation:
+#> 
+#>   RMSEA                                          0.026       0.012
+#>   90 Percent confidence interval - lower         0.000       0.000
+#>   90 Percent confidence interval - upper         0.079       0.069
+#>   P-value RMSEA <= 0.05                          0.713       0.814
+#>                                                                   
+#>   Robust RMSEA                                               0.013
+#>   90 Percent confidence interval - lower                     0.000
+#>   90 Percent confidence interval - upper                     0.078
+#> 
+#> Standardized Root Mean Square Residual:
+#> 
+#>   SRMR                                           0.016       0.016
+#> 
+#> Parameter Estimates:
+#> 
+#>   Standard errors                             Sandwich
+#>   Information bread                           Observed
+#>   Observed information based on                Hessian
+#> 
+#> Latent Variables:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>   visual =~                                                             
+#>     x1                1.000                               1.165    1.000
+#>   textual =~                                                            
+#>     x4                1.000                               0.990    0.852
+#>     x5                1.115    0.066   16.910    0.000    1.104    0.857
+#>     x6                0.923    0.061   15.181    0.000    0.914    0.835
+#>   speed =~                                                              
+#>     x8                1.000                               0.515    0.510
+#>     x9                1.722    0.398    4.322    0.000    0.887    0.881
+#> 
+#> Covariances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>   visual ~~                                                             
+#>     textual           0.462    0.087    5.292    0.000    0.400    0.400
+#>     speed             0.266    0.072    3.674    0.000    0.443    0.443
+#>   textual ~~                                                            
+#>     speed             0.149    0.055    2.726    0.006    0.291    0.291
+#> 
+#> Variances:
+#>                    Estimate  Std.Err  z-value  P(>|z|)   Std.lv  Std.all
+#>    .x1                0.000                               0.000    0.000
+#>    .x4                0.370    0.050    7.356    0.000    0.370    0.274
+#>    .x5                0.441    0.056    7.822    0.000    0.441    0.266
+#>    .x6                0.362    0.047    7.689    0.000    0.362    0.302
+#>    .x8                0.756    0.090    8.407    0.000    0.756    0.740
+#>    .x9                0.228    0.167    1.359    0.174    0.228    0.224
+#>     visual            1.358    0.120   11.367    0.000    1.000    1.000
+#>     textual           0.981    0.121    8.093    0.000    1.000    1.000
+#>     speed             0.266    0.082    3.248    0.001    1.000    1.000
+#> 
+#> R-Square:
+#>                    Estimate
+#>     x1                1.000
+#>     x4                0.726
+#>     x5                0.734
+#>     x6                0.698
+#>     x8                0.260
+#>     x9                0.776
+```
+
+<img src="man/figures/cfaplot2.png" width="30%" />
+
+Let’s compare the fit to see if it’s better now:
+
+``` r
+nice_fit(fit.cfa, fit.cfa2, nice_table = TRUE)
+```
+
+<img src="man/figures/README-cfaplot5-1.png" width="90%" />
+
+It is! If you like this table, you may also wish to save it to Word.
+Also easy:
+
+``` r
+# Save fit table as an object
+fit_table <- nice_fit(fit.cfa, fit.cfa2, nice_table = TRUE)
+
+# Save fit table to Word!
+save_as_docx(fit_table, path = "fit_table.docx")
+```
 
 ## SEM example
 
