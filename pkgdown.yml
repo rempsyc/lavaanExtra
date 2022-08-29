@@ -3,7 +3,7 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   example: example.html
-last_built: 2022-08-29T01:15Z
+last_built: 2022-08-29T01:26Z
 urls:
   reference: https://lavaanExtra.remi-theriault.com/reference
   article: https://lavaanExtra.remi-theriault.com/articles
