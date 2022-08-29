@@ -27,7 +27,7 @@ Extract relevant indirect effects indices from lavaan model.
                    textual = "visual",
                    visual = c("ageyr", "grade")))
 
-(indirect <- list(M = "visual", DV = c("speed", "textual")))
+(indirect <- list(IV = c("ageyr", "grade"), M = "visual", DV = c("speed", "textual")))
 
 HS.model <- write_lavaan(mediation, indirect = indirect,
                          latent = latent, label = TRUE)
