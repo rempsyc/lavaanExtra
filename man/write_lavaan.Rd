@@ -28,7 +28,11 @@ specified automatically with argument \code{label}.}
 
 \item{covariance}{(Residual) (co)variance indicators (\verb{~~} symbol: "is correlated with").}
 
-\item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect effect defined as").}
+\item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect effect defined as").
+If a named list is provided, with names "IV" (independent variables), "M"
+(mediator), and "DV" (dependent variables), \code{write_lavaan} attempts to
+write indirect effects automatically. In this case, the \code{mediation}
+argument must be specified too.}
 
 \item{latent}{Latent variable indicators (\verb{=~} symbol: "is measured by").}
 

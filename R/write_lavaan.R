@@ -8,6 +8,10 @@
 #' @param regression Regression indicators (`~` symbol: "is regressed on").
 #' @param covariance (Residual) (co)variance indicators (`~~` symbol: "is correlated with").
 #' @param indirect Indirect effect indicators (`:=` symbol: "indirect effect defined as").
+#'                 If a named list is provided, with names "IV" (independent variables), "M"
+#'                 (mediator), and "DV" (dependent variables), `write_lavaan` attempts to
+#'                 write indirect effects automatically. In this case, the `mediation`
+#'                 argument must be specified too.
 #' @param latent Latent variable indicators (`=~` symbol: "is measured by").
 #' @param intercept Intercept indicators (`~ 1` symbol: "intercept").
 #' @param constraint.equal Equality indicators (`==` symbol).
@@ -66,7 +70,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
                              "[---------------Latent variables---------------]")
   }
   if (!is.null(indirect)) {
-    if (all(names(indirect) %in% c("M", "DV"))) {
+    if (all(names(indirect) %in% c("IV", "M", "DV"))) {
       x <- mediation
       labels <- paste0(names(x))
       if (isTRUE(use.letters)) {
@@ -81,9 +85,9 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
       x <- stats::setNames(x, labels)
       y <- unlist(x[indirect$M])
       z <- gsub("[^_]*$", "", y)
-      indirect.names <- paste0(rep(z, each = length(unlist(x[indirect$DV]))),
+      indirect.names <- paste0(rep(z, each = length(indirect$IV)),
                                unlist(x[indirect$DV]))
-      indirect <- paste(rep(y, each = length(unlist(x[indirect$DV]))),
+      indirect <- paste(rep(y, each = length(indirect$IV)),
                         "*", unlist(x[indirect$DV]))
       indirect.list <- as.list(indirect)
       indirect <- stats::setNames(indirect.list, indirect.names)

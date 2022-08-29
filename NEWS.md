@@ -1,3 +1,6 @@
+## lavaanExtra 0.0.5
+- Fixed bug with automatic indirect effects when more than 1 mediator making forbidden paths (two mediators tested successfully)
+
 ## lavaanExtra 0.0.4
 * `cfa_fit_plot`: 
   * Adds ellipsis to pass any desired argument to `lavaan::cfa`, and thus removes the default `missing = "fiml"` which was causing a bug with `estimator = DWLS`.

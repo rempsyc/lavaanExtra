@@ -1,0 +1,88 @@
+---
+title: "Automatic indirect effects"
+author: "Rémi Thériault"
+date: "August 29, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Automatic indirect effects}
+  %\VignetteEngine{knitr::knitr}
+---
+
+This article demonstrates ways to produce indirect effects automatically for different scenarios.
+
+```{r}
+library(lavaan)
+library(lavaanExtra)
+```
+
+# One mediator
+
+```{r}
+# Calculate scale averages
+data <- HolzingerSwineford1939
+data$visual <- rowMeans(data[paste0("x", 1:3)])
+data$textual <- rowMeans(data[paste0("x", 4:6)])
+data$speed <- rowMeans(data[paste0("x", 7:9)])
+
+# Define our variables
+(M <- "visual")
+(IV <- c("ageyr", "grade"))
+(DV <- c("speed", "textual"))
+
+# Define our lavaan lists
+(mediation <- list(speed = M,
+                   textual = M,
+                   visual = IV))
+(regression <- list(speed = IV,
+                    textual = IV))
+
+# Define indirect object
+(indirect <- list(M = M, 
+                  DV = DV,
+                  IV = IV))
+
+
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model.saturated)
+
+```
+
+# Two mediators
+
+```{r}
+# Calculate scale averages
+data <- HolzingerSwineford1939
+data$visual <- rowMeans(data[paste0("x", 1:3)])
+data$textual <- rowMeans(data[paste0("x", 4:6)])
+data$speed <- rowMeans(data[paste0("x", 7:9)])
+
+# Define our variables
+(IV <- "ageyr")
+(M <- c("visual", "grade"))
+(DV <- c("speed", "textual"))
+
+# Define our lavaan lists
+(mediation <- list(speed = M,
+                   textual = M,
+                   visual = IV,
+                   grade = IV))
+(regression <- list(speed = IV,
+                    textual = IV))
+
+# Define indirect object
+(indirect <- list(IV = IV,
+                  M = M, 
+                  DV = DV))
+
+# Write the model, and check it
+model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model.saturated)
+
+```
+
+# Other scenarios
+
+If you experience any issues with other scenarios, please open a GitHub issue with your example, and I will try to adapt the function to support that case. Thank you!

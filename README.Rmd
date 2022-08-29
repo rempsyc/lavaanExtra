@@ -268,7 +268,8 @@ There is also an experimental feature that attempts to produce the indirect effe
 
 ```{r saturated4}
 # Define indirect object
-(indirect <- list(M = M, 
+(indirect <- list(IV = IV,
+                  M = M, 
                   DV = DV))
 
 # Write the model, and check it
