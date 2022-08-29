@@ -19,6 +19,9 @@
     <loc>https://lavaanExtra.remi-theriault.com/articles/index.html</loc>
   </url>
   <url>
+    <loc>https://lavaanExtra.remi-theriault.com/articles/indirect.html</loc>
+  </url>
+  <url>
     <loc>https://lavaanExtra.remi-theriault.com/authors.html</loc>
   </url>
   <url>
@@ -29,9 +32,6 @@
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/cfa_fit_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/foo.html</loc>
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/index.html</loc>
