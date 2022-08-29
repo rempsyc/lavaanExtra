@@ -15,7 +15,7 @@ NULL
 #' @rdname save_as_x
 #' @export
 save_as_docx <- function(...) {
-  if (isTRUE(requireNamespace("flextable", quietly = TRUE)))  {
+  if (isTRUE(requireNamespace("flextable", quietly = TRUE))) {
     flextable::save_as_docx(...)
   }
 }

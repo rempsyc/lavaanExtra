@@ -28,6 +28,8 @@ navbar:
     menu:
       - text: Example lavaan models
         href: articles/example.html
+      - text: Automatic indirect effects
+        href: articles/indirect.html
   - text: Functions
     href: reference/index.html
   - text: Changelog

@@ -64,6 +64,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-tutorials">Tutorials</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-tutorials">
     <a class="dropdown-item" href="articles/example.html">Example lavaan models</a>
+    <a class="dropdown-item" href="articles/indirect.html">Automatic indirect effects</a>
   </div>
 </li>
 <li class="nav-item">
@@ -174,7 +175,8 @@
 <span></span>
 <span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.4) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
+<span><span class="co">#&gt; Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan </span></span>
+<span><span class="co">#&gt; (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
 <span><span class="va">mtcars.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">regression</span><span class="op">)</span></span>
@@ -719,8 +721,12 @@
 <p>There is also an experimental feature that attempts to produce the indirect effects automatically. This feature requires specifying your dependent and mediator variables as “DV” and “M”, respectively, in the <code>indirect</code> object. In our case, we have already defined those earlier, so we can just feed the proper objects.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
-<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">M</span>, </span>
+<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>IV <span class="op">=</span> <span class="va">IV</span>,</span>
+<span>                  M <span class="op">=</span> <span class="va">M</span>, </span>
 <span>                  DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co">#&gt; $IV</span></span>
+<span><span class="co">#&gt; [1] "ageyr" "grade"</span></span>
+<span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; $M</span></span>
 <span><span class="co">#&gt; [1] "visual"</span></span>
 <span><span class="co">#&gt; </span></span>

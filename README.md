@@ -95,7 +95,8 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 # Load library
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version 0.0.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan 
+#> (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)
@@ -694,8 +695,12 @@ so we can just feed the proper objects.
 
 ``` r
 # Define indirect object
-(indirect <- list(M = M, 
+(indirect <- list(IV = IV,
+                  M = M, 
                   DV = DV))
+#> $IV
+#> [1] "ageyr" "grade"
+#> 
 #> $M
 #> [1] "visual"
 #> 
