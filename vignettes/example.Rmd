@@ -45,7 +45,6 @@ myModel <- ' # regressions
 
 `lavaanExtra`:
 ```{r}
-#y <- paste0(rep(c("f", "x"), each = 2), 1:2)
 reg <- list(y1 = c("f1", "f2", "x1", "x2"),
             y2 = c("f1", "f2", "x1", "x2"),
             f1 = c("f2", "f3"),

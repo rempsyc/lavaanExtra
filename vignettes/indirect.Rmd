@@ -27,22 +27,16 @@ data$textual <- rowMeans(data[paste0("x", 4:6)])
 data$speed <- rowMeans(data[paste0("x", 7:9)])
 
 # Define our variables
-(M <- "visual")
-(IV <- c("ageyr", "grade"))
-(DV <- c("speed", "textual"))
+M <- "visual"
+IV <- c("ageyr", "grade")
+DV <- c("speed", "textual")
 
 # Define our lavaan lists
-(mediation <- list(speed = M,
-                   textual = M,
-                   visual = IV))
-(regression <- list(speed = IV,
-                    textual = IV))
+mediation <- list(speed = M, textual = M, visual = IV)
+regression <- list(speed = IV, textual = IV)
 
 # Define indirect object
-(indirect <- list(M = M, 
-                  DV = DV,
-                  IV = IV))
-
+indirect <- list(M = M, DV = DV, IV = IV)
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
@@ -60,22 +54,16 @@ data$textual <- rowMeans(data[paste0("x", 4:6)])
 data$speed <- rowMeans(data[paste0("x", 7:9)])
 
 # Define our variables
-(IV <- "ageyr")
-(M <- c("visual", "grade"))
-(DV <- c("speed", "textual"))
+IV <- "ageyr"
+M <- c("visual", "grade")
+DV <- c("speed", "textual")
 
 # Define our lavaan lists
-(mediation <- list(speed = M,
-                   textual = M,
-                   visual = IV,
-                   grade = IV))
-(regression <- list(speed = IV,
-                    textual = IV))
+mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
+regression <- list(speed = IV, textual = IV)
 
 # Define indirect object
-(indirect <- list(IV = IV,
-                  M = M, 
-                  DV = DV))
+indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)

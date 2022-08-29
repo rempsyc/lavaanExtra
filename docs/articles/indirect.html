@@ -142,50 +142,18 @@ automatically for different scenarios.</p>
 <span><span class="va">data</span><span class="op">$</span><span class="va">speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define our variables</span></span>
-<span><span class="op">(</span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "visual"</span></span></code></pre>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "ageyr" "grade"</span></span></code></pre>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "speed"   "textual"</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define our lavaan lists</span></span>
-<span><span class="op">(</span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>,</span>
-<span>                   textual <span class="op">=</span> <span class="va">M</span>,</span>
-<span>                   visual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $speed</span></span>
-<span><span class="co">## [1] "visual"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $textual</span></span>
-<span><span class="co">## [1] "visual"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $visual</span></span>
-<span><span class="co">## [1] "ageyr" "grade"</span></span></code></pre>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">IV</span>,</span>
-<span>                    textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $speed</span></span>
-<span><span class="co">## [1] "ageyr" "grade"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $textual</span></span>
-<span><span class="co">## [1] "ageyr" "grade"</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
-<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">M</span>, </span>
-<span>                  DV <span class="op">=</span> <span class="va">DV</span>,</span>
-<span>                  IV <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $M</span></span>
-<span><span class="co">## [1] "visual"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $DV</span></span>
-<span><span class="co">## [1] "speed"   "textual"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $IV</span></span>
-<span><span class="co">## [1] "ageyr" "grade"</span></span></code></pre>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span></span>
+<span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
+<span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define our lavaan lists</span></span>
+<span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>, textual <span class="op">=</span> <span class="va">M</span>, visual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">IV</span>, textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define indirect object</span></span>
+<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">M</span>, DV <span class="op">=</span> <span class="va">DV</span>, IV <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Write the model, and check it</span></span>
 <span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -212,7 +180,7 @@ automatically for different scenarios.</p>
 <div class="section level2">
 <h2 id="two-mediators">Two mediators<a class="anchor" aria-label="anchor" href="#two-mediators"></a>
 </h2>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate scale averages</span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">HolzingerSwineford1939</span></span>
 <span><span class="va">data</span><span class="op">$</span><span class="va">visual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
@@ -220,54 +188,18 @@ automatically for different scenarios.</p>
 <span><span class="va">data</span><span class="op">$</span><span class="va">speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define our variables</span></span>
-<span><span class="op">(</span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="st">"ageyr"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "ageyr"</span></span></code></pre>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "visual" "grade"</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "speed"   "textual"</span></span></code></pre>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define our lavaan lists</span></span>
-<span><span class="op">(</span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>,</span>
-<span>                   textual <span class="op">=</span> <span class="va">M</span>,</span>
-<span>                   visual <span class="op">=</span> <span class="va">IV</span>,</span>
-<span>                   grade <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $speed</span></span>
-<span><span class="co">## [1] "visual" "grade" </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $textual</span></span>
-<span><span class="co">## [1] "visual" "grade" </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $visual</span></span>
-<span><span class="co">## [1] "ageyr"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $grade</span></span>
-<span><span class="co">## [1] "ageyr"</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="op">(</span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">IV</span>,</span>
-<span>                    textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $speed</span></span>
-<span><span class="co">## [1] "ageyr"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $textual</span></span>
-<span><span class="co">## [1] "ageyr"</span></span></code></pre>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Define indirect object</span></span>
-<span><span class="op">(</span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>IV <span class="op">=</span> <span class="va">IV</span>,</span>
-<span>                  M <span class="op">=</span> <span class="va">M</span>, </span>
-<span>                  DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## $IV</span></span>
-<span><span class="co">## [1] "ageyr"</span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $M</span></span>
-<span><span class="co">## [1] "visual" "grade" </span></span>
-<span><span class="co">## </span></span>
-<span><span class="co">## $DV</span></span>
-<span><span class="co">## [1] "speed"   "textual"</span></span></code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="st">"ageyr"</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
+<span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define our lavaan lists</span></span>
+<span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>, textual <span class="op">=</span> <span class="va">M</span>, visual <span class="op">=</span> <span class="va">IV</span>, grade <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">IV</span>, textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define indirect object</span></span>
+<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>IV <span class="op">=</span> <span class="va">IV</span>, M <span class="op">=</span> <span class="va">M</span>, DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Write the model, and check it</span></span>
 <span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>

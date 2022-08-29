@@ -85,13 +85,8 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 ``` r
 # Define our regression terms
-(regression <- list(mpg = names(mtcars)[2:5],
-                    disp = names(mtcars)[4:7]))
-#> $mpg
-#> [1] "cyl"  "disp" "hp"   "drat"
-#> 
-#> $disp
-#> [1] "hp"   "drat" "wt"   "qsec"
+regression <- list(mpg = names(mtcars)[2:5],
+                   disp = names(mtcars)[4:7])
 
 # Load library
 library(lavaanExtra)
@@ -133,17 +128,9 @@ lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
 
 ``` r
 # Define latent variables
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
-#> $visual
-#> [1] "x1" "x2" "x3"
-#> 
-#> $textual
-#> [1] "x4" "x5" "x6"
-#> 
-#> $speed
-#> [1] "x7" "x8" "x9"
+latent <- list(visual = paste0("x", 1:3),
+               textual = paste0("x", 4:6),
+               speed = paste0("x", 7:9))
 
 # Write the model, and check it
 cfa.model <- write_lavaan(latent = latent)
@@ -443,57 +430,15 @@ data$visual <- rowMeans(data[paste0("x", 1:3)])
 data$textual <- rowMeans(data[paste0("x", 4:6)])
 data$speed <- rowMeans(data[paste0("x", 7:9)])
 
-# Check what we have
-head(data)
-#>   id sex ageyr agemo  school grade       x1   x2    x3       x4   x5        x6
-#> 1  1   1    13     1 Pasteur     7 3.333333 7.75 0.375 2.333333 5.75 1.2857143
-#> 2  2   2    13     7 Pasteur     7 5.333333 5.25 2.125 1.666667 3.00 1.2857143
-#> 3  3   2    13     1 Pasteur     7 4.500000 5.25 1.875 1.000000 1.75 0.4285714
-#> 4  4   1    13     2 Pasteur     7 5.333333 7.75 3.000 2.666667 4.50 2.4285714
-#> 5  5   2    12     2 Pasteur     7 4.833333 4.75 0.875 2.666667 4.00 2.5714286
-#> 6  6   2    14     1 Pasteur     7 5.333333 5.00 2.250 1.000000 3.00 0.8571429
-#>         x7   x8       x9   visual  textual    speed
-#> 1 3.391304 5.75 6.361111 3.819444 3.123016 5.167472
-#> 2 3.782609 6.25 7.916667 4.236111 1.984127 5.983092
-#> 3 3.260870 3.90 4.416667 3.875000 1.059524 3.859179
-#> 4 3.000000 5.30 4.861111 5.361111 3.198413 4.387037
-#> 5 3.695652 6.30 5.916667 3.486111 3.079365 5.304106
-#> 6 4.347826 6.65 7.500000 4.194444 1.619048 6.165942
-
 # Define our variables
-(M <- "visual")
-#> [1] "visual"
-(IV <- c("ageyr", "grade"))
-#> [1] "ageyr" "grade"
-(DV <- c("speed", "textual"))
-#> [1] "speed"   "textual"
+M <- "visual"
+IV <- c("ageyr", "grade")
+DV <- c("speed", "textual")
 
 # Define our lavaan lists
-(mediation <- list(speed = M,
-                   textual = M,
-                   visual = IV))
-#> $speed
-#> [1] "visual"
-#> 
-#> $textual
-#> [1] "visual"
-#> 
-#> $visual
-#> [1] "ageyr" "grade"
-(regression <- list(speed = IV,
-                    textual = IV))
-#> $speed
-#> [1] "ageyr" "grade"
-#> 
-#> $textual
-#> [1] "ageyr" "grade"
-(covariance <- list(speed = "textual",
-                    ageyr = "grade"))
-#> $speed
-#> [1] "textual"
-#> 
-#> $ageyr
-#> [1] "grade"
+mediation <- list(speed = M, textual = M, visual = IV)
+regression <- list(speed = IV, textual = IV)
+covariance <- list(speed = "textual", ageyr = "grade")
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance)
@@ -557,21 +502,10 @@ define our `indirect` object as such:
 
 ``` r
 # Define indirect object
-(indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
-                  ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
-                  grade_visual_speed = c("grade_visual", "visual_speed"),
-                  grade_visual_textual = c("grade_visual", "visual_textual")))
-#> $ageyr_visual_speed
-#> [1] "ageyr_visual" "visual_speed"
-#> 
-#> $ageyr_visual_textual
-#> [1] "ageyr_visual"   "visual_textual"
-#> 
-#> $grade_visual_speed
-#> [1] "grade_visual" "visual_speed"
-#> 
-#> $grade_visual_textual
-#> [1] "grade_visual"   "visual_textual"
+indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
+                 ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
+                 grade_visual_speed = c("grade_visual", "visual_speed"),
+                 grade_visual_textual = c("grade_visual", "visual_textual"))
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -639,21 +573,10 @@ In this case, the path names are `a_speed`, `a_textual`, `a_visual`, and
 
 ``` r
 # Define indirect object
-(indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
-                  ageyr_visual_textual = c("a_visual", "a_textual"),
-                  grade_visual_speed = c("b_visual", "a_speed"),
-                  grade_visual_textual = c("b_visual", "a_textual")))
-#> $ageyr_visual_speed
-#> [1] "a_visual" "a_speed" 
-#> 
-#> $ageyr_visual_textual
-#> [1] "a_visual"  "a_textual"
-#> 
-#> $grade_visual_speed
-#> [1] "b_visual" "a_speed" 
-#> 
-#> $grade_visual_textual
-#> [1] "b_visual"  "a_textual"
+indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
+                 ageyr_visual_textual = c("a_visual", "a_textual"),
+                 grade_visual_speed = c("b_visual", "a_speed"),
+                 grade_visual_textual = c("b_visual", "a_textual"))
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -689,23 +612,13 @@ cat(model.saturated)
 
 There is also an experimental feature that attempts to produce the
 indirect effects automatically. This feature requires specifying your
-dependent and mediator variables as “DV” and “M”, respectively, in the
-`indirect` object. In our case, we have already defined those earlier,
-so we can just feed the proper objects.
+independent, dependent, and mediator variables as “IV”, “M”, and “DV”,
+respectively, in the `indirect` object. In our case, we have already
+defined those earlier, so we can just feed the proper objects.
 
 ``` r
 # Define indirect object
-(indirect <- list(IV = IV,
-                  M = M, 
-                  DV = DV))
-#> $IV
-#> [1] "ageyr" "grade"
-#> 
-#> $M
-#> [1] "visual"
-#> 
-#> $DV
-#> [1] "speed"   "textual"
+indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -762,13 +675,7 @@ model: simply what we want to update. In this case, the regressions and
 the indirect effects.
 
 ``` r
-(regression <- list(speed = "grade",
-                    textual = IV))
-#> $speed
-#> [1] "grade"
-#> 
-#> $textual
-#> [1] "ageyr" "grade"
+regression <- list(speed = "grade", textual = IV)
 # We check that we have removed "ageyr" correctly from "speed". OK.
 
 # We can run the model again, setting `label = TRUE` to get the path names
@@ -796,13 +703,8 @@ cat(model.path)
 # regression section. OK.
 
 # Define just our indirect effects of interest
-(indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
-                  grade_visual_textual = c("grade_visual", "visual_textual")))
-#> $age_visual_speed
-#> [1] "ageyr_visual" "visual_speed"
-#> 
-#> $grade_visual_textual
-#> [1] "grade_visual"   "visual_textual"
+indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
+                 grade_visual_textual = c("grade_visual", "visual_textual"))
 
 # We run the model again, with the indirect effects
 model.path <- write_lavaan(mediation, regression, covariance, 
@@ -863,18 +765,7 @@ lavaan_cov(fit.path, nice_table = TRUE)
 <img src="man/figures/README-covariance-1.png" width="30%" />
 
 ``` r
-# Get fit indices
-nice_fit(fit.cfa, fit.saturated, fit.path)
-#>           Model   chi2 df chi2.df     p   CFI   TLI RMSEA  SRMR      AIC
-#> 1       fit.cfa 85.306 24   3.554 0.000 0.931 0.896 0.092 0.065 7517.490
-#> 2 fit.saturated  0.000  0     NaN    NA 1.000 1.000 0.000 0.000 3483.460
-#> 3      fit.path  0.327  1   0.327 0.568 1.000 1.028 0.000 0.007 3481.787
-#>        BIC
-#> 1 7595.339
-#> 2 3539.017
-#> 3 3533.640
-
-# We can get it prettier with the `rempsyc::nice_table` integration
+# Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, fit.saturated, fit.path, nice_table = TRUE)
 ```
 
@@ -956,20 +847,7 @@ cat(model.latent)
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
               auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 
-# Get fit indices
-nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent)
-#>           Model    chi2 df chi2.df     p   CFI   TLI RMSEA  SRMR      AIC
-#> 1       fit.cfa  85.306 24   3.554 0.000 0.931 0.896 0.092 0.065 7517.490
-#> 2 fit.saturated   0.000  0     NaN    NA 1.000 1.000 0.000 0.000 3483.460
-#> 3      fit.path   0.327  1   0.327 0.568 1.000 1.028 0.000 0.007 3481.787
-#> 4    fit.latent 118.917 37   3.214 0.000 0.924 0.888 0.086 0.061 8638.789
-#>        BIC
-#> 1 7595.339
-#> 2 3539.017
-#> 3 3533.640
-#> 4 8746.198
-
-# We can get it prettier with the `rempsyc::nice_table` integration
+# Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 ```
 

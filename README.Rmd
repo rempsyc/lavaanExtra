@@ -91,8 +91,8 @@ invisible(lapply(list(
 
 ```{r reg}
 # Define our regression terms
-(regression <- list(mpg = names(mtcars)[2:5],
-                    disp = names(mtcars)[4:7]))
+regression <- list(mpg = names(mtcars)[2:5],
+                   disp = names(mtcars)[4:7])
 
 # Load library
 library(lavaanExtra)
@@ -119,9 +119,9 @@ lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
 
 ```{r cfaplot1}
 # Define latent variables
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+latent <- list(visual = paste0("x", 1:3),
+               textual = paste0("x", 4:6),
+               speed = paste0("x", 7:9))
 
 # Write the model, and check it
 cfa.model <- write_lavaan(latent = latent)
@@ -191,22 +191,15 @@ data$visual <- rowMeans(data[paste0("x", 1:3)])
 data$textual <- rowMeans(data[paste0("x", 4:6)])
 data$speed <- rowMeans(data[paste0("x", 7:9)])
 
-# Check what we have
-head(data)
-
 # Define our variables
-(M <- "visual")
-(IV <- c("ageyr", "grade"))
-(DV <- c("speed", "textual"))
+M <- "visual"
+IV <- c("ageyr", "grade")
+DV <- c("speed", "textual")
 
 # Define our lavaan lists
-(mediation <- list(speed = M,
-                   textual = M,
-                   visual = IV))
-(regression <- list(speed = IV,
-                    textual = IV))
-(covariance <- list(speed = "textual",
-                    ageyr = "grade"))
+mediation <- list(speed = M, textual = M, visual = IV)
+regression <- list(speed = IV, textual = IV)
+covariance <- list(speed = "textual", ageyr = "grade")
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance)
@@ -227,10 +220,10 @@ Here, if we check the mediation section of the model, we see that it has been "a
 
 ```{r saturated3}
 # Define indirect object
-(indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
-                  ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
-                  grade_visual_speed = c("grade_visual", "visual_speed"),
-                  grade_visual_textual = c("grade_visual", "visual_textual")))
+indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
+                 ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
+                 grade_visual_speed = c("grade_visual", "visual_speed"),
+                 grade_visual_textual = c("grade_visual", "visual_textual"))
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -252,10 +245,10 @@ In this case, the path names are `a_speed`, `a_textual`, `a_visual`, and `b_visu
 
 ```{r letters2}
 # Define indirect object
-(indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
-                  ageyr_visual_textual = c("a_visual", "a_textual"),
-                  grade_visual_speed = c("b_visual", "a_speed"),
-                  grade_visual_textual = c("b_visual", "a_textual")))
+indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
+                 ageyr_visual_textual = c("a_visual", "a_textual"),
+                 grade_visual_speed = c("b_visual", "a_speed"),
+                 grade_visual_textual = c("b_visual", "a_textual"))
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -264,13 +257,11 @@ cat(model.saturated)
 
 ```
 
-There is also an experimental feature that attempts to produce the indirect effects automatically. This feature requires specifying your dependent and mediator variables as "DV" and "M", respectively, in the `indirect` object. In our case, we have already defined those earlier, so we can just feed the proper objects.
+There is also an experimental feature that attempts to produce the indirect effects automatically. This feature requires specifying your independent, dependent, and mediator variables as "IV", "M", and "DV", respectively, in the `indirect` object. In our case, we have already defined those earlier, so we can just feed the proper objects.
 
 ```{r saturated4}
 # Define indirect object
-(indirect <- list(IV = IV,
-                  M = M, 
-                  DV = DV))
+indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance, 
@@ -299,8 +290,7 @@ So `speed` as predicted by `ageyr` isn't significant. We could remove that path 
 Because we use `lavaanExtra`, we don't have to redefine the entire model: simply what we want to update. In this case, the regressions and the indirect effects.
 
 ```{r path}
-(regression <- list(speed = "grade",
-                    textual = IV))
+regression <- list(speed = "grade", textual = IV)
 # We check that we have removed "ageyr" correctly from "speed". OK.
 
 # We can run the model again, setting `label = TRUE` to get the path names
@@ -310,8 +300,8 @@ cat(model.path)
 # regression section. OK.
 
 # Define just our indirect effects of interest
-(indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
-                  grade_visual_textual = c("grade_visual", "visual_textual")))
+indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
+                 grade_visual_textual = c("grade_visual", "visual_textual"))
 
 # We run the model again, with the indirect effects
 model.path <- write_lavaan(mediation, regression, covariance, 
@@ -341,10 +331,7 @@ lavaan_cov(fit.path, nice_table = TRUE)
 <img src="man/figures/README-covariance-1.png" width="30%" />
 
 ```{r path2}
-# Get fit indices
-nice_fit(fit.cfa, fit.saturated, fit.path)
-
-# We can get it prettier with the `rempsyc::nice_table` integration
+# Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, fit.saturated, fit.path, nice_table = TRUE)
 
 ```
@@ -384,10 +371,7 @@ cat(model.latent)
 fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
               auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 
-# Get fit indices
-nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent)
-
-# We can get it prettier with the `rempsyc::nice_table` integration
+# Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 
 ```
