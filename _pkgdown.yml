@@ -20,9 +20,6 @@ navbar:
   - icon: fa-coffee
     href: https://github.com/sponsors/rempsyc
     aria-label: Donate
-  - text: Author
-    href: https://remi-theriault.com
-    aria-label: Author
   left:
   - icon: fa-home
     href: index.html
