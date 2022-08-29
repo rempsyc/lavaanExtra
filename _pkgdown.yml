@@ -8,9 +8,9 @@ navbar:
   type: default
   toc: TRUE
   right:
-  - text: Author
-    href: https://remi-theriault.com
-    aria-label: Author
+  - text: rempsyc
+    href: https://rempsyc.remi-theriault.com/
+    aria-label: rempsyc
   - icon: fa-twitter
     href: https://twitter.com/rempsyc
     aria-label: Twitter
@@ -20,6 +20,9 @@ navbar:
   - icon: fa-coffee
     href: https://github.com/sponsors/rempsyc
     aria-label: Donate
+  - text: Author
+    href: https://remi-theriault.com
+    aria-label: Author
   left:
   - icon: fa-home
     href: index.html
