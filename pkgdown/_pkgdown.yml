@@ -26,10 +26,16 @@ navbar:
   - text: Tutorials
     href: articles/index.html
     menu:
+      - text: Regressions
+        href: articles/regression.html
+      - text: Full CFA/SEM workflow
+        href: articles/fullworkflow.html
       - text: Example lavaan models
         href: articles/example.html
       - text: Automatic indirect effects
         href: articles/indirect.html
+      - text: Special cases
+        href: articles/special.html
   - text: Functions
     href: reference/index.html
   - text: Changelog

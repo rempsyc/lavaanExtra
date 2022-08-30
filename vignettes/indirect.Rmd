@@ -68,7 +68,6 @@ indirect <- list(IV = IV, M = M, DV = DV)
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
 cat(model.saturated)
-
 ```
 
 # Other scenarios

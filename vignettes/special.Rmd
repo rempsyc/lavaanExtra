@@ -1,0 +1,32 @@
+---
+title: "Special cases"
+author: "Rémi Thériault"
+date: "August 29, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Special cases}
+  %\VignetteEngine{knitr::knitr}
+---
+
+Intercepts, various constraints, and even custom specifications can also be specified, e.g.:
+
+```{r}
+library(lavaanExtra)
+```
+
+```{r}
+intercept <- c("mpg", "cyl", "disp")
+constraint.equal <- list(b1 = "(b2 + b3)^2")
+constraint.smaller <- list(b1 = "exp(b2 + b3)")
+constraint.larger <- list(b1 = "exp(b2 + b3)")
+custom <- "y1 + y2 ~ f1 + f2 + x1 + x2"
+
+model.custom <- write_lavaan(
+  intercept = intercept, constraint.equal = constraint.equal, 
+  constraint.smaller = constraint.smaller, 
+  constraint.larger = constraint.larger, custom = custom)
+cat(model.custom)
+```
+

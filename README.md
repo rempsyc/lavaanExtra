@@ -65,9 +65,6 @@ install.packages("lavaanExtra", repos = c(
 
 ## Overview
 
-[Regression
-example](#regression-example)<a name = 'Regression example'/>
-
 [CFA example](#cfa-example)<a name = 'CFA example'/>
 
 [SEM example](#sem-example)<a name = 'SEM example'/>
@@ -79,54 +76,14 @@ model](#path-analysis-model)<a name = 'Path analysis model'/>
 
 [Latent model](#latent-model)<a name = 'Latent model'/>
 
-[Special cases](#special-cases)<a name = 'Special cases'/>
-
-## Regression example
+## CFA example
 
 ``` r
-# Define our regression terms
-regression <- list(mpg = names(mtcars)[2:5],
-                   disp = names(mtcars)[4:7])
-
 # Load library
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan 
 #> (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
-# Write the model, and check it
-mtcars.model <- write_lavaan(regression = regression)
-cat(mtcars.model)
-#> ##################################################
-#> # [---------Regressions (Direct effects)---------]
-#> 
-#> mpg ~ cyl + disp + hp + drat
-#> disp ~ hp + drat + wt + qsec
-
-# Fit the model with `lavaan`
-library(lavaan)
-fit.reg <- lavaan(mtcars.model, data = mtcars, auto.var = TRUE)
-
-# Get regression parameters only
-lavaan_reg(fit.reg)
-#>   Outcome Predictor      B     p
-#> 1     mpg       cyl -0.242 0.244
-#> 2     mpg      disp -0.287 0.123
-#> 3     mpg        hp -0.264 0.128
-#> 4     mpg      drat  0.192 0.159
-#> 5    disp        hp  0.175 0.177
-#> 6    disp      drat -0.177 0.034
-#> 7    disp        wt  0.614 0.000
-#> 8    disp      qsec -0.186 0.061
-
-# We can get it prettier with the `rempsyc::nice_table` integration
-lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
-```
-
-<img src="man/figures/README-reg-1.png" width="30%" />
-
-## CFA example
-
-``` r
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
                textual = paste0("x", 4:6),
@@ -656,6 +613,7 @@ We are now satisfied with our model, so we can finally fit it!
 
 ``` r
 # Fit the model with `lavaan`
+library(lavaan)
 fit.saturated <- lavaan(model.saturated, data = data, auto.var = TRUE)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
@@ -676,7 +634,6 @@ the indirect effects.
 
 ``` r
 regression <- list(speed = "grade", textual = IV)
-# We check that we have removed "ageyr" correctly from "speed". OK.
 
 # We can run the model again, setting `label = TRUE` to get the path names
 model.path <- write_lavaan(mediation, regression, covariance, label = TRUE)
@@ -738,7 +695,18 @@ cat(model.path)
 # Fit the model with `lavaan`
 fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
 
-# Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
+# Get regression parameters only
+lavaan_reg(fit.path)
+#>   Outcome Predictor      B     p
+#> 1   speed    visual  0.206 0.000
+#> 2 textual    visual  0.235 0.000
+#> 3  visual     ageyr -0.161 0.014
+#> 4  visual     grade  0.281 0.000
+#> 5   speed     grade  0.327 0.000
+#> 6 textual     ageyr -0.403 0.000
+#> 7 textual     grade  0.358 0.000
+
+# We can get it prettier with the `rempsyc::nice_table` integration
 lavaan_reg(fit.path, nice_table = TRUE, highlight = TRUE)
 ```
 
@@ -852,42 +820,6 @@ nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-latent-1.png" width="90%" />
-
-# Special cases
-
-Finally, intercepts and various constraints can also be specified, e.g.:
-
-``` r
-intercept <- c("mpg", "cyl", "disp")
-constraint.equal <- list(b1 = "(b2 + b3)^2")
-constraint.smaller <- list(b1 = "exp(b2 + b3)")
-constraint.larger <- list(b1 = "exp(b2 + b3)")
-custom <- "y1 + y2 ~ f1 + f2 + x1 + x2"
-
-model.custom <- write_lavaan(
-  intercept = intercept, constraint.equal = constraint.equal, 
-  constraint.smaller = constraint.smaller, 
-  constraint.larger = constraint.larger, custom = custom)
-cat(model.custom)
-#> ##################################################
-#> # [------------------Intercepts------------------]
-#> 
-#> mpg ~ 1
-#> cyl ~ 1
-#> disp ~ 1
-#> 
-#> ##################################################
-#> # [-----------------Constraints------------------]
-#> 
-#> b1 == (b2 + b3)^2
-#> b1 < exp(b2 + b3)
-#> b1 > exp(b2 + b3)
-#> 
-#> ##################################################
-#> # [------------Custom Specifications-------------]
-#> 
-#> y1 + y2 ~ f1 + f2 + x1 + x2
-```
 
 ### Final note
 
