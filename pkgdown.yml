@@ -3,8 +3,11 @@ pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
   example: example.html
+  fullworkflow: fullworkflow.html
   indirect: indirect.html
-last_built: 2022-08-29T23:01Z
+  regression: regression.html
+  special: special.html
+last_built: 2022-08-30T01:34Z
 urls:
   reference: https://lavaanExtra.remi-theriault.com/reference
   article: https://lavaanExtra.remi-theriault.com/articles
