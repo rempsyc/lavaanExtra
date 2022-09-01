@@ -12,12 +12,12 @@ vignette: >
 
 This article demonstrates ways to produce indirect effects automatically for different scenarios. This is an experimental feature and does not support all scenarios. Progress for more scenarios will be implemented progressively. If using this feature, always triple check that your model was specified correctly.
 
-```{r}
+```{r, message = FALSE}
 library(lavaan)
 library(lavaanExtra)
 ```
 
-# One mediator, two IVs
+# 1 mediator, 2 IVs
 
 ```{r}
 # Calculate scale averages
@@ -42,12 +42,13 @@ indirect <- list(M = M, DV = DV, IV = IV)
 model1 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
 cat(model1)
 
+# Fit and plot
 fit1 <- lavaan(model1, data = data, auto.cov.lv.x = TRUE,
-              auto.var=TRUE, auto.fix.first=TRUE)
+               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit1)
 ```
 
-# Two mediators, one IV
+# 2 mediators, 1 IV
 
 ```{r}
 # Define our variables
@@ -65,12 +66,13 @@ indirect <- list(IV = IV, M = M, DV = DV)
 model2 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
 cat(model2)
 
+# Fit and plot
 fit2 <- lavaan(model2, data = data, auto.cov.lv.x = TRUE,
-              auto.var=TRUE, auto.fix.first=TRUE)
+               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit2)
 ```
 
-# Two mediators, two IVs
+# 2 mediators, 2 IVs
 
 ```{r}
 # Define our variables
@@ -87,10 +89,58 @@ indirect <- list(IV = IV, M = M, DV = DV)
 model3 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
 cat(model3)
 
+# Fit and plot
 fit3 <- lavaan(model3, data = data, auto.cov.lv.x = TRUE,
-              auto.var=TRUE, auto.fix.first=TRUE)
+               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit3)
 ```
+
+# 2 mediators, 3 IVs
+
+```{r}
+# Define our variables
+IV <- c("sex", "ageyr", "agemo")
+
+# Define our lavaan lists
+mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
+regression <- list(speed = IV, textual = IV)
+
+# Define indirect object
+indirect <- list(IV = IV, M = M, DV = DV)
+
+# Write the model, and check it
+model4 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model4)
+
+# Fit and plot
+fit4 <- lavaan(model4, data = data, auto.cov.lv.x = TRUE,
+               auto.var = TRUE, auto.fix.first = TRUE)
+nice_lavaanPlot(fit4)
+```
+
+# 2 mediators, 6 IVs
+
+```{r}
+# Define our variables
+IV <- c("sex", "ageyr", "agemo", "school", "x2", "x3")
+
+# Define our lavaan lists
+mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
+regression <- list(speed = IV, textual = IV)
+
+# Define indirect object
+indirect <- list(IV = IV, M = M, DV = DV)
+
+# Write the model, and check it
+model5 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model5)
+
+# Fit and plot
+fit5 <- lavaan(model5, data = data, auto.cov.lv.x = TRUE,
+               auto.var = TRUE, auto.fix.first = TRUE)
+nice_lavaanPlot(fit5)
+```
+
 
 # Other scenarios
 

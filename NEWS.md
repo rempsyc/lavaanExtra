@@ -1,3 +1,6 @@
+## lavaanExtra 0.0.7
+* `write_lavaan`: Automatic indirect effects now support another scenario: two mediators and three IVs!
+
 ## lavaanExtra 0.0.6
 * Added new function: `nice_lavaanPlot`, for a quick and decent-looking `lavaanPlot` with sensical (but customizable) defaults.
 * `write_lavaan`: Automatic indirect effects now support another scenario: two mediators and two IVs!

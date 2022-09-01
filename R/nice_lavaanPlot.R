@@ -33,7 +33,8 @@ nice_lavaanPlot <- function(model, node_options = list(shape = "box", fontname =
                             edge_options = list(color = "grey"), coefs = TRUE, stand = TRUE,
                             covs = FALSE, stars = list("regress"), sig = .05,
                             graph_options = list(rankdir = "LR"), ...) {
-  rlang::check_installed(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png"), reason = "for this function.")
+  rlang::check_installed(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"),
+                         reason = "for this function.")
   lavaanPlot::lavaanPlot(model = model,
                          node_options = node_options,
                          edge_options = edge_options,

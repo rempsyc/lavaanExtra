@@ -37,7 +37,6 @@
 
 cfa_fit_plot <- function(model, data, covs = FALSE, estimator = "MLR", remove.items = "",
                          save.as.pdf = FALSE, file.name, ...){
-  rlang::check_installed(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png"), reason = "for this function.")
   if(missing(file.name) && isTRUE(save.as.pdf)) {
     prefix <- deparse(substitute(model))
     time <- gsub(":", ".", Sys.time())

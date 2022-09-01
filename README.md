@@ -78,7 +78,7 @@ install.packages("lavaanExtra", repos = c(
 library(lavaan)
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.0.6) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> (R package version 0.0.7) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -278,8 +278,8 @@ cat(model)
 #> # [--------Mediations (indirect effects)---------]
 #> 
 #> ageyr_visual_speed := ageyr_visual * visual_speed
-#> ageyr_visual_textual := ageyr_visual * visual_textual
-#> grade_visual_speed := grade_visual * visual_speed
+#> grade_visual_textual := grade_visual * visual_textual
+#> ageyr_visual_speed := ageyr_visual * visual_speed
 #> grade_visual_textual := grade_visual * visual_textual
 
 fit.sem <- lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
