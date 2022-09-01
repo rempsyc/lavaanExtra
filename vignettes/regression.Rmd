@@ -12,7 +12,7 @@ vignette: >
 
 ## Regression example
 
-```{r reg}
+```{r reg, message = FALSE}
 # Load libraries
 library(lavaan)
 library(lavaanExtra)

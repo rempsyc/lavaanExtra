@@ -129,19 +129,14 @@ Thériault</h4>
 project at <a href="https://lavaan.ugent.be" class="external-link uri">https://lavaan.ugent.be</a>. Let’s start by loading both
 packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## This is lavaan 0.6-12</span></span>
-<span><span class="co">## lavaan is FREE software! Please report any bugs.</span></span></code></pre>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan </span></span>
-<span><span class="co">## (R package version 0.0.7) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span></code></pre>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="example-1-model-syntax-1">Example 1 (Model syntax 1):<a class="anchor" aria-label="anchor" href="#example-1-model-syntax-1"></a>
 </h2>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax1.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax1.html</a></p>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="st">' # regressions</span></span>
 <span><span class="st">             y1 + y2 ~ f1 + f2 + x1 + x2</span></span>
 <span><span class="st">                  f1 ~ f2 + f3</span></span>
@@ -162,7 +157,7 @@ packages.</p>
 <span><span class="st">               f1 ~ 1</span></span>
 <span><span class="st">           '</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
 <span>            y2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
 <span>            f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f2"</span>, <span class="st">"f3"</span><span class="op">)</span>,</span>
@@ -210,12 +205,12 @@ packages.</p>
 </h2>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/cfa.html" class="external-link uri">https://lavaan.ugent.be/tutorial/cfa.html</a></p>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="st">' visual  =~ x1 + x2 + x3 </span></span>
 <span><span class="st">              textual =~ x4 + x5 + x6</span></span>
 <span><span class="st">              speed   =~ x7 + x8 + x9 '</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
 <span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
@@ -233,7 +228,7 @@ packages.</p>
 </h2>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/sem.html" class="external-link uri">https://lavaan.ugent.be/tutorial/sem.html</a></p>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">  # measurement model</span></span>
 <span><span class="st">    ind60 =~ x1 + x2 + x3</span></span>
@@ -250,7 +245,7 @@ packages.</p>
 <span><span class="st">    y6 ~~ y8</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ind60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>            dem60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
 <span>            dem65 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
@@ -293,7 +288,7 @@ packages.</p>
 <h4 id="example-4-1">Example 4.1<a class="anchor" aria-label="anchor" href="#example-4-1"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st"># three-factor model</span></span>
 <span><span class="st">  visual =~ x1 + x2 + x3</span></span>
@@ -306,7 +301,7 @@ packages.</p>
 <span><span class="st">  speed ~~ 1*speed</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
 <span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
 <span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA*x7"</span>, <span class="st">"x8"</span>, <span class="st">"x9"</span><span class="op">)</span><span class="op">)</span></span>
@@ -333,14 +328,14 @@ packages.</p>
 <h4 id="example-4-2">Example 4.2<a class="anchor" aria-label="anchor" href="#example-4-2"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">visual  =~ x1 + start(0.8)*x2 + start(1.2)*x3</span></span>
 <span><span class="st">textual =~ x4 + start(0.5)*x5 + start(1.0)*x6</span></span>
 <span><span class="st">speed   =~ x7 + start(0.7)*x8 + start(1.8)*x9</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"start(0.8)*x2"</span>, <span class="st">"start(1.2)*x3"</span><span class="op">)</span>,</span>
 <span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x4"</span>, <span class="st">"start(0.5)*x5"</span>, <span class="st">"start(1.0)*x6"</span><span class="op">)</span>,</span>
 <span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x7"</span>, <span class="st">"start(0.7)*x8"</span>, <span class="st">"start(1.8)*x9"</span><span class="op">)</span><span class="op">)</span></span>
@@ -357,12 +352,12 @@ packages.</p>
 <h4 id="example-4-3">Example 4.3<a class="anchor" aria-label="anchor" href="#example-4-3"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y1"</span>, <span class="st">"y2"</span>, <span class="st">"myLabel*y3"</span>, <span class="st">"start(0.5)*y3"</span>, <span class="st">"y4"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
@@ -375,14 +370,14 @@ packages.</p>
 <h4 id="example-4-4">Example 4.4<a class="anchor" aria-label="anchor" href="#example-4-4"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">visual  =~ x1 + v2*x2 + v2*x3</span></span>
 <span><span class="st">textual =~ x4 + x5 + x6</span></span>
 <span><span class="st">speed   =~ x7 + x8 + x9</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"v2*x2"</span>, <span class="st">"v2*x3"</span><span class="op">)</span>,</span>
 <span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
 <span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
@@ -399,7 +394,7 @@ packages.</p>
 <h4 id="example-4-5">Example 4.5<a class="anchor" aria-label="anchor" href="#example-4-5"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">visual  =~ x1 + x2 + equal("visual=~x2")*x3</span></span>
 <span><span class="st">textual =~ x4 + x5 + x6</span></span>
@@ -422,7 +417,7 @@ packages.</p>
 <span><span class="co">##   Degrees of freedom                                25</span></span>
 <span><span class="co">##   P-value (Chi-square)                           0.000</span></span></code></pre>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"equal('visual=~x2')*x3"</span><span class="op">)</span>,</span>
 <span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
 <span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
@@ -434,7 +429,7 @@ packages.</p>
 <span><span class="co">## visual =~ x1 + x2 + equal('visual=~x2')*x3</span></span>
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>
 <span>       auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## lavaan 0.6-12 ended normally after 36 iterations</span></span>
@@ -456,14 +451,14 @@ packages.</p>
 <h4 id="example-4-6">Example 4.6<a class="anchor" aria-label="anchor" href="#example-4-6"></a>
 </h4>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.constr</span> <span class="op">&lt;-</span> <span class="st">' # model with labeled parameters</span></span>
 <span><span class="st">                    y ~ b1*x1 + b2*x2 + b3*x3</span></span>
 <span><span class="st">                  # constraints</span></span>
 <span><span class="st">                    b1 == (b2 + b3)^2</span></span>
 <span><span class="st">                    b1 &gt; exp(b2 + b3) '</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b1*x1"</span>, <span class="st">"b2*x2"</span>, <span class="st">"b3*x3"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">cstr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"(b2 + b3)^2"</span><span class="op">)</span></span>
 <span><span class="va">cstr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"exp(b2 + b3)"</span><span class="op">)</span></span>
@@ -487,7 +482,7 @@ packages.</p>
 </h2>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">' # direct effect</span></span>
 <span><span class="st">             Y ~ c*X</span></span>
 <span><span class="st">           # mediator</span></span>
@@ -499,7 +494,7 @@ packages.</p>
 <span><span class="st">             total := c + (a*b)</span></span>
 <span><span class="st">         '</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="st">"c*X"</span>,</span>
 <span>                  M <span class="op">=</span> <span class="st">"a*X"</span>,</span>
 <span>                  Y <span class="op">=</span> <span class="st">"b*M"</span><span class="op">)</span></span>
@@ -525,7 +520,7 @@ packages.</p>
 </h2>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/multilevel.html" class="external-link uri">https://lavaan.ugent.be/tutorial/multilevel.html</a></p>
 <p><code>lavaan</code>:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
 <span><span class="st">    level: 1</span></span>
 <span><span class="st">        fw =~ y1 + y2 + y3</span></span>
@@ -535,7 +530,7 @@ packages.</p>
 <span><span class="st">        fb ~ w1 + w2</span></span>
 <span><span class="st">'</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">cus</span> <span class="op">&lt;-</span> </span>
 <span><span class="st">"level: 1</span></span>
 <span><span class="st">    fw =~ y1 + y2 + y3</span></span>

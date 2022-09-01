@@ -85,12 +85,12 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
       }
       x <- stats::setNames(x, labels)
       indirect.names <- lapply(indirect$M, function(x) {
-        paste0(rep(indirect$IV, each = length(indirect$M)), "_", x, "_",
+        paste0(rep(indirect$IV, each = length(indirect$DV)), "_", x, "_",
                rep(indirect$DV, length(indirect$IV)))
       })
       indirect.names <- unlist(indirect.names)
       indirect2 <- lapply(indirect$M, function(x) {
-        paste0(rep(indirect$IV, each = length(indirect$M)), "_", x, " * ", x,
+        paste0(rep(indirect$IV, each = length(indirect$DV)), "_", x, " * ", x,
                "_", rep(indirect$DV, length(indirect$IV)))
       })
       indirect.list <- as.list(unlist(indirect2))

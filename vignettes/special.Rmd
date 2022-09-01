@@ -12,7 +12,7 @@ vignette: >
 
 Intercepts, various constraints, and even custom specifications can also be specified, e.g.:
 
-```{r}
+```{r, message = FALSE}
 library(lavaanExtra)
 ```
 

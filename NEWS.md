@@ -1,3 +1,6 @@
+## lavaanExtra 0.0.8
+* `write_lavaan`: Exciting news! Automatic indirect effects now seemingly support any combination of IV, moderator, and DV!
+
 ## lavaanExtra 0.0.7
 * `write_lavaan`: Automatic indirect effects now support another scenario: two mediators and three IVs!
 

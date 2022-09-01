@@ -278,8 +278,8 @@ cat(model)
 #> # [--------Mediations (indirect effects)---------]
 #> 
 #> ageyr_visual_speed := ageyr_visual * visual_speed
-#> grade_visual_textual := grade_visual * visual_textual
-#> ageyr_visual_speed := ageyr_visual * visual_speed
+#> ageyr_visual_textual := ageyr_visual * visual_textual
+#> grade_visual_speed := grade_visual * visual_speed
 #> grade_visual_textual := grade_visual * visual_textual
 
 fit.sem <- lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 

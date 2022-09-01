@@ -12,7 +12,7 @@ vignette: >
 
 ## CFA example
 
-```{r cfaplot1}
+```{r cfaplot1, message = FALSE}
 # Load library
 library(lavaan)
 library(lavaanExtra)

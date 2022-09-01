@@ -12,7 +12,7 @@ vignette: >
 
 This article attempts to reproduce several different possible `lavaan` models. We start with the source itself: The lavaan project at https://lavaan.ugent.be. Let's start by loading both packages.
 
-```{r}
+```{r, message = FALSE}
 library(lavaan)
 library(lavaanExtra)
 ```
