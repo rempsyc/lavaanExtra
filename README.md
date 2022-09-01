@@ -78,7 +78,7 @@ install.packages("lavaanExtra", repos = c(
 library(lavaan)
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> (R package version 0.0.6) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -246,7 +246,7 @@ indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model <- write_lavaan(mediation, regression, covariance, 
-                                indirect, latent, label = TRUE)
+                      indirect, latent, label = TRUE)
 cat(model)
 #> ##################################################
 #> # [---------------Latent variables---------------]
@@ -283,7 +283,7 @@ cat(model)
 #> grade_visual_textual := grade_visual * visual_textual
 
 fit.sem <- lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
-              auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+                  auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
@@ -315,6 +315,13 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="50%" />
+
+``` r
+# Plot our model
+nice_lavaanPlot(fit.sem)
+```
+
+<img src="man/figures/semplot.png" width="70%" />
 
 ## Final note
 

@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -109,8 +109,8 @@
 
 
 
-
-<div class="row">
+<script src="indirect_files/htmlwidgets-1.5.4/htmlwidgets.js"></script><script src="indirect_files/viz-1.8.2/viz.js"></script><link href="indirect_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="indirect_files/grViz-binding-1.0.9/grViz.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Automatic indirect effects</h1>
                         <h4 data-toc-skip class="author">Rémi
@@ -125,7 +125,10 @@ Thériault</h4>
     
     
 <p>This article demonstrates ways to produce indirect effects
-automatically for different scenarios.</p>
+automatically for different scenarios. This is an experimental feature
+and does not support all scenarios. Progress for more scenarios will be
+implemented progressively. If using this feature, always triple check
+that your model was specified correctly.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## This is lavaan 0.6-12</span></span>
@@ -133,9 +136,9 @@ automatically for different scenarios.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan </span></span>
-<span><span class="co">## (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span></code></pre>
+<span><span class="co">## (R package version 0.0.6) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span></code></pre>
 <div class="section level2">
-<h2 id="one-mediator">One mediator<a class="anchor" aria-label="anchor" href="#one-mediator"></a>
+<h2 id="one-mediator-two-ivs">One mediator, two IVs<a class="anchor" aria-label="anchor" href="#one-mediator-two-ivs"></a>
 </h2>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Calculate scale averages</span></span>
@@ -145,8 +148,8 @@ automatically for different scenarios.</p>
 <span><span class="va">data</span><span class="op">$</span><span class="va">speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define our variables</span></span>
-<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
+<span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define our lavaan lists</span></span>
@@ -157,8 +160,8 @@ automatically for different scenarios.</p>
 <span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>M <span class="op">=</span> <span class="va">M</span>, DV <span class="op">=</span> <span class="va">DV</span>, IV <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
-<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model1</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model1</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">## </span></span>
@@ -179,21 +182,20 @@ automatically for different scenarios.</p>
 <span><span class="co">## ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
 <span><span class="co">## grade_visual_speed := grade_visual * visual_speed</span></span>
 <span><span class="co">## grade_visual_textual := grade_visual * visual_textual</span></span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model1</span>, data <span class="op">=</span> <span class="va">data</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              auto.var<span class="op">=</span><span class="cn">TRUE</span>, auto.fix.first<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit1</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-9d7a782bb674d7c35871" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9d7a782bb674d7c35871">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; ageyr; grade; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] visual->textual [label = \"0.24***\"] ageyr->visual [label = \"-0.16*\"] grade->visual [label = \"0.28***\"] ageyr->speed [label = \"\"] grade->speed [label = \"0.31***\"] ageyr->textual [label = \"-0.4***\"] grade->textual [label = \"0.36***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
-<h2 id="two-mediators">Two mediators<a class="anchor" aria-label="anchor" href="#two-mediators"></a>
+<h2 id="two-mediators-one-iv">Two mediators, one IV<a class="anchor" aria-label="anchor" href="#two-mediators-one-iv"></a>
 </h2>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Calculate scale averages</span></span>
-<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">HolzingerSwineford1939</span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">visual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">textual</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="va">data</span><span class="op">$</span><span class="va">speed</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/colSums.html" class="external-link">rowMeans</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Define our variables</span></span>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="st">"ageyr"</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
-<span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define our lavaan lists</span></span>
 <span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>, textual <span class="op">=</span> <span class="va">M</span>, visual <span class="op">=</span> <span class="va">IV</span>, grade <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
@@ -203,8 +205,8 @@ automatically for different scenarios.</p>
 <span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>IV <span class="op">=</span> <span class="va">IV</span>, M <span class="op">=</span> <span class="va">M</span>, DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
-<span><span class="va">model.saturated</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model.saturated</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">model2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model2</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----------Mediations (named paths)-----------]</span></span>
 <span><span class="co">## </span></span>
@@ -223,9 +225,64 @@ automatically for different scenarios.</p>
 <span><span class="co">## # [--------Mediations (indirect effects)---------]</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
-<span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
+<span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_grade_textual := ageyr_grade * grade_textual</span></span></code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model2</span>, data <span class="op">=</span> <span class="va">data</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              auto.var<span class="op">=</span><span class="cn">TRUE</span>, auto.fix.first<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit2</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-94e66738ca32cf0e604c" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-94e66738ca32cf0e604c">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.31***\"] visual->textual [label = \"0.24***\"] grade->textual [label = \"0.36***\"] ageyr->visual [label = \"\"] ageyr->grade [label = \"0.51***\"] ageyr->speed [label = \"\"] ageyr->textual [label = \"-0.41***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+</div>
+<div class="section level2">
+<h2 id="two-mediators-two-ivs">Two mediators, two IVs<a class="anchor" aria-label="anchor" href="#two-mediators-two-ivs"></a>
+</h2>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
+<span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"ageyr"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define our lavaan lists</span></span>
+<span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">M</span>, textual <span class="op">=</span> <span class="va">M</span>, visual <span class="op">=</span> <span class="va">IV</span>, grade <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span><span class="va">regression</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>speed <span class="op">=</span> <span class="va">IV</span>, textual <span class="op">=</span> <span class="va">IV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define indirect object</span></span>
+<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>IV <span class="op">=</span> <span class="va">IV</span>, M <span class="op">=</span> <span class="va">M</span>, DV <span class="op">=</span> <span class="va">DV</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Write the model, and check it</span></span>
+<span><span class="va">model3</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, indirect <span class="op">=</span> <span class="va">indirect</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model3</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [-----------Mediations (named paths)-----------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## speed ~ visual_speed*visual + grade_speed*grade</span></span>
+<span><span class="co">## textual ~ visual_textual*visual + grade_textual*grade</span></span>
+<span><span class="co">## visual ~ sex_visual*sex + ageyr_visual*ageyr</span></span>
+<span><span class="co">## grade ~ sex_grade*sex + ageyr_grade*ageyr</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## speed ~ sex + ageyr</span></span>
+<span><span class="co">## textual ~ sex + ageyr</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## sex_visual_speed := sex_visual * visual_speed</span></span>
+<span><span class="co">## sex_visual_textual := sex_visual * visual_textual</span></span>
+<span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
+<span><span class="co">## ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
+<span><span class="co">## sex_grade_speed := sex_grade * grade_speed</span></span>
+<span><span class="co">## sex_grade_textual := sex_grade * grade_textual</span></span>
+<span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
+<span><span class="co">## ageyr_grade_textual := ageyr_grade * grade_textual</span></span></code></pre>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">fit3</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model3</span>, data <span class="op">=</span> <span class="va">data</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>              auto.var<span class="op">=</span><span class="cn">TRUE</span>, auto.fix.first<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit3</span><span class="op">)</span></span></code></pre></div>
+<div id="htmlwidget-717582f2e135e0af4dd7" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-717582f2e135e0af4dd7">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.24***\"] grade->speed [label = \"0.3***\"] visual->textual [label = \"0.25***\"] grade->textual [label = \"0.35***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.52***\"] sex->speed [label = \"0.11*\"] ageyr->speed [label = \"\"] sex->textual [label = \"\"] ageyr->textual [label = \"-0.39***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="other-scenarios">Other scenarios<a class="anchor" aria-label="anchor" href="#other-scenarios"></a>

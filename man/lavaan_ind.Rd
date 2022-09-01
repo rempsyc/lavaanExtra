@@ -15,7 +15,9 @@ as well as print the reference values at the bottom of the table.}
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }
 \description{
-Extract relevant indirect effects indices from lavaan model.
+Extract relevant indirect effects indices from lavaan model through
+\verb{lavaan::parameterEstimates)} with \code{standardized = TRUE}. In this
+case, the beta (B) represents the resulting \code{std.all} column.
 }
 \examples{
 

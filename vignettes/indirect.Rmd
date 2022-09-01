@@ -10,14 +10,14 @@ vignette: >
   %\VignetteEngine{knitr::knitr}
 ---
 
-This article demonstrates ways to produce indirect effects automatically for different scenarios.
+This article demonstrates ways to produce indirect effects automatically for different scenarios. This is an experimental feature and does not support all scenarios. Progress for more scenarios will be implemented progressively. If using this feature, always triple check that your model was specified correctly.
 
 ```{r}
 library(lavaan)
 library(lavaanExtra)
 ```
 
-# One mediator
+# One mediator, two IVs
 
 ```{r}
 # Calculate scale averages
@@ -27,8 +27,8 @@ data$textual <- rowMeans(data[paste0("x", 4:6)])
 data$speed <- rowMeans(data[paste0("x", 7:9)])
 
 # Define our variables
-M <- "visual"
 IV <- c("ageyr", "grade")
+M <- "visual"
 DV <- c("speed", "textual")
 
 # Define our lavaan lists
@@ -39,24 +39,20 @@ regression <- list(speed = IV, textual = IV)
 indirect <- list(M = M, DV = DV, IV = IV)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
-cat(model.saturated)
+model1 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model1)
 
+fit1 <- lavaan(model1, data = data, auto.cov.lv.x = TRUE,
+              auto.var=TRUE, auto.fix.first=TRUE)
+nice_lavaanPlot(fit1)
 ```
 
-# Two mediators
+# Two mediators, one IV
 
 ```{r}
-# Calculate scale averages
-data <- HolzingerSwineford1939
-data$visual <- rowMeans(data[paste0("x", 1:3)])
-data$textual <- rowMeans(data[paste0("x", 4:6)])
-data$speed <- rowMeans(data[paste0("x", 7:9)])
-
 # Define our variables
 IV <- "ageyr"
 M <- c("visual", "grade")
-DV <- c("speed", "textual")
 
 # Define our lavaan lists
 mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
@@ -66,8 +62,34 @@ regression <- list(speed = IV, textual = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
-cat(model.saturated)
+model2 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model2)
+
+fit2 <- lavaan(model2, data = data, auto.cov.lv.x = TRUE,
+              auto.var=TRUE, auto.fix.first=TRUE)
+nice_lavaanPlot(fit2)
+```
+
+# Two mediators, two IVs
+
+```{r}
+# Define our variables
+IV <- c("sex", "ageyr")
+
+# Define our lavaan lists
+mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
+regression <- list(speed = IV, textual = IV)
+
+# Define indirect object
+indirect <- list(IV = IV, M = M, DV = DV)
+
+# Write the model, and check it
+model3 <- write_lavaan(mediation, regression, indirect = indirect, label = TRUE)
+cat(model3)
+
+fit3 <- lavaan(model3, data = data, auto.cov.lv.x = TRUE,
+              auto.var=TRUE, auto.fix.first=TRUE)
+nice_lavaanPlot(fit3)
 ```
 
 # Other scenarios

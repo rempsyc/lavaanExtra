@@ -41,7 +41,7 @@ as it will add it automatically.}
 \item{...}{Arguments to be passed to function \code{lavaan::cfa}.}
 }
 \description{
-Print and save CFA fit, as well as plot CFA loadings, simultaneously.
+Print and save CFA fit, as well as plot CFA factor loadings, simultaneously.
 }
 \section{Illustrations}{
 

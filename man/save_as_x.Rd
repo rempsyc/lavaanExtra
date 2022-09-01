@@ -21,10 +21,4 @@ save_as_pptx(...)
 }
 \description{
 These \code{save_as_x} functions are imported from \code{flextable}.
-
-flextable:
-\code{save_as_docx},
-\code{save_as_html},
-\code{save_as_image},
-\code{save_as_pptx}
 }

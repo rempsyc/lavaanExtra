@@ -1,6 +1,9 @@
 #' @title Extract relevant covariance indices from lavaan model
 #'
-#' @description Extract relevant covariance indices from lavaan model.
+#' @description Extract relevant covariance indices from lavaan model through
+#'              `lavaan::parameterEstimates` with `standardized = TRUE`. In this
+#'              case, the correlation coefficient (r) represents the resulting
+#'              `std.all` column.
 #'
 #' @param fit lavaan fit object to extract covariance indices from
 #' @param nice_table Logical, whether to print the table as a `rempsyc::nice_table`

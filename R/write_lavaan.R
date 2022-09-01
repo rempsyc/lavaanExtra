@@ -69,6 +69,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
     latent <- process_vars(latent, symbol = "=~", title =
                              "[---------------Latent variables---------------]")
   }
+  #### AUTOMATIC INDIRECT EFFECTS!!! ####
   if (!is.null(indirect)) {
     if (all(names(indirect) %in% c("IV", "M", "DV"))) {
       x <- mediation
@@ -83,13 +84,17 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
         })
       }
       x <- stats::setNames(x, labels)
-      y <- unlist(x[indirect$M])
-      z <- gsub("[^_]*$", "", y)
-      indirect.names <- paste0(rep(z, each = length(indirect$IV)),
-                               unlist(x[indirect$DV]))
-      indirect <- paste(rep(y, each = length(indirect$IV)),
-                        "*", unlist(x[indirect$DV]))
-      indirect.list <- as.list(indirect)
+      indirect.names <- lapply(indirect$M, function(x) {
+        paste0(rep(indirect$IV, each = length(indirect$IV)), "_", x, "_",
+               rep(indirect$DV, length(indirect$IV)))
+      })
+      indirect.names <- unlist(indirect.names)
+      indirect2 <- lapply(indirect$M, function(x) {
+        paste0(rep(indirect$IV, each = length(indirect$IV)), "_", x, " * ", x,
+               "_", rep(indirect$DV, length(indirect$IV)))
+      })
+      indirect.list <- as.list(unlist(indirect2))
+      stats::setNames(indirect.list, indirect.names)
       indirect <- stats::setNames(indirect.list, indirect.names)
     }
     indirect <- process_vars(indirect, symbol = ":=", collapse = " * ", title =

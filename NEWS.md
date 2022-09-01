@@ -1,5 +1,9 @@
+## lavaanExtra 0.0.6
+* Added new function: `nice_lavaanPlot`, for a quick and decent-looking `lavaanPlot` with sensical (but customizable) defaults.
+* `write_lavaan`: Automatic indirect effects now support another scenario: two mediators and two IVs!
+
 ## lavaanExtra 0.0.5
-- Fixed bug with automatic indirect effects when more than 1 mediator making forbidden paths (two mediators tested successfully)
+* `write_lavaan`: Fixed bug with automatic indirect effects when more than 1 mediator making forbidden paths (two mediators tested successfully)
 
 ## lavaanExtra 0.0.4
 * `cfa_fit_plot`: 

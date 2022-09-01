@@ -15,7 +15,9 @@ as well as print the reference values at the bottom of the table.}
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }
 \description{
-Extract relevant regression indices from lavaan model.
+Extract relevant regression indices from lavaan model through
+\code{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
+case, the beta (B) represents the resulting \code{std.all} column.
 }
 \examples{
 (latent <- list(visual = paste0("x", 1:3),

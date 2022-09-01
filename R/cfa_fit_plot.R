@@ -1,6 +1,6 @@
 #' @title Fit and plot CFA simultaneously
 #'
-#' @description Print and save CFA fit, as well as plot CFA loadings, simultaneously.
+#' @description Print and save CFA fit, as well as plot CFA factor loadings, simultaneously.
 #'
 #' @param model CFA model to fit.
 #' @param data Data set on which to fit the CFA model.
@@ -63,15 +63,7 @@ cfa_fit_plot <- function(model, data, covs = FALSE, estimator = "MLR", remove.it
   fit <- lavaan::cfa(model, data = data, estimator = estimator, ...)
   print(summary(fit, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE))
   # Plot the model
-  lavaanPlot::lavaanPlot(model = fit,
-                         node_options = list(shape = "box", fontname = "Helvetica"),
-                         edge_options = list(color = "grey"),
-                         coefs = TRUE,
-                         stand = TRUE,
-                         covs = covs,
-                         stars = list("regress"),
-                         graph_options = list(rankdir = "LR"),
-                         sig = .05) -> my.plot
+  my.plot <- nice_lavaanPlot(fit, covs = covs)
   # # Save file
   if(isTRUE(save.as.pdf)) {
     lavaanPlot::embed_plot_pdf(my.plot, paste0(file.name, ".pdf"))

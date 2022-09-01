@@ -15,7 +15,10 @@ as well as print the reference values at the bottom of the table.}
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }
 \description{
-Extract relevant covariance indices from lavaan model.
+Extract relevant covariance indices from lavaan model through
+\code{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
+case, the correlation coefficient (r) represents the resulting
+\code{std.all} column.
 }
 \examples{
 

@@ -135,11 +135,11 @@ indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model <- write_lavaan(mediation, regression, covariance, 
-                                indirect, latent, label = TRUE)
+                      indirect, latent, label = TRUE)
 cat(model)
 
 fit.sem <- lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
-              auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+                  auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
@@ -174,6 +174,13 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="50%" />
+
+```{r plot, eval = FALSE}
+# Plot our model
+nice_lavaanPlot(fit.sem)
+```
+
+<img src="man/figures/semplot.png" width="70%" />
 
 ## Final note
 This is an experimental package in a *very* early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to share your questions or concerns. And of course, please have a look at the other tutorials to discover even more cool features: https://lavaanextra.remi-theriault.com/articles/
