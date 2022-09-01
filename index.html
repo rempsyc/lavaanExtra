@@ -45,7 +45,7 @@
     
     <a class="navbar-brand me-2" href="index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.5</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.6</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -165,7 +165,7 @@
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan </span></span>
-<span><span class="co">#&gt; (R package version 0.0.5) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
+<span><span class="co">#&gt; (R package version 0.0.6) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
 <span></span>
 <span><span class="co"># Define latent variables</span></span>
 <span><span class="va">latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
@@ -325,7 +325,7 @@
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, <span class="va">regression</span>, <span class="va">covariance</span>, </span>
-<span>                                <span class="va">indirect</span>, <span class="va">latent</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                      <span class="va">indirect</span>, <span class="va">latent</span>, label <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span>
 <span><span class="co">#&gt; ##################################################</span></span>
 <span><span class="co">#&gt; # [---------------Latent variables---------------]</span></span>
@@ -362,7 +362,7 @@
 <span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span>
 <span></span>
 <span><span class="va">fit.sem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>              auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>                  auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
@@ -383,6 +383,10 @@
 <span><span class="co"># Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect2-1.png" width="50%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot our model</span></span>
+<span><span class="fu"><a href="reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit.sem</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/semplot.png" width="70%"></p>
 </div>
 <div class="section level2">
 <h2 id="final-note">Final note<a class="anchor" aria-label="anchor" href="#final-note"></a>
