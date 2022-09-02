@@ -1,0 +1,24 @@
+---
+title: "testing lavaanPlot vignette"
+author: "Rémi Thériault"
+date: "August 29, 2022"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{testing lavaanPlot vignette}
+  %\VignetteEngine{knitr::knitr}
+---
+
+```{r prep, message = FALSE}
+library(lavaan)
+library(lavaanPlot)
+model <- 'mpg ~ cyl + disp + hp
+          qsec ~ disp + hp + wt'
+fit <- sem(model, data = mtcars)
+```
+
+```{r plot}
+lavaanPlot(model = fit, node_options = list(shape = "box", fontname = "Helvetica"),
+ edge_options = list(color = "grey"), coefs = FALSE)
+```
