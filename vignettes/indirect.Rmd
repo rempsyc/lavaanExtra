@@ -46,10 +46,22 @@ fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 ```
 
+```{r lavaaPlot0}
+lavaanPlot::lavaanPlot(model = fit,
+                       node_options = list(shape = "box", fontname = "Helvetica"),
+                       edge_options = list(color = "grey"), 
+                       coefs = TRUE, 
+                       stand = TRUE,
+                       covs = FALSE, 
+                       stars = list("regress"), 
+                       sig = .05,
+                       graph_options = list(rankdir = "LR"))
+```
+
+
 ```{r lavaaPlot}
 nice_lavaanPlot(fit)
 ```
-
 
 # 1 IV, 1 mediator, 2 DVs
 
