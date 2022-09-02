@@ -7,7 +7,7 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{testing lavaanPlot vignette}
-  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEngine{knitr::knitr}
 ---
 
 ```{r prep, message = FALSE}
@@ -18,7 +18,8 @@ model <- 'mpg ~ cyl + disp + hp
 fit <- sem(model, data = mtcars)
 ```
 
-```{r plot}
-lavaanPlot(model = fit, node_options = list(shape = "box", fontname = "Helvetica"),
+```{r}
+plot <- lavaanPlot(model = fit, node_options = list(shape = "box", fontname = "Helvetica"),
  edge_options = list(color = "grey"), coefs = FALSE)
+plot
 ```
