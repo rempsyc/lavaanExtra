@@ -7,7 +7,7 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Automatic indirect effects}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 This article demonstrates ways to produce indirect effects automatically for different scenarios. This is an experimental feature and does not support all scenarios. Right now, it only supports designs with 3 clear levels: independent (usually exogenous) variables, mediating variables, and dependent (outcome) variables. Progress for more scenarios will be implemented progressively. If using this feature, always triple check that your model was specified correctly.

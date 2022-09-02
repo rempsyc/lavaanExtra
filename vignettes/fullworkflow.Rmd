@@ -7,7 +7,7 @@ output:
     toc: true
 vignette: >
   %\VignetteIndexEntry{Full CFA/SEM workflow}
-  %\VignetteEngine{knitr::knitr}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ## CFA example
