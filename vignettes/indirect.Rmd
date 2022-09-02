@@ -44,8 +44,12 @@ cat(model)
 # Fit and plot
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
+```
+
+```{r lavaaPlot}
 nice_lavaanPlot(fit)
 ```
+
 
 # 1 IV, 1 mediator, 2 DVs
 
