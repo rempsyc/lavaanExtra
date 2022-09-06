@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -127,9 +127,9 @@
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="example-1-model-syntax-1">Example 1 (Model syntax 1):<a class="anchor" aria-label="anchor" href="#example-1-model-syntax-1"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-1-model-syntax-1">Example 1 (Model syntax 1):<a class="anchor" aria-label="anchor" href="#example-1-model-syntax-1"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax1.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax1.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -196,9 +196,9 @@
 <span><span class="co">## y1 ~ 1</span></span>
 <span><span class="co">## f1 ~ 1</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-2-a-cfa-example">Example 2 (A CFA example):<a class="anchor" aria-label="anchor" href="#example-2-a-cfa-example"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-2-a-cfa-example">Example 2 (A CFA example):<a class="anchor" aria-label="anchor" href="#example-2-a-cfa-example"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/cfa.html" class="external-link uri">https://lavaan.ugent.be/tutorial/cfa.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -219,9 +219,9 @@
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-3-a-sem-example">Example 3 (A SEM example):<a class="anchor" aria-label="anchor" href="#example-3-a-sem-example"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-3-a-sem-example">Example 3 (A SEM example):<a class="anchor" aria-label="anchor" href="#example-3-a-sem-example"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/sem.html" class="external-link uri">https://lavaan.ugent.be/tutorial/sem.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -276,13 +276,13 @@
 <span><span class="co">## y4 ~~ y8</span></span>
 <span><span class="co">## y6 ~~ y8</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-4-model-syntax-2">Example 4 (Model syntax 2):<a class="anchor" aria-label="anchor" href="#example-4-model-syntax-2"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-4-model-syntax-2">Example 4 (Model syntax 2):<a class="anchor" aria-label="anchor" href="#example-4-model-syntax-2"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax2.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax2.html</a></p>
-<div class="section level4">
-<h4 id="example-4-1">Example 4.1<a class="anchor" aria-label="anchor" href="#example-4-1"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-1">Example 4.1<a class="anchor" aria-label="anchor" href="#example-4-1"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -320,9 +320,9 @@
 <span><span class="co">## textual ~~ 0*speed</span></span>
 <span><span class="co">## speed ~~ 1*speed</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-2">Example 4.2<a class="anchor" aria-label="anchor" href="#example-4-2"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-2">Example 4.2<a class="anchor" aria-label="anchor" href="#example-4-2"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -344,9 +344,9 @@
 <span><span class="co">## textual =~ x4 + start(0.5)*x5 + start(1.0)*x6</span></span>
 <span><span class="co">## speed =~ x7 + start(0.7)*x8 + start(1.8)*x9</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-3">Example 4.3<a class="anchor" aria-label="anchor" href="#example-4-3"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-3">Example 4.3<a class="anchor" aria-label="anchor" href="#example-4-3"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -362,9 +362,9 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-4">Example 4.4<a class="anchor" aria-label="anchor" href="#example-4-4"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-4">Example 4.4<a class="anchor" aria-label="anchor" href="#example-4-4"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -386,9 +386,9 @@
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-5">Example 4.5<a class="anchor" aria-label="anchor" href="#example-4-5"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-5">Example 4.5<a class="anchor" aria-label="anchor" href="#example-4-5"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -443,9 +443,9 @@
 <span><span class="co">##   Degrees of freedom                                25</span></span>
 <span><span class="co">##   P-value (Chi-square)                           0.000</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-6">Example 4.6<a class="anchor" aria-label="anchor" href="#example-4-6"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-6">Example 4.6<a class="anchor" aria-label="anchor" href="#example-4-6"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.constr</span> <span class="op">&lt;-</span> <span class="st">' # model with labeled parameters</span></span>
@@ -473,9 +473,9 @@
 <span><span class="co">## b1 &gt; exp(b2 + b3)</span></span></code></pre>
 </div>
 </div>
-<div class="section level2">
-<h2 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
@@ -511,9 +511,9 @@
 <span><span class="co">## ab := a*b</span></span>
 <span><span class="co">## total := c + (a*b)</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-6-multilevel-sem">Example 6 (Multilevel SEM)<a class="anchor" aria-label="anchor" href="#example-6-multilevel-sem"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-6-multilevel-sem">Example 6 (Multilevel SEM)<a class="anchor" aria-label="anchor" href="#example-6-multilevel-sem"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/multilevel.html" class="external-link uri">https://lavaan.ugent.be/tutorial/multilevel.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
@@ -546,6 +546,108 @@
 <span><span class="co">## level: 2</span></span>
 <span><span class="co">##     fb =~ y1 + y2 + y3</span></span>
 <span><span class="co">##     fb ~ w1 + w2</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="example-7-total-effects">Example 7 (total effects)<a class="anchor" aria-label="anchor" href="#example-7-total-effects"></a>
+</h2>
+<p>Source: <a href="https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem" class="external-link uri">https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem</a></p>
+<p><code>lavaan</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">model_mediation</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st"># Measurement model</span></span>
+<span><span class="st">SUP_Parents =~ sup_parents_p1 + sup_parents_p2 + sup_parents_p3</span></span>
+<span><span class="st">SUP_Friends =~ sup_friends_p1 + sup_friends_p2 + sup_friends_p3</span></span>
+<span><span class="st">SE_Academic =~ se_acad_p1 + se_acad_p2 + se_acad_p3</span></span>
+<span><span class="st">SE_Social =~ se_social_p1 + se_social_p2 + se_social_p3</span></span>
+<span><span class="st">LS  =~ ls_p1 + ls_p2 + ls_p3</span></span>
+<span><span class="st"></span></span>
+<span><span class="st"># Structural model </span></span>
+<span><span class="st"># Regressions</span></span>
+<span><span class="st">SE_Academic ~ b1*SUP_Parents + b3*SUP_Friends</span></span>
+<span><span class="st">SE_Social ~ b2*SUP_Parents + b4*SUP_Friends</span></span>
+<span><span class="st">LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social </span></span>
+<span><span class="st"></span></span>
+<span><span class="st"># Residual covariances</span></span>
+<span><span class="st">SE_Academic ~~ SE_Social</span></span>
+<span><span class="st"></span></span>
+<span><span class="st"># Indirect effects</span></span>
+<span><span class="st">b1b7 := b1*b7</span></span>
+<span><span class="st">b2b8 := b2*b8</span></span>
+<span><span class="st">totalind_eltern := b1*b7 + b2*b8</span></span>
+<span><span class="st">b3b7 := b3*b7</span></span>
+<span><span class="st">b4b8 := b4*b8</span></span>
+<span><span class="st">totalind_freunde := b3*b7 + b4*b8</span></span>
+<span><span class="st"></span></span>
+<span><span class="st"># Total effects</span></span>
+<span><span class="st">total_eltern := b1*b7 + b2*b8 + b5</span></span>
+<span><span class="st">total_freunde := b3*b7 + b4*b8 + b6  </span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<p><code>lavaanExtra</code>:</p>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sup_parents"</span>, <span class="st">"sup_friends"</span>, <span class="st">"se_acad"</span>, <span class="st">"se_social"</span>, <span class="st">"ls"</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">paste0</span>, <span class="st">"_p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SUP_Parents <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_parents</span>,</span>
+<span>            SUP_Friends <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_friends</span>,</span>
+<span>            SE_Academic <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_acad</span>,</span>
+<span>            SE_Social <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_social</span>,</span>
+<span>            LS <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">ls</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
+<span>       <span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span>, <span class="st">"SE_Academic"</span>, <span class="st">"SE_Social"</span><span class="op">)</span></span>
+<span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">b</span>, <span class="st">"*"</span>, <span class="va">d</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SE_Academic <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>            SE_Social <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>            LS <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SE_Academic <span class="op">=</span> <span class="st">"SE_Social"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1b7 <span class="op">=</span> <span class="st">"b1*b7"</span>,</span>
+<span>            b2b8 <span class="op">=</span> <span class="st">"b2*b8"</span>,</span>
+<span>            totalind_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8"</span>,</span>
+<span>            b3b7 <span class="op">=</span> <span class="st">"b3*b7"</span>,</span>
+<span>            b4b8 <span class="op">=</span> <span class="st">"b4*b8"</span>,</span>
+<span>            totalind_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8"</span>,</span>
+<span>            total_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8 + b5"</span>,</span>
+<span>            total_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8 + b6"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">reg</span>, covariance <span class="op">=</span> <span class="va">cov</span>, </span>
+<span>                      indirect <span class="op">=</span> <span class="va">ind</span>, latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [---------------Latent variables---------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## SUP_Parents =~ sup_parents_p1 + sup_parents_p2 + sup_parents_p3</span></span>
+<span><span class="co">## SUP_Friends =~ sup_friends_p1 + sup_friends_p2 + sup_friends_p3</span></span>
+<span><span class="co">## SE_Academic =~ se_acad_p1 + se_acad_p2 + se_acad_p3</span></span>
+<span><span class="co">## SE_Social =~ se_social_p1 + se_social_p2 + se_social_p3</span></span>
+<span><span class="co">## LS =~ ls_p1 + ls_p2 + ls_p3</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## SE_Academic ~ b1*SUP_Parents + b3*SUP_Friends</span></span>
+<span><span class="co">## SE_Social ~ b2*SUP_Parents + b4*SUP_Friends</span></span>
+<span><span class="co">## LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [------------------Covariances-----------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## SE_Academic ~~ SE_Social</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [--------Mediations (indirect effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## b1b7 := b1*b7</span></span>
+<span><span class="co">## b2b8 := b2*b8</span></span>
+<span><span class="co">## totalind_eltern := b1*b7 + b2*b8</span></span>
+<span><span class="co">## b3b7 := b3*b7</span></span>
+<span><span class="co">## b4b8 := b4*b8</span></span>
+<span><span class="co">## totalind_freunde := b3*b7 + b4*b8</span></span>
+<span><span class="co">## total_eltern := b1*b7 + b2*b8 + b5</span></span>
+<span><span class="co">## total_freunde := b3*b7 + b4*b8 + b6</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
