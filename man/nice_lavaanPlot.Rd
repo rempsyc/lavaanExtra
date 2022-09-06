@@ -18,7 +18,7 @@ nice_lavaanPlot(
 )
 }
 \arguments{
-\item{model}{CFA model to plot.}
+\item{model}{SEM or CFA model to plot.}
 
 \item{node_options}{Shape and font name.}
 

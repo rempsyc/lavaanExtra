@@ -232,6 +232,21 @@ For reference, this is our model, visually speaking
 
 ![](https://lavaanExtra.remi-theriault.com/articles/images/fullworkflow/holzinger_model.png)
 
+We could also attempt to draw it with `lavaanExtra::nice_tidySEM`, a convenience wrapper around the amazing `tidySEM` package.
+
+```{r nice_tidySEM}
+labels <- list(ageyr = "Age (year)",
+               grade = "Grade",
+               visual = "Visual",
+               speed = "Speed",
+               textual = "Textual")
+layout <- list(IV = IV, M = M, DV = DV)
+
+nice_tidySEM(fit.path, layout = layout, hide_nonsig_edges = TRUE, label = labels)
+
+```
+
+
 ### Latent model
 
 Finally, perhaps we change our mind and decide to run a full SEM instead, with latent variables. Fear not: we don't have to redo everything again. We can simply define our latent variables and proceed. In this example, we have *already* defined our latent variable for our CFA earlier, so we don't even need to write that again!

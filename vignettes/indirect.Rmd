@@ -35,7 +35,7 @@ DV <- "speed"
 mediation <- list(speed = M, visual = IV)
 
 # Define indirect object
-indirect <- list(M = M, DV = DV, IV = IV)
+indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
@@ -44,23 +44,8 @@ cat(model)
 # Fit and plot
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
-```
-
-```{r lavaaPlot0}
-lavaanPlot::lavaanPlot(model = fit,
-                       node_options = list(shape = "box", fontname = "Helvetica"),
-                       edge_options = list(color = "grey"), 
-                       coefs = TRUE, 
-                       stand = TRUE,
-                       covs = FALSE, 
-                       stars = list("regress"), 
-                       sig = .05,
-                       graph_options = list(rankdir = "LR"))
-```
-
-
-```{r lavaaPlot}
 nice_lavaanPlot(fit)
+
 ```
 
 # 1 IV, 1 mediator, 2 DVs
@@ -83,6 +68,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 1 IV, 2 mediator, 1 DV
@@ -106,6 +93,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 1 IV, 2 mediators, 2 DVs
@@ -128,6 +117,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 2 IVs, 1 mediator, 1 DV
@@ -152,6 +143,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 2 IVs, 1 mediator, 2 DVs
@@ -174,6 +167,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 2 IVs, 2 mediators, 1 DV
@@ -197,6 +192,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 2 IVs, 2 mediators, 2 DVs
@@ -219,6 +216,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 3 IVs, 2 mediators, 1 DV
@@ -242,6 +241,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect)
 ```
 
 # 3 IVs, 2 mediators, 2 DVs
@@ -264,6 +265,8 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE)
 ```
 
 # 6 IVs, 2 mediators, 2 DVs
@@ -286,6 +289,11 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+```
+
+```{r, fig.height = 6}
+nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE)
 ```
 
 # 6 IVs, 3 mediators, 5 DVs
@@ -310,6 +318,27 @@ cat(model)
 fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
               auto.var = TRUE, auto.fix.first = TRUE)
 nice_lavaanPlot(fit)
+
+```
+
+```{r, fig.height = 8}
+labels <- list(sex = "Sex",
+               ageyr = "Age (year)",
+               agemo = "Age (month)",
+               school = "School",
+               x2 = "Item 2",
+               x3 = "Item 3",
+               visual = "Visual",
+               grade = "Grade",
+               x8 = "Item 8",
+               speed = "Speed",
+               textual = "Textual",
+               x4 = "Item 4",
+               x5 = "Item 5",
+               x7 = "Item 7")
+
+nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE, label = labels)
+
 ```
 
 Etc.

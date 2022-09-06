@@ -1,3 +1,6 @@
+## lavaanExtra 0.0.9
+* Added new function: `nice_tidySEM`, for a quick and decent-looking `tidySEM` plot with sensical (but customizable) defaults.
+
 ## lavaanExtra 0.0.8
 * `write_lavaan`: Exciting news! Automatic indirect effects now seemingly support any combination of IV, moderator, and DV!
 

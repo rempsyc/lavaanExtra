@@ -2,7 +2,7 @@
 #'
 #' @description Make a quick and decent-looking `lavaanPlot`.
 #'
-#' @param model CFA model to plot.
+#' @param model SEM or CFA model to plot.
 #' @param node_options Shape and font name.
 #' @param edge_options Colour of edges.
 #' @param coefs Logical, whether to plot coefficients.
