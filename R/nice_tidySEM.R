@@ -99,7 +99,7 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
     p <- tidySEM::hide_var(p)
   }
   if (isTRUE(hide_mean)) {
-    tidySEM::nodes(p)$label <- gsub("\\n(.*)", "", tidySEM::nodes(p)$label)
+    tidySEM::nodes(p)$label <- tidySEM::nodes(p)$name
   }
   if (!missing(label)) {
     order.label <- match(tidySEM::nodes(p)$name, names(label))

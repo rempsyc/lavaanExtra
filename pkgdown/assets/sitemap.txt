@@ -2,7 +2,13 @@ https://lavaanExtra.remi-theriault.com/
 https://lavaanExtra.remi-theriault.com/reference/index
 https://lavaanExtra.remi-theriault.com/news/index
 https://lavaanExtra.remi-theriault.com/TODOS
-https://lavaanExtra.remi-theriault.com/articles/
-https://lavaanExtra.remi-theriault.com/articles/example.html
 https://lavaanExtra.remi-theriault.com/authors.html
 https://lavaanExtra.remi-theriault.com/LICENSE.html
+https://lavaanextra.remi-theriault.com/LICENSE-text.html
+
+https://lavaanExtra.remi-theriault.com/articles/
+https://lavaanextra.remi-theriault.com/articles/regression.html
+https://lavaanextra.remi-theriault.com/articles/fullworkflow.html
+https://lavaanExtra.remi-theriault.com/articles/example.html
+https://lavaanextra.remi-theriault.com/articles/indirect.html
+https://lavaanextra.remi-theriault.com/articles/special.html
