@@ -67,7 +67,7 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
 
   # Function starts here
   structure <- layout
-  if (all(names(structure) %in% c("IV", "M", "DV"))) {
+  if (all(c("IV", "M", "DV") %in% names(structure))) {
     sx <- function(x) {
       rep("", x)
     }

@@ -1,3 +1,6 @@
+## lavaanExtra 0.1.0
+* `nice_tidySEM`: Corrected bug when not providing a structure/matrix layout.
+
 ## lavaanExtra 0.0.9
 * Added new function: `nice_tidySEM`, for a quick and decent-looking `tidySEM` plot with sensical (but customizable) defaults.
 
