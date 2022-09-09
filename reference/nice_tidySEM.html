@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -99,7 +99,9 @@
 <span>  hide_mean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  est_std <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">label</span>,</span>
-<span>  plot <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  label_location <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -139,9 +141,18 @@ it is provided as a named list with format
 <code>(colname = "label")</code>.</p></dd>
 
 
+<dt>label_location</dt>
+<dd><p>Location of label along the path, as a percentage (defaults
+to middle, 0.5).</p></dd>
+
+
 <dt>plot</dt>
 <dd><p>Logical, whether to plot the result (default). If <code>FALSE</code>, returns
 the <code>tidy_sem</code> object, which can be further edited as needed.</p></dd>
+
+
+<dt>...</dt>
+<dd><p>Arguments to be passed to <code><a href="https://cjvanlissa.github.io/tidySEM/reference/prepare_graph.html" class="external-link">prepare_graph</a></code>.</p></dd>
 
 </dl></div>
     <div class="section level2">
