@@ -9,4 +9,4 @@
 library(testthat)
 library(lavaanExtra)
 
-#test_check("lavaanExtra")
+test_check("lavaanExtra")

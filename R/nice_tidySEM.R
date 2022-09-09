@@ -7,11 +7,11 @@
 #'               \code{\link[tidySEM]{get_layout}}. If a named list is provided,
 #'               with names "IV" (independent variables), "M" (mediator), and
 #'               "DV" (dependent variables), `nice_tidySEM` attempts to write
-#'               the layout matrix automatically
-#' @param hide_nonsig_edges Logical, hides non-significant edges. Defaults to TRUE.
+#'               the layout matrix automatically.
+#' @param hide_nonsig_edges Logical, hides non-significant edges. Defaults to FALSE.
 #' @param hide_var Logical, hides variances. Defaults to TRUE.
 #' @param hide_mean Logical, hides means/node labels. Defaults to TRUE.
-#' @param est_std Logical, whether to use the standardized coefficients.
+#' @param est_std Logical, whether to use the standardized coefficients. Defaults to TRUE.
 #' @param plot Logical, whether to plot the result (default). If `FALSE`, returns
 #'             the `tidy_sem` object, which can be further edited as needed.
 #' @param label Labels to be used on the plot. As elsewhere in `lavaanExtra`,
@@ -50,7 +50,7 @@
 #' nice_tidySEM(fit, layout = structure)
 #' @section Illustrations:
 #'
-#' \if{html}{\figure{tidySEM.png}{options: width="400"}}
+#' \if{html}{\figure{nice_tidySEM.png}{options: width="400"}}
 
 nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
                          hide_var = TRUE, hide_mean = TRUE, est_std = TRUE,
@@ -87,8 +87,8 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
     DV.s <- (max.length - length(structure$DV))/2
 
     structure <- data.frame(IV = c(sx(IV.s), structure$IV, sx(IV.s)),
-                         M = c(sx(M.s), structure$M, sx(M.s)),
-                         DV = c(sx(DV.s), structure$DV, sx(DV.s)))
+                            M = c(sx(M.s), structure$M, sx(M.s)),
+                            DV = c(sx(DV.s), structure$DV, sx(DV.s)))
     structure <- as.matrix(structure)
   }
   p <- tidySEM::prepare_graph(fit, layout = structure)
