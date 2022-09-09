@@ -1,3 +1,6 @@
+## lavaanExtra 0.1.1
+* `nice_tidySEM`: Gains the `label_location` and `...` arguments.
+
 ## lavaanExtra 0.1.0
 * `nice_tidySEM`: Corrected bug when not providing a structure/matrix layout.
 

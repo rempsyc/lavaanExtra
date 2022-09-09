@@ -12,7 +12,9 @@ nice_tidySEM(
   hide_mean = TRUE,
   est_std = TRUE,
   label,
-  plot = TRUE
+  label_location = NULL,
+  plot = TRUE,
+  ...
 )
 }
 \arguments{
@@ -36,8 +38,13 @@ the layout matrix automatically.}
 it is provided as a named list with format
 \code{(colname = "label")}.}
 
+\item{label_location}{Location of label along the path, as a percentage (defaults
+to middle, 0.5).}
+
 \item{plot}{Logical, whether to plot the result (default). If \code{FALSE}, returns
 the \code{tidy_sem} object, which can be further edited as needed.}
+
+\item{...}{Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.}
 }
 \description{
 Make a quick and decent-looking \code{tidySEM} plot.

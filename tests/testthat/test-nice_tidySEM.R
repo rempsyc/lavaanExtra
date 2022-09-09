@@ -18,7 +18,7 @@ test_that("nice_tidySEM on CFA with manual structure", {
                  speed = paste0("x", 7:9))
   HS.model <- write_lavaan(latent = latent)
   fit <- cfa(HS.model, HolzingerSwineford1939)
-  s3 <- paste0(rep("", 3))
+  s3 <- rep("", 3)
   structure <- data.frame(factors = c(s3, names(latent), s3),
                           items = unlist(latent))
   structure <- as.matrix(structure)
@@ -46,7 +46,7 @@ test_that("nice_tidySEM on SEM with manual structure", {
                  speed = paste0("x", 7:9))
   HS.model <- write_lavaan(latent = latent)
   fit <- sem(HS.model, HolzingerSwineford1939)
-  s3 <- paste0(rep("", 3))
+  s3 <- rep("", 3)
   structure <- data.frame(factors = c(s3, names(latent), s3),
                           items = unlist(latent))
   structure <- as.matrix(structure)
@@ -76,7 +76,7 @@ test_that("nice_tidySEM on lavaan with manual structure", {
   HS.model <- write_lavaan(latent = latent)
   fit <- lavaan(HS.model, HolzingerSwineford1939, auto.var = TRUE,
                 auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
-  s3 <- paste0(rep("", 3))
+  s3 <- rep("", 3)
   structure <- data.frame(factors = c(s3, names(latent), s3),
                           items = unlist(latent))
   structure <- as.matrix(structure)
@@ -85,4 +85,3 @@ test_that("nice_tidySEM on lavaan with manual structure", {
     c("gg", "ggplot")
   )
 })
-

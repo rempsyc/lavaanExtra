@@ -17,6 +17,10 @@
 #' @param label Labels to be used on the plot. As elsewhere in `lavaanExtra`,
 #'              it is provided as a named list with format
 #'              `(colname = "label")`.
+#' @param label_location Location of label along the path, as a percentage (defaults
+#'                       to middle, 0.5).
+#' @param ... Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.
+
 #' @keywords CFA, lavaan, plot, fit, tidySEM, table_results
 #' @export
 #' @examples
@@ -54,7 +58,8 @@
 
 nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
                          hide_var = TRUE, hide_mean = TRUE, est_std = TRUE,
-                         label, plot = TRUE) {
+                         label, label_location = NULL, plot = TRUE,
+                         ...) {
   rlang::check_installed(c("tidySEM"), reason = "for this function.")
 
   # We are forced to reimport some tidySEM functions manually here...
@@ -64,6 +69,7 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
   est_sig <- tidySEM::est_sig
   get_nodes <- tidySEM::get_nodes
   if_edit <- tidySEM::if_edit
+  edit_graph <- tidySEM::edit_graph
 
   # Function starts here
   structure <- layout
@@ -91,7 +97,8 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
                             DV = c(sx(DV.s), structure$DV, sx(DV.s)))
     structure <- as.matrix(structure)
   }
-  p <- tidySEM::prepare_graph(fit, layout = structure)
+  p <- tidySEM::prepare_graph(fit, layout = structure, ...)
+  p <- tidySEM::edit_graph(p, {label_location = label_location})
   if (isTRUE(hide_nonsig_edges)) {
     p <- tidySEM::hide_nonsig_edges(p)
   }
