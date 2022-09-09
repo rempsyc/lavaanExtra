@@ -32,9 +32,9 @@
 #' cat(HS.model)
 #'
 #' library(lavaan)
-#' fit <- lavaan(HS.model, data=HolzingerSwineford1939,
-#'               auto.var=TRUE, auto.fix.first=TRUE,
-#'               auto.cov.lv.x=TRUE)
+#' fit <- lavaan(HS.model, data = HolzingerSwineford1939,
+#'               auto.var = TRUE, auto.fix.first = TRUE,
+#'               auto.cov.lv.x = TRUE)
 #' summary(fit, fit.measures=TRUE)
 
 write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,

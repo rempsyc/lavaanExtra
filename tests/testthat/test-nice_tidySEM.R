@@ -61,8 +61,8 @@ test_that("nice_tidySEM on lavaan", {
                  textual = paste0("x", 4:6),
                  speed = paste0("x", 7:9))
   HS.model <- write_lavaan(latent = latent)
-  fit <- lavaan(HS.model, HolzingerSwineford1939, auto.var=TRUE,
-                auto.fix.first=TRUE, auto.cov.lv.x=TRUE)
+  fit <- lavaan(HS.model, HolzingerSwineford1939, auto.var = TRUE,
+                auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
   expect_equal(
     class(nice_tidySEM(fit)),
     c("gg", "ggplot")
@@ -74,8 +74,8 @@ test_that("nice_tidySEM on lavaan with manual structure", {
                  textual = paste0("x", 4:6),
                  speed = paste0("x", 7:9))
   HS.model <- write_lavaan(latent = latent)
-  fit <- lavaan(HS.model, HolzingerSwineford1939, auto.var=TRUE,
-                auto.fix.first=TRUE, auto.cov.lv.x=TRUE)
+  fit <- lavaan(HS.model, HolzingerSwineford1939, auto.var = TRUE,
+                auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
   s3 <- paste0(rep("", 3))
   structure <- data.frame(factors = c(s3, names(latent), s3),
                           items = unlist(latent))

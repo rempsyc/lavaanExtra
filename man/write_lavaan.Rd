@@ -63,9 +63,9 @@ HS.model <- write_lavaan(latent = latent)
 cat(HS.model)
 
 library(lavaan)
-fit <- lavaan(HS.model, data=HolzingerSwineford1939,
-              auto.var=TRUE, auto.fix.first=TRUE,
-              auto.cov.lv.x=TRUE)
+fit <- lavaan(HS.model, data = HolzingerSwineford1939,
+              auto.var = TRUE, auto.fix.first = TRUE,
+              auto.cov.lv.x = TRUE)
 summary(fit, fit.measures=TRUE)
 }
 \keyword{CFA}

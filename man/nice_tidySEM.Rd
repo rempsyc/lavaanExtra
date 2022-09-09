@@ -22,15 +22,15 @@ nice_tidySEM(
 \code{\link[tidySEM]{get_layout}}. If a named list is provided,
 with names "IV" (independent variables), "M" (mediator), and
 "DV" (dependent variables), \code{nice_tidySEM} attempts to write
-the layout matrix automatically}
+the layout matrix automatically.}
 
-\item{hide_nonsig_edges}{Logical, hides non-significant edges. Defaults to TRUE.}
+\item{hide_nonsig_edges}{Logical, hides non-significant edges. Defaults to FALSE.}
 
 \item{hide_var}{Logical, hides variances. Defaults to TRUE.}
 
 \item{hide_mean}{Logical, hides means/node labels. Defaults to TRUE.}
 
-\item{est_std}{Logical, whether to use the standardized coefficients.}
+\item{est_std}{Logical, whether to use the standardized coefficients. Defaults to TRUE.}
 
 \item{label}{Labels to be used on the plot. As elsewhere in \code{lavaanExtra},
 it is provided as a named list with format
@@ -45,7 +45,7 @@ Make a quick and decent-looking \code{tidySEM} plot.
 \section{Illustrations}{
 
 
-\if{html}{\figure{tidySEM.png}{options: width="400"}}
+\if{html}{\figure{nice_tidySEM.png}{options: width="400"}}
 }
 
 \examples{
