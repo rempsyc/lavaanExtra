@@ -1,9 +1,12 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 on:
-  workflow_call:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
 
-#name: test-coverage
+name: test-coverage
 
 jobs:
   test-coverage:
@@ -20,10 +23,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          pak-version: devel
-          extra-packages: |
-            EGAnet=?ignore-before-r=5.0.0
-            r-lib/covr
+          extra-packages: any::covr
           needs: coverage
 
       - name: Test coverage
