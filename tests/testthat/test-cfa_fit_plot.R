@@ -29,7 +29,7 @@ test_that("cfa_fit_plot comparison to cfa", {
   expect_equal(
     fit1,
     fit2,
-    tolerance = 0.2
+    tolerance = 0.3
   )
 })
 
