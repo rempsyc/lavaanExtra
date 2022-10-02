@@ -12,3 +12,4 @@ TODOS.md
 models
 ^revdep$
 ^codecov\.yml$
+^CRAN-SUBMISSION$

@@ -35,8 +35,4 @@ test_that("nice_fit save for html", {
   )
 })
 
-test_that("nice_fit save for image", {
-  expect_silent(
-    save_as_image(nice.table, path = "table.png")
-  )
-})
+save_as_image(nice.table, path = "table.png")
