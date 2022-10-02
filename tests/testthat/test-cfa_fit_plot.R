@@ -27,17 +27,15 @@ fit5 <- cfa(model, data, estimator = estimator)
 
 test_that("cfa_fit_plot comparison to cfa", {
   expect_equal(
-    fit1,
-    fit2,
-    tolerance = 0.3
+    summary(fit1),
+    summary(fit2)
   )
 })
 
 test_that("cfa_fit_plot save as PDF", {
   expect_equal(
-    fit3,
-    fit2,
-    tolerance = 0.3
+    summary(fit3),
+    summary(fit2)
   )
 })
 
