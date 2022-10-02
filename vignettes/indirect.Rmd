@@ -42,8 +42,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 ```
@@ -65,8 +64,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -90,8 +88,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -114,8 +111,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -140,8 +136,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -164,8 +159,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -189,8 +183,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -213,8 +206,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -238,8 +230,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect)
@@ -262,8 +253,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE)
@@ -286,8 +276,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 ```
@@ -315,8 +304,7 @@ model <- write_lavaan(mediation, indirect = indirect, label = TRUE)
 cat(model)
 
 # Fit and plot
-fit <- lavaan(model, data = data, auto.cov.lv.x = TRUE,
-              auto.var = TRUE, auto.fix.first = TRUE)
+fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
 
 ```

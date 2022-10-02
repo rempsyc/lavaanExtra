@@ -9,10 +9,15 @@ lavaan_cov(fit, nice_table = FALSE, ...)
 \arguments{
 \item{fit}{lavaan fit object to extract covariance indices from}
 
-\item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
-as well as print the reference values at the bottom of the table.}
+\item{nice_table}{Logical, whether to print the table as a
+\code{rempsyc::nice_table} as well as print the
+reference values at the bottom of the table.}
 
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
+}
+\value{
+A dataframe of covariances, including the covaried variables,
+the covariance, and corresponding p-value.
 }
 \description{
 Extract relevant covariance indices from lavaan model through
@@ -42,9 +47,9 @@ fit <- lavaan(HS.model, data=HolzingerSwineford1939,
 lavaan_cov(fit)
 }
 \keyword{CFA}
-\keyword{analysis,}
+\keyword{analysis}
 \keyword{equation}
-\keyword{lavaan,}
-\keyword{modeling,}
+\keyword{lavaan}
+\keyword{modeling}
 \keyword{path}
 \keyword{structural}

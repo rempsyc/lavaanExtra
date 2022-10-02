@@ -1,0 +1,31 @@
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
+# Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
+on:
+  workflow_call:
+
+#name: test-coverage
+
+jobs:
+  test-coverage:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          pak-version: devel
+          extra-packages: |
+            EGAnet=?ignore-before-r=5.0.0
+            r-lib/covr
+          needs: coverage
+
+      - name: Test coverage
+        run: covr::codecov(quiet = FALSE)
+        shell: Rscript {0}

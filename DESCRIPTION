@@ -1,11 +1,11 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package `lavaan`
-Version: 0.1.1
-Date: 2022-09-09
+Version: 0.1.2
+Date: 2022-10-02
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))
-Description: Affords an alternative, vector-based syntax to lavaan, as well as other 
+Description: Affords an alternative, vector-based syntax to 'lavaan', as well as other 
              convenience functions such as naming paths and defining indirect
              links automatically, in addition to convenience formatting optimized
              for a publication and script sharing workflow.
@@ -30,6 +30,7 @@ Suggests:
     rmarkdown,
     markdown,
     testthat (>= 3.0.0),
+    covr
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

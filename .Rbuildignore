@@ -10,3 +10,5 @@
 TODOS.md
 ^models$
 models
+^revdep$
+^codecov\.yml$

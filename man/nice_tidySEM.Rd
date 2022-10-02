@@ -26,25 +26,32 @@ with names "IV" (independent variables), "M" (mediator), and
 "DV" (dependent variables), \code{nice_tidySEM} attempts to write
 the layout matrix automatically.}
 
-\item{hide_nonsig_edges}{Logical, hides non-significant edges. Defaults to FALSE.}
+\item{hide_nonsig_edges}{Logical, hides non-significant edges.
+Defaults to FALSE.}
 
 \item{hide_var}{Logical, hides variances. Defaults to TRUE.}
 
 \item{hide_mean}{Logical, hides means/node labels. Defaults to TRUE.}
 
-\item{est_std}{Logical, whether to use the standardized coefficients. Defaults to TRUE.}
+\item{est_std}{Logical, whether to use the standardized coefficients.
+Defaults to TRUE.}
 
-\item{label}{Labels to be used on the plot. As elsewhere in \code{lavaanExtra},
-it is provided as a named list with format
-\code{(colname = "label")}.}
+\item{label}{Labels to be used on the plot. As elsewhere in
+\code{lavaanExtra}, it is provided as a named list with
+format \code{(colname = "label")}.}
 
-\item{label_location}{Location of label along the path, as a percentage (defaults
-to middle, 0.5).}
+\item{label_location}{Location of label along the path, as a percentage
+(defaults to middle, 0.5).}
 
-\item{plot}{Logical, whether to plot the result (default). If \code{FALSE}, returns
-the \code{tidy_sem} object, which can be further edited as needed.}
+\item{plot}{Logical, whether to plot the result (default). If \code{FALSE},
+returns the \code{tidy_sem} object, which can be further edited
+as needed.}
 
 \item{...}{Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.}
+}
+\value{
+A tidySEM plot, of class ggplot, representing the specified
+\code{lavaan} model.
 }
 \description{
 Make a quick and decent-looking \code{tidySEM} plot.
@@ -83,11 +90,13 @@ cat(model)
 fit <- sem(model, data)
 
 # Plot model
+\donttest{
 nice_tidySEM(fit, layout = structure)
 }
-\keyword{CFA,}
-\keyword{fit,}
-\keyword{lavaan,}
-\keyword{plot,}
+}
+\keyword{CFA}
+\keyword{fit}
+\keyword{lavaan}
+\keyword{plot}
 \keyword{table_results}
-\keyword{tidySEM,}
+\keyword{tidySEM}

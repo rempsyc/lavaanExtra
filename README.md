@@ -11,12 +11,12 @@
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/lavaanExtra)](https://github.com/rempsyc/lavaanExtra/commits/main)
-![size](https://img.shields.io/github/repo-size/rempsyc/lavaanExtra)
+[![Codecov test
+coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![forks](https://img.shields.io/github/forks/rempsyc/lavaanExtra?style=social)](https://github.com/rempsyc/lavaanExtra/network/members)
 [![stars](https://img.shields.io/github/stars/rempsyc/lavaanExtra?style=social)](https://github.com/rempsyc/lavaanExtra/stargazers)
-
 <!-- badges: end -->
 
 Affords an alternative, vector-based syntax to `lavaan`, as well as
@@ -76,9 +76,11 @@ install.packages("lavaanExtra", repos = c(
 ``` r
 # Load library
 library(lavaan)
+#> This is lavaan 0.6-12
+#> lavaan is FREE software! Please report any bugs.
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.0.7) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan 
+#> (R package version 0.1.1) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -94,9 +96,7 @@ cat(cfa.model)
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6
 #> speed =~ x7 + x8 + x9
-```
 
-``` r
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
@@ -282,8 +282,7 @@ cat(model)
 #> grade_visual_speed := grade_visual * visual_speed
 #> grade_visual_textual := grade_visual * visual_textual
 
-fit.sem <- lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
-                  auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+fit.sem <- sem(model, data = HolzingerSwineford1939)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)

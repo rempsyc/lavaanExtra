@@ -10,6 +10,7 @@ cfa_fit_plot(
   covs = FALSE,
   estimator = "MLR",
   remove.items = "",
+  print = TRUE,
   save.as.pdf = FALSE,
   file.name,
   ...
@@ -27,26 +28,37 @@ cfa_fit_plot(
 \item{remove.items}{Optional, if one wants to remove items from the CFA model
 without having to redefine it completely again.}
 
+\item{print}{Logical, whether to print model summary to console.}
+
 \item{save.as.pdf}{Logical, whether to save as PDF for a high-resolution,
 scalable vector graphic quality plot. Defaults to
-saving to the "/model" subfolder of the working directory.
-If it doesn't exist, it creates it. Then automatically
-open the created PDF in the default browser. Defaults to false.}
+saving to the "/model" subfolder of the working
+directory. If it doesn't exist, it creates it. Then
+automatically open the created PDF in the default
+browser. Defaults to false.}
 
-\item{file.name}{Optional (when \code{save.as.pdf} is set to \code{TRUE}), if one wants
-something different than the default file name. It saves to
-pdf per default, so the .pdf extension should not be specified
-as it will add it automatically.}
+\item{file.name}{Optional (when \code{save.as.pdf} is set to \code{TRUE}), if one
+wants something different than the default file name.
+It saves to pdf per default, so the .pdf extension
+should not be specified as it will add it automatically.}
 
 \item{...}{Arguments to be passed to function \code{lavaan::cfa}.}
 }
+\value{
+The function returns a \code{lavaan} fit object. However, it also: prints
+a summary of the \code{lavaan} fit object to the console, and; prints a
+\code{lavaanPlot} of the \code{lavaan} fit object.
+}
 \description{
-Print and save CFA fit, as well as plot CFA factor loadings, simultaneously.
+Prints and saves CFA fit, as well as plots CFA factor loadings,
+simultaneously.
 }
 \section{Illustrations}{
 
 
-\if{html}{\figure{cfaplot.png}{options: width="400"}}
+\if{html}{
+\figure{cfaplot.png}{options: width="400"}
+}
 }
 
 \examples{
@@ -60,7 +72,7 @@ cat(HS.model)
 library(lavaan)
 fit <- cfa_fit_plot(HS.model, HolzingerSwineford1939)
 }
-\keyword{CFA,}
+\keyword{CFA}
 \keyword{fit}
-\keyword{lavaan,}
-\keyword{plot,}
+\keyword{lavaan}
+\keyword{plot}

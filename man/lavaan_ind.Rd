@@ -9,15 +9,21 @@ lavaan_ind(fit, nice_table = FALSE, ...)
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
 
-\item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
-as well as print the reference values at the bottom of the table.}
+\item{nice_table}{Logical, whether to print the table as a
+\code{rempsyc::nice_table} as well as print the
+reference values at the bottom of the table.}
 
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }
+\value{
+A dataframe, including the indirect effect, corresponding paths,
+standardized regression coefficient, and corresponding p-value.
+}
 \description{
-Extract relevant indirect effects indices from lavaan model through
-\verb{lavaan::parameterEstimates)} with \code{standardized = TRUE}. In this
-case, the beta (B) represents the resulting \code{std.all} column.
+Extract relevant indirect effects indices from lavaan model
+through \verb{lavaan::parameterEstimates)} with
+\code{standardized = TRUE}. In this case, the beta (B) represents
+the resulting \code{std.all} column.
 }
 \examples{
 
@@ -29,7 +35,9 @@ case, the beta (B) represents the resulting \code{std.all} column.
                    textual = "visual",
                    visual = c("ageyr", "grade")))
 
-(indirect <- list(IV = c("ageyr", "grade"), M = "visual", DV = c("speed", "textual")))
+(indirect <- list(IV = c("ageyr", "grade"),
+                  M = "visual",
+                  DV = c("speed", "textual")))
 
 HS.model <- write_lavaan(mediation, indirect = indirect,
                          latent = latent, label = TRUE)
@@ -42,9 +50,9 @@ fit <- lavaan(HS.model, data=HolzingerSwineford1939,
 lavaan_ind(fit)
 }
 \keyword{CFA}
-\keyword{analysis,}
+\keyword{analysis}
 \keyword{equation}
-\keyword{lavaan,}
-\keyword{modeling,}
+\keyword{lavaan}
+\keyword{modeling}
 \keyword{path}
 \keyword{structural}

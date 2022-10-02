@@ -19,6 +19,9 @@ save_as_pptx(...)
 \arguments{
 \item{...}{arguments passed to \code{save_as_x} functions}
 }
+\value{
+A table, either as an image, Word, PowerPoint, or HTML document.
+}
 \description{
 These \code{save_as_x} functions are imported from \code{flextable}.
 }

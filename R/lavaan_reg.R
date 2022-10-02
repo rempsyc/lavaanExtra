@@ -5,10 +5,13 @@
 #'              case, the beta (B) represents the resulting `std.all` column.
 #'
 #' @param fit lavaan fit object to extract fit indices from
-#' @param nice_table Logical, whether to print the table as a `rempsyc::nice_table`
-#'                   as well as print the reference values at the bottom of the table.
+#' @param nice_table Logical, whether to print the table as a
+#'                   `rempsyc::nice_table` as well as print the
+#'                   reference values at the bottom of the table.
 #' @param ... Arguments to be passed to `rempsyc::nice_table`
-#' @keywords lavaan, structural equation modeling, path analysis, CFA
+#' @keywords lavaan structural equation modeling path analysis CFA
+#' @return A dataframe, including the outcome, predictor, standardized
+#'         regression coefficient, and corresponding p-value.
 #' @export
 #' @examples
 #' (latent <- list(visual = paste0("x", 1:3),
@@ -33,20 +36,7 @@ lavaan_reg <- function(fit, nice_table = FALSE, ...) {
   x <- x[c("lhs", "rhs", "std.all", "pvalue")]
   names(x) <- c("Outcome", "Predictor", "B", "p")
   if (nice_table) {
-    if (isFALSE(requireNamespace("rempsyc", quietly = TRUE))) {
-      cat("The package `rempsyc` is required for this feature\n",
-          "Would you like to install it?")
-      if (utils::menu(c("Yes", "No")) == 1) {
-        utils::install.packages('rempsyc', repos = c(
-          rempsyc = 'https://rempsyc.r-universe.dev',
-          CRAN = 'https://cloud.r-project.org'))
-      } else (stop(
-        'The `nice_table` feature relies on the `rempsyc` package.
-    You can install it manually with:
-    install.packages("rempsyc", repos = c(
-          rempsyc = "https://rempsyc.r-universe.dev",
-          CRAN = "https://cloud.r-project.org")'))
-    }
+    rlang::check_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
   }
   x

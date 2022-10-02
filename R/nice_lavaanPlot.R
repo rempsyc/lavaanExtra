@@ -12,7 +12,9 @@
 #' @param sig Significance threshold.
 #' @param graph_options Read from left to right, rather than from top to bottom.
 #' @param ... Arguments to be passed to function `lavaanPlot::lavaanPlot`.
-#' @keywords CFA, lavaan, plot, fit
+#' @keywords CFA lavaan plot fit
+#' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
+#'         specified `lavaan` model.
 #' @export
 #' @examples
 #' (latent <- list(visual = paste0("x", 1:3),
@@ -29,12 +31,14 @@
 #'
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}
 
-nice_lavaanPlot <- function(model, node_options = list(shape = "box", fontname = "Helvetica"),
-                            edge_options = list(color = "grey"), coefs = TRUE, stand = TRUE,
-                            covs = FALSE, stars = list("regress"), sig = .05,
-                            graph_options = list(rankdir = "LR"), ...) {
-  rlang::check_installed(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"),
-                         reason = "for this function.")
+nice_lavaanPlot <- function(
+    model, node_options = list(shape = "box", fontname = "Helvetica"),
+    edge_options = list(color = "grey"), coefs = TRUE, stand = TRUE,
+    covs = FALSE, stars = list("regress"), sig = .05,
+    graph_options = list(rankdir = "LR"), ...) {
+  rlang::check_installed(c(
+    "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"),
+    reason = "for this function.")
   lavaanPlot::lavaanPlot(model = model,
                          node_options = node_options,
                          edge_options = edge_options,

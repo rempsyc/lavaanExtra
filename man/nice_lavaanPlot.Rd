@@ -38,6 +38,10 @@ nice_lavaanPlot(
 
 \item{...}{Arguments to be passed to function \code{lavaanPlot::lavaanPlot}.}
 }
+\value{
+A lavaanPlot, of classes \code{c("grViz", "htmlwidget")}, representing the
+specified \code{lavaan} model.
+}
 \description{
 Make a quick and decent-looking \code{lavaanPlot}.
 }
@@ -59,7 +63,7 @@ library(lavaan)
 fit <- cfa(HS.model, HolzingerSwineford1939)
 nice_lavaanPlot(fit)
 }
-\keyword{CFA,}
+\keyword{CFA}
 \keyword{fit}
-\keyword{lavaan,}
-\keyword{plot,}
+\keyword{lavaan}
+\keyword{plot}

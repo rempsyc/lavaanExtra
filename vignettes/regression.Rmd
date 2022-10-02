@@ -26,7 +26,7 @@ mtcars.model <- write_lavaan(regression = regression)
 cat(mtcars.model)
 
 # Fit the model with `lavaan`
-fit.reg <- lavaan(mtcars.model, data = mtcars, auto.var = TRUE)
+fit.reg <- sem(mtcars.model, data = mtcars)
 
 # Get regression parameters only
 lavaan_reg(fit.reg)

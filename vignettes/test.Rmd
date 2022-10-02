@@ -19,6 +19,6 @@ fit <- sem(model, data = mtcars)
 ```
 
 ```{r plot}
-lavaanPlot(model = fit, node_options = list(shape = "box", fontname = "Helvetica"),
- edge_options = list(color = "grey"), coefs = FALSE)
+lavaanPlot(model = fit, edge_options = list(color = "grey"), coefs = FALSE,
+           node_options = list(shape = "box", fontname = "Helvetica"))
 ```

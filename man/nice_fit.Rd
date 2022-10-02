@@ -9,15 +9,18 @@ nice_fit(..., nice_table = FALSE)
 \arguments{
 \item{...}{lavaan model objects to extract fit indices from}
 
-\item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
-as well as print the reference values at the bottom of the table.}
+\item{nice_table}{Logical, whether to print the table as a
+\code{rempsyc::nice_table} as well as print the
+reference values at the bottom of the table.}
+}
+\value{
+A dataframe, representing select fit indices (chi2, df, chi2/df,
+p-value of the chi2 test, CFI, TLI, RMSEA, SRMR, AIC, and BIC).
 }
 \description{
 Compares fit from one or several lavaan models. Also
 optionally includes references values. The reference fit values are
 based on Schreiber et al. (2006).
-
-Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King, J. (2006). Reporting structural equation modeling and confirmatory factor analysis results: A review. \emph{The Journal of educational research}, \emph{99}(6), 323-338. https://doi.org/10.3200/JOER.99.6.323-338
 }
 \examples{
 (latent <- list(visual = paste0("x", 1:3),
@@ -31,15 +34,19 @@ HS.model <- write_lavaan(latent = latent, regression = regression)
 cat(HS.model)
 
 library(lavaan)
-fit <- lavaan(HS.model, data=HolzingerSwineford1939,
-              auto.var=TRUE, auto.fix.first=TRUE,
-              auto.cov.lv.x=TRUE)
+fit <- sem(HS.model, data=HolzingerSwineford1939)
 nice_fit(fit)
 }
+\references{
+Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,
+J. (2006). Reporting structural equation modeling and confirmatory factor
+analysis results: A review. \emph{The Journal of educational research}, \emph{99}(6),
+323-338. https://doi.org/10.3200/JOER.99.6.323-338
+}
 \keyword{CFA}
-\keyword{analysis,}
+\keyword{analysis}
 \keyword{equation}
-\keyword{lavaan,}
-\keyword{modeling,}
+\keyword{lavaan}
+\keyword{modeling}
 \keyword{path}
 \keyword{structural}

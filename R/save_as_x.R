@@ -6,6 +6,7 @@
 #' @name save_as_x
 NULL
 
+#' @return A table, either as an image, Word, PowerPoint, or HTML document.
 #' @rdname save_as_x
 #' @export
 save_as_docx <- function(...) {

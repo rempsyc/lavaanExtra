@@ -215,8 +215,7 @@ visual  =~ x1 + x2 + equal("visual=~x2")*x3
 textual =~ x4 + x5 + x6
 speed   =~ x7 + x8 + x9
 '
-lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
-       auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+sem(model, data = HolzingerSwineford1939)
 ```
 
 `lavaanExtra`:
@@ -226,8 +225,7 @@ lat <- list(visual = c("x1", "x2", "equal('visual=~x2')*x3"),
             speed = paste0("x", 7:9))
 model <- write_lavaan(latent = lat)
 cat(model)
-lavaan(model, data = HolzingerSwineford1939, auto.var = TRUE, 
-       auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+sem(model, data = HolzingerSwineford1939)
 ```
 
 #### Example 4.6
@@ -273,7 +271,7 @@ model <- ' # direct effect
 mediation <- list(Y = "c*X",
                   M = "a*X",
                   Y = "b*M")
-indirect = list(ab = "a*b",
+indirect <- list(ab = "a*b",
                 total = "c + (a*b)")
 model <- write_lavaan(mediation, indirect = indirect)
 cat(model)

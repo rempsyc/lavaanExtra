@@ -20,19 +20,22 @@ write_lavaan(
 )
 }
 \arguments{
-\item{mediation}{Mediation    indicators (\code{~} symbol: "is regressed on"). Differs from
-argument \code{regression} because path names can be optionally
-specified automatically with argument \code{label}.}
+\item{mediation}{Mediation    indicators (\code{~} symbol: "is regressed on").
+Differs from argument \code{regression} because path names
+can be optionally specified automatically with argument
+\code{label}.}
 
 \item{regression}{Regression indicators (\code{~} symbol: "is regressed on").}
 
-\item{covariance}{(Residual) (co)variance indicators (\verb{~~} symbol: "is correlated with").}
+\item{covariance}{(Residual) (co)variance indicators (\verb{~~} symbol:
+"is correlated with").}
 
-\item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect effect defined as").
-If a named list is provided, with names "IV" (independent variables), "M"
-(mediator), and "DV" (dependent variables), \code{write_lavaan} attempts to
-write indirect effects automatically. In this case, the \code{mediation}
-argument must be specified too.}
+\item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect
+effect defined as"). If a named list is provided,
+with names "IV" (independent variables), "M" (mediator),
+and "DV" (dependent variables), \code{write_lavaan} attempts to
+write indirect effects automatically. In this case, the
+\code{mediation} argument must be specified too.}
 
 \item{latent}{Latent variable indicators (\verb{=~} symbol: "is measured by").}
 
@@ -44,12 +47,18 @@ argument must be specified too.}
 
 \item{constraint.larger}{Greater than indicators (\code{>} symbol).}
 
-\item{custom}{Custom specifications. Takes a \emph{single} string just like regular
-\code{lavaan} syntax would. Always added at the end of the model.}
+\item{custom}{Custom specifications. Takes a \emph{single} string just
+like regular \code{lavaan} syntax would. Always added at
+the end of the model.}
 
-\item{label}{Logical, whether to display path names for the mediation argument.}
+\item{label}{Logical, whether to display path names for the
+mediation argument.}
 
-\item{use.letters}{Logical, for the labels, whether to use letters instead of the variable names.}
+\item{use.letters}{Logical, for the labels, whether to use letters
+instead of the variable names.}
+}
+\value{
+A character string, representing the specified \code{lavaan} model.
 }
 \description{
 Vector-based lavaan syntax interpreter.
@@ -69,9 +78,9 @@ fit <- lavaan(HS.model, data = HolzingerSwineford1939,
 summary(fit, fit.measures=TRUE)
 }
 \keyword{CFA}
-\keyword{analysis,}
+\keyword{analysis}
 \keyword{equation}
-\keyword{lavaan,}
-\keyword{modeling,}
+\keyword{lavaan}
+\keyword{modeling}
 \keyword{path}
 \keyword{structural}

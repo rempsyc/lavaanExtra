@@ -9,10 +9,15 @@ lavaan_reg(fit, nice_table = FALSE, ...)
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
 
-\item{nice_table}{Logical, whether to print the table as a \code{rempsyc::nice_table}
-as well as print the reference values at the bottom of the table.}
+\item{nice_table}{Logical, whether to print the table as a
+\code{rempsyc::nice_table} as well as print the
+reference values at the bottom of the table.}
 
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
+}
+\value{
+A dataframe, including the outcome, predictor, standardized
+regression coefficient, and corresponding p-value.
 }
 \description{
 Extract relevant regression indices from lavaan model through
@@ -37,9 +42,9 @@ fit <- lavaan(HS.model, data=HolzingerSwineford1939,
 lavaan_reg(fit)
 }
 \keyword{CFA}
-\keyword{analysis,}
+\keyword{analysis}
 \keyword{equation}
-\keyword{lavaan,}
-\keyword{modeling,}
+\keyword{lavaan}
+\keyword{modeling}
 \keyword{path}
 \keyword{structural}

@@ -8,20 +8,24 @@
 #'               with names "IV" (independent variables), "M" (mediator), and
 #'               "DV" (dependent variables), `nice_tidySEM` attempts to write
 #'               the layout matrix automatically.
-#' @param hide_nonsig_edges Logical, hides non-significant edges. Defaults to FALSE.
+#' @param hide_nonsig_edges Logical, hides non-significant edges.
+#'                          Defaults to FALSE.
 #' @param hide_var Logical, hides variances. Defaults to TRUE.
 #' @param hide_mean Logical, hides means/node labels. Defaults to TRUE.
-#' @param est_std Logical, whether to use the standardized coefficients. Defaults to TRUE.
-#' @param plot Logical, whether to plot the result (default). If `FALSE`, returns
-#'             the `tidy_sem` object, which can be further edited as needed.
-#' @param label Labels to be used on the plot. As elsewhere in `lavaanExtra`,
-#'              it is provided as a named list with format
-#'              `(colname = "label")`.
-#' @param label_location Location of label along the path, as a percentage (defaults
-#'                       to middle, 0.5).
+#' @param est_std Logical, whether to use the standardized coefficients.
+#'                Defaults to TRUE.
+#' @param plot Logical, whether to plot the result (default). If `FALSE`,
+#'             returns the `tidy_sem` object, which can be further edited
+#'             as needed.
+#' @param label Labels to be used on the plot. As elsewhere in
+#'              `lavaanExtra`, it is provided as a named list with
+#'              format `(colname = "label")`.
+#' @param label_location Location of label along the path, as a percentage
+#'                      (defaults to middle, 0.5).
 #' @param ... Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.
-
-#' @keywords CFA, lavaan, plot, fit, tidySEM, table_results
+#' @keywords CFA lavaan plot fit tidySEM table_results
+#' @return A tidySEM plot, of class ggplot, representing the specified
+#'         `lavaan` model.
 #' @export
 #' @examples
 #'
@@ -51,7 +55,9 @@
 #' fit <- sem(model, data)
 #'
 #' # Plot model
+#' \donttest{
 #' nice_tidySEM(fit, layout = structure)
+#' }
 #' @section Illustrations:
 #'
 #' \if{html}{\figure{nice_tidySEM.png}{options: width="400"}}
@@ -87,7 +93,9 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
           x
           }
     })
-    max.length <- max(c(length(structure$IV), length(structure$M), length(structure$DV)))
+    max.length <- max(c(length(structure$IV),
+                        length(structure$M),
+                        length(structure$DV)))
     IV.s <- (max.length - length(structure$IV))/2
     M.s <- (max.length - length(structure$M))/2
     DV.s <- (max.length - length(structure$DV))/2
@@ -98,7 +106,7 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
     structure <- as.matrix(structure)
   }
   p <- tidySEM::prepare_graph(fit, layout = structure, ...)
-  p <- tidySEM::edit_graph(p, {label_location = label_location})
+  p <- tidySEM::edit_graph(p, {label_location <- label_location})
   if (isTRUE(hide_nonsig_edges)) {
     p <- tidySEM::hide_nonsig_edges(p)
   }

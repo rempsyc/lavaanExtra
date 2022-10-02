@@ -1,14 +1,17 @@
 #' @title Extract relevant indirect effects indices from lavaan model
 #'
-#' @description Extract relevant indirect effects indices from lavaan model through
-#'              `lavaan::parameterEstimates)` with `standardized = TRUE`. In this
-#'              case, the beta (B) represents the resulting `std.all` column.
-#'
+#' @description Extract relevant indirect effects indices from lavaan model
+#'              through `lavaan::parameterEstimates)` with
+#'              `standardized = TRUE`. In this case, the beta (B) represents
+#'              the resulting `std.all` column.
 #' @param fit lavaan fit object to extract fit indices from
-#' @param nice_table Logical, whether to print the table as a `rempsyc::nice_table`
-#'                   as well as print the reference values at the bottom of the table.
+#' @param nice_table Logical, whether to print the table as a
+#'                   `rempsyc::nice_table` as well as print the
+#'                   reference values at the bottom of the table.
 #' @param ... Arguments to be passed to `rempsyc::nice_table`
-#' @keywords lavaan, structural equation modeling, path analysis, CFA
+#' @keywords lavaan structural equation modeling path analysis CFA
+#' @return A dataframe, including the indirect effect, corresponding paths,
+#'         standardized regression coefficient, and corresponding p-value.
 #' @export
 #' @examples
 #'
@@ -20,7 +23,9 @@
 #'                    textual = "visual",
 #'                    visual = c("ageyr", "grade")))
 #'
-#' (indirect <- list(IV = c("ageyr", "grade"), M = "visual", DV = c("speed", "textual")))
+#' (indirect <- list(IV = c("ageyr", "grade"),
+#'                   M = "visual",
+#'                   DV = c("speed", "textual")))
 #'
 #' HS.model <- write_lavaan(mediation, indirect = indirect,
 #'                          latent = latent, label = TRUE)
@@ -38,20 +43,7 @@ lavaan_ind <- function(fit, nice_table = FALSE, ...) {
   x <- x[c("lhs", "rhs", "std.all", "pvalue")]
   names(x) <- c("Indirect Effect", "Paths", "B", "p")
   if (nice_table) {
-    if (isFALSE(requireNamespace("rempsyc", quietly = TRUE))) {
-      cat("The package `rempsyc` is required for this feature\n",
-          "Would you like to install it?")
-      if (utils::menu(c("Yes", "No")) == 1) {
-        utils::install.packages('rempsyc', repos = c(
-          rempsyc = 'https://rempsyc.r-universe.dev',
-          CRAN = 'https://cloud.r-project.org'))
-      } else (stop(
-        'The `nice_table` feature relies on the `rempsyc` package.
-    You can install it manually with:
-    install.packages("rempsyc", repos = c(
-          rempsyc = "https://rempsyc.r-universe.dev",
-          CRAN = "https://cloud.r-project.org")'))
-    }
+    rlang::check_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
   }
   x

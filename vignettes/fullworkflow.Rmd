@@ -103,7 +103,8 @@ cat(model.saturated)
 This looks good so far, but we might also want to check our indirect effects (mediations). For this, we have to obtain the path names by setting `label = TRUE`. This will allow us to define our indirect effects and feed them back to `write_lavaan`.
 
 ```{r saturated2}
-# We can run the model again. However, we set `label = TRUE` to get the path names
+# We can run the model again. 
+# However, we set `label = TRUE` to get the path names
 model.saturated <- write_lavaan(mediation, regression, covariance, label = TRUE)
 cat(model.saturated)
 
@@ -167,9 +168,10 @@ We are now satisfied with our model, so we can finally fit it!
 
 ```{r saturated5}
 # Fit the model with `lavaan`
-fit.saturated <- lavaan(model.saturated, data = data, auto.var = TRUE)
+fit.saturated <- sem(model.saturated, data = data)
 
-# Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
+# Get regression parameters only 
+# And make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.saturated, nice_table = TRUE, highlight = TRUE)
 
 ```
@@ -199,7 +201,7 @@ model.path <- write_lavaan(mediation, regression, covariance,
 cat(model.path)
 
 # Fit the model with `lavaan`
-fit.path <- lavaan(model.path, data = data, auto.var = TRUE)
+fit.path <- sem(model.path, data = data)
 
 # Get regression parameters only
 lavaan_reg(fit.path)
@@ -242,7 +244,8 @@ labels <- list(ageyr = "Age (year)",
                textual = "Textual")
 layout <- list(IV = IV, M = M, DV = DV)
 
-nice_tidySEM(fit.path, layout = layout, hide_nonsig_edges = TRUE, label = labels)
+nice_tidySEM(fit.path, layout = layout, label = labels,
+             hide_nonsig_edges = TRUE)
 
 ```
 
@@ -257,8 +260,7 @@ model.latent <- write_lavaan(mediation, regression, covariance,
 cat(model.latent)
 
 # Run model
-fit.latent <- lavaan(model.latent, data = HolzingerSwineford1939, auto.var = TRUE, 
-              auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+fit.latent <- sem(model.latent, data = HolzingerSwineford1939)
 
 # Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, fit.saturated, fit.path, fit.latent, nice_table = TRUE)
