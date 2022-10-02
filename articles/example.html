@@ -39,7 +39,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -396,8 +396,7 @@
 <span><span class="st">textual =~ x4 + x5 + x6</span></span>
 <span><span class="st">speed   =~ x7 + x8 + x9</span></span>
 <span><span class="st">'</span></span>
-<span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>       auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## lavaan 0.6-12 ended normally after 36 iterations</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   Estimator                                         ML</span></span>
@@ -426,8 +425,7 @@
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/lavaan.html" class="external-link">lavaan</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span>, auto.var <span class="op">=</span> <span class="cn">TRUE</span>, </span>
-<span>       auto.fix.first <span class="op">=</span> <span class="cn">TRUE</span>, auto.cov.lv.x <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## lavaan 0.6-12 ended normally after 36 iterations</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   Estimator                                         ML</span></span>
@@ -494,7 +492,7 @@
 <code class="sourceCode R"><span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="st">"c*X"</span>,</span>
 <span>                  M <span class="op">=</span> <span class="st">"a*X"</span>,</span>
 <span>                  Y <span class="op">=</span> <span class="st">"b*M"</span><span class="op">)</span></span>
-<span><span class="va">indirect</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ab <span class="op">=</span> <span class="st">"a*b"</span>,</span>
+<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ab <span class="op">=</span> <span class="st">"a*b"</span>,</span>
 <span>                total <span class="op">=</span> <span class="st">"c + (a*b)"</span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, indirect <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>

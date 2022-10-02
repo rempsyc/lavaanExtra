@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -85,6 +85,13 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.1.2" id="lavaanextra-012">lavaanExtra 0.1.2<a class="anchor" aria-label="anchor" href="#lavaanextra-012"></a></h2>
+<ul><li>
+<code>rempsyc</code> package dependency is now on CRAN, so we can rely on it normally now (yeah!).</li>
+<li>Adding test coverage (100% so far!).</li>
+<li>Preparing for CRAN.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.1.1" id="lavaanextra-011">lavaanExtra 0.1.1<a class="anchor" aria-label="anchor" href="#lavaanextra-011"></a></h2>
 <ul><li>
 <code>nice_tidySEM</code>: Gains the <code>label_location</code> and <code>...</code> arguments.</li></ul></div>
@@ -118,7 +125,7 @@
 <ul><li>
 <code>cfa_fit_plot</code>:<ul><li>Adds ellipsis to pass any desired argument to <code><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">lavaan::cfa</a></code>, and thus removes the default <code>missing = "fiml"</code> which was causing a bug with <code>estimator = DWLS</code>.</li>
 <li>Changes the default from saving to PDF to opening in RStudio Viewer, and adds an additional <code>save.as.pdf</code> argument to save as PDF.</li>
-<li>Now imports <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code> (and <code>save_as_html</code>, <code>save_as_image</code>, <code>save_as_pptx</code>…) to support saving the <code>nice_fit</code> tables to Word without having to explicitely load <code>flextable</code> or <code>rempsyc</code>.</li>
+<li>Now imports <code><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">flextable::save_as_docx</a></code> (and <code>save_as_html</code>, <code>save_as_image</code>, <code>save_as_pptx</code>…) to support saving the <code>nice_fit</code> tables to Word without having to explicitly load <code>flextable</code> or <code>rempsyc</code>.</li>
 <li>Added package logo!</li>
 </ul></li></ul></div>
     <div class="section level2">
