@@ -1,3 +1,11 @@
+## Resubmission lavaanExtra 0.1.3
+
+> Title: Convenience Functions for Package `lavaan`
+
+> Can you pls use undirected quotes on the line above?
+
+* Fixed.
+
 ## R CMD check results
 
 0 errors | 0 warnings | 2 notes

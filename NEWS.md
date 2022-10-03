@@ -1,3 +1,6 @@
+## lavaanExtra 0.1.3
+* CRAN resubmission
+
 ## lavaanExtra 0.1.2
 * `rempsyc` package dependency is now on CRAN, so we can rely on it normally now (yeah!).
 * Adding test coverage (100% so far!).
