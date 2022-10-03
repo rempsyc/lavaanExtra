@@ -1,4 +1,4 @@
-setwd(tempdir())
+.old_wd <- setwd(tempdir())
 
 (latent <- list(visual = paste0("x", 1:3),
                 textual = paste0("x", 4:6),
@@ -11,7 +11,6 @@ data <- HolzingerSwineford1939
 estimator <- "MLR"
 fit1 <- cfa_fit_plot(model, data)
 fit2 <- cfa(model, data, estimator = estimator)
-fit3 <- cfa_fit_plot(model, data, save.as.pdf = TRUE, file.name = "cfaplot")
 
 (latent2 <- list(visual = paste0("x", 2:3),
                  textual = paste0("x", 4:6),
@@ -33,6 +32,8 @@ test_that("cfa_fit_plot comparison to cfa", {
 })
 
 test_that("cfa_fit_plot save as PDF", {
+  skip_on_cran()
+  fit3 <- cfa_fit_plot(model, data, save.as.pdf = TRUE, file.name = "cfaplot")
   expect_equal(
     summary(fit3),
     summary(fit2)
@@ -46,3 +47,4 @@ test_that("cfa_fit_plot remove items", {
   )
 })
 
+setwd(.old_wd)
