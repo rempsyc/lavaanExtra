@@ -1,3 +1,8 @@
+## lavaanExtra 0.1.4
+* `lavaan_ind` gains an argument, `underscores_to_arrows`, to replace underscores by arrows for the indirect effect column, so that indirect effects are more quickly visually interpretable.
+* `nice_tidySEM`: More meaningful error message when providing unmatching label names.
+* `nice_fit` look improved when using `nice_table = TRUE`
+
 ## lavaanExtra 0.1.3
 * CRAN resubmission
 

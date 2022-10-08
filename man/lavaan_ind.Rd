@@ -4,7 +4,7 @@
 \alias{lavaan_ind}
 \title{Extract relevant indirect effects indices from lavaan model}
 \usage{
-lavaan_ind(fit, nice_table = FALSE, ...)
+lavaan_ind(fit, nice_table = FALSE, underscores_to_arrows = TRUE, ...)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
@@ -12,6 +12,9 @@ lavaan_ind(fit, nice_table = FALSE, ...)
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
+
+\item{underscores_to_arrows}{Logical, whether to convert underscorse
+to arrows in the "Indirect Effect column".}
 
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
 }

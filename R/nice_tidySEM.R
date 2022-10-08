@@ -118,6 +118,9 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
   }
   if (!missing(label)) {
     order.label <- match(tidySEM::nodes(p)$name, names(label))
+    if (any(is.na(order.label))) {
+      stop("Label names don't match. Please double-check your variable names.")
+    }
     tidySEM::nodes(p)$label <- unlist(label[order.label])
   }
   if (isTRUE(est_std)) {

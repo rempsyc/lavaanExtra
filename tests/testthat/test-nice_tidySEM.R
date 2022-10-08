@@ -47,6 +47,12 @@ test_that("nice_tidySEM on CFA", {
   )
 })
 
+test_that("nice_tidySEM wrong labels", {
+  expect_error(
+    nice_tidySEM(fit.cfa, label = "wrong.labels")
+  )
+})
+
 test_that("nice_tidySEM on CFA with manual structure", {
   expect_s3_class(
     nice_tidySEM(fit.cfa, layout = manual.structure),

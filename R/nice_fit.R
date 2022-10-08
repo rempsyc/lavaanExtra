@@ -57,7 +57,12 @@ nice_fit <- function(..., nice_table = FALSE) {
     table <- flextable::bold(table, part = "footer")
     table <- flextable::align(table, align = "center", part = "all")
     table <- flextable::font(table, part = "all", fontname = "Times New Roman")
-    table <- flextable::hline(table, i = nrow(df))
+    nice.borders <- list("width" = 0.5, color = "black", style = "solid")
+    #table <- flextable::hline(table, i = nrow(df), border = nice.borders)
+    table <- flextable::hline_bottom(
+      table, part = "body", border = nice.borders)
+    table <- flextable::hline_bottom(
+      table, part = "footer", border = nice.borders)
     df <- table
   }
   df

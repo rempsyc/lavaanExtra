@@ -8,6 +8,8 @@
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
+#' @param underscores_to_arrows Logical, whether to convert underscorse
+#' to arrows in the "Indirect Effect column".
 #' @param ... Arguments to be passed to `rempsyc::nice_table`
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, including the indirect effect, corresponding paths,
@@ -37,10 +39,14 @@
 #'               auto.cov.lv.x=TRUE)
 #' lavaan_ind(fit)
 
-lavaan_ind <- function(fit, nice_table = FALSE, ...) {
+lavaan_ind <- function(fit, nice_table = FALSE, underscores_to_arrows = TRUE,
+                       ...) {
   x <- lavaan::parameterEstimates(fit, standardized = TRUE)
   x <- x[which(x["op"] == ":="),]
   x <- x[c("lhs", "rhs", "std.all", "pvalue")]
+  if (isTRUE(underscores_to_arrows)) {
+    x$lhs <- gsub("_", " \u2192 ", x$lhs)
+  }
   names(x) <- c("Indirect Effect", "Paths", "B", "p")
   if (nice_table) {
     rlang::check_installed("rempsyc", reason = "for this feature.")

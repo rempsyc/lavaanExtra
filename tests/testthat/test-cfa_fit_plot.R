@@ -37,7 +37,7 @@ test_that("cfa_fit_plot save as PDF", {
   )
 })
 
-fit4 <- cfa_fit_plot(model, data, print = TRUE, remove.items = c("x1"))
+fit4 <- cfa_fit_plot(model, data, print = FALSE, remove.items = c("x1"))
 model <- write_lavaan(latent = latent2)
 fit5 <- cfa(model, data, estimator = estimator)
 
@@ -47,5 +47,12 @@ test_that("cfa_fit_plot remove items", {
     summary(fit5)
   )
 })
+
+test_that("cfa_fit_plot save as PDF error", {
+  expect_error(
+    cfa_fit_plot(model, data, save.as.pdf = TRUE)
+  )
+})
+
 
 setwd(.old_wd)

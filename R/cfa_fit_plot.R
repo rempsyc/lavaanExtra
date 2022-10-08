@@ -46,6 +46,11 @@
 cfa_fit_plot <- function(
     model, data, covs = FALSE, estimator = "MLR", remove.items = "",
     print = TRUE, save.as.pdf = FALSE, file.name, ...){
+
+  if (missing(file.name) && isTRUE(save.as.pdf)) {
+    stop("To save as PDF, the file name must also be specified.")
+  }
+
   # Remove requested items
   if(!missing(remove.items)) {
     remove.items0 <- paste0("\\s", remove.items, "\\s")
@@ -62,12 +67,13 @@ cfa_fit_plot <- function(
   # Fit model
   fit <- lavaan::cfa(model, data = data, estimator = estimator, ...)
   if (isTRUE(print)) {
-    print(summary(fit, standardized = TRUE, fit.measures = TRUE, rsquare = TRUE))
+    print(summary(fit, standardized = TRUE,
+                  fit.measures = TRUE, rsquare = TRUE))
   }
   # Plot the model
   my.plot <- nice_lavaanPlot(fit, covs = covs)
   # # Save file
-  if(!missing(file.name) && isTRUE(save.as.pdf)) {
+  if (!missing(file.name) && isTRUE(save.as.pdf)) {
     lavaanPlot::embed_plot_pdf(my.plot, paste0(file.name, ".pdf"))
     utils::browseURL(paste0(file.name, ".pdf"))
   } else {

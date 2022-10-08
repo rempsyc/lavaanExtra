@@ -33,7 +33,7 @@ test_that("write_lavaan using latent", {
     HS.model,
     c(
 "##################################################
-# [---------------Latent variables---------------]
+# [-----Latent variables (measurement model)-----]
 
 visual =~ x1 + x2 + x3
 textual =~ x4 + x5 + x6
@@ -240,7 +240,7 @@ test_that("write_lavaan using everything", {
     HS.model,
     c(
 "##################################################
-# [---------------Latent variables---------------]
+# [-----Latent variables (measurement model)-----]
 
 visual =~ x1 + x2 + x3
 textual =~ x4 + x5 + x6

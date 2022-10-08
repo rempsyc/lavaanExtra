@@ -74,7 +74,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
   }
   if (!is.null(latent)) {
     latent <- process_vars(latent, symbol = "=~", title =
-                             "[---------------Latent variables---------------]")
+                             "[-----Latent variables (measurement model)-----]")
   }
   #### AUTOMATIC INDIRECT EFFECTS!!! ####
   if (!is.null(indirect)) {
