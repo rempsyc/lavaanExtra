@@ -81,7 +81,7 @@ library(lavaan)
 #> lavaan is FREE software! Please report any bugs.
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.1.1) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> (R package version 0.1.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -92,7 +92,7 @@ latent <- list(visual = paste0("x", 1:3),
 cfa.model <- write_lavaan(latent = latent)
 cat(cfa.model)
 #> ##################################################
-#> # [---------------Latent variables---------------]
+#> # [-----Latent variables (measurement model)-----]
 #> 
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6
@@ -250,7 +250,7 @@ model <- write_lavaan(mediation, regression, covariance,
                       indirect, latent, label = TRUE)
 cat(model)
 #> ##################################################
-#> # [---------------Latent variables---------------]
+#> # [-----Latent variables (measurement model)-----]
 #> 
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6

@@ -245,7 +245,7 @@ labels <- list(ageyr = "Age (year)",
 layout <- list(IV = IV, M = M, DV = DV)
 
 nice_tidySEM(fit.path, layout = layout, label = labels,
-             hide_nonsig_edges = TRUE)
+             hide_nonsig_edges = TRUE, label_location = .60)
 
 ```
 
