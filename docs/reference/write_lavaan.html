@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -110,9 +110,10 @@
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>mediation</dt>
-<dd><p>Mediation    indicators (<code>~</code> symbol: "is regressed on"). Differs from
-argument <code>regression</code> because path names can be optionally
-specified automatically with argument <code>label</code>.</p></dd>
+<dd><p>Mediation    indicators (<code>~</code> symbol: "is regressed on").
+Differs from argument <code>regression</code> because path names
+can be optionally specified automatically with argument
+<code>label</code>.</p></dd>
 
 
 <dt>regression</dt>
@@ -120,15 +121,17 @@ specified automatically with argument <code>label</code>.</p></dd>
 
 
 <dt>covariance</dt>
-<dd><p>(Residual) (co)variance indicators (<code>~~</code> symbol: "is correlated with").</p></dd>
+<dd><p>(Residual) (co)variance indicators (<code>~~</code> symbol:
+"is correlated with").</p></dd>
 
 
 <dt>indirect</dt>
-<dd><p>Indirect effect indicators (<code>:=</code> symbol: "indirect effect defined as").
-If a named list is provided, with names "IV" (independent variables), "M"
-(mediator), and "DV" (dependent variables), <code>write_lavaan</code> attempts to
-write indirect effects automatically. In this case, the <code>mediation</code>
-argument must be specified too.</p></dd>
+<dd><p>Indirect effect indicators (<code>:=</code> symbol: "indirect
+effect defined as"). If a named list is provided,
+with names "IV" (independent variables), "M" (mediator),
+and "DV" (dependent variables), <code>write_lavaan</code> attempts to
+write indirect effects automatically. In this case, the
+<code>mediation</code> argument must be specified too.</p></dd>
 
 
 <dt>latent</dt>
@@ -152,18 +155,27 @@ argument must be specified too.</p></dd>
 
 
 <dt>custom</dt>
-<dd><p>Custom specifications. Takes a <em>single</em> string just like regular
-<code>lavaan</code> syntax would. Always added at the end of the model.</p></dd>
+<dd><p>Custom specifications. Takes a <em>single</em> string just
+like regular <code>lavaan</code> syntax would. Always added at
+the end of the model.</p></dd>
 
 
 <dt>label</dt>
-<dd><p>Logical, whether to display path names for the mediation argument.</p></dd>
+<dd><p>Logical, whether to display path names for the
+mediation argument.</p></dd>
 
 
 <dt>use.letters</dt>
-<dd><p>Logical, for the labels, whether to use letters instead of the variable names.</p></dd>
+<dd><p>Logical, for the labels, whether to use letters
+instead of the variable names.</p></dd>
 
 </dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    
+
+<p>A character string, representing the specified <code>lavaan</code> model.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -183,7 +195,7 @@ argument must be specified too.</p></dd>
 <span class="r-in"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu">write_lavaan</span><span class="op">(</span>latent <span class="op">=</span> <span class="va">latent</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ##################################################</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> # [---------------Latent variables---------------]</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> # [-----Latent variables (measurement model)-----]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> visual =~ x1 + x2 + x3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> textual =~ x4 + x5 + x6</span>
