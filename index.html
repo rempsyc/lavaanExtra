@@ -125,11 +125,19 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of <code>lavaanExtra</code> like so:</p>
+<p>You can install the <code>lavaanExtra</code> package directly from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"lavaanExtra"</span><span class="op">)</span></span></code></pre></div>
+<p>Or the development version from the r-universe (note that there is a 24-hour delay with GitHub):</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"lavaanExtra"</span>, repos <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
 <span>  rempsyc <span class="op">=</span> <span class="st">"https://rempsyc.r-universe.dev"</span>,</span>
 <span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Or from GitHub, for the very latest version:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># If package `remotes` isn't already installed, install it with `install.packages("remotes")`</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rempsyc/lavaanExtra"</span><span class="op">)</span></span></code></pre></div>
+<p>You can load the package and open the help file, and click “Index” at the bottom. You will see all the available functions listed.</p>
 </div>
 <div class="section level2">
 <h2 id="why-use-lavaanextra">Why use <code>lavaanExtra</code>?<a class="anchor" aria-label="anchor" href="#why-use-lavaanextra"></a>
@@ -161,14 +169,14 @@
 <div class="section level2">
 <h2 id="cfa-example">CFA example<a class="anchor" aria-label="anchor" href="#cfa-example"></a>
 </h2>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load library</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; This is lavaan 0.6-12</span></span>
 <span><span class="co">#&gt; lavaan is FREE software! Please report any bugs.</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan </span></span>
-<span><span class="co">#&gt; (R package version 0.1.4) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
+<span><span class="co">#&gt; (R package version 0.1.5) [Computer software]. https://lavaanExtra.remi-theriault.com/</span></span>
 <span></span>
 <span><span class="co"># Define latent variables</span></span>
 <span><span class="va">latent</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
@@ -303,7 +311,7 @@
 <span><span class="co">#&gt;     x8                0.523</span></span>
 <span><span class="co">#&gt;     x9                0.442</span></span></code></pre></div>
 <p><img src="reference/figures/cfaplot.png" width="30%"></p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-cfa2-1.png" width="90%"></p>
@@ -311,8 +319,8 @@
 <div class="section level2">
 <h2 id="sem-example">SEM example<a class="anchor" aria-label="anchor" href="#sem-example"></a>
 </h2>
-<p>Note that that latent variables have been defined above, so we can reuse them as is, without having to redefine them.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<p>Note that latent variables have been defined above, so we can reuse them as is, without having to redefine them.</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our other variables</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ageyr"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
@@ -369,23 +377,23 @@
 <span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-saturated-1.png" width="30%"></p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get covariance indices and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_cov.html">lavaan_cov</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-covariance-1.png" width="30%"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="va">fit_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">fit_table</span></span></code></pre></div>
 <p><img src="reference/figures/README-path2-1.png" width="90%"></p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save fit table to Word!</span></span>
 <span><span class="fu"><a href="reference/save_as_x.html">save_as_docx</a></span><span class="op">(</span><span class="va">fit_table</span>, path <span class="op">=</span> <span class="st">"fit_table.docx"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect2-1.png" width="50%"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot our model</span></span>
 <span><span class="fu"><a href="reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit.sem</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/semplot.png" width="70%"></p>
