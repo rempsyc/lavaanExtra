@@ -1,5 +1,6 @@
 # Development objectives (to-do list)
 
+- Full CFA/SEM workflow vignette: show how to make custom tidySEM layout
 - Update image in full workflow tutorial
 - All extraction functions: provide both standardized and unstandardized coefficients, as well as the 95% CI.
 - `lavaan_cov`: rename r for something more accurate
