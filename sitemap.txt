@@ -12,6 +12,3 @@ https://lavaanextra.remi-theriault.com/articles/fullworkflow.html
 https://lavaanExtra.remi-theriault.com/articles/example.html
 https://lavaanextra.remi-theriault.com/articles/indirect.html
 https://lavaanextra.remi-theriault.com/articles/special.html
-
-https://lavaanextra.remi-theriault.com/LICENSE-text.html
-https://lavaanextra.remi-theriault.com/LICENSE.html
