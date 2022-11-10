@@ -43,3 +43,8 @@ test_that("nice_fit labels", {
   )
 })
 
+
+test_that("nice_fit warns on labels", {
+  expect_warning(
+    nice_fit(fit, fit, model.labels = "Second Model"))
+})

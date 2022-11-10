@@ -38,6 +38,12 @@ nice_fit <- function(..., model.labels, nice_table = FALSE) {
   df <- do.call(rbind, x)
   if (!missing(model.labels)) {
     Model <- model.labels
+    # verify labels match number of objects
+    if(!length(x) == length(model.labels)){
+      warning("Number of model.labels and models do not match. Broadcasting...")
+    }
+
+
   } else {
     Model <- vapply(match.call(expand.dots = FALSE)$`...`, as.character,
                     FUN.VALUE = "character")
