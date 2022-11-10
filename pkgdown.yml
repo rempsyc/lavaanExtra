@@ -1,4 +1,4 @@
-pandoc: 2.14.2
+pandoc: 2.19.2
 pkgdown: 2.0.6
 pkgdown_sha: ~
 articles:
@@ -8,7 +8,7 @@ articles:
   regression: regression.html
   special: special.html
   test: test.html
-last_built: 2022-10-21T23:52Z
+last_built: 2022-11-10T21:35Z
 urls:
   reference: https://lavaanExtra.remi-theriault.com/reference
   article: https://lavaanExtra.remi-theriault.com/articles
