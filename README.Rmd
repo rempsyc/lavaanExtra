@@ -37,13 +37,25 @@ Affords an alternative, vector-based syntax to `lavaan`, as well as other conven
 
 ## Installation
 
-You can install the development version of `lavaanExtra` like so:
+You can install the `lavaanExtra` package directly from CRAN:
+``` r
+install.packages("lavaanExtra")
+```
 
+Or the development version from the r-universe (note that there is a 24-hour delay with GitHub):
 ``` r
 install.packages("lavaanExtra", repos = c(
   rempsyc = "https://rempsyc.r-universe.dev",
   CRAN = "https://cloud.r-project.org"))
 ```
+
+Or from GitHub, for the very latest version:
+``` r
+# If package `remotes` isn't already installed, install it with `install.packages("remotes")`
+remotes::install_github("rempsyc/lavaanExtra")
+```
+
+You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
 
 ## Why use `lavaanExtra`?
 

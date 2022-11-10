@@ -27,13 +27,30 @@ publication and script sharing workflow.
 
 ## Installation
 
-You can install the development version of `lavaanExtra` like so:
+You can install the `lavaanExtra` package directly from CRAN:
+
+``` r
+install.packages("lavaanExtra")
+```
+
+Or the development version from the r-universe (note that there is a
+24-hour delay with GitHub):
 
 ``` r
 install.packages("lavaanExtra", repos = c(
   rempsyc = "https://rempsyc.r-universe.dev",
   CRAN = "https://cloud.r-project.org"))
 ```
+
+Or from GitHub, for the very latest version:
+
+``` r
+# If package `remotes` isn't already installed, install it with `install.packages("remotes")`
+remotes::install_github("rempsyc/lavaanExtra")
+```
+
+You can load the package and open the help file, and click “Index” at
+the bottom. You will see all the available functions listed.
 
 ## Why use `lavaanExtra`?
 
@@ -81,7 +98,7 @@ library(lavaan)
 #> lavaan is FREE software! Please report any bugs.
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.1.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> (R package version 0.1.5) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -228,8 +245,8 @@ nice_fit(fit.cfa, nice_table = TRUE)
 
 ## SEM example
 
-Note that that latent variables have been defined above, so we can reuse
-them as is, without having to redefine them.
+Note that latent variables have been defined above, so we can reuse them
+as is, without having to redefine them.
 
 ``` r
 # Define our other variables
