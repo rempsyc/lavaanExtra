@@ -5,6 +5,8 @@
 #' based on Schreiber et al. (2006).
 #'
 #' @param ... lavaan model objects to extract fit indices from
+#' @param model.labels Model labels to use. Default to the
+#' model names.
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
@@ -31,11 +33,15 @@
 #' fit <- sem(HS.model, data=HolzingerSwineford1939)
 #' nice_fit(fit)
 
-nice_fit <- function(..., nice_table = FALSE) {
+nice_fit <- function(..., model.labels, nice_table = FALSE) {
   x <- lapply(list(...), nice_fit_internal)
   df <- do.call(rbind, x)
-  Model <- vapply(match.call(expand.dots = FALSE)$`...`, as.character,
-                  FUN.VALUE = "character")
+  if (!missing(model.labels)) {
+    Model <- model.labels
+  } else {
+    Model <- vapply(match.call(expand.dots = FALSE)$`...`, as.character,
+                    FUN.VALUE = "character")
+  }
   df <- cbind(Model, df)
   row.names(df) <- NULL
   if (nice_table) {

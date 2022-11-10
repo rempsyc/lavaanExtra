@@ -114,7 +114,7 @@ nice_fit(fit.cfa, nice_table = TRUE)
 
 ## SEM example
 
-Note that that latent variables have been defined above, so we can reuse them as is, without having to redefine them. 
+Note that latent variables have been defined above, so we can reuse them as is, without having to redefine them. 
 
 ```{r saturated}
 # Define our other variables

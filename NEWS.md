@@ -1,3 +1,6 @@
+## lavaanExtra 0.1.5
+* `nice_fit`: gains a `model.labels` argument to customize the model names in the table.
+
 ## lavaanExtra 0.1.4
 * `lavaan_ind` gains an argument, `underscores_to_arrows`, to replace underscores by arrows for the indirect effect column, so that indirect effects are more quickly visually interpretable.
 * `nice_tidySEM`: More meaningful error message when providing unmatching label names.

@@ -36,3 +36,10 @@ test_that("nice_fit regular", {
   )
 })
 
+test_that("nice_fit labels", {
+  expect_s3_class(
+    nice_fit(fit, fit, model.labels = c("First Model", "Second Model")),
+    "data.frame"
+  )
+})
+

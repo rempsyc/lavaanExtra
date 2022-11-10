@@ -4,10 +4,13 @@
 \alias{nice_fit}
 \title{Extract relevant fit indices from lavaan model}
 \usage{
-nice_fit(..., nice_table = FALSE)
+nice_fit(..., model.labels, nice_table = FALSE)
 }
 \arguments{
 \item{...}{lavaan model objects to extract fit indices from}
+
+\item{model.labels}{Model labels to use. Default to the
+model names.}
 
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the
