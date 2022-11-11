@@ -43,7 +43,6 @@ nice_fit <- function(..., model.labels, nice_table = FALSE) {
       warning("Number of model.labels and models do not match. Broadcasting...")
     }
 
-
   } else {
     Model <- vapply(match.call(expand.dots = FALSE)$`...`, as.character,
                     FUN.VALUE = "character")
