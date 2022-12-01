@@ -26,19 +26,24 @@ optionally includes references values. The reference fit values are
 based on Schreiber et al. (2006).
 }
 \examples{
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+(latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
-(regression <- list(ageyr = c("visual", "textual", "speed"),
-                    grade = c("visual", "textual", "speed")))
+(regression <- list(
+  ageyr = c("visual", "textual", "speed"),
+  grade = c("visual", "textual", "speed")
+))
 
 HS.model <- write_lavaan(latent = latent, regression = regression)
 cat(HS.model)
 
 library(lavaan)
-fit <- sem(HS.model, data=HolzingerSwineford1939)
+fit <- sem(HS.model, data = HolzingerSwineford1939)
 nice_fit(fit)
+
 }
 \references{
 Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,

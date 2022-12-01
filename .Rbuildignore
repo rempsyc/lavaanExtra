@@ -13,3 +13,4 @@ models
 ^revdep$
 ^codecov\.yml$
 ^CRAN-SUBMISSION$
+^tink$
