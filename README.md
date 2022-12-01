@@ -340,6 +340,33 @@ nice_lavaanPlot(fit.sem)
 
 <img src="man/figures/semplot.png" width="70%" />
 
+``` r
+# Alternative way to plot
+mylayout <- data.frame(
+  IV = c("", "x1", "grade", "", "ageyr", "", ""),
+  M = c("", "x2", "", "visual", "", "", ""),
+  DV = c("", "x3", "textual", "", "speed", "", ""),
+  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9))) |> 
+  as.matrix()
+mylayout
+#>      IV      M        DV        DV.items
+#> [1,] ""      ""       ""        "x4"    
+#> [2,] "x1"    "x2"     "x3"      "x5"    
+#> [3,] "grade" ""       "textual" "x6"    
+#> [4,] ""      "visual" ""        ""      
+#> [5,] "ageyr" ""       "speed"   "x7"    
+#> [6,] ""      ""       ""        "x8"    
+#> [7,] ""      ""       ""        "x9"
+```
+
+``` r
+nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.7)
+
+ggplot2::ggsave("my_semPlot.pdf", width = 6, height = 6, limitsize = FALSE)
+```
+
+<img src="man/figures/semplot2.png" width="70%" />
+
 ## Final note
 
 This is an experimental package in a *very* early stage. Any feedback or
