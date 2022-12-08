@@ -380,3 +380,6 @@ have a look at the other tutorials to discover even more cool features:
 
 Thank you for your support. You can support me and this package here:
 <https://github.com/sponsors/rempsyc>
+
+Mastodon:
+<a rel="me" href="https://mastodon.world/@rempsyc">Mastodon</a>
