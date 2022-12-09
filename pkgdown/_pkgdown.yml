@@ -38,7 +38,7 @@ navbar:
         href: articles/special.html
   - text: Functions
     href: reference/index.html
-  - text: Changelog
+  - text: News
     href: news/index.html
   - text: To-dos
     href: TODOS.html
