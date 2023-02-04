@@ -1,3 +1,7 @@
+## Resubmission lavaanExtra 0.1.4
+
+0 errors | 0 warnings | 0 notes
+
 ## Resubmission lavaanExtra 0.1.3
 
 > Title: Convenience Functions for Package `lavaan`
