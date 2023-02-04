@@ -4,9 +4,10 @@
 #' optionally includes references values. The reference fit values are
 #' based on Schreiber et al. (2006).
 #'
-#' @param ... lavaan model objects to extract fit indices from
-#' @param model.labels Model labels to use. Default to the
-#' model names.
+#' @param model lavaan model object(s) to extract fit indices from
+#' @param model.labels Model labels to use. If a named list is provided
+#' for `model`, default to the names of the list. Otherwise, if the list
+#' is unnamed, defaults to generic numbering.
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
@@ -37,8 +38,13 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' nice_fit(fit)
 #'
-nice_fit <- function(..., model.labels, nice_table = FALSE) {
-  x <- lapply(list(...), nice_fit_internal)
+nice_fit <- function(model, model.labels, nice_table = FALSE) {
+  if (inherits(model, "list")) {
+    models.list <- model
+  } else {
+    models.list <- list(model)
+  }
+  x <- lapply(models.list, nice_fit_internal)
   df <- do.call(rbind, x)
   if (!missing(model.labels)) {
     Model <- model.labels
@@ -48,10 +54,10 @@ nice_fit <- function(..., model.labels, nice_table = FALSE) {
     } else if (!length(x) == length(model.labels)) {
       warning("Number of models and labels do not match.")
     }
-  } else {
-    Model <- vapply(match.call(expand.dots = FALSE)$`...`, as.character,
-      FUN.VALUE = "character"
-    )
+    } else if (!is.null(names(models.list))) {
+        Model <- names(models.list)
+      } else {
+      Model <- paste0("Model ", seq_len(length(models.list)))
   }
   df <- cbind(Model, df)
   row.names(df) <- NULL
@@ -76,17 +82,18 @@ nice_fit <- function(..., model.labels, nice_table = FALSE) {
     )
     table <- flextable::bold(table, part = "footer")
     table <- flextable::align(table, align = "center", part = "all")
+
+    table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
+      "As proposed by Schreiber et al. (2006)."), ref_symbols = "a", part = "footer")
+    table <- flextable::align(table, i = 2, part = "footer", align = "left")
+
     table <- flextable::font(table, part = "all", fontname = "Times New Roman")
     nice.borders <- list("width" = 0.5, color = "black", style = "solid")
-    # table <- flextable::hline(table, i = nrow(df), border = nice.borders)
     table <- flextable::hline_bottom(
       table,
       part = "body", border = nice.borders
     )
-    table <- flextable::hline_bottom(
-      table,
-      part = "footer", border = nice.borders
-    )
+     table <- flextable::hline(table, i = 1, border = nice.borders, part = "footer")
     df <- table
   }
   df
@@ -97,7 +104,6 @@ nice_fit_internal <- function(fit) {
     "chisq", "df", "pvalue", "cfi", "tli",
     "rmsea", "srmr", "aic", "bic"
   ))
-  # names(x)[1] <- "Model"
   x <- as.data.frame(t(as.data.frame(x)))
   chi2.df <- x$chisq / x$df
   x <- cbind(x[1:2], chi2.df, x[3:9])

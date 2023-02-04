@@ -166,7 +166,7 @@ lavaan_cov(fit.sem, nice_table = TRUE)
 
 ```{r path2}
 # Get nice fit indices with the `rempsyc::nice_table` integration
-fit_table <- nice_fit(fit.cfa, fit.sem, nice_table = TRUE)
+fit_table <- nice_fit(list(fit.cfa, fit.sem), nice_table = TRUE)
 fit_table
 ```
 
@@ -174,7 +174,7 @@ fit_table
 
 ```{r indirect2}
 # Save fit table to Word!
-save_as_docx(fit_table, path = "fit_table.docx")
+flextable::save_as_docx(fit_table, path = "fit_table.docx")
 
 # Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_ind(fit.sem, nice_table = TRUE)
@@ -182,6 +182,10 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="50%" />
+
+```{r, echo=FALSE}
+unlink("fit_table.docx")
+```
 
 ```{r plot, eval = FALSE}
 # Plot our model

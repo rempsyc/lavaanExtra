@@ -33,16 +33,23 @@ test_that("nice_fit as nice_table", {
   )
 })
 
-test_that("nice_fit regular", {
+test_that("nice_fit list", {
   expect_s3_class(
-    nice_fit(fit, fit),
+    nice_fit(list(fit, fit)),
+    "data.frame"
+  )
+})
+
+test_that("nice_fit named list", {
+  expect_s3_class(
+    nice_fit(list(zz1 = fit, zz2= fit)),
     "data.frame"
   )
 })
 
 test_that("nice_fit labels", {
   expect_s3_class(
-    nice_fit(fit, fit, model.labels = c("First Model", "Second Model")),
+    nice_fit(list(fit, fit), model.labels = c("First Model", "Second Model")),
     "data.frame"
   )
 })
@@ -50,10 +57,11 @@ test_that("nice_fit labels", {
 
 test_that("nice_fit warns on labels", {
   expect_warning(
-    nice_fit(fit, fit, model.labels = "Second Model")
+    nice_fit(list(fit, fit), model.labels = "Second Model")
   )
   # Testing more labels
   expect_error(
     nice_fit(fit, fit, model.labels = seq(1,10))
   )
 })
+

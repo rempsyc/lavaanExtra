@@ -1,9 +1,16 @@
-# lavaanExtra 0.1.x
+## lavaanExtra 0.1.4
+* CRAN resubmission
 
-## lavaanExtra 0.1.5
+## lavaanExtra 0.1.3.3
+* Breaking changes: 
+    - We remove the copied/reexported `save_as_docx` and the like in favour of explicitly calling `flextable::save_as_docx`. This way we are not creating namespace conflicts for these functions, we are consistent with the new approach in `rempsyc`, and it also gives credit to the `flextable` package, as this is the powerhouse that produces the tables under the hood.
+    - `nice_fit` now requires a list of models (or a single model), so it will not accept models loosely provided in the function as different arguments. This is because we get rid of the dot-dot-dot `...` argument in favour of supporting list objects.
+* `nice_fit` now has an added footnote reference to Schreiber et al. (2006) for fit indices references when using `nice_table = TRUE`.
+
+## lavaanExtra 0.1.3.2
 * `nice_fit`: gains a `model.labels` argument to customize the model names in the table.
 
-## lavaanExtra 0.1.4
+## lavaanExtra 0.1.3.1
 * `lavaan_ind` gains an argument, `underscores_to_arrows`, to replace underscores by arrows for the indirect effect column, so that indirect effects are more quickly visually interpretable.
 * `nice_tidySEM`: More meaningful error message when providing unmatching label names.
 * `nice_fit` look improved when using `nice_table = TRUE`

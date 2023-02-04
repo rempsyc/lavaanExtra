@@ -98,7 +98,7 @@ library(lavaan)
 #> lavaan is FREE software! Please report any bugs.
 library(lavaanExtra)
 #> Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.1.5) [Computer software]. https://lavaanExtra.remi-theriault.com/
+#> (R package version 0.1.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
@@ -317,7 +317,7 @@ lavaan_cov(fit.sem, nice_table = TRUE)
 
 ``` r
 # Get nice fit indices with the `rempsyc::nice_table` integration
-fit_table <- nice_fit(fit.cfa, fit.sem, nice_table = TRUE)
+fit_table <- nice_fit(list(fit.cfa, fit.sem), nice_table = TRUE)
 fit_table
 ```
 
@@ -325,7 +325,7 @@ fit_table
 
 ``` r
 # Save fit table to Word!
-save_as_docx(fit_table, path = "fit_table.docx")
+flextable::save_as_docx(fit_table, path = "fit_table.docx")
 
 # Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_ind(fit.sem, nice_table = TRUE)
