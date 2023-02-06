@@ -17,6 +17,9 @@ knitr::opts_chunk$set(
 
 ```{r version, echo = FALSE, message = FALSE, warning = FALSE}
 flextable::set_flextable_defaults(background.color = "white")
+
+library(lavaan)
+library(lavaanExtra)
 ```
 
 <!-- badges: start -->
@@ -91,13 +94,12 @@ cute_TOC <- function(section) {
 invisible(lapply(list(
   section.1, section.2, section.3), 
   cute_TOC))
-
 ```
 
 ## CFA example
 
 ```{r cfaplot}
-# Load library
+# Load libraries
 library(lavaan)
 library(lavaanExtra)
 

@@ -12,6 +12,7 @@ status](https://www.r-pkg.org/badges/version/lavaanExtra)](https://cran.r-projec
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/lavaanExtra)](https://github.com/rempsyc/lavaanExtra/commits/main)
 [![Codecov test
 coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://cran.r-project.org/package=lavaanExtra)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://cranlogs.r-pkg.org/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
@@ -92,13 +93,9 @@ the bottom. You will see all the available functions listed.
 ## CFA example
 
 ``` r
-# Load library
+# Load libraries
 library(lavaan)
-#> This is lavaan 0.6-12
-#> lavaan is FREE software! Please report any bugs.
 library(lavaanExtra)
-#> Suggested citation: Thériault, R. (2022).lavaanExtra: Convenience functions for lavaan 
-#> (R package version 0.1.4) [Computer software]. https://lavaanExtra.remi-theriault.com/
 
 # Define latent variables
 latent <- list(visual = paste0("x", 1:3),
