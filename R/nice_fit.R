@@ -85,6 +85,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
 
     table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
       "As proposed by Schreiber et al. (2006)."), ref_symbols = "a", part = "footer")
+    table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
     table <- flextable::align(table, i = 2, part = "footer", align = "left")
 
     table <- flextable::font(table, part = "all", fontname = "Times New Roman")

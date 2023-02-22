@@ -121,7 +121,6 @@ fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 ```{r cfa2}
 # Get nice fit indices with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, nice_table = TRUE)
-
 ```
 
 <img src="man/figures/README-cfa2-1.png" width="90%" />
@@ -153,7 +152,6 @@ fit.sem <- sem(model, data = HolzingerSwineford1939)
 
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
-
 ```
 
 <img src="man/figures/README-saturated-1.png" width="30%" />
@@ -161,7 +159,6 @@ lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
 ```{r covariance}
 # Get covariance indices and make it pretty with the `rempsyc::nice_table` integration
 lavaan_cov(fit.sem, nice_table = TRUE)
-
 ```
 
 <img src="man/figures/README-covariance-1.png" width="30%" />
@@ -180,7 +177,6 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 
 # Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_ind(fit.sem, nice_table = TRUE)
-
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="50%" />
@@ -216,7 +212,7 @@ ggplot2::ggsave("my_semPlot.pdf", width = 6, height = 6, limitsize = FALSE)
 <img src="man/figures/semplot2.png" width="70%" />
 
 ## Final note
-This is an experimental package in a *very* early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to share your questions or concerns. And of course, please have a look at the other tutorials to discover even more cool features: https://lavaanextra.remi-theriault.com/articles/
+This is an experimental package in a *very* early stage. Any feedback or feature request is appreciated, and the package will likely change and evolve over time based on community feedback. Feel free to open an issue or discussion to share your questions or concerns. And of course, please have a look at the other tutorials to discover even more cool features: https://lavaanExtra.remi-theriault.com/articles/
 
 ## Support me and this package
 
