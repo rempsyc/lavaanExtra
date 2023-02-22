@@ -86,11 +86,15 @@
 
 <div id="development-objectives-to-do-list" class="section level1">
 
-<ul><li>Make new vignette to show how to make custom tidySEM layout (maybe make another vignette about that?)</li>
+<ul><li>
+<code>cfa_fit_plot</code>, add covariances of items on plot?</li>
+<li>Make new vignette to show how to make custom tidySEM layout (maybe make another vignette about that?)</li>
 <li>Update image in full workflow tutorial</li>
 <li>All extraction functions: provide both standardized and unstandardized coefficients, as well as the 95% CI.</li>
 <li>
-<code>lavaan_cov</code>: rename r for something more accurate</li>
+<code>lavaan_cov</code>: rename r to covariance, σ(x, y) (“3C3”), or just covariance for simplicity if people are not likely to understand that.</li>
+<li>Create new function: <code>lavaan_cor</code> (then keep r but remove residual covariances)</li>
+<li>Add 95% confidence intervals whenever possible</li>
 <li>
 <code>nice_tidySEM</code>: improve algorithm when odd number of variables for layout matrix by adding two empty rows around the odd levels, and one empty row in the middle of the even levels.</li>
 <li>Add automatic covariances (specify levels, e.g.,: “level1 = IV”, “level2 = M”, “level3 = DV”)</li>
