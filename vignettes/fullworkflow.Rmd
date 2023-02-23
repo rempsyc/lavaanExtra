@@ -56,9 +56,7 @@ fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
                          remove.items = paste0("x", c(2:3, 7)))
 ```
 
-![]("man/figures/cfaplot2.png"){width="30%"}
-
-<!-- <img src="man/figures/cfaplot2.png" width="30%" /> -->
+<img src="man/figures/cfaplot2.png" width="30%" />
 
 <!-- <img src="https://lavaanExtra.remi-theriault.com/articles/images/fullworkflow/cfaplot2.png" width="30%" /> -->
 
