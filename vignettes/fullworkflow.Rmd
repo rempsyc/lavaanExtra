@@ -32,7 +32,7 @@ cat(cfa.model)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 ```
 
-<img src="https://lavaanExtra.remi-theriault.com/articles/images/fullworkflow/cfaplot.png" width="30%" />
+<img src="https://lavaanextra.remi-theriault.com/reference/figures/cfaplot.png" width="30%" />
 
 ```{r cfa2}
 # Get fit indices
@@ -52,7 +52,7 @@ fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
                          remove.items = paste0("x", c(2:3, 7)))
 ```
 
-<img src="https://lavaanExtra.remi-theriault.com/articles/images/fullworkflow/cfaplot2.png" width="30%" />
+<img src="https://lavaanextra.remi-theriault.com/reference/figures/cfaplot2.png" width="30%" />
 
 Let's compare the fit to see if it's better now:
 
@@ -237,7 +237,7 @@ modindices(fit.path, sort = TRUE, maximum.number = 5)
 
 For reference, this is our model, visually speaking
 
-![](https://lavaanExtra.remi-theriault.com/articles/images/fullworkflow/holzinger_model.png)
+<img src="https://lavaanextra.remi-theriault.com/reference/figures/holzinger_model.png" />
 
 We could also attempt to draw it with `lavaanExtra::nice_tidySEM`, a convenience wrapper around the amazing `tidySEM` package.
 
