@@ -11,6 +11,7 @@
 #' @param hide_nonsig_edges Logical, hides non-significant edges.
 #'                          Defaults to FALSE.
 #' @param hide_var Logical, hides variances. Defaults to TRUE.
+#' @param hide_cov Logical, hides co-variances. Defaults to FALSE.
 #' @param hide_mean Logical, hides means/node labels. Defaults to TRUE.
 #' @param est_std Logical, whether to use the standardized coefficients.
 #'                Defaults to TRUE.
@@ -62,9 +63,16 @@
 #'
 #' \if{html}{\figure{nice_tidySEM.png}{options: width="400"}}
 
-nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
-                         hide_var = TRUE, hide_mean = TRUE, est_std = TRUE,
-                         label, label_location = NULL, plot = TRUE,
+nice_tidySEM <- function(fit,
+                         layout = NULL,
+                         hide_nonsig_edges = FALSE,
+                         hide_var = TRUE,
+                         hide_cov = FALSE,
+                         hide_mean = TRUE,
+                         est_std = TRUE,
+                         label,
+                         label_location = NULL,
+                         plot = TRUE,
                          ...) {
   rlang::check_installed(c("tidySEM"), reason = "for this function.")
 
@@ -112,6 +120,9 @@ nice_tidySEM <- function(fit, layout = NULL, hide_nonsig_edges = FALSE,
   }
   if (isTRUE(hide_var)) {
     p <- tidySEM::hide_var(p)
+  }
+  if (isTRUE(hide_cov)) {
+    p <- tidySEM::hide_cov(p)
   }
   if (isTRUE(hide_mean)) {
     tidySEM::nodes(p)$label <- tidySEM::nodes(p)$name

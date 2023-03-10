@@ -9,6 +9,7 @@ nice_tidySEM(
   layout = NULL,
   hide_nonsig_edges = FALSE,
   hide_var = TRUE,
+  hide_cov = FALSE,
   hide_mean = TRUE,
   est_std = TRUE,
   label,
@@ -30,6 +31,8 @@ the layout matrix automatically.}
 Defaults to FALSE.}
 
 \item{hide_var}{Logical, hides variances. Defaults to TRUE.}
+
+\item{hide_cov}{Logical, hides co-variances. Defaults to FALSE.}
 
 \item{hide_mean}{Logical, hides means/node labels. Defaults to TRUE.}
 

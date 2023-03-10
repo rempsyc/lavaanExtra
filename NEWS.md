@@ -1,3 +1,9 @@
+# lavaanExtra 0.1.x
+* Work in progress!
+
+## lavaanExtra 0.1.4.1
+* `nice_tidySEM`: New argument to hide covariances: `hide_cov` (defaults to `FALSE`).
+
 # lavaanExtra 0.1.4
 * CRAN resubmission
 
