@@ -97,6 +97,11 @@ library(lavaan)
 library(lavaanExtra)
 
 # Define latent variables
+latent <- list(visual = c("x1", "x2", "x3"),
+               textual = c("x4", "x5", "x6"),
+               speed = c("x7", "x8", "x9"))
+
+# If you have many items, you can also use:
 latent <- list(visual = paste0("x", 1:3),
                textual = paste0("x", 4:6),
                speed = paste0("x", 7:9))
@@ -370,7 +375,7 @@ feature request is appreciated, and the package will likely change and
 evolve over time based on community feedback. Feel free to open an issue
 or discussion to share your questions or concerns. And of course, please
 have a look at the other tutorials to discover even more cool features:
-<https://lavaanextra.remi-theriault.com/articles/>
+<https://lavaanExtra.remi-theriault.com/articles/>
 
 ## Support me and this package
 
