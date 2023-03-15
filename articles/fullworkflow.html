@@ -109,8 +109,8 @@
 
 
 
-<link href="fullworkflow_files/tabwid-1.1.3/tabwid.css" rel="stylesheet">
-<script src="fullworkflow_files/tabwid-1.1.3/tabwid.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Full CFA/SEM workflow</h1>
                         <h4 data-toc-skip class="author">Rémi
@@ -151,7 +151,7 @@ Thériault</h4>
 <code class="sourceCode R"><span><span class="co"># Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`</span></span>
 <span><span class="co"># to get the factor loadings visually (optionally as PDF)</span></span>
 <span><span class="va">fit.cfa</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cfa_fit_plot.html">cfa_fit_plot</a></span><span class="op">(</span><span class="va">cfa.model</span>, <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## lavaan 0.6.14 ended normally after 35 iterations</span></span>
+<pre><code><span><span class="co">## lavaan 0.6.15 ended normally after 35 iterations</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   Estimator                                         ML</span></span>
 <span><span class="co">##   Optimization method                           NLMINB</span></span>
@@ -278,49 +278,49 @@ Thériault</h4>
 <code class="sourceCode R"><span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-632b426a{table-layout:auto;}.cl-6321584a{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-6321585e{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-6321585f{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-63215868{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-63215869{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-63215872{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-63215873{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-6325a1fc{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-6325a210{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-6325a211{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-6325c150{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6325c164{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6325c165{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-6325c16e{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-632b426a">
+<style>.cl-2e0196f2{table-layout:auto;}.cl-2df4b0f4{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2df4b11c{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-2df4b11d{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2df4b126{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2df4b127{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-2df4b130{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-2df4b131{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2dfa3da8{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-2dfa3dbc{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2dfa3dc6{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2dfa6364{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2dfa636e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2dfa6378{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2dfa6379{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-2e0196f2">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">Model</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">χ</span><span class="cl-6321585e">2</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321585f">df</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">χ</span><span class="cl-6321585e">2</span><span class="cl-6321584a">∕</span><span class="cl-6321585f">df</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321585f">p</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">CFI</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">TLI</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">RMSEA</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">SRMR</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">AIC</span></p></th>
-<th class="cl-6325c150"><p class="cl-6325a1fc"><span class="cl-6321584a">BIC</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">Model</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">χ</span><span class="cl-2df4b11c">2</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b11d">df</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">χ</span><span class="cl-2df4b11c">2</span><span class="cl-2df4b0f4">∕</span><span class="cl-2df4b11d">df</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b11d">p</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">CFI</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">TLI</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">RMSEA</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">SRMR</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">AIC</span></p></th>
+<th class="cl-2dfa6364"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">BIC</span></p></th>
 </tr></thead>
 <tbody><tr style="overflow-wrap:break-word;">
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">Model 1</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">85.31</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">24</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">3.55</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">&lt; .001</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">0.93</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">0.90</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">0.09</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">0.07</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">7,517.49</span></p></td>
-<td class="cl-6325c164"><p class="cl-6325a1fc"><span class="cl-6321584a">7,595.34</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">Model 1</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">85.31</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">24</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">3.55</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">&lt; .001</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">0.93</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">0.90</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">0.09</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">0.07</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">7,517.49</span></p></td>
+<td class="cl-2dfa636e"><p class="cl-2dfa3da8"><span class="cl-2df4b0f4">7,595.34</span></p></td>
 </tr></tbody>
 <tfoot>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">Ideal Value</span><span class="cl-63215869">a</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">—</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">—</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">&lt; 2 or 3</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">&gt; .05</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">≥ .95</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">≥ .95</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">&lt; .06-.08</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">≤ .08</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">Smaller is better</span></p></td>
-<td class="cl-6325c165"><p class="cl-6325a210"><span class="cl-63215868">Smaller is better</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">Ideal Value</span><span class="cl-2df4b127">a</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">—</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">—</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">&lt; 2 or 3</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">&gt; .05</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">≥ .95</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">≥ .95</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">&lt; .06-.08</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">≤ .08</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">Smaller is better</span></p></td>
+<td class="cl-2dfa6378"><p class="cl-2dfa3dbc"><span class="cl-2df4b126">Smaller is better</span></p></td>
 </tr>
-<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-6325c16e"><p class="cl-6325a211"><span class="cl-63215872">a</span><span class="cl-63215873">As proposed by Schreiber et al. (2006).</span></p></td></tr>
+<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-2dfa6379"><p class="cl-2dfa3dc6"><span class="cl-2df4b130">a</span><span class="cl-2df4b131">As proposed by Schreiber et al. (2006).</span></p></td></tr>
 </tfoot>
 </table>
 </div>
@@ -332,7 +332,7 @@ model, only what items you wish to remove:</p>
 <span><span class="co"># to get the factor loadings visually (as PDF)</span></span>
 <span><span class="va">fit.cfa2</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/cfa_fit_plot.html">cfa_fit_plot</a></span><span class="op">(</span><span class="va">cfa.model</span>, <span class="va">HolzingerSwineford1939</span>,</span>
 <span>                         remove.items <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## lavaan 0.6.14 ended normally after 29 iterations</span></span>
+<pre><code><span><span class="co">## lavaan 0.6.15 ended normally after 29 iterations</span></span>
 <span><span class="co">## </span></span>
 <span><span class="co">##   Estimator                                         ML</span></span>
 <span><span class="co">##   Optimization method                           NLMINB</span></span>
@@ -445,64 +445,64 @@ model, only what items you wish to remove:</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.cfa2</span><span class="op">)</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-639742bc{table-layout:auto;}.cl-638eb282{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-638eb296{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-638eb297{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-638eb2a0{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-638eb2a1{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-638eb2aa{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-638eb2ab{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-63927c50{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-63927c64{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-63927c65{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-6392938e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-63929398{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-63929399{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-639293a2{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-639293a3{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-639742bc">
+<style>.cl-2f27d6b8{table-layout:auto;}.cl-2f1ca342{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2f1ca356{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-2f1ca357{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2f1ca360{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2f1ca361{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-2f1ca36a{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-2f1ca36b{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-2f218c2c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-2f218c40{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2f218c41{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-2f21a9f0{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2f21aa04{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2f21aa05{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2f21aa0e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-2f21aa18{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-2f27d6b8">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">Model</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">χ</span><span class="cl-638eb296">2</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb297">df</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">χ</span><span class="cl-638eb296">2</span><span class="cl-638eb282">∕</span><span class="cl-638eb297">df</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb297">p</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">CFI</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">TLI</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">RMSEA</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">SRMR</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">AIC</span></p></th>
-<th class="cl-6392938e"><p class="cl-63927c50"><span class="cl-638eb282">BIC</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">Model</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">χ</span><span class="cl-2f1ca356">2</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca357">df</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">χ</span><span class="cl-2f1ca356">2</span><span class="cl-2f1ca342">∕</span><span class="cl-2f1ca357">df</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca357">p</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">CFI</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">TLI</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">RMSEA</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">SRMR</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">AIC</span></p></th>
+<th class="cl-2f21a9f0"><p class="cl-2f218c2c"><span class="cl-2f1ca342">BIC</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">fit.cfa</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">85.31</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">24</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">3.55</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">&lt; .001</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">0.93</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">0.90</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">0.09</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">0.07</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">7,517.49</span></p></td>
-<td class="cl-63929398"><p class="cl-63927c50"><span class="cl-638eb282">7,595.34</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">fit.cfa</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">85.31</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">24</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">3.55</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">&lt; .001</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.93</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.90</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.09</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.07</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">7,517.49</span></p></td>
+<td class="cl-2f21aa04"><p class="cl-2f218c2c"><span class="cl-2f1ca342">7,595.34</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">fit.cfa2</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">8.44</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">7</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">1.21</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">.295</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">1.00</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">0.99</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">0.03</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">0.02</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">4,887.73</span></p></td>
-<td class="cl-63929399"><p class="cl-63927c50"><span class="cl-638eb282">4,939.63</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">fit.cfa2</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">8.44</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">7</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">1.21</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">.295</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">1.00</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.99</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.03</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">0.02</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">4,887.73</span></p></td>
+<td class="cl-2f21aa05"><p class="cl-2f218c2c"><span class="cl-2f1ca342">4,939.63</span></p></td>
 </tr>
 </tbody>
 <tfoot>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">Ideal Value</span><span class="cl-638eb2a1">a</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">—</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">—</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">&lt; 2 or 3</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">&gt; .05</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">≥ .95</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">≥ .95</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">&lt; .06-.08</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">≤ .08</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">Smaller is better</span></p></td>
-<td class="cl-639293a2"><p class="cl-63927c64"><span class="cl-638eb2a0">Smaller is better</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">Ideal Value</span><span class="cl-2f1ca361">a</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">—</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">—</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">&lt; 2 or 3</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">&gt; .05</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">≥ .95</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">≥ .95</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">&lt; .06-.08</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">≤ .08</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">Smaller is better</span></p></td>
+<td class="cl-2f21aa0e"><p class="cl-2f218c40"><span class="cl-2f1ca360">Smaller is better</span></p></td>
 </tr>
-<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-639293a3"><p class="cl-63927c65"><span class="cl-638eb2aa">a</span><span class="cl-638eb2ab">As proposed by Schreiber et al. (2006).</span></p></td></tr>
+<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-2f21aa18"><p class="cl-2f218c41"><span class="cl-2f1ca36a">a</span><span class="cl-2f1ca36b">As proposed by Schreiber et al. (2006).</span></p></td></tr>
 </tfoot>
 </table>
 </div>
@@ -751,62 +751,62 @@ objects.</p>
 <span><span class="co"># And make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.saturated</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-6481c18e{table-layout:auto;}.cl-647945e0{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-647945fe{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-647945ff{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-647d01d0{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-647d1a12{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-647d1a1c{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-647d1a26{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-647d1a27{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-6481c18e">
+<style>.cl-30439834{table-layout:auto;}.cl-3033b996{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3033b9aa{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3033b9ab{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-303aa0ee{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-303ac452{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-303ac466{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-303ac470{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-303ac47a{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-30439834">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-647d1a12"><p class="cl-647d01d0"><span class="cl-647945e0">Outcome</span></p></th>
-<th class="cl-647d1a12"><p class="cl-647d01d0"><span class="cl-647945e0">Predictor</span></p></th>
-<th class="cl-647d1a12"><p class="cl-647d01d0"><span class="cl-647945e0">β</span></p></th>
-<th class="cl-647d1a12"><p class="cl-647d01d0"><span class="cl-647945fe">p</span></p></th>
+<th class="cl-303ac452"><p class="cl-303aa0ee"><span class="cl-3033b996">Outcome</span></p></th>
+<th class="cl-303ac452"><p class="cl-303aa0ee"><span class="cl-3033b996">Predictor</span></p></th>
+<th class="cl-303ac452"><p class="cl-303aa0ee"><span class="cl-3033b996">β</span></p></th>
+<th class="cl-303ac452"><p class="cl-303aa0ee"><span class="cl-3033b9aa">p</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">speed</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">visual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">0.21</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">speed</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">visual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">0.21</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">textual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">visual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">0.24</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">textual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">visual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">0.24</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">visual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">ageyr</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">-0.16</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">.014</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">visual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">ageyr</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">-0.16</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">.014</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">visual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">grade</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">0.28</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">visual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">grade</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">0.28</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a26"><p class="cl-647d01d0"><span class="cl-647945e0">speed</span></p></td>
-<td class="cl-647d1a26"><p class="cl-647d01d0"><span class="cl-647945e0">ageyr</span></p></td>
-<td class="cl-647d1a26"><p class="cl-647d01d0"><span class="cl-647945e0">0.04</span></p></td>
-<td class="cl-647d1a26"><p class="cl-647d01d0"><span class="cl-647945e0">.568</span></p></td>
+<td class="cl-303ac470"><p class="cl-303aa0ee"><span class="cl-3033b996">speed</span></p></td>
+<td class="cl-303ac470"><p class="cl-303aa0ee"><span class="cl-3033b996">ageyr</span></p></td>
+<td class="cl-303ac470"><p class="cl-303aa0ee"><span class="cl-3033b996">0.04</span></p></td>
+<td class="cl-303ac470"><p class="cl-303aa0ee"><span class="cl-3033b996">.568</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">speed</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">grade</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">0.31</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">speed</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">grade</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">0.31</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">textual</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">ageyr</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">-0.40</span></p></td>
-<td class="cl-647d1a1c"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">textual</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">ageyr</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">-0.40</span></p></td>
+<td class="cl-303ac466"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-647d1a27"><p class="cl-647d01d0"><span class="cl-647945ff">textual</span></p></td>
-<td class="cl-647d1a27"><p class="cl-647d01d0"><span class="cl-647945ff">grade</span></p></td>
-<td class="cl-647d1a27"><p class="cl-647d01d0"><span class="cl-647945ff">0.36</span></p></td>
-<td class="cl-647d1a27"><p class="cl-647d01d0"><span class="cl-647945ff">&lt; .001</span></p></td>
+<td class="cl-303ac47a"><p class="cl-303aa0ee"><span class="cl-3033b9ab">textual</span></p></td>
+<td class="cl-303ac47a"><p class="cl-303aa0ee"><span class="cl-3033b9ab">grade</span></p></td>
+<td class="cl-303ac47a"><p class="cl-303aa0ee"><span class="cl-3033b9ab">0.36</span></p></td>
+<td class="cl-303ac47a"><p class="cl-303aa0ee"><span class="cl-3033b9ab">&lt; .001</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -900,56 +900,56 @@ regressions and the indirect effects.</p>
 <code class="sourceCode R"><span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-64b82f8a{table-layout:auto;}.cl-64affc84{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64affc98{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64affca2{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64b39ac4{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-64b3b2fc{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-64b3b306{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-64b3b310{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-64b82f8a">
+<style>.cl-30887102{table-layout:auto;}.cl-307c3a0e{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-307c3a22{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-307c3a2c{font-family:'Times New Roman';font-size:12pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30826a00{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-30828ad0{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30828ada{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30828adb{background-color:rgba(217, 217, 217, 1.00);vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-30887102">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-64b3b2fc"><p class="cl-64b39ac4"><span class="cl-64affc84">Outcome</span></p></th>
-<th class="cl-64b3b2fc"><p class="cl-64b39ac4"><span class="cl-64affc84">Predictor</span></p></th>
-<th class="cl-64b3b2fc"><p class="cl-64b39ac4"><span class="cl-64affc84">β</span></p></th>
-<th class="cl-64b3b2fc"><p class="cl-64b39ac4"><span class="cl-64affc98">p</span></p></th>
+<th class="cl-30828ad0"><p class="cl-30826a00"><span class="cl-307c3a0e">Outcome</span></p></th>
+<th class="cl-30828ad0"><p class="cl-30826a00"><span class="cl-307c3a0e">Predictor</span></p></th>
+<th class="cl-30828ad0"><p class="cl-30826a00"><span class="cl-307c3a0e">β</span></p></th>
+<th class="cl-30828ad0"><p class="cl-30826a00"><span class="cl-307c3a22">p</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">speed</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">visual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">0.21</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">speed</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">visual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">0.21</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">textual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">visual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">0.24</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">textual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">visual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">0.24</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">visual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">ageyr</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">-0.16</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">.014</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">visual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">ageyr</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">-0.16</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">.014</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">visual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">grade</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">0.28</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">visual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">grade</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">0.28</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">speed</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">grade</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">0.33</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">speed</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">grade</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">0.33</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">textual</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">ageyr</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">-0.40</span></p></td>
-<td class="cl-64b3b306"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">textual</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">ageyr</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">-0.40</span></p></td>
+<td class="cl-30828ada"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64b3b310"><p class="cl-64b39ac4"><span class="cl-64affca2">textual</span></p></td>
-<td class="cl-64b3b310"><p class="cl-64b39ac4"><span class="cl-64affca2">grade</span></p></td>
-<td class="cl-64b3b310"><p class="cl-64b39ac4"><span class="cl-64affca2">0.36</span></p></td>
-<td class="cl-64b3b310"><p class="cl-64b39ac4"><span class="cl-64affca2">&lt; .001</span></p></td>
+<td class="cl-30828adb"><p class="cl-30826a00"><span class="cl-307c3a2c">textual</span></p></td>
+<td class="cl-30828adb"><p class="cl-30826a00"><span class="cl-307c3a2c">grade</span></p></td>
+<td class="cl-30828adb"><p class="cl-30826a00"><span class="cl-307c3a2c">0.36</span></p></td>
+<td class="cl-30828adb"><p class="cl-30826a00"><span class="cl-307c3a2c">&lt; .001</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -971,56 +971,56 @@ regressions and the indirect effects.</p>
 <code class="sourceCode R"><span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/lavaan_cov.html">lavaan_cov</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-64d6f2c6{table-layout:auto;}.cl-64ce928e{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64ce92a2{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-64d23268{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-64d24b86{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-64d24b90{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-64d24b9a{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-64d6f2c6">
+<style>.cl-30ade05e{table-layout:auto;}.cl-30a2a8ec{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30a2a900{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30a77598{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-30a794ba{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30a794c4{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30a794ce{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-30ade05e">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-64d24b86"><p class="cl-64d23268"><span class="cl-64ce928e">Variable 1</span></p></th>
-<th class="cl-64d24b86"><p class="cl-64d23268"><span class="cl-64ce928e">Variable 2</span></p></th>
-<th class="cl-64d24b86"><p class="cl-64d23268"><span class="cl-64ce92a2">r</span></p></th>
-<th class="cl-64d24b86"><p class="cl-64d23268"><span class="cl-64ce92a2">p</span></p></th>
+<th class="cl-30a794ba"><p class="cl-30a77598"><span class="cl-30a2a8ec">Variable 1</span></p></th>
+<th class="cl-30a794ba"><p class="cl-30a77598"><span class="cl-30a2a8ec">Variable 2</span></p></th>
+<th class="cl-30a794ba"><p class="cl-30a77598"><span class="cl-30a2a900">r</span></p></th>
+<th class="cl-30a794ba"><p class="cl-30a77598"><span class="cl-30a2a900">p</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">speed</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">textual</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.13</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.024</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">speed</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">textual</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.13</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.024</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">ageyr</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">grade</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.51</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">ageyr</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">grade</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.51</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">speed</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">speed</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.82</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">speed</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">speed</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.82</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">textual</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">textual</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.76</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">textual</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">textual</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.76</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">visual</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">visual</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">.94</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">visual</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">visual</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">.94</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">ageyr</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">ageyr</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">1.0</span></p></td>
-<td class="cl-64d24b90"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">ageyr</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">ageyr</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">1.0</span></p></td>
+<td class="cl-30a794c4"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-64d24b9a"><p class="cl-64d23268"><span class="cl-64ce928e">grade</span></p></td>
-<td class="cl-64d24b9a"><p class="cl-64d23268"><span class="cl-64ce928e">grade</span></p></td>
-<td class="cl-64d24b9a"><p class="cl-64d23268"><span class="cl-64ce928e">1.0</span></p></td>
-<td class="cl-64d24b9a"><p class="cl-64d23268"><span class="cl-64ce928e">&lt; .001</span></p></td>
+<td class="cl-30a794ce"><p class="cl-30a77598"><span class="cl-30a2a8ec">grade</span></p></td>
+<td class="cl-30a794ce"><p class="cl-30a77598"><span class="cl-30a2a8ec">grade</span></p></td>
+<td class="cl-30a794ce"><p class="cl-30a77598"><span class="cl-30a2a8ec">1.0</span></p></td>
+<td class="cl-30a794ce"><p class="cl-30a77598"><span class="cl-30a2a8ec">&lt; .001</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -1029,77 +1029,77 @@ regressions and the indirect effects.</p>
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span><span class="op">)</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-650f8dd4{table-layout:auto;}.cl-65065e1c{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-65065e30{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-65065e3a{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-65065e3b{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-65065e44{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-65065e45{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-65065e4e{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-650a662e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-650a6638{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-650a6642{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-650a815e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-650a8168{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-650a8172{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-650a8173{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-650a817c{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-650f8dd4">
+<style>.cl-30fa3918{table-layout:auto;}.cl-30eeebee{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30eeebf8{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-30eeec02{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30eeec0c{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30eeec0d{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-30eeec16{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-30eeec20{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-30f3e694{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-30f3e69e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-30f3e6a8{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-30f40908{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30f4091c{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30f4091d{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30f40926{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-30f40927{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-30fa3918">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">Model</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">χ</span><span class="cl-65065e30">2</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e3a">df</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">χ</span><span class="cl-65065e30">2</span><span class="cl-65065e1c">∕</span><span class="cl-65065e3a">df</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e3a">p</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">CFI</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">TLI</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">RMSEA</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">SRMR</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">AIC</span></p></th>
-<th class="cl-650a815e"><p class="cl-650a662e"><span class="cl-65065e1c">BIC</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">Model</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">χ</span><span class="cl-30eeebf8">2</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeec02">df</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">χ</span><span class="cl-30eeebf8">2</span><span class="cl-30eeebee">∕</span><span class="cl-30eeec02">df</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeec02">p</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">CFI</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">TLI</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">RMSEA</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">SRMR</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">AIC</span></p></th>
+<th class="cl-30f40908"><p class="cl-30f3e694"><span class="cl-30eeebee">BIC</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">fit.cfa</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">85.31</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">24</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">3.55</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">&lt; .001</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.93</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.90</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.09</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.07</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">7,517.49</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">7,595.34</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">fit.cfa</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">85.31</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">24</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">3.55</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">&lt; .001</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.93</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.90</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.09</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.07</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">7,517.49</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">7,595.34</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">fit.saturated</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.00</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">Inf</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c"></span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">1.00</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">1.00</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.00</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">0.00</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">3,483.46</span></p></td>
-<td class="cl-650a8168"><p class="cl-650a662e"><span class="cl-65065e1c">3,539.02</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">fit.saturated</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.00</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">Inf</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee"></span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">1.00</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">1.00</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.00</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">0.00</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">3,483.46</span></p></td>
+<td class="cl-30f4091c"><p class="cl-30f3e694"><span class="cl-30eeebee">3,539.02</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">fit.path</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">0.33</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">1</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">0.33</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">.568</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">1.00</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">1.03</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">0.00</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">0.01</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">3,481.79</span></p></td>
-<td class="cl-650a8172"><p class="cl-650a662e"><span class="cl-65065e1c">3,533.64</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">fit.path</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">0.33</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">1</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">0.33</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">.568</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">1.00</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">1.03</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">0.00</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">0.01</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">3,481.79</span></p></td>
+<td class="cl-30f4091d"><p class="cl-30f3e694"><span class="cl-30eeebee">3,533.64</span></p></td>
 </tr>
 </tbody>
 <tfoot>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">Ideal Value</span><span class="cl-65065e44">a</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">—</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">—</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">&lt; 2 or 3</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">&gt; .05</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">≥ .95</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">≥ .95</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">&lt; .06-.08</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">≤ .08</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">Smaller is better</span></p></td>
-<td class="cl-650a8173"><p class="cl-650a6638"><span class="cl-65065e3b">Smaller is better</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">Ideal Value</span><span class="cl-30eeec0d">a</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">—</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">—</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">&lt; 2 or 3</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">&gt; .05</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">≥ .95</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">≥ .95</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">&lt; .06-.08</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">≤ .08</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">Smaller is better</span></p></td>
+<td class="cl-30f40926"><p class="cl-30f3e69e"><span class="cl-30eeec0c">Smaller is better</span></p></td>
 </tr>
-<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-650a817c"><p class="cl-650a6642"><span class="cl-65065e45">a</span><span class="cl-65065e4e">As proposed by Schreiber et al. (2006).</span></p></td></tr>
+<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-30f40927"><p class="cl-30f3e6a8"><span class="cl-30eeec16">a</span><span class="cl-30eeec20">As proposed by Schreiber et al. (2006).</span></p></td></tr>
 </tfoot>
 </table>
 </div>
@@ -1113,26 +1113,26 @@ regressions and the indirect effects.</p>
 <code class="sourceCode R"><span><span class="co"># We can get it prettier with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.path</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-652f5cc2{table-layout:auto;}.cl-652179ae{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-652179c2{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-652a214e{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-652a7676{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-652a768a{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-652a768b{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-652f5cc2">
+<style>.cl-311d21d0{table-layout:auto;}.cl-311253a4{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-311253b8{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-311731bc{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-31174fb2{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31174fbc{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-31174fc6{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-311d21d0">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-652a7676"><p class="cl-652a214e"><span class="cl-652179ae">Indirect Effect</span></p></th>
-<th class="cl-652a7676"><p class="cl-652a214e"><span class="cl-652179ae">Paths</span></p></th>
-<th class="cl-652a7676"><p class="cl-652a214e"><span class="cl-652179ae">β</span></p></th>
-<th class="cl-652a7676"><p class="cl-652a214e"><span class="cl-652179c2">p</span></p></th>
+<th class="cl-31174fb2"><p class="cl-311731bc"><span class="cl-311253a4">Indirect Effect</span></p></th>
+<th class="cl-31174fb2"><p class="cl-311731bc"><span class="cl-311253a4">Paths</span></p></th>
+<th class="cl-31174fb2"><p class="cl-311731bc"><span class="cl-311253a4">β</span></p></th>
+<th class="cl-31174fb2"><p class="cl-311731bc"><span class="cl-311253b8">p</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-652a768a"><p class="cl-652a214e"><span class="cl-652179ae">age → visual → speed</span></p></td>
-<td class="cl-652a768a"><p class="cl-652a214e"><span class="cl-652179ae">ageyr_visual*visual_speed</span></p></td>
-<td class="cl-652a768a"><p class="cl-652a214e"><span class="cl-652179ae">-0.03</span></p></td>
-<td class="cl-652a768a"><p class="cl-652a214e"><span class="cl-652179ae">.037</span></p></td>
+<td class="cl-31174fbc"><p class="cl-311731bc"><span class="cl-311253a4">age → visual → speed</span></p></td>
+<td class="cl-31174fbc"><p class="cl-311731bc"><span class="cl-311253a4">ageyr_visual*visual_speed</span></p></td>
+<td class="cl-31174fbc"><p class="cl-311731bc"><span class="cl-311253a4">-0.03</span></p></td>
+<td class="cl-31174fbc"><p class="cl-311731bc"><span class="cl-311253a4">.037</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-652a768b"><p class="cl-652a214e"><span class="cl-652179ae">grade → visual → textual</span></p></td>
-<td class="cl-652a768b"><p class="cl-652a214e"><span class="cl-652179ae">grade_visual*visual_textual</span></p></td>
-<td class="cl-652a768b"><p class="cl-652a214e"><span class="cl-652179ae">0.07</span></p></td>
-<td class="cl-652a768b"><p class="cl-652a214e"><span class="cl-652179ae">.002</span></p></td>
+<td class="cl-31174fc6"><p class="cl-311731bc"><span class="cl-311253a4">grade → visual → textual</span></p></td>
+<td class="cl-31174fc6"><p class="cl-311731bc"><span class="cl-311253a4">grade_visual*visual_textual</span></p></td>
+<td class="cl-31174fc6"><p class="cl-311731bc"><span class="cl-311253a4">0.07</span></p></td>
+<td class="cl-31174fc6"><p class="cl-311731bc"><span class="cl-311253a4">.002</span></p></td>
 </tr>
 </tbody>
 </table>
@@ -1213,90 +1213,90 @@ for our CFA earlier, so we don’t even need to write that again!</p>
 <span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="../reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/lst.html" class="external-link">lst</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.saturated</span>, <span class="va">fit.path</span>, <span class="va">fit.latent</span><span class="op">)</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="tabwid">
-<style>.cl-67e0e4cc{table-layout:auto;}.cl-67d7cd6a{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-67d7cd7e{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-67d7cd88{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-67d7cd89{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-67d7cd92{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-67d7cd93{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-67d7cd9c{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-67dbd248{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-67dbd25c{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-67dbd266{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-67dbee40{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-67dbee54{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-67dbee5e{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-67dbee68{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-67dbee69{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
-<table data-quarto-disable-processing="true" class="table cl-67e0e4cc">
+<style>.cl-347bb404{table-layout:auto;}.cl-346fc126{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-346fc130{font-family:'Times New Roman';font-size:7.2pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.6pt;}.cl-346fc13a{font-family:'Times New Roman';font-size:12pt;font-weight:normal;font-style:italic;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-346fc144{font-family:'Times New Roman';font-size:11pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-346fc145{font-family:'Times New Roman';font-size:6.6pt;font-weight:bold;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-346fc14e{font-family:'Times New Roman';font-size:6.6pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;position: relative;bottom:3.3pt;}.cl-346fc158{font-family:'Times New Roman';font-size:11pt;font-weight:normal;font-style:normal;text-decoration:none;color:rgba(0, 0, 0, 1.00);background-color:transparent;}.cl-3474d0e4{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 2;background-color:transparent;}.cl-3474d0ee{margin:0;text-align:center;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3474d0f8{margin:0;text-align:left;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);padding-bottom:5pt;padding-top:5pt;padding-left:5pt;padding-right:5pt;line-height: 1;background-color:transparent;}.cl-3474f0c4{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3474f0ce{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3474f0d8{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(0, 0, 0, 1.00);border-right: 0 solid rgba(0, 0, 0, 1.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3474f0e2{background-color:transparent;vertical-align: middle;border-bottom: 0.5pt solid rgba(0, 0, 0, 1.00);border-top: 0 solid rgba(255, 255, 255, 0.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}.cl-3474f0e3{background-color:transparent;vertical-align: middle;border-bottom: 0 solid rgba(255, 255, 255, 0.00);border-top: 0.5pt solid rgba(0, 0, 0, 1.00);border-left: 0 solid rgba(255, 255, 255, 0.00);border-right: 0 solid rgba(255, 255, 255, 0.00);margin-bottom:0;margin-top:0;margin-left:0;margin-right:0;}</style>
+<table data-quarto-disable-processing="true" class="table cl-347bb404">
 <thead><tr style="overflow-wrap:break-word;">
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">Model</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">χ</span><span class="cl-67d7cd7e">2</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd88">df</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">χ</span><span class="cl-67d7cd7e">2</span><span class="cl-67d7cd6a">∕</span><span class="cl-67d7cd88">df</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd88">p</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">CFI</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">TLI</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">RMSEA</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">SRMR</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">AIC</span></p></th>
-<th class="cl-67dbee40"><p class="cl-67dbd248"><span class="cl-67d7cd6a">BIC</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">Model</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">χ</span><span class="cl-346fc130">2</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc13a">df</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">χ</span><span class="cl-346fc130">2</span><span class="cl-346fc126">∕</span><span class="cl-346fc13a">df</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc13a">p</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">CFI</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">TLI</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">RMSEA</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">SRMR</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">AIC</span></p></th>
+<th class="cl-3474f0c4"><p class="cl-3474d0e4"><span class="cl-346fc126">BIC</span></p></th>
 </tr></thead>
 <tbody>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">fit.cfa</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">85.31</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">24</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3.55</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">&lt; .001</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.93</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.90</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.09</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.07</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">7,517.49</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">7,595.34</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">fit.cfa</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">85.31</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">24</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">3.55</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">&lt; .001</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.93</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.90</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.09</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.07</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">7,517.49</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">7,595.34</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">fit.saturated</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">Inf</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a"></span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">1.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">1.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3,483.46</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3,539.02</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">fit.saturated</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">Inf</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126"></span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">1.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">1.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">3,483.46</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">3,539.02</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">fit.path</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.33</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">1</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.33</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">.568</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">1.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">1.03</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.00</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.01</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3,481.79</span></p></td>
-<td class="cl-67dbee54"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3,533.64</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">fit.path</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.33</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">1</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.33</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">.568</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">1.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">1.03</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.00</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">0.01</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">3,481.79</span></p></td>
+<td class="cl-3474f0ce"><p class="cl-3474d0e4"><span class="cl-346fc126">3,533.64</span></p></td>
 </tr>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">fit.latent</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">118.92</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">37</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">3.21</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">&lt; .001</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.92</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.89</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.09</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">0.06</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">8,638.79</span></p></td>
-<td class="cl-67dbee5e"><p class="cl-67dbd248"><span class="cl-67d7cd6a">8,746.20</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">fit.latent</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">118.92</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">37</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">3.21</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">&lt; .001</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">0.92</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">0.89</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">0.09</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">0.06</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">8,638.79</span></p></td>
+<td class="cl-3474f0d8"><p class="cl-3474d0e4"><span class="cl-346fc126">8,746.20</span></p></td>
 </tr>
 </tbody>
 <tfoot>
 <tr style="overflow-wrap:break-word;">
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">Ideal Value</span><span class="cl-67d7cd92">a</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">—</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">—</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">&lt; 2 or 3</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">&gt; .05</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">≥ .95</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">≥ .95</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">&lt; .06-.08</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">≤ .08</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">Smaller is better</span></p></td>
-<td class="cl-67dbee68"><p class="cl-67dbd25c"><span class="cl-67d7cd89">Smaller is better</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">Ideal Value</span><span class="cl-346fc145">a</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">—</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">—</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">&lt; 2 or 3</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">&gt; .05</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">≥ .95</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">≥ .95</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">&lt; .06-.08</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">≤ .08</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">Smaller is better</span></p></td>
+<td class="cl-3474f0e2"><p class="cl-3474d0ee"><span class="cl-346fc144">Smaller is better</span></p></td>
 </tr>
-<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-67dbee69"><p class="cl-67dbd266"><span class="cl-67d7cd93">a</span><span class="cl-67d7cd9c">As proposed by Schreiber et al. (2006).</span></p></td></tr>
+<tr style="overflow-wrap:break-word;"><td colspan="11" class="cl-3474f0e3"><p class="cl-3474d0f8"><span class="cl-346fc14e">a</span><span class="cl-346fc158">As proposed by Schreiber et al. (2006).</span></p></td></tr>
 </tfoot>
 </table>
 </div>
