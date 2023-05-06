@@ -1,6 +1,10 @@
 # lavaanExtra 0.1.x
 * Work in progress!
 
+## lavaanExtra 0.1.4.2
+* `nice_fit`: better error message when not providing a lavaan object.
+* `tmvnsim` package now required for nice_tidySEM as it seems necessary to use `tidySEM`'s new version.
+
 ## lavaanExtra 0.1.4.1
 * `nice_tidySEM`: New argument to hide covariances: `hide_cov` (defaults to `FALSE`).
 

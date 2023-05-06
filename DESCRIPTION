@@ -25,6 +25,7 @@ Suggests:
     png,
     webshot,
     tidySEM,
+    tmvnsim,
     rlang,
     knitr,
     tibble,

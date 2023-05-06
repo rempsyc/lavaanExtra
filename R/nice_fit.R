@@ -39,11 +39,16 @@
 #' nice_fit(fit)
 #'
 nice_fit <- function(model, model.labels, nice_table = FALSE) {
-  if (inherits(model, "list")) {
+
+  if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
-  } else {
+  } else if (inherits(model, "lavaan")) {
     models.list <- list(model)
+  } else {
+    stop(paste("Model must be of class 'lavaan' or be a 'list()' of lavaan models (using 'c()' won't work).\n",
+               "Have you perhaps provided the model specification (of class character) instead of the sem or cfa object?"))
   }
+
   x <- lapply(models.list, nice_fit_internal)
   df <- do.call(rbind, x)
   if (!missing(model.labels)) {
