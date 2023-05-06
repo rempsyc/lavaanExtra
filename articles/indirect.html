@@ -109,7 +109,7 @@
 
 
 
-<script src="indirect_files/htmlwidgets-1.6.1/htmlwidgets.js"></script><script src="indirect_files/viz-1.8.2/viz.js"></script><link href="indirect_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
+<script src="indirect_files/htmlwidgets-1.6.2/htmlwidgets.js"></script><script src="indirect_files/viz-1.8.2/viz.js"></script><link href="indirect_files/DiagrammeR-styles-0.2/styles.css" rel="stylesheet">
 <script src="indirect_files/grViz-binding-1.0.9/grViz.js"></script><div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Automatic indirect effects</h1>
@@ -172,8 +172,8 @@ always triple check that your model was specified correctly.</p>
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-d103746f427ac274abba" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-d103746f427ac274abba">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-7e747c704ed761f33cc9" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-7e747c704ed761f33cc9">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="section level2">
 <h2 id="iv-1-mediator-2-dvs">1 IV, 1 mediator, 2 DVs<a class="anchor" aria-label="anchor" href="#iv-1-mediator-2-dvs"></a>
@@ -207,15 +207,18 @@ always triple check that your model was specified correctly.</p>
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ef4f9907385730b299db" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ef4f9907385730b299db">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] visual->textual [label = \"0.31***\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fe2d346b3b4b762a46dd" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-fe2d346b3b4b762a46dd">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] visual->textual [label = \"0.31***\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Registered S3 method overwritten by 'tidySEM':</span></span>
+<span><span class="co">##   method          from  </span></span>
+<span><span class="co">##   predict.MxModel OpenMx</span></span></code></pre>
 <p><img src="indirect_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="iv-2-mediator-1-dv">1 IV, 2 mediator, 1 DV<a class="anchor" aria-label="anchor" href="#iv-2-mediator-1-dv"></a>
 </h2>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="st">"speed"</span></span>
@@ -241,19 +244,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
 <span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span></code></pre>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-3100d2c215a69a754bf1" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-3100d2c215a69a754bf1">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] ageyr->visual [label = \"\"] ageyr->grade [label = \"0.51***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-611cd7e037a6889af165" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-611cd7e037a6889af165">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] ageyr->visual [label = \"\"] ageyr->grade [label = \"0.51***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-4-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="iv-2-mediators-2-dvs">1 IV, 2 mediators, 2 DVs<a class="anchor" aria-label="anchor" href="#iv-2-mediators-2-dvs"></a>
 </h2>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
@@ -281,19 +284,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## ageyr_visual_textual := ageyr_visual * visual_textual</span></span>
 <span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_grade_textual := ageyr_grade * grade_textual</span></span></code></pre>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-792a4b69f8e8f3fc017f" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-792a4b69f8e8f3fc017f">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] ageyr->visual [label = \"\"] ageyr->grade [label = \"0.51***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-40ae09be18d078ee6212" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-40ae09be18d078ee6212">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] ageyr->visual [label = \"\"] ageyr->grade [label = \"0.51***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-5-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-1-mediator-1-dv">2 IVs, 1 mediator, 1 DV<a class="anchor" aria-label="anchor" href="#ivs-1-mediator-1-dv"></a>
 </h2>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"ageyr"</span><span class="op">)</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="st">"visual"</span></span>
@@ -319,19 +322,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## sex_visual_speed := sex_visual * visual_speed</span></span>
 <span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span></code></pre>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-21a6bb0804ee18cfe09f" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-21a6bb0804ee18cfe09f">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; sex; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-a8609b2b56c8cec281b6" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-a8609b2b56c8cec281b6">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; sex; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-6-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-1-mediator-2-dvs">2 IVs, 1 mediator, 2 DVs<a class="anchor" aria-label="anchor" href="#ivs-1-mediator-2-dvs"></a>
 </h2>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
@@ -358,19 +361,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## sex_visual_textual := sex_visual * visual_textual</span></span>
 <span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
 <span><span class="co">## ageyr_visual_textual := ageyr_visual * visual_textual</span></span></code></pre>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-fdd8218ff624abb8255a" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-fdd8218ff624abb8255a">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; sex; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] visual->textual [label = \"0.31***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c344b9d0427f8beae50e" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-c344b9d0427f8beae50e">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; sex; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.27***\"] visual->textual [label = \"0.31***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-2-mediators-1-dv">2 IVs, 2 mediators, 1 DV<a class="anchor" aria-label="anchor" href="#ivs-2-mediators-1-dv"></a>
 </h2>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span><span class="op">)</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="st">"speed"</span></span>
@@ -398,19 +401,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## ageyr_visual_speed := ageyr_visual * visual_speed</span></span>
 <span><span class="co">## sex_grade_speed := sex_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span></code></pre>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-37b46a6dd6f07b342d6b" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-37b46a6dd6f07b342d6b">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.52***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-35a829069cc92cf692ee" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-35a829069cc92cf692ee">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.52***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-2-mediators-2-dvs">2 IVs, 2 mediators, 2 DVs<a class="anchor" aria-label="anchor" href="#ivs-2-mediators-2-dvs"></a>
 </h2>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
@@ -442,19 +445,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## sex_grade_textual := sex_grade * grade_textual</span></span>
 <span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_grade_textual := ageyr_grade * grade_textual</span></span></code></pre>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-1b4ada4be90c4aab5707" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-1b4ada4be90c4aab5707">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.52***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-666c7cef447a9f0db962" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-666c7cef447a9f0db962">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.52***\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-9-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-2-mediators-1-dv-1">3 IVs, 2 mediators, 1 DV<a class="anchor" aria-label="anchor" href="#ivs-2-mediators-1-dv-1"></a>
 </h2>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"ageyr"</span>, <span class="st">"agemo"</span><span class="op">)</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="st">"speed"</span></span>
@@ -484,19 +487,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## sex_grade_speed := sex_grade * grade_speed</span></span>
 <span><span class="co">## ageyr_grade_speed := ageyr_grade * grade_speed</span></span>
 <span><span class="co">## agemo_grade_speed := agemo_grade * grade_speed</span></span></code></pre>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-8fa79b9fd6741452b080" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-8fa79b9fd6741452b080">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.55***\"] agemo->grade [label = \"0.13*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c82f7955b0a95813cb6f" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-c82f7955b0a95813cb6f">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; speed \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.55***\"] agemo->grade [label = \"0.13*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-10-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-2-mediators-2-dvs-1">3 IVs, 2 mediators, 2 DVs<a class="anchor" aria-label="anchor" href="#ivs-2-mediators-2-dvs-1"></a>
 </h2>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span><span class="op">)</span></span>
 <span></span>
@@ -532,19 +535,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## ageyr_grade_textual := ageyr_grade * grade_textual</span></span>
 <span><span class="co">## agemo_grade_speed := agemo_grade * grade_speed</span></span>
 <span><span class="co">## agemo_grade_textual := agemo_grade * grade_textual</span></span></code></pre>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-32d2cf9e295d8b76987e" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-32d2cf9e295d8b76987e">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.55***\"] agemo->grade [label = \"0.13*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cb7a875d9568795065ea" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-cb7a875d9568795065ea">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"-0.17**\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] sex->grade [label = \"\"] ageyr->grade [label = \"0.55***\"] agemo->grade [label = \"0.13*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span>, hide_nonsig_edges <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-11-2.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-2-mediators-2-dvs-2">6 IVs, 2 mediators, 2 DVs<a class="anchor" aria-label="anchor" href="#ivs-2-mediators-2-dvs-2"></a>
 </h2>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">IV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sex"</span>, <span class="st">"ageyr"</span>, <span class="st">"agemo"</span>, <span class="st">"school"</span>, <span class="st">"x2"</span>, <span class="st">"x3"</span><span class="op">)</span></span>
 <span></span>
@@ -592,19 +595,19 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## x2_grade_textual := x2_grade * grade_textual</span></span>
 <span><span class="co">## x3_grade_speed := x3_grade * grade_speed</span></span>
 <span><span class="co">## x3_grade_textual := x3_grade * grade_textual</span></span></code></pre>
-<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-6b30a84f4555fc35b211" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-6b30a84f4555fc35b211">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; school; x2; x3; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] school->visual [label = \"\"] x2->visual [label = \"0.52***\"] x3->visual [label = \"0.61***\"] sex->grade [label = \"0.1*\"] ageyr->grade [label = \"0.59***\"] agemo->grade [label = \"0.13**\"] school->grade [label = \"-0.12*\"] x2->grade [label = \"0.1*\"] x3->grade [label = \"0.12*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-cc91103ea6a0eb22286d" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-cc91103ea6a0eb22286d">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; sex; ageyr; agemo; school; x2; x3; speed; textual \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.21***\"] grade->speed [label = \"0.33***\"] visual->textual [label = \"0.29***\"] grade->textual [label = \"0.14**\"] sex->visual [label = \"\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] school->visual [label = \"\"] x2->visual [label = \"0.52***\"] x3->visual [label = \"0.61***\"] sex->grade [label = \"0.1*\"] ageyr->grade [label = \"0.59***\"] agemo->grade [label = \"0.13**\"] school->grade [label = \"-0.12*\"] x2->grade [label = \"0.1*\"] x3->grade [label = \"0.12*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span>, hide_nonsig_edges <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="indirect_files/figure-html/unnamed-chunk-13-1.png" width="700"></p>
 </div>
 <div class="section level2">
 <h2 id="ivs-3-mediators-5-dvs">6 IVs, 3 mediators, 5 DVs<a class="anchor" aria-label="anchor" href="#ivs-3-mediators-5-dvs"></a>
 </h2>
-<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Define our variables</span></span>
 <span><span class="va">M</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"visual"</span>, <span class="st">"grade"</span>, <span class="st">"x8"</span><span class="op">)</span></span>
 <span><span class="va">DV</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"speed"</span>, <span class="st">"textual"</span>, <span class="st">"x4"</span>, <span class="st">"x5"</span>, <span class="st">"x7"</span><span class="op">)</span></span>
@@ -724,12 +727,12 @@ always triple check that your model was specified correctly.</p>
 <span><span class="co">## x3_x8_x4 := x3_x8 * x8_x4</span></span>
 <span><span class="co">## x3_x8_x5 := x3_x8 * x8_x5</span></span>
 <span><span class="co">## x3_x8_x7 := x3_x8 * x8_x7</span></span></code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Fit and plot</span></span>
 <span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">data</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></code></pre></div>
-<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-17669863b69d3e9e62d5" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-17669863b69d3e9e62d5">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; x8; sex; ageyr; agemo; school; x2; x3; speed; textual; x4; x5; x7 \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.08*\"] grade->speed [label = \"0.13***\"] x8->speed [label = \"0.78***\"] visual->textual [label = \"0.28***\"] grade->textual [label = \"0.13*\"] x8->textual [label = \"\"] visual->x4 [label = \"0.27***\"] grade->x4 [label = \"0.15**\"] x8->x4 [label = \"\"] visual->x5 [label = \"0.19***\"] grade->x5 [label = \"0.12*\"] x8->x5 [label = \"\"] visual->x7 [label = \"-0.12*\"] grade->x7 [label = \"0.24***\"] x8->x7 [label = \"0.45***\"] sex->x8 [label = \"\"] ageyr->x8 [label = \"0.27***\"] agemo->x8 [label = \"\"] school->x8 [label = \"\"] x2->x8 [label = \"\"] x3->x8 [label = \"0.18**\"] sex->visual [label = \"\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] school->visual [label = \"\"] x2->visual [label = \"0.52***\"] x3->visual [label = \"0.61***\"] sex->grade [label = \"0.1*\"] ageyr->grade [label = \"0.59***\"] agemo->grade [label = \"0.13**\"] school->grade [label = \"-0.12*\"] x2->grade [label = \"0.1*\"] x3->grade [label = \"0.12*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<div class="grViz html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-210d7a62ffb6ed44f0e1" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-210d7a62ffb6ed44f0e1">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n visual; grade; x8; sex; ageyr; agemo; school; x2; x3; speed; textual; x4; x5; x7 \n node [shape = oval] \n  \n \n edge [ color = grey ] \n visual->speed [label = \"0.08*\"] grade->speed [label = \"0.13***\"] x8->speed [label = \"0.78***\"] visual->textual [label = \"0.28***\"] grade->textual [label = \"0.13*\"] x8->textual [label = \"\"] visual->x4 [label = \"0.27***\"] grade->x4 [label = \"0.15**\"] x8->x4 [label = \"\"] visual->x5 [label = \"0.19***\"] grade->x5 [label = \"0.12*\"] x8->x5 [label = \"\"] visual->x7 [label = \"-0.12*\"] grade->x7 [label = \"0.24***\"] x8->x7 [label = \"0.45***\"] sex->x8 [label = \"\"] ageyr->x8 [label = \"0.27***\"] agemo->x8 [label = \"\"] school->x8 [label = \"\"] x2->x8 [label = \"\"] x3->x8 [label = \"0.18**\"] sex->visual [label = \"\"] ageyr->visual [label = \"\"] agemo->visual [label = \"\"] school->visual [label = \"\"] x2->visual [label = \"0.52***\"] x3->visual [label = \"0.61***\"] sex->grade [label = \"0.1*\"] ageyr->grade [label = \"0.59***\"] agemo->grade [label = \"0.13**\"] school->grade [label = \"-0.12*\"] x2->grade [label = \"0.1*\"] x3->grade [label = \"0.12*\"]  \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">labels</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>sex <span class="op">=</span> <span class="st">"Sex"</span>,</span>
 <span>               ageyr <span class="op">=</span> <span class="st">"Age (year)"</span>,</span>
 <span>               agemo <span class="op">=</span> <span class="st">"Age (month)"</span>,</span>
@@ -746,6 +749,8 @@ always triple check that your model was specified correctly.</p>
 <span>               x7 <span class="op">=</span> <span class="st">"Item 7"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="../reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit</span>, layout <span class="op">=</span> <span class="va">indirect</span>, hide_nonsig_edges <span class="op">=</span> <span class="cn">TRUE</span>, label <span class="op">=</span> <span class="va">labels</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Removed 707 rows containing missing values (`geom_path()`).</span></span></code></pre>
+<pre><code><span><span class="co">## Warning: Removed 7 rows containing missing values (`geom_label()`).</span></span></code></pre>
 <p><img src="indirect_files/figure-html/unnamed-chunk-15-1.png" width="700"></p>
 <p>Etc.</p>
 </div>
