@@ -30,7 +30,7 @@
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A character string, representing the specified `lavaan` model.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(visual = paste0("x", 1:3),
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))

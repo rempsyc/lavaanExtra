@@ -1,3 +1,7 @@
+skip_if_not_installed(c("lavaan", "lavaanPlot"))
+
+suppressWarnings(library(lavaan))
+
 .old_wd <- setwd(tempdir())
 
 (latent <- list(visual = paste0("x", 1:3),
@@ -6,7 +10,6 @@
 
 model <- write_lavaan(latent = latent)
 
-library(lavaan)
 data <- HolzingerSwineford1939
 estimator <- "MLR"
 fit1 <- cfa_fit_plot(model, data)

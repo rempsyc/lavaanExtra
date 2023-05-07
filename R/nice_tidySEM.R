@@ -28,7 +28,7 @@
 #' @return A tidySEM plot, of class ggplot, representing the specified
 #'         `lavaan` model.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("tidySEM", quietly = TRUE)
 #'
 #' # Calculate scale averages
 #' library(lavaan)

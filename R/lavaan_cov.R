@@ -14,8 +14,7 @@
 #' @return A dataframe of covariances, including the covaried variables,
 #'         the covariance, and corresponding p-value.
 #' @export
-#' @examples
-#'
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(visual = paste0("x", 1:3),
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))

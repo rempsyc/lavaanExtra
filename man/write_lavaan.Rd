@@ -64,6 +64,7 @@ A character string, representing the specified \code{lavaan} model.
 Vector-based lavaan syntax interpreter.
 }
 \examples{
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 (latent <- list(visual = paste0("x", 1:3),
                 textual = paste0("x", 4:6),
                 speed = paste0("x", 7:9)))
@@ -76,6 +77,7 @@ fit <- lavaan(HS.model, data = HolzingerSwineford1939,
               auto.var = TRUE, auto.fix.first = TRUE,
               auto.cov.lv.x = TRUE)
 summary(fit, fit.measures=TRUE)
+\dontshow{\}) # examplesIf}
 }
 \keyword{CFA}
 \keyword{analysis}

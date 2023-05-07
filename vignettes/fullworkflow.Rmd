@@ -5,9 +5,6 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
-vignette: >
-  %\VignetteIndexEntry{Full CFA/SEM workflow}
-  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ## CFA example

@@ -27,6 +27,7 @@ optionally includes references values. The reference fit values are
 based on Schreiber et al. (2006).
 }
 \examples{
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 (latent <- list(
   visual = paste0("x", 1:3),
   textual = paste0("x", 4:6),
@@ -44,7 +45,7 @@ cat(HS.model)
 library(lavaan)
 fit <- sem(HS.model, data = HolzingerSwineford1939)
 nice_fit(fit)
-
+\dontshow{\}) # examplesIf}
 }
 \references{
 Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,

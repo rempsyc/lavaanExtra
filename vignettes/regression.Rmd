@@ -5,9 +5,6 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
-vignette: >
-  %\VignetteIndexEntry{Regressions}
-  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ## Regression example

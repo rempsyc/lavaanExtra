@@ -26,7 +26,7 @@
 #'         a summary of the `lavaan` fit object to the console, and; prints a
 #'         `lavaanPlot` of the `lavaan` fit object.
 #' @export
-#' @examples
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE)
 #' (latent <- list(visual = paste0("x", 1:3),
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))
@@ -46,6 +46,8 @@
 cfa_fit_plot <- function(
     model, data, covs = FALSE, estimator = "MLR", remove.items = "",
     print = TRUE, save.as.pdf = FALSE, file.name, ...){
+
+  rlang::check_installed("lavaanPlot", reason = "for this function.")
 
   if (missing(file.name) && isTRUE(save.as.pdf)) {
     stop("To save as PDF, the file name must also be specified.")

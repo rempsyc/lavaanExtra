@@ -15,8 +15,7 @@
 #' @return A dataframe, including the indirect effect, corresponding paths,
 #'         standardized regression coefficient, and corresponding p-value.
 #' @export
-#' @examples
-#'
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(visual = paste0("x", 1:3),
 #'                 textual = paste0("x", 4:6),
 #'                 speed = paste0("x", 7:9)))

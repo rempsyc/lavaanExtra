@@ -1,4 +1,6 @@
-library(lavaan)
+skip_if_not_installed("lavaan")
+
+suppressWarnings(library(lavaan))
 
 # Define our other variables
 M <- "visual"

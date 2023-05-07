@@ -1,6 +1,10 @@
 # lavaanExtra 0.1.x
 * Work in progress!
 
+## lavaanExtra 0.1.4.3
+* In internal tests, now check for package availability to satisfy CRAN requirements.
+* Remove vignettes from package, to satisfy CRAN package size requirements (they are still available on the website however).
+
 ## lavaanExtra 0.1.4.2
 * `nice_fit`: better error message when not providing a lavaan object.
 * `tmvnsim` package now required for nice_tidySEM as it seems necessary to use `tidySEM`'s new version.

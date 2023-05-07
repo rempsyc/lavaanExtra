@@ -19,7 +19,7 @@
 #' J. (2006). Reporting structural equation modeling and confirmatory factor
 #' analysis results: A review. *The Journal of educational research*, *99*(6),
 #' 323-338. https://doi.org/10.3200/JOER.99.6.323-338
-#' @examples
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(
 #'   visual = paste0("x", 1:3),
 #'   textual = paste0("x", 4:6),
