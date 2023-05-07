@@ -48,43 +48,45 @@ workflow by providing publication-ready tables and figures.
 There is a single function at the center of the proposed alternative syntax,
 `write_lavaan()`. The idea behind `write_lavaan()` is to define individual 
 components (regressions, covariances, latent variables, etc.), provide them to 
-the function, and have it write the lavaan model for you, so you don't have to
+the function, and have it write the lavaan model, so the user does not have to
 worry about making typos in the specific symbols required for each aspect of 
 the model.
 
 There are several benefits to this approach. Some lavaan models can become
 very large. By defining the entire model every time, not only do we break the 
-DRY (Don't Repeat Yourself) principle, but our scripts can become long and 
+DRY (Don't Repeat Yourself) principle, but our scripts can also become long and 
 unwieldy. This problem gets worse in the scenario where we want to compare 
-several variations of the same general model. `write_lavaan()` allows you to 
-reuse your code components, say, your latent variables only, for future models.
+several variations of the same general model. `write_lavaan()` allows the user 
+to reuse code components, say, only the latent variables, for future models.
 
-This aspect also allows better control over your code. If you made a mistake
-in your five SEM models definition, you will have to change it at all five 
-places within your script. With `write_lavaan()`, you only need to change it 
-once, at the relevant location, and it will of course update future occurences
-automatically.
+This aspect also allows better control over the user's code. If the user makes 
+a mistake in one of say five SEM models definition, the user will have to 
+change it at all five places within the script. With `write_lavaan()`, the user 
+only needs to change it once, at the relevant location, and it will update 
+future occurrences automatically since it relies on reusable components.
 
 The vector-based approach also allows the use of functions to define components.
-For example, if all scale items are named consistently, say x1 to x50, one can 
-use `paste0("x", 1:50)` instead of typing all the items by hand and risk making 
-mistakes.
+For example, if all scale items are named consistently, say `x1` to `x50`, one 
+can use `paste0("x", 1:50)` instead of typing all the items by hand and risk 
+making mistakes.
 
 Another issue with lavaan models is readability of the code defining the model. 
-One can go in lengths to make it pretty, but not everyone goes to this extra 
-mile, and the model formatting is certaintly not standardized. With 
-`write_lavaan()`, not only is the model standardized, but it is also neatly
-divided in clear and useful categories.
+One can go in lengths to make it pretty, but not everyone does, and the model 
+formatting is certaintly not standardized. With `write_lavaan()`, not only is 
+the model standardized, but it is also neatly divided in clear and useful 
+categories.
 
 Finally, for beginners, it can be difficult to remember the correct lavaan 
 symbols for each specific operation. `write_lavaan()` uses intuitive names to
-convert the information to the correct symbols, meaning you don't have to rely
-on memory as much. Even for people familiar with lavaan syntax, this approach
-can save time. The function also saves time by defining the named paths 
-automatically, with clear and intuitive names.
+convert the information to the correct symbols, meaning the user does not have 
+to rely on memory as much. Even for people familiar with lavaan syntax, this 
+approach can save time. The function also saves time by offering the possibility 
+to define the named paths automatically, with clear and intuitive names.
 
-I provide a simple CFA example below, where the latent variables visual,
-textual, and speed are defined by items 1 to 9:
+I provide a simple CFA example below, where the latent variables `visual`,
+`textual`, and `speed` are defined by items 1 to 9. We can then use the `cat()`
+function on the resulting object (of type character) to read it in the
+traditional way and make sure we have not made any mistake.
 
 ```{r, warning=F, message=F, echo=F}
 library(lavaanExtra)
@@ -129,9 +131,9 @@ cat(model.sem)
 
 The most popular {lavaanExtra} function for tables is `nice_fit()`, which 
 extracts only some of the most popular fit indices, compares them among models 
-automatically, and formats the output as an APA-style flextable 
-[@flextablePackage], through the {rempsyc} package [@rempsycPackage]. Below we fit
-our two earlier models and feed them to `nice_fit()` as a named list:
+automatically, and formats the output as an APA-style {flextable} 
+[@flextablePackage], through the {rempsyc} package [@rempsycPackage]. Below we 
+fit our two earlier models and feed them to `nice_fit()` as a named list:
 
 ```{r}
 library(lavaan)
@@ -174,7 +176,7 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 There are several packages designed to plot SEM models, but few that people
 consider satisfying or sufficiently good for publication. There are two
 packages that stand out, however, {lavaanPlot} [@lavaanPlotPackage] and 
-{tidySEM} [@tidySEMPackage]. However, even for those excellent packages, most 
+{tidySEM} [@tidySEMPackage]. Yet, even for those excellent packages, most 
 people do not view them as publication-ready or at least optimized in the best 
 possible way.
 
@@ -189,9 +191,9 @@ nice_lavaanPlot(fit.sem)
 ![](semplot.png)
 
 The best option for publication is `nice_tidySEM`. When our model is simply
-made of three "levels": independent variables, mediators, and dependent variables,
-we can specify the layout by simply feeding it the object `indirect` that we 
-created earlier.
+made of three "levels": independent variables, mediators, and dependent 
+variables, or that we do not want to draw the items, we can specify the layout 
+by simply feeding it the `indirect` object that we created earlier.
 
 ```{r, eval=F}
 nice_tidySEM(fit.sem, layout = indirect, label_location = 0.75)
@@ -203,8 +205,9 @@ ggplot2::ggsave("paper/semplot3.jpg", width = 8, height = 4)
 
 ![](semplot3.jpg)
 
-However, when the model is more complex (such as when including items), it is 
-necessary to specify the layout manually using a matrix or data frame.
+However, when the model is more complex (or that we want to include items), it 
+is necessary to specify the layout manually using a matrix or data frame, which
+allows a fine-grained control over the generated figure.
 
 ```{r}
 mylayout <- data.frame(
