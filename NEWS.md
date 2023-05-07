@@ -2,7 +2,7 @@
 * Work in progress!
 
 ## lavaanExtra 0.1.4.3
-* In internal tests, now check for package availability to satisfy CRAN requirements.
+* In examples and internal tests, now check for package availability to satisfy CRAN requirements.
 * Remove vignettes from package, to satisfy CRAN package size requirements (they are still available on the website however).
 
 ## lavaanExtra 0.1.4.2

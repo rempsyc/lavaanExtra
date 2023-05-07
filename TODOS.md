@@ -1,8 +1,6 @@
 # Development objectives (to-do list)
 
 - `cfa_fit_plot`, add covariances of items on plot?
-- Make new vignette to show how to make custom tidySEM layout (maybe make another vignette about that?)
-- Update image in full workflow tutorial
 - All extraction functions: provide both standardized and unstandardized coefficients, as well as the 95% CI.
 - `lavaan_cov`: rename r to covariance, σ(x, y) ("\U03C3"), or just covariance for simplicity if people are not likely to understand that.
 - Create new function: `lavaan_cor` (then keep r but remove residual covariances)
