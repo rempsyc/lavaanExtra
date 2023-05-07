@@ -14,3 +14,4 @@ models
 ^codecov\.yml$
 ^CRAN-SUBMISSION$
 ^tink$
+^paper$

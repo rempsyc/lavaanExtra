@@ -83,8 +83,8 @@ on memory as much. Even for people familiar with lavaan syntax, this approach
 can save time. The function also saves time by defining the named paths 
 automatically, with clear and intuitive names.
 
-I first provide a simple CFA example below:
-
+I provide a simple CFA example below, where the latent variables visual,
+textual, and speed are defined by items 1 to 9:
 
 
 
@@ -109,12 +109,12 @@ cat(model.cfa)
 ## speed =~ x7 + x8 + x9
 ```
 
-Should we want to use this model in a full SEM, we do not need to define the
-latent variables again, only the new components. In the example below, the
-dependent variables DV (`speed` and `textual`) are mediated by the mediator M 
-(`visual`) and predicted by the independent variables IV (`ageyr` and `grade`).
-Similarly, we specify covariances between the DVs and IVs, and in this case
-our indirect effects can be determined automatically.
+Should we want to use these latent variables in a full SEM model, we do not
+need to define the latent variables again, only the new components. In the 
+example below, the dependent variables DV (`speed` and `textual`) are mediated 
+by the mediator M (`visual`) and predicted by the independent variables IV 
+(`ageyr` and `grade`). Similarly, we specify covariances between the DVs and 
+IVs, and in this case our indirect effects can be determined automatically.
 
 
 ```r
@@ -173,7 +173,7 @@ cat(model.sem)
 The most popular {lavaanExtra} function for tables is `nice_fit()`, which 
 extracts only some of the most popular fit indices, compares them among models 
 automatically, and formats the output as an APA-style flextable 
-[flextablePackage], through the {rempsyc} package [rempsycPackage]. Below we fit
+[@flextablePackage], through the {rempsyc} package [@rempsycPackage]. Below we fit
 our two earlier models and feed them to `nice_fit()` as a named list:
 
 
@@ -190,7 +190,7 @@ fit_table <- nice_fit(dplyr::lst(fit.cfa, fit.sem), nice_table = TRUE)
 fit_table
 ```
 
-![](fit table.png)
+![](fit_table.png)
 
 The table can then be saved to word simply using `flextable::save_as_docx()` on
 the resulting `flextable` object. 
@@ -202,12 +202,89 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 
 It is similarly possible to prepare APA tables in Word with the regression
 coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`), or indirect effects 
-(`lavaan_ind()`).
+(`lavaan_ind()`). For example, for indirect effects:
+
+
+
+
+```r
+lavaan_ind(fit.sem, nice_table = TRUE)
+```
+
+![](ind.png)
 
 # Figures
 
+There are several packages designed to plot SEM models, but few that people
+consider satisfying or sufficiently good for publication. There are two
+packages that stand out, however, {lavaanPlot} [@lavaanPlotPackage] and 
+{tidySEM} [@tidySEMPackage]. However, even for those excellent packages, most 
+people do not view them as publication-ready or at least optimized in the best 
+possible way.
+
+This is what `nice_lavaanPlot` and `nice_tidySEM` aim to correct. 
+`nice_lavaanPlot` is not optimal for publications but will yield excellent 
+results for a quick and easy check.
 
 
+```r
+nice_lavaanPlot(fit.sem)
+```
+
+![](semplot.png)
+
+The best option for publication is `nice_tidySEM`. When our model is simply
+made of three "levels": independent variables, mediators, and dependent variables,
+we can specify the layout by simply feeding it the object `indirect` that we 
+created earlier.
+
+
+```r
+nice_tidySEM(fit.sem, layout = indirect, label_location = 0.75)
+```
+
+
+
+![](semplot3.jpg)
+
+However, when the model is more complex (such as when including items), it is 
+necessary to specify the layout manually using a matrix or data frame.
+
+
+```r
+mylayout <- data.frame(
+  IV = c("", "x1", "grade", "", "ageyr", "", ""),
+  M = c("", "x2", "", "visual", "", "", ""),
+  DV = c("", "x3", "textual", "", "speed", "", ""),
+  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9)))
+as.matrix(mylayout)
+```
+
+```
+##      IV      M        DV        DV.items
+## [1,] ""      ""       ""        "x4"    
+## [2,] "x1"    "x2"     "x3"      "x5"    
+## [3,] "grade" ""       "textual" "x6"    
+## [4,] ""      "visual" ""        ""      
+## [5,] "ageyr" ""       "speed"   "x7"    
+## [6,] ""      ""       ""        "x8"    
+## [7,] ""      ""       ""        "x9"
+```
+
+
+```r
+nice_tidySEM(fit.sem, layout = mylayout)
+```
+
+
+![](semplot2.png)
+
+This figure can be saved using `ggplot2::ggsave()` [@ggplot2Package].
+
+
+```r
+ggplot2::ggsave("my_semPlot.pdf", width = 7, height = 4)
+```
 
 # Availability
 
@@ -219,9 +296,10 @@ https://github.com/rempsyc/lavaanExtra/issues/.
 
 # Acknowledgements
 
-I would like to thank Hugues Leduc and Charles-Étienne Lavoie for statistical or 
-technical advice that helped inform some functions of this package and/or useful 
-feedback on this manuscript. I would also like to acknowledge funding from the 
-Social Sciences and Humanities Research Council of Canada.
+I would like to thank Hugues Leduc, Charles-Étienne Lavoie, Jany St-Cyr, and 
+Andreea Gavrila for statistical or technical advice that helped inform some 
+functions of this package and/or useful feedback on this manuscript. I would 
+also like to acknowledge funding from the Social Sciences and Humanities 
+Research Council of Canada.
 
 # References

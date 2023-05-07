@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.2.25)  6 MAY 2023 17:41
+This is XeTeX, Version 3.141592653-2.6-0.999994 (MiKTeX 23.1) (preloaded format=xelatex 2023.2.25)  6 MAY 2023 19:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1206,9 +1206,9 @@ Underfull \hbox (badness 3118) in paragraph at lines 321--328
 tive syntax,
  []
 
-File: C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/template
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
 s/joss/resources/JOSS-logo.png Graphic file (type bmp)
-<C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/templates/jos
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
 s/resources/JOSS-logo.png>
 
 Package fancyhdr Warning: \headheight is too small (62.59596pt): 
@@ -1223,9 +1223,9 @@ LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
 [1
 
 ]
-File: C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/template
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
 s/joss/resources/JOSS-logo.png Graphic file (type bmp)
-<C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/templates/jos
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
 s/resources/JOSS-logo.png>
 
 Package fancyhdr Warning: \headheight is too small (62.59596pt): 
@@ -1236,11 +1236,11 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [2]
-File: fit table.png Graphic file (type bmp)
-<fit table.png>
-File: C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/template
+File: fit_table.png Graphic file (type bmp)
+<fit_table.png>
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
 s/joss/resources/JOSS-logo.png Graphic file (type bmp)
-<C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/templates/jos
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
 s/resources/JOSS-logo.png>
 
 Package fancyhdr Warning: \headheight is too small (62.59596pt): 
@@ -1251,9 +1251,13 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [3]
-File: C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/template
+File: ind.png Graphic file (type bmp)
+<ind.png>
+File: semplot.png Graphic file (type bmp)
+<semplot.png>
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
 s/joss/resources/JOSS-logo.png Graphic file (type bmp)
-<C:/Users/there/AppData/Local/R/win-library/4.2/rticles/rmarkdown/templates/jos
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
 s/resources/JOSS-logo.png>
 
 Package fancyhdr Warning: \headheight is too small (62.59596pt): 
@@ -1263,7 +1267,50 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[4] (paper.aux)
+[4]
+File: semplot3.jpg Graphic file (type bmp)
+<semplot3.jpg>
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
+s/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
+s/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[5]
+File: semplot2.png Graphic file (type bmp)
+<semplot2.png>
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
+s/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
+s/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[6]
+File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
+s/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/templates/jos
+s/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[7] (paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 348F34970BA6C7C025A4E59335EC5794;826.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1271,12 +1318,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36528 strings out of 411511
- 738300 string characters out of 5819115
+ 36561 strings out of 411511
+ 738780 string characters out of 5819115
  1870001 words of memory out of 5000000
- 56225 multiletter control sequences out of 15000+600000
+ 56253 multiletter control sequences out of 15000+600000
  519151 words of font info for 79 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,12n,81p,1196b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,13n,81p,1196b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on paper.pdf (4 pages).
+Output written on paper.pdf (7 pages).
