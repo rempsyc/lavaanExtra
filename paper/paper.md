@@ -311,6 +311,6 @@ Research Council of Canada.
 
 # Testing EPS vector graphics
 
-![](test.eps)
+![](test.pdf)
 
 # References
