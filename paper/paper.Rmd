@@ -16,10 +16,10 @@ affiliations:
 date: "`r Sys.Date()`"
 bibliography: paper.bib
 output:
-  rticles::joss_article
-  # md_document:
-  #   preserve_yaml: TRUE
-  #   variant: "markdown_strict"
+  # rticles::joss_article
+  md_document:
+    preserve_yaml: TRUE
+    variant: "markdown_strict"
 journal: JOSS
 link-citations: yes
 csl: apa.csl
@@ -160,7 +160,7 @@ It is similarly possible to prepare APA tables in Word with the regression
 coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`), or indirect effects 
 (`lavaan_ind()`). For example, for indirect effects:
 
-```{r, echo=F}
+```{r, eval=F}
 x <- lavaan_ind(fit.sem, nice_table = TRUE)
 flextable::save_as_docx(x, path = "ind_table.docx")
 ```
@@ -246,5 +246,9 @@ Andreea Gavrila for statistical or technical advice that helped inform some
 functions of this package and/or useful feedback on this manuscript. I would 
 also like to acknowledge funding from the Social Sciences and Humanities 
 Research Council of Canada.
+
+# Testing EPS vector graphics
+
+![](test.eps)
 
 # References
