@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  8 MAY 2023 14:41
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  8 MAY 2023 14:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1065,8 +1065,6 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
-File: paper_files/figure-latex/unnamed-chunk-15-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/unnamed-chunk-15-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1078,16 +1076,16 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 
 [7] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
-(rerunfilecheck)             Checksum: 57BAF6B59B532C515BB926BF98171821;1014.
+(rerunfilecheck)             Checksum: 348F34970BA6C7C025A4E59335EC5794;826.
 Package logreq Info: Writing requests to 'paper.run.xml'.
 \openout1 = `paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36786 strings out of 478705
- 758892 string characters out of 5847479
+ 36776 strings out of 478705
+ 758436 string characters out of 5847479
  1870873 words of memory out of 5000000
- 56319 multiletter control sequences out of 15000+600000
+ 56311 multiletter control sequences out of 15000+600000
  519151 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,13n,81p,1194b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s

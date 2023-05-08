@@ -309,14 +309,4 @@ functions of this package and/or useful feedback on this manuscript. I would
 also like to acknowledge funding from the Social Sciences and Humanities 
 Research Council of Canada.
 
-# Testing EPS vector graphics
-
-
-```r
-rempsyc::nice_violin(data = ToothGrowth, response = "len")
-```
-
-![](paper_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
-
-
 # References
