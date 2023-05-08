@@ -311,6 +311,12 @@ Research Council of Canada.
 
 # Testing EPS vector graphics
 
-![](test.pdf)
+
+```r
+rempsyc::nice_violin(data = ToothGrowth, response = "len")
+```
+
+![](paper_files/figure-latex/unnamed-chunk-15-1.pdf)<!-- --> 
+
 
 # References

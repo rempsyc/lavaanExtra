@@ -249,6 +249,9 @@ Research Council of Canada.
 
 # Testing EPS vector graphics
 
-![](test.pdf)
+```{r}
+rempsyc::nice_violin(data = ToothGrowth, response = "len")
+```
+
 
 # References
