@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  9 MAY 2023 14:41
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  9 MAY 2023 15:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1057,6 +1057,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 [5]
 File: paper_files/figure-latex/nice_tidySEM-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_tidySEM-1.pdf>
+File: paper_files/figure-latex/nice_tidySEM2-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_tidySEM2-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1067,8 +1069,6 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
-File: paper_files/figure-latex/nice_tidySEM2-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/nice_tidySEM2-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
