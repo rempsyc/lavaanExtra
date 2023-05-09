@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.5</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -86,15 +86,11 @@
 
 <div id="development-objectives-to-do-list" class="section level1">
 
-<ul><li>
-<code>cfa_fit_plot</code>, add covariances of items on plot?</li>
-<li>All extraction functions: provide both standardized and unstandardized coefficients, as well as the 95% CI.</li>
+<ul><li>Use <code>standardizedsolution(fit, level=.95)</code> to get the CI of the standardized beta!</li>
 <li>
-<code>lavaan_cov</code>: rename r to covariance, σ(x, y) (“3C3”), or just covariance for simplicity if people are not likely to understand that.</li>
-<li>Create new function: <code>lavaan_cor</code> (then keep r but remove residual covariances)</li>
-<li>Add 95% confidence intervals whenever possible</li>
+<code>cfa_fit_plot</code>, add covariances of items on plot? Problem is that is does not keep a vertical structure so does not look pretty when putting the default to <code>TRUE</code>.</li>
 <li>
-<code>nice_tidySEM</code>: improve algorithm when odd number of variables for layout matrix by adding two empty rows around the odd levels, and one empty row in the middle of the even levels.</li>
+<code>nice_tidySEM</code>: improve algorithm when odd number of variables for layout matrix by adding two empty rows around the odd levels, and one empty row in the middle of the even levels?</li>
 <li>Add automatic covariances (specify levels, e.g.,: “level1 = IV”, “level2 = M”, “level3 = DV”)</li>
 <li>Get community feedback</li>
 </ul></div>
