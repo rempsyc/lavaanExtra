@@ -1,6 +1,11 @@
 # lavaanExtra 0.1.x
 * Work in progress!
 
+## lavaanExtra 0.1.4.5
+* `lavaan_cov`: renamed r column to covariance since in some cases standardized residual variances were not real correlations.
+* New function: `lavaan_cor`, which is the same as `lavaan_cov` but only for actual correlations
+* `lavaan_reg`, `lavaan_ind`, and `lavaan_cov`: now also include the unstandardized regression coefficient and its confidence interval.
+
 ## lavaanExtra 0.1.4.4
 * `nice_tidySEM`: corrected a bug whereas if the layout contained columns named c("IV", "M", "DV"), it would remove any extra columns (such as items), explictly ignoring part of the layout provided.
 * `nice_lavaanPlot`: now default to black path lines instead of gray.

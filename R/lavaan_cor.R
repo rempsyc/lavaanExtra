@@ -1,18 +1,18 @@
-#' @title Extract relevant covariance indices from lavaan model
+#' @title Extract relevant correlation indices from lavaan model
 #'
-#' @description Extract relevant covariance indices from lavaan model through
+#' @description Extract relevant correlation indices from lavaan model through
 #'              `lavaan::parameterEstimates` with `standardized = TRUE`. In this
-#'              case, the covariances represent the resulting
+#'              case, the correlation coefficient (r) represents the resulting
 #'              `std.all` column.
 #'
-#' @param fit lavaan fit object to extract covariance indices from
+#' @param fit lavaan fit object to extract correlation indices from
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
 #' @param ... Arguments to be passed to `rempsyc::nice_table`
 #' @keywords lavaan structural equation modeling path analysis CFA
-#' @return A dataframe of covariances, including the covaried variables,
-#'         the covariance, and corresponding p-value.
+#' @return A dataframe of correlations, including the correlated
+#'         variables, the correlation, and the corresponding p-value.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(visual = paste0("x", 1:3),
@@ -30,13 +30,15 @@
 #'
 #' library(lavaan)
 #' fit <- sem(HS.model, data=HolzingerSwineford1939)
-#' lavaan_cov(fit)
+#' lavaan_cor(fit)
 
-lavaan_cov <- function(fit, nice_table = FALSE, ...) {
+lavaan_cor <- function(fit, nice_table = FALSE, ...) {
   x <- lavaan::parameterEstimates(fit, standardized = TRUE)
   x <- x[which(x["op"] == "~~"),]
-  x <- x[c("lhs", "rhs", "std.all", "pvalue", "est", "ci.lower", "ci.upper")]
-  names(x) <- c("Variable 1", "Variable 2", "B", "p", "b", "CI_lower", "CI_upper")
+  x <- x[c("lhs", "rhs", "std.all", "pvalue")]
+  not.cor <- which(x$lhs == x$rhs)
+  x <- x[-not.cor,]
+  names(x) <- c("Variable 1", "Variable 2", "r", "p")
   if (nice_table) {
     rlang::check_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)

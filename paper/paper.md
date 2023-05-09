@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-08"
+date: "2023-05-09"
 bibliography: paper.bib
 output:
   rticles::joss_article

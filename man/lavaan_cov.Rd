@@ -22,7 +22,7 @@ the covariance, and corresponding p-value.
 \description{
 Extract relevant covariance indices from lavaan model through
 \code{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
-case, the correlation coefficient (r) represents the resulting
+case, the covariances represent the resulting
 \code{std.all} column.
 }
 \examples{
@@ -41,9 +41,7 @@ HS.model <- write_lavaan(regression = regression, covariance = covariance,
 cat(HS.model)
 
 library(lavaan)
-fit <- lavaan(HS.model, data=HolzingerSwineford1939,
-              auto.var=TRUE, auto.fix.first=TRUE,
-              auto.cov.lv.x=TRUE)
+fit <- sem(HS.model, data=HolzingerSwineford1939)
 lavaan_cov(fit)
 \dontshow{\}) # examplesIf}
 }
