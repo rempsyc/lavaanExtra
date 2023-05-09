@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  8 MAY 2023 14:46
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  8 MAY 2023 20:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -830,8 +830,8 @@ Package microtype Info: Loading configuration file microtype.cfg.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
 File: microtype.cfg 2023/03/13 v3.1a microtype main configuration file (RS)
 ))
-Package hyperref Info: Option `unicode' set `true' on input line 151.
-Package hyperref Info: Option `breaklinks' set `true' on input line 151.
+Package hyperref Info: Option `unicode' set `true' on input line 152.
+Package hyperref Info: Option `breaklinks' set `true' on input line 152.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/grffile/grffile.sty
 Package: grffile 2019/11/11 v2.1 Extended file name support for graphics (legacy)
 Package grffile Info: This package is an empty stub for compatibility on input line 40.
@@ -861,31 +861,31 @@ Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
 (./paper.aux)
 \openout1 = `paper.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 266.
-LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 266.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 268.
+LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 268.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 266.
-LaTeX Font Info:    ... okay on input line 266.
-Package hyperref Info: Link coloring ON on input line 266.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 268.
+LaTeX Font Info:    ... okay on input line 268.
+Package hyperref Info: Link coloring ON on input line 268.
 (./paper.out) (./paper.out)
 \@outlinefile=\write6
 \openout6 = `paper.out'.
@@ -906,8 +906,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'paper.bbl' not found.
 No file paper.bbl.
-Package biblatex Info: Reference section=0 on input line 266.
-Package biblatex Info: Reference segment=0 on input line 266.
+Package biblatex Info: Reference section=0 on input line 268.
+Package biblatex Info: Reference segment=0 on input line 268.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -942,12 +942,12 @@ Package biblatex Info: Reference segment=0 on input line 266.
 * \@reversemargintrue
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-LaTeX Info: Redefining \microtypecontext on input line 266.
-Package microtype Info: Applying patch `item' on input line 266.
-Package microtype Info: Applying patch `toc' on input line 266.
-Package microtype Info: Applying patch `eqnum' on input line 266.
-Package microtype Info: Applying patch `footnote' on input line 266.
-Package microtype Info: Applying patch `verbatim' on input line 266.
+LaTeX Info: Redefining \microtypecontext on input line 268.
+Package microtype Info: Applying patch `item' on input line 268.
+Package microtype Info: Applying patch `toc' on input line 268.
+Package microtype Info: Applying patch `eqnum' on input line 268.
+Package microtype Info: Applying patch `footnote' on input line 268.
+Package microtype Info: Applying patch `verbatim' on input line 268.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -957,7 +957,7 @@ Package microtype Info: No adjustment of kerning.
 File: mt-LatinModernRoman.cfg 2021/02/21 v1.1 microtype config. file: Latin Modern Roman (RS)
 )
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <17.28> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 267.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 269.
 Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: TU).
 (microtype)             For optimal results, create family-specific settings.
@@ -965,29 +965,29 @@ Package microtype Info: Loading generic protrusion settings for font family
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-cmr.cfg
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 267.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 269.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 267.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 269.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
 
-Package hyperref Warning: Suppressing link with empty target on input line 293.
+Package hyperref Warning: Suppressing link with empty target on input line 295.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 293.
+Package hyperref Warning: Suppressing link with empty target on input line 295.
 
 
-Package hyperref Warning: Suppressing link with empty target on input line 293.
+Package hyperref Warning: Suppressing link with empty target on input line 295.
 
 
-Underfull \hbox (badness 3118) in paragraph at lines 321--328
+Underfull \hbox (badness 3118) in paragraph at lines 324--331
 \TU/lmr/m/n/10 There is a single function at the center of the proposed alternative syntax,
  []
 
@@ -1001,7 +1001,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 362.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 367.
 [1
 
 ]
@@ -1029,8 +1029,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 [3]
 File: ind.png Graphic file (type bmp)
 <ind.png>
-File: semplot.png Graphic file (type bmp)
-<semplot.png>
+File: paper_files/figure-latex/nice_lavaanPlot-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_lavaanPlot-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1041,8 +1041,10 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [4]
-File: semplot3.jpg Graphic file (type bmp)
-<semplot3.jpg>
+File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
+File: paper_files/figure-latex/graph_sem-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/graph_sem-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1053,8 +1055,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [5]
-File: semplot2.png Graphic file (type bmp)
-<semplot2.png>
+File: paper_files/figure-latex/nice_tidySEM-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_tidySEM-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1065,6 +1067,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
+File: paper_files/figure-latex/nice_tidySEM2-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_tidySEM2-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1074,7 +1078,17 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[7] (./paper.aux)
+[7]
+File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[8] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 348F34970BA6C7C025A4E59335EC5794;826.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1082,12 +1096,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36776 strings out of 478705
- 758436 string characters out of 5847479
- 1870873 words of memory out of 5000000
- 56311 multiletter control sequences out of 15000+600000
+ 36792 strings out of 478705
+ 759954 string characters out of 5847479
+ 1871873 words of memory out of 5000000
+ 56325 multiletter control sequences out of 15000+600000
  519151 words of font info for 79 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,13n,81p,1194b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on paper.pdf (7 pages).
+Output written on paper.pdf (8 pages).

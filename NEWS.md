@@ -1,6 +1,10 @@
 # lavaanExtra 0.1.x
 * Work in progress!
 
+## lavaanExtra 0.1.4.4
+* `nice_tidySEM`: corrected a bug whereas if the layout contained columns named c("IV", "M", "DV"), it would remove any extra columns (such as items), explictly ignoring part of the layout provided.
+* `nice_lavaanPlot`: now default to black path lines instead of gray.
+
 ## lavaanExtra 0.1.4.3
 * In examples and internal tests, now check for package availability to satisfy CRAN requirements.
 * Remove vignettes from package, to satisfy CRAN package size requirements (they are still available on the website however).

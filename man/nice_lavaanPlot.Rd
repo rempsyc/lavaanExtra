@@ -7,7 +7,7 @@
 nice_lavaanPlot(
   model,
   node_options = list(shape = "box", fontname = "Helvetica"),
-  edge_options = list(color = "grey"),
+  edge_options = list(color = "black"),
   coefs = TRUE,
   stand = TRUE,
   covs = FALSE,

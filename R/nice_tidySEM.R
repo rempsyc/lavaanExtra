@@ -87,7 +87,7 @@ nice_tidySEM <- function(fit,
 
   # Function starts here
   structure <- layout
-  if (all(c("IV", "M", "DV") %in% names(structure))) {
+  if (all(c("IV", "M", "DV") %in% names(structure)) && length(names(structure)) == 3) {
     sx <- function(x) {
       rep("", x)
     }
@@ -111,7 +111,6 @@ nice_tidySEM <- function(fit,
     structure <- data.frame(IV = c(sx(IV.s), structure$IV, sx(IV.s)),
                             M = c(sx(M.s), structure$M, sx(M.s)),
                             DV = c(sx(DV.s), structure$DV, sx(DV.s)))
-    structure <- as.matrix(structure)
   }
   p <- tidySEM::prepare_graph(fit, layout = structure, ...)
   p <- tidySEM::edit_graph(p, {label_location <- label_location})

@@ -41,23 +41,25 @@ on.
 
 {lavaanExtra} does mainly two things. First, it offers an alternative, 
 code-efficient syntax. Second, it facilitates the analysis-to-publication
-workflow by providing publication-ready tables and figures.
+workflow by providing publication-ready tables and figures (following the 
+style of the American Psychological Association, APA).
 
 # Alternative Syntax
 
 There is a single function at the center of the proposed alternative syntax,
 `write_lavaan()`. The idea behind `write_lavaan()` is to define individual 
 components (regressions, covariances, latent variables, etc.), provide them to 
-the function, and have it write the lavaan model, so the user does not have to
+the function, and have it write the `lavaan` model, so the user does not have to
 worry about making typos in the specific symbols required for each aspect of 
 the model.
 
-There are several benefits to this approach. Some lavaan models can become
-very large. By defining the entire model every time, not only do we break the 
-DRY (Don't Repeat Yourself) principle, but our scripts can also become long and 
-unwieldy. This problem gets worse in the scenario where we want to compare 
-several variations of the same general model. `write_lavaan()` allows the user 
-to reuse code components, say, only the latent variables, for future models.
+There are several benefits to this approach. Some `lavaan` models can become
+very large. By defining the entire model every time, such as is typical with
+{lavaan} users, not only do we break the DRY (Don't Repeat Yourself) principle, 
+but our scripts can also become long and unwieldy. This problem gets worse in 
+the scenario where we want to compare several variations of the same general 
+model. `write_lavaan()` allows the user to reuse code components, say, only 
+the latent variables, for future models.
 
 This aspect also allows better control over the user's code. If the user makes 
 a mistake in one of say five SEM models definition, the user will have to 
@@ -70,27 +72,28 @@ For example, if all scale items are named consistently, say `x1` to `x50`, one
 can use `paste0("x", 1:50)` instead of typing all the items by hand and risk 
 making mistakes.
 
-Another issue with lavaan models is readability of the code defining the model. 
+Another issue with `lavaan` models is readability of the code defining the model. 
 One can go in lengths to make it pretty, but not everyone does, and the model 
 formatting is certaintly not standardized. With `write_lavaan()`, not only is 
 the model standardized, but it is also neatly divided in clear and useful 
 categories.
 
-Finally, for beginners, it can be difficult to remember the correct lavaan 
+Finally, for beginners, it can be difficult to remember the correct `lavaan` 
 symbols for each specific operation. `write_lavaan()` uses intuitive names to
 convert the information to the correct symbols, meaning the user does not have 
-to rely on memory as much. Even for people familiar with lavaan syntax, this 
+to rely on memory as much. Even for people familiar with `lavaan` syntax, this 
 approach can save time. The function also saves time by offering the possibility 
 to define the named paths automatically, with clear and intuitive names.
 
-I provide a simple CFA example below, where the latent variables `visual`,
-`textual`, and `speed` are defined by items 1 to 9. We can then use the `cat()`
-function on the resulting object (of type character) to read it in the
-traditional way and make sure we have not made any mistake.
+I provide a simple Confirmatory Factor Analysis (CFA) example below, where the 
+latent variables `visual`, `textual`, and `speed` are defined by items 1 to 9. 
+We can then use the `cat()` function on the resulting object (of type character) 
+to read it in the traditional way and make sure we have not made any mistake.
 
 ```{r, warning=F, message=F, echo=F}
 library(lavaanExtra)
 library(lavaan)
+library(tidySEM)
 ```
 
 ```{r}
@@ -130,10 +133,12 @@ cat(model.sem)
 # Tables
 
 The most popular {lavaanExtra} function for tables is `nice_fit()`, which 
-extracts only some of the most popular fit indices, compares them among models 
-automatically, and formats the output as an APA-style {flextable} 
-[@flextablePackage], through the {rempsyc} package [@rempsycPackage]. Below we 
-fit our two earlier models and feed them to `nice_fit()` as a named list:
+extracts only some of the most popular fit indices and organize them such
+that it is easy to compare models. There is an option to format the table 
+as an APA {flextable} [@flextablePackage], through the {rempsyc} package 
+[@rempsycPackage], using option `nice_table = TRUE`. This `flextable` object 
+can then be easily exported to Microsoft Word. Below we fit our two earlier
+models and feed them to `nice_fit()` as a named list:
 
 ```{r}
 library(lavaan)
@@ -180,34 +185,58 @@ packages that stand out, however, {lavaanPlot} [@lavaanPlotPackage] and
 people do not view them as publication-ready or at least optimized in the best 
 possible way.
 
-This is what `nice_lavaanPlot` and `nice_tidySEM` aim to correct. 
-`nice_lavaanPlot` is not optimal for publications but will yield excellent 
-results for a quick and easy check.
+This is what `nice_lavaanPlot` and `nice_tidySEM` aim to correct. Let's 
+compare the default `lavaanPlot()` and `nice_lavaanPlot()` outputs 
+side-by-side for demonstration purposes.
 
-```{r, eval=FALSE}
+```{r nice_lavaanPlot}
+lavaanPlot::lavaanPlot(fit.sem)
+
 nice_lavaanPlot(fit.sem)
 ```
 
-![](semplot.png)
+As these figures demonstrate, `nice_lavaanPlot()` has several elements
+frequently requested by researchers (especially in psychology): (a)
+an horizontal, rather than vertical, layout; (b) the coefficients
+appear per default (but only significant ones); (c) significance
+stars, for the regressions; and (d) the use of a sans serif font 
+(as required by APA style for figures).
 
-The best option for publication is `nice_tidySEM`. When our model is simply
-made of three "levels": independent variables, mediators, and dependent 
-variables, or that we do not want to draw the items, we can specify the layout 
-by simply feeding it the `indirect` object that we created earlier.
+Even so, `nice_lavaanPlot` is not perfectly optimal for publication, for 
+example for the use of curved lines, which many researchers dislike. 
+Nonetheless, it will still yield excellent and satisfying results for 
+such a quick and easy check.
 
-```{r, eval=F}
-nice_tidySEM(fit.sem, layout = indirect, label_location = 0.75)
+In turn, the best option for publication is `nice_tidySEM`. Let's first
+look at the default output of the base `tidySEM::graph_sem()` for 
+reference.
+
+```{r graph_sem, fig.width=14, fig.height=5, message=FALSE, warning=FALSE}
+tidySEM::graph_sem(fit.sem)
 ```
 
-```{r, eval=F, echo=F}
-ggplot2::ggsave("paper/semplot3.jpg", width = 8, height = 4)
+The author of the {tidySEM} package notes that
+
+> the [default] node placement is not very aesthetically pleasing. 
+[However] one of the areas where tidySEM really excels is customization. [@tidySEMWebsite]
+
+In this sense, most of the time, both `tidySEM` and `nice_tidySEM` will 
+need a layout in order to yield the best result. One of the benefits of
+`nice_tidySEM` is that when our model is simply made of three "levels": 
+independent variables, mediators, and dependent variables (e.g., for a 
+path analysis, or if we do not want to draw the items for a full SEM),
+it is possible to automatically specify a proper layout by simply 
+feeding it the `indirect` object that we created earlier.
+
+```{r nice_tidySEM, fig.width=8, fig.height=4, message=FALSE}
+nice_tidySEM(fit.sem, layout = indirect)
 ```
 
-![](semplot3.jpg)
-
-However, when the model is more complex (or that we want to include items), it 
-is necessary to specify the layout manually using a matrix or data frame, which
-allows a fine-grained control over the generated figure.
+For the time being, `nice_tidySEM` only supports this three-level 
+automatic layout, but more designs are in the works. In the meantime, 
+when the model is more complex (or that we want to include items), it 
+is necessary to specify the layout manually using a matrix or data frame, 
+which allows a fine-grained control over the generated figure.
 
 ```{r}
 mylayout <- data.frame(
@@ -218,18 +247,31 @@ mylayout <- data.frame(
 as.matrix(mylayout)
 ```
 
-```{r, eval=F}
-nice_tidySEM(fit.sem, layout = mylayout)
+```{r nice_tidySEM2, fig.width=8, fig.height=8}
+nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.70)
 ```
 
+The resulting figure can be saved using `ggplot2::ggsave()`.
 
-![](semplot2.png)
-
-This figure can be saved using `ggplot2::ggsave()` [@ggplot2Package].
-
-```{r}
+```{r, eval=FALSE}
 ggplot2::ggsave("my_semPlot.pdf", width = 7, height = 4)
 ```
+
+Other differences between {tidySEM} and `nice_tidySEM()` are that the
+latter displays standardized coefficients by default, does not plot the variances
+per default, and allows defining an automatic layout in specific 
+cases (as described earlier).
+
+Finally, the base function, `tidySEM::graph_sem()`, is difficult 
+to customize in depth. For the aesthetics of `nice_tidySEM()`, 
+for example, we need to rely instead on the `tidySEM::prepare_graph()` 
+and `tidySEM::edit_graph()` functions. In contrast to `nice_tidySEM()`, 
+these `tidySEM` functions act more like a grammar of SEM plotting, akin 
+to the popular grammar of graphics, {ggplot2} [@ggplot2Package]. This 
+provides great flexibility, but for the occasional user, this comes with 
+an additional burden, as users need to skim through almost 400 different 
+functions simply to understand how to edit the resulting `sem_graph` 
+object.
 
 # Availability
 
