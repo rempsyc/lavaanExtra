@@ -5,7 +5,7 @@
 #'              case, the correlation coefficient (r) represents the resulting
 #'              `std.all` column.
 #'
-#' @param fit lavaan fit object to extract correlation indices from
+#' @param fit lavaan fit object to extract correlations from
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.

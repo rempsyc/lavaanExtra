@@ -1,3 +1,7 @@
+version <- meta$Version
+if(is.null(version))
+  version <- utils::packageVersion("rempsyc")
+
 bibentry(
   bibtype  = "Misc",
   title    = "lavaanExtra: Convenience functions for lavaan",
@@ -7,7 +11,3 @@ bibentry(
   url      = "https://rempsyc.remi-theriault.com",
   textVersion = paste0("Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version ", version, ") [Computer software]. https://lavaanExtra.remi-theriault.com/")
 )
-
-version <- meta$Version
-if(is.null(version))
-  version <- utils::packageVersion("rempsyc")

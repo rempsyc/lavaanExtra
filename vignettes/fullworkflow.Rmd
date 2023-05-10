@@ -238,7 +238,7 @@ For reference, this is our model, visually speaking
 
 We could also attempt to draw it with `lavaanExtra::nice_tidySEM`, a convenience wrapper around the amazing `tidySEM` package.
 
-```{r nice_tidySEM}
+```{r nice_tidySEM, message=FALSE}
 labels <- list(ageyr = "Age (year)",
                grade = "Grade",
                visual = "Visual",

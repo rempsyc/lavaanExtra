@@ -44,7 +44,7 @@ code-efficient syntax. Second, it facilitates the analysis-to-publication
 workflow by providing publication-ready tables and figures (following the 
 style of the American Psychological Association, APA).
 
-# Alternative Syntax
+## Alternative Syntax
 
 There is a single function at the center of the proposed alternative syntax,
 `write_lavaan()`. The idea behind `write_lavaan()` is to define individual 
@@ -114,11 +114,12 @@ cat(model.cfa)
 ```
 
 Should we want to use these latent variables in a full SEM model, we do not
-need to define the latent variables again, only the new components. In the 
-example below, the dependent variables DV (`speed` and `textual`) are mediated 
-by the mediator M (`visual`) and predicted by the independent variables IV 
-(`ageyr` and `grade`). Similarly, we specify covariances between the DVs and 
-IVs, and in this case our indirect effects can be determined automatically.
+need to define the latent variables again, only the new components. With the
+`lavaanExtra` syntax, when defining our lists of components, we can think of 
+the `=` sign as "predicted by", a bit like `~` for regression. There is
+an exception to this for the `indirect` object, which also allows specifying 
+our variables directly instead. When such is the case, `write_lvaan()` will
+define all indirect paths automatically.
 
 
 ```r
@@ -172,7 +173,7 @@ cat(model.sem)
 ## grade_visual_textual := grade_visual * visual_textual
 ```
 
-# Tables
+## Tables
 
 The most popular {lavaanExtra} function for tables is `nice_fit()`, which 
 extracts only some of the most popular fit indices and organize them such
@@ -211,10 +212,6 @@ coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`), or indirect effects
 (`lavaan_ind()`). For example, for indirect effects:
 
 
-```r
-x <- lavaan_ind(fit.sem, nice_table = TRUE)
-flextable::save_as_docx(x, path = "ind_table.docx")
-```
 
 
 ```r
@@ -223,11 +220,11 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 
 ![](ind.png)
 
-# Figures
+## Figures
 
 There are several packages designed to plot SEM models, but few that people
 consider satisfying or sufficiently good for publication. There are two
-packages that stand out, however, {lavaanPlot} [@lavaanPlotPackage] and 
+packages that stand out however, {lavaanPlot} [@lavaanPlotPackage] and 
 {tidySEM} [@tidySEMPackage]. Yet, even for those excellent packages, most 
 people do not view them as publication-ready or at least optimized in the best 
 possible way.
@@ -253,13 +250,13 @@ As these figures demonstrate, `nice_lavaanPlot()` has several elements
 frequently requested by researchers (especially in psychology): (a)
 an horizontal, rather than vertical, layout; (b) the coefficients
 appear per default (but only significant ones); (c) significance
-stars, for the regressions; and (d) the use of a sans serif font 
-(as required by APA style for figures).
+stars; and (d) the use of a sans serif font (as required by APA 
+style for figures).
 
 Even so, `nice_lavaanPlot` is not perfectly optimal for publication, for 
 example for the use of curved lines, which many researchers dislike. 
-Nonetheless, it will still yield excellent and satisfying results for 
-such a quick and easy check.
+Nonetheless, it will still yield excellent and satisfying results for a 
+quick and easy check.
 
 In turn, the best option for publication is `nice_tidySEM`. Let's first
 look at the default output of the base `tidySEM::graph_sem()` for 
@@ -274,8 +271,9 @@ tidySEM::graph_sem(fit.sem)
 
 The author of the {tidySEM} package notes that
 
-> the [default] node placement is not very aesthetically pleasing. 
-[However] one of the areas where tidySEM really excels is customization. [@tidySEMWebsite]
+> This uses a default layout, provided by the `igraph` package. However, 
+the node placement is not very aesthetically pleasing. One of the areas 
+where tidySEM really excels is customization. [@tidySEMWebsite]
 
 In this sense, most of the time, both `tidySEM` and `nice_tidySEM` will 
 need a layout in order to yield the best result. One of the benefits of
@@ -293,9 +291,9 @@ nice_tidySEM(fit.sem, layout = indirect)
 ![](paper_files/figure-latex/nice_tidySEM-1.pdf)<!-- --> 
 
 For the time being, `nice_tidySEM` only supports this three-level 
-automatic layout, but more designs are in the works. In the meantime, 
-when the model is more complex (or that we want to include items), it 
-is necessary to specify the layout manually using a matrix or data frame, 
+automatic layout, but designs with more levels are in the works. In the 
+meantime, when the model is more complex (or that we want to include items), 
+it is necessary to specify the layout manually using a matrix or data frame, 
 which allows a fine-grained control over the generated figure.
 
 

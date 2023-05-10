@@ -6,6 +6,9 @@
 #'              See "Value" section for more details.
 #'
 #' @param fit lavaan fit object to extract fit indices from
+#' @param estimate What estimate to use, either the standardized
+#'                 estimate ("B", default), or unstandardized
+#'                 estimate ("b").
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
@@ -31,11 +34,21 @@
 #' fit <- sem(HS.model, data=HolzingerSwineford1939)
 #' lavaan_reg(fit)
 
-lavaan_reg <- function(fit, nice_table = FALSE, ...) {
-  x <- lavaan::parameterEstimates(fit, standardized = TRUE)
+lavaan_reg <- function(fit, estimate = "B", nice_table = FALSE, ...) {
+  og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
+  new.names <- c("Outcome", "Predictor", "p", "b", "CI_lower", "CI_upper")
+  if (estimate == "b") {
+    x <- lavaan::parameterEstimates(fit)
+  } else if (estimate == "B") {
+    x <- standardizedsolution(fit, level = 0.95)
+    og.names[4] <- "est.std"
+    new.names[4] <- "B"
+  } else {
+    stop("The 'estimate' argument may only be one of c('B', 'b').")
+  }
   x <- x[which(x["op"] == "~"),]
-  x <- x[c("lhs", "rhs", "std.all", "pvalue", "est", "ci.lower", "ci.upper")]
-  names(x) <- c("Outcome", "Predictor", "B", "p", "b", "CI_lower", "CI_upper")
+  x <- x[og.names]
+  names(x) <- new.names
   if (nice_table) {
     rlang::check_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
