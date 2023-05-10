@@ -185,25 +185,25 @@ the covariance, and corresponding p-value.</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">HS.model</span>, data<span class="op">=</span><span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">lavaan_cov</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    Variable.1 Variable.2     B     p     b CI_lower CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16    textual      speed 0.268 0.001 0.174    0.074    0.274</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17      ageyr      grade 0.533 0.000 0.230    0.170    0.291</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18         x1         x1 0.395 0.000 0.539    0.313    0.764</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19         x2         x2 0.820 0.000 1.136    0.936    1.336</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20         x3         x3 0.667 0.000 0.850    0.672    1.028</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 21         x4         x4 0.268 0.000 0.363    0.271    0.454</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 22         x5         x5 0.264 0.000 0.438    0.326    0.549</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 23         x6         x6 0.311 0.000 0.373    0.288    0.457</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 24         x7         x7 0.641 0.000 0.761    0.607    0.915</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 25         x8         x8 0.437 0.000 0.445    0.309    0.580</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 26         x9         x9 0.610 0.000 0.621    0.489    0.752</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 27      ageyr      ageyr 0.839 0.000 0.925    0.766    1.085</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 28      grade      grade 0.809 0.000 0.202    0.167    0.237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 29     visual     visual 1.000 0.000 0.823    0.534    1.112</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30    textual    textual 1.000 0.000 0.991    0.771    1.212</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31      speed      speed 1.000 0.000 0.426    0.252    0.599</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32     visual    textual 0.458 0.000 0.414    0.268    0.560</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33     visual      speed 0.438 0.000 0.260    0.148    0.371</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    Variable.1 Variable.2  p     B CI_lower CI_upper</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16    textual      speed  0 0.268    0.133    0.403</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17      ageyr      grade  0 0.533    0.447    0.619</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18         x1         x1  0 0.395    0.227    0.564</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19         x2         x2  0 0.820    0.720    0.919</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20         x3         x3  0 0.667    0.542    0.792</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 21         x4         x4  0 0.268    0.194    0.341</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 22         x5         x5  0 0.264    0.191    0.337</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 23         x6         x6  0 0.311    0.235    0.388</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 24         x7         x7  0 0.641    0.524    0.759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 25         x8         x8  0 0.437    0.301    0.572</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 26         x9         x9  0 0.610    0.489    0.730</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 27      ageyr      ageyr  0 0.839    0.745    0.932</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 28      grade      grade  0 0.809    0.713    0.905</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 29     visual     visual NA 1.000    1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30    textual    textual NA 1.000    1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31      speed      speed NA 1.000    1.000    1.000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32     visual    textual  0 0.458    0.333    0.583</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33     visual      speed  0 0.438    0.294    0.582</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

@@ -93,7 +93,9 @@
 <code>lavaan_cov</code>: renamed r column to covariance since in some cases standardized residual variances were not real correlations.</li>
 <li>New function: <code>lavaan_cor</code>, which is the same as <code>lavaan_cov</code> but only for actual correlations</li>
 <li>
-<code>lavaan_reg</code>, <code>lavaan_ind</code>, and <code>lavaan_cov</code>: now also include the unstandardized regression coefficient and its confidence interval.</li>
+<code>lavaan_reg</code>, <code>lavaan_ind</code>, and <code>lavaan_cov</code>: new argument <code>estimate</code> which can be either “B” to obtain standardized estimates and corresponding p values and confidence interval, or “b” for unstandardized values.</li>
+<li>
+<code>nice_lavaanPlot</code>: stars now appear not only for regression per default, but also for latent variables and covariances <code>c("regress", "latent", "covs")</code>.</li>
 </ul></div>
 <div class="section level3">
 <h3 id="lavaanextra-0-1-1">lavaanExtra 0.1.4.4<a class="anchor" aria-label="anchor" href="#lavaanextra-0-1-1"></a></h3>
