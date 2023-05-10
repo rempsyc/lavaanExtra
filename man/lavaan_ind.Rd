@@ -4,10 +4,20 @@
 \alias{lavaan_ind}
 \title{Extract relevant indirect effects indices from lavaan model}
 \usage{
-lavaan_ind(fit, nice_table = FALSE, underscores_to_arrows = TRUE, ...)
+lavaan_ind(
+  fit,
+  estimate = "B",
+  nice_table = FALSE,
+  underscores_to_arrows = TRUE,
+  ...
+)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
+
+\item{estimate}{What estimate to use, either the standardized
+estimate ("B", default), or unstandardized
+estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the

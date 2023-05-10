@@ -7,7 +7,7 @@
 lavaan_cor(fit, nice_table = FALSE, ...)
 }
 \arguments{
-\item{fit}{lavaan fit object to extract correlation indices from}
+\item{fit}{lavaan fit object to extract correlations from}
 
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the

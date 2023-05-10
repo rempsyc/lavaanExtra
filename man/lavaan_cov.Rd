@@ -4,10 +4,14 @@
 \alias{lavaan_cov}
 \title{Extract relevant covariance indices from lavaan model}
 \usage{
-lavaan_cov(fit, nice_table = FALSE, ...)
+lavaan_cov(fit, estimate = "B", nice_table = FALSE, ...)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract covariance indices from}
+
+\item{estimate}{What estimate to use, either the standardized
+estimate ("B", default), or unstandardized
+estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the

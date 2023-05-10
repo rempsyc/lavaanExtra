@@ -7,13 +7,13 @@
 nice_lavaanPlot(
   model,
   node_options = list(shape = "box", fontname = "Helvetica"),
-  edge_options = list(color = "black"),
+  edge_options = c(color = "black"),
   coefs = TRUE,
   stand = TRUE,
   covs = FALSE,
-  stars = list("regress"),
+  stars = c("regress", "latent", "covs"),
   sig = 0.05,
-  graph_options = list(rankdir = "LR"),
+  graph_options = c(rankdir = "LR"),
   ...
 )
 }
