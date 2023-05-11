@@ -350,7 +350,7 @@ In any case, the resulting figure can be saved using `ggplot2::ggsave()`.
 
 
 ```r
-ggplot2::ggsave("my_semPlot.pdf", width = 7, height = 4)
+ggplot2::ggsave("my_semPlot.pdf", width = 8, height = 6)
 ```
 
 Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the

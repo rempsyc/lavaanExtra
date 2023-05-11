@@ -258,7 +258,7 @@ the output as a `tidy_sem` object (by using `plot = FALSE`), which can then
 be modified according to regular `tidySEM` syntax. This can be useful to
 fine-tune and finalize the figure.
 
-```{r nice_tidySEM3, fig.width=8, fig.height=5.5}
+```{r nice_tidySEM3, fig.width=8, fig.height=6}
 x <- nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.65, 
                   plot = FALSE)
 x$edges[x$edges$from == "grade" & x$edges$to == "speed",
@@ -275,7 +275,7 @@ plot(x)
 In any case, the resulting figure can be saved using `ggplot2::ggsave()`.
 
 ```{r, eval=FALSE}
-ggplot2::ggsave("my_semPlot.pdf", width = 7, height = 4)
+ggplot2::ggsave("my_semPlot.pdf", width = 8, height = 6)
 ```
 
 Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the
