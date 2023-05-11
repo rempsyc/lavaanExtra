@@ -134,7 +134,10 @@ nice_tidySEM <- function(fit,
     tidySEM::nodes(p)$label <- unlist(label[order.label])
   }
   if (isTRUE(est_std)) {
-    tidySEM::edges(p)$label <- tidySEM::edges(p)$est_sig_std
+    x <- tidySEM::edges(p)$est_sig_std
+    x <- sub("^0", "", x)
+    x <- sub("^-0", "-", x)
+    tidySEM::edges(p)$label <- x
   }
   if (isTRUE(plot)) {
     return(plot(p))

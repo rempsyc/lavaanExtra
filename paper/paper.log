@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  9 MAY 2023 19:34
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  11 MAY 2023 11:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1001,7 +1001,7 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 367.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 360.
 [1
 
 ]
@@ -1031,8 +1031,6 @@ File: ind.png Graphic file (type bmp)
 <ind.png>
 File: paper_files/figure-latex/nice_lavaanPlot-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_lavaanPlot-1.pdf>
-File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1043,6 +1041,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [4]
+File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
 File: paper_files/figure-latex/graph_sem-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/graph_sem-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
@@ -1069,6 +1069,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [6]
+File: paper_files/figure-latex/nice_tidySEM3-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_tidySEM3-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1088,7 +1090,17 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[8] (./paper.aux)
+[8]
+File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[9] (./paper.aux)
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 7AFFAECF88269982FC44D44BFC02A218;865.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1096,12 +1108,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36795 strings out of 478705
- 760002 string characters out of 5847479
- 1871873 words of memory out of 5000000
- 56328 multiletter control sequences out of 15000+600000
- 519151 words of font info for 79 fonts, out of 8000000 for 9000
+ 36807 strings out of 478705
+ 760455 string characters out of 5847479
+ 1869873 words of memory out of 5000000
+ 56337 multiletter control sequences out of 15000+600000
+ 519159 words of font info for 80 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  84i,13n,81p,1194b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on paper.pdf (8 pages).
+Output written on paper.pdf (9 pages).

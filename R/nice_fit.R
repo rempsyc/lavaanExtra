@@ -13,7 +13,8 @@
 #'                   reference values at the bottom of the table.
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, representing select fit indices (chi2, df, chi2/df,
-#'         p-value of the chi2 test, CFI, TLI, RMSEA, SRMR, AIC, and BIC).
+#'         p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI, SRMR,
+#'         AIC, and BIC).
 #' @export
 #' @references Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,
 #' J. (2006). Reporting structural equation modeling and confirmatory factor
@@ -79,6 +80,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
         CFI = "\u2265 .95",
         TLI = "\u2265 .95",
         RMSEA = "< .06-.08",
+        `90% CI (RMSEA)` = "[.00, .10]",
         SRMR = "\u2264 .08",
         AIC = "Smaller is better",
         BIC = "Smaller is better"
@@ -108,12 +110,12 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
 nice_fit_internal <- function(fit) {
   x <- lavaan::fitMeasures(fit, c(
     "chisq", "df", "pvalue", "cfi", "tli",
-    "rmsea", "srmr", "aic", "bic"
+    "rmsea", "rmsea.ci.lower", "rmsea.ci.upper",
+    "srmr", "aic", "bic"
   ))
   x <- as.data.frame(t(as.data.frame(x)))
   chi2.df <- x$chisq / x$df
-  x <- cbind(x[1:2], chi2.df, x[3:9])
+  x <- cbind(x[1:2], chi2.df, x[3:length(x)])
   x <- round(x, 3)
-  names(x)[(c(1, 4:10))] <- c("chi2", "p", toupper(names(x)[5:10]))
   x
 }

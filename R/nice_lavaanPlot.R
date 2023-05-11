@@ -5,10 +5,12 @@
 #' @param model SEM or CFA model to plot.
 #' @param node_options Shape and font name.
 #' @param edge_options Colour of edges.
-#' @param coefs Logical, whether to plot coefficients.
-#' @param stand Logical, whether to standardized coefficients.
-#' @param covs Logical, whether to plot covariances
-#' @param stars Logical, whether to plot significance stars.
+#' @param coefs Logical, whether to plot coefficients. Defaults to TRUE.
+#' @param stand Logical, whether to use standardized coefficients.
+#'              Defaults to TRUE.
+#' @param covs Logical, whether to plot covariances. Defaults to FALSE.
+#' @param stars Which links to plot significance stars for. One of
+#'              `c("regress", "latent", "covs")`.
 #' @param sig Significance threshold.
 #' @param graph_options Read from left to right, rather than from top to bottom.
 #' @param ... Arguments to be passed to function `lavaanPlot::lavaanPlot`.

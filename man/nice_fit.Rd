@@ -19,7 +19,8 @@ reference values at the bottom of the table.}
 }
 \value{
 A dataframe, representing select fit indices (chi2, df, chi2/df,
-p-value of the chi2 test, CFI, TLI, RMSEA, SRMR, AIC, and BIC).
+p-value of the chi2 test, CFI, TLI, RMSEA and its 90\% CI, SRMR,
+AIC, and BIC).
 }
 \description{
 Compares fit from one or several lavaan models. Also

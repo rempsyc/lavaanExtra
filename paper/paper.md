@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-09"
+date: "2023-05-11"
 bibliography: paper.bib
 output:
   rticles::joss_article
@@ -29,8 +29,8 @@ csl: apa.csl
 
 {lavaanExtra} is an R package that offers an alternative, vector-based syntax to 
 package {lavaan}, as well as other convenience functions such as naming paths 
-and defining indirect links automatically. It also offers convenience formatting 
-optimized for a publication and script sharing workflow.
+and defining indirect effects automatically. It also offers convenience formatting 
+optimized for publication and script sharing workflows.
 
 # Statement of need
 
@@ -73,10 +73,10 @@ can use `paste0("x", 1:50)` instead of typing all the items by hand and risk
 making mistakes.
 
 Another issue with `lavaan` models is readability of the code defining the model. 
-One can go in lengths to make it pretty, but not everyone does, and the model 
-formatting is certaintly not standardized. With `write_lavaan()`, not only is 
-the model standardized, but it is also neatly divided in clear and useful 
-categories.
+One can go in lengths to make it pretty, but not everyone does, and many people
+do not use the same strategies to organize the information from the model. With
+`write_lavaan()`, not only is the model information standardized, but it is 
+also neatly divided in clear and useful categories.
 
 Finally, for beginners, it can be difficult to remember the correct `lavaan` 
 symbols for each specific operation. `write_lavaan()` uses intuitive names to
@@ -129,7 +129,7 @@ IV <- c("ageyr", "grade")
 
 mediation <- list(speed = M, textual = M, visual = IV)
 regression <- list(speed = IV, textual = IV)
-covariance <- list(speed = "textual", ageyr = "grade")
+covariance <- list(speed = "textual", ageyr = "grade", x4 = c("x5", "x6"))
 indirect <- list(IV = IV, M = M, DV = DV)
 
 model.sem <- write_lavaan(mediation, regression, covariance, 
@@ -163,6 +163,7 @@ cat(model.sem)
 ## 
 ## speed ~~ textual
 ## ageyr ~~ grade
+## x4 ~~ x5 + x6
 ## 
 ## ##################################################
 ## # [--------Mediations (indirect effects)---------]
@@ -208,8 +209,9 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 ```
 
 It is similarly possible to prepare APA tables in Word with the regression
-coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`), or indirect effects 
-(`lavaan_ind()`). For example, for indirect effects:
+coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`), correlations
+(`lavaan_cor()`), or indirect effects (`lavaan_ind()`). For example, for 
+indirect effects:
 
 
 
@@ -303,6 +305,11 @@ mylayout <- data.frame(
   M = c("", "x2", "", "visual", "", "", ""),
   DV = c("", "x3", "textual", "", "speed", "", ""),
   DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9)))
+# mylayout <- data.frame(
+#   IV = c("x1", "grade", "", "ageyr", ""),
+#   M = c("x2", "", "visual", "", "x7"),
+#   DV = c("x3", "textual", "", "speed", "x8"),
+#   DV.items = c(paste0("x", 4:6), "", "x9"))
 as.matrix(mylayout)
 ```
 
@@ -324,28 +331,53 @@ nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.70)
 
 ![](paper_files/figure-latex/nice_tidySEM2-1.pdf)<!-- --> 
 
-The resulting figure can be saved using `ggplot2::ggsave()`.
+If the figure is still not sufficiently satisfying, it is possible to store
+the output as a `tidy_sem` object (by using `plot = FALSE`), which can then 
+be modified according to regular `tidySEM` syntax. This can be useful to
+fine-tune and finalize the figure.
+
+
+```r
+x <- nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.65, 
+                  plot = FALSE)
+x$edges[x$edges$from == "grade" & x$edges$to == "speed",
+        "curvature"] <- 40
+x$edges[x$edges$from == "ageyr" & x$edges$to == "textual", 
+        "curvature"] <- -40
+x$edges$linetype <- ifelse(x$edges$arrow == "none", 2, 1)
+x$nodes[6:14,]$node_xmin <- x$nodes[6:14,]$node_xmin + 0.4
+x$nodes[6:14,]$node_xmax <- x$nodes[6:14,]$node_xmax - 0.4
+x$nodes[6:14,]$node_ymin <- x$nodes[6:14,]$node_ymin + 0.2
+x$nodes[6:14,]$node_ymax <- x$nodes[6:14,]$node_ymax - 0.2
+plot(x)
+```
+
+![](paper_files/figure-latex/nice_tidySEM3-1.pdf)<!-- --> 
+
+In any case, the resulting figure can be saved using `ggplot2::ggsave()`.
 
 
 ```r
 ggplot2::ggsave("my_semPlot.pdf", width = 7, height = 4)
 ```
 
-Other differences between {tidySEM} and `nice_tidySEM()` are that the
-latter displays standardized coefficients by default, does not plot the variances
-per default, and allows defining an automatic layout in specific 
-cases (as described earlier).
+Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the
+latter displays standardized coefficients by default (but unstandardized
+coefficients can be specified with `est_std = FALSE`), (b) if using 
+standardized coefficients, the leading zero is omitted (as per APA 
+requirements); (c) does not plot the variances per default, and (d) allows 
+defining an automatic layout in specific cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult 
 to customize in depth. For the aesthetics of `nice_tidySEM()`, 
-for example, we need to rely instead on the `tidySEM::prepare_graph()` 
-and `tidySEM::edit_graph()` functions. In contrast to `nice_tidySEM()`, 
-these `tidySEM` functions act more like a grammar of SEM plotting, akin 
-to the popular grammar of graphics, {ggplot2} [@ggplot2Package]. This 
-provides great flexibility, but for the occasional user, this comes with 
-an additional burden, as users need to skim through almost 400 different 
-functions simply to understand how to edit the resulting `sem_graph` 
-object.
+for example, we need to rely instead on the {tidySEM}'s `prepare_graph()`,
+`edit_graph()`, and numerous conditional formatting functions. In contrast 
+to `nice_tidySEM()`, these `tidySEM` functions act more like a grammar of 
+SEM plotting, akin to the popular grammar of graphics, {ggplot2} 
+[@ggplot2Package]. This provides great flexibility, but for the occasional 
+user, also comes with an additional burden, as users may for example need 
+to skim through almost 400 undocumented functions, should they want to 
+conditionally edit the resulting `tidy_sem` object.
 
 # Availability
 

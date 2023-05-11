@@ -24,13 +24,15 @@ nice_lavaanPlot(
 
 \item{edge_options}{Colour of edges.}
 
-\item{coefs}{Logical, whether to plot coefficients.}
+\item{coefs}{Logical, whether to plot coefficients. Defaults to TRUE.}
 
-\item{stand}{Logical, whether to standardized coefficients.}
+\item{stand}{Logical, whether to use standardized coefficients.
+Defaults to TRUE.}
 
-\item{covs}{Logical, whether to plot covariances}
+\item{covs}{Logical, whether to plot covariances. Defaults to FALSE.}
 
-\item{stars}{Logical, whether to plot significance stars.}
+\item{stars}{Which links to plot significance stars for. One of
+\code{c("regress", "latent", "covs")}.}
 
 \item{sig}{Significance threshold.}
 
