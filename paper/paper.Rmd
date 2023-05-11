@@ -308,10 +308,10 @@ https://github.com/rempsyc/lavaanExtra/issues/.
 
 # Acknowledgements
 
-I would like to thank Hugues Leduc, Charles-Étienne Lavoie, Jany St-Cyr, and 
-Andreea Gavrila for statistical or technical advice that helped inform some 
-functions of this package and/or useful feedback on this manuscript. I would 
-also like to acknowledge funding from the Social Sciences and Humanities 
+I would like to thank Hugues Leduc, Jany St-Cyr, Andreea Gavrila, Charles-Étienne
+Lavoie, and Björn Büdenbender for statistical or technical advice that helped 
+inform some functions of this package and/or useful feedback on this manuscript. 
+I would also like to acknowledge funding from the Social Sciences and Humanities
 Research Council of Canada.
 
 # References
