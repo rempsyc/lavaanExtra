@@ -105,7 +105,6 @@ latent <- list(visual = paste0("x", 1:3),
 
 model.cfa <- write_lavaan(latent = latent)
 cat(model.cfa)
-
 ```
 
 Should we want to use these latent variables in a full SEM model, we do not
@@ -243,19 +242,14 @@ which allows a fine-grained control over the generated figure.
 
 ```{r}
 mylayout <- data.frame(
-  IV = c("", "x1", "grade", "", "ageyr", "", ""),
-  M = c("", "x2", "", "visual", "", "", ""),
-  DV = c("", "x3", "textual", "", "speed", "", ""),
-  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9)))
-# mylayout <- data.frame(
-#   IV = c("x1", "grade", "", "ageyr", ""),
-#   M = c("x2", "", "visual", "", "x7"),
-#   DV = c("x3", "textual", "", "speed", "x8"),
-#   DV.items = c(paste0("x", 4:6), "", "x9"))
+  IV = c("x1", "grade", "", "ageyr", ""),
+  M = c("x2", "", "visual", "", ""),
+  DV = c("x3", "textual", "", "speed", "x9"),
+  DV.items = c(paste0("x", 4:8)))
 as.matrix(mylayout)
 ```
 
-```{r nice_tidySEM2, fig.width=8, fig.height=8}
+```{r nice_tidySEM2, fig.width=8, fig.height=5}
 nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.70)
 ```
 
@@ -264,14 +258,13 @@ the output as a `tidy_sem` object (by using `plot = FALSE`), which can then
 be modified according to regular `tidySEM` syntax. This can be useful to
 fine-tune and finalize the figure.
 
-```{r nice_tidySEM3, fig.width=8, fig.height=8}
+```{r nice_tidySEM3, fig.width=8, fig.height=5.5}
 x <- nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.65, 
                   plot = FALSE)
 x$edges[x$edges$from == "grade" & x$edges$to == "speed",
         "curvature"] <- 40
 x$edges[x$edges$from == "ageyr" & x$edges$to == "textual", 
         "curvature"] <- -40
-x$edges$linetype <- ifelse(x$edges$arrow == "none", 2, 1)
 x$nodes[6:14,]$node_xmin <- x$nodes[6:14,]$node_xmin + 0.4
 x$nodes[6:14,]$node_xmax <- x$nodes[6:14,]$node_xmax - 0.4
 x$nodes[6:14,]$node_ymin <- x$nodes[6:14,]$node_ymin + 0.2
@@ -289,8 +282,10 @@ Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the
 latter displays standardized coefficients by default (but unstandardized
 coefficients can be specified with `est_std = FALSE`), (b) if using 
 standardized coefficients, the leading zero is omitted (as per APA 
-requirements); (c) does not plot the variances per default, and (d) allows 
-defining an automatic layout in specific cases (as described earlier).
+requirements); (c) does not plot the variances per default, (d) uses
+full double-headed arrows instead of dashed lines with no arrows for
+covariances, and (e) allows defining an automatic layout in specific 
+cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult 
 to customize in depth. For the aesthetics of `nice_tidySEM()`, 

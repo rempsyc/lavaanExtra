@@ -29,7 +29,6 @@
 #'         `lavaan` model.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("tidySEM", quietly = TRUE)
-#'
 #' # Calculate scale averages
 #' library(lavaan)
 #' data <- HolzingerSwineford1939
@@ -124,21 +123,24 @@ nice_tidySEM <- function(fit,
     p <- tidySEM::hide_cov(p)
   }
   if (isTRUE(hide_mean)) {
-    tidySEM::nodes(p)$label <- tidySEM::nodes(p)$name
+    p$nodes$label <- p$nodes$name
   }
   if (!missing(label)) {
-    order.label <- match(tidySEM::nodes(p)$name, names(label))
+    order.label <- match(p$nodes$name, names(label))
     if (any(is.na(order.label))) {
       stop("Label names don't match. Please double-check your variable names.")
     }
-    tidySEM::nodes(p)$label <- unlist(label[order.label])
+    p$nodes$label <- unlist(label[order.label])
   }
   if (isTRUE(est_std)) {
-    x <- tidySEM::edges(p)$est_sig_std
+    x <- p$edges$est_sig_std
     x <- sub("^0", "", x)
     x <- sub("^-0", "-", x)
-    tidySEM::edges(p)$label <- x
+    p$edges$label <- x
   }
+  # Use full line (2) everywhere instead of dashed lines (2) for variances
+  p$edges$linetype <- 1
+  p$edges$arrow <- ifelse(p$edges$arrow == "none", "both", p$edges$arrow)
   if (isTRUE(plot)) {
     return(plot(p))
   } else {

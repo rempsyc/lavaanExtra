@@ -49,10 +49,9 @@ nice_fit(fit)
 \dontshow{\}) # examplesIf}
 }
 \references{
-Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,
-J. (2006). Reporting structural equation modeling and confirmatory factor
-analysis results: A review. \emph{The Journal of educational research}, \emph{99}(6),
-323-338. https://doi.org/10.3200/JOER.99.6.323-338
+Schreiber, J. B. (2017). Update to core reporting practices in
+structural equation modeling. \emph{Research in social and administrative pharmacy},
+\emph{13}(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 }
 \keyword{CFA}
 \keyword{analysis}

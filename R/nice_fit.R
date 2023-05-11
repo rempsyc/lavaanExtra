@@ -16,10 +16,9 @@
 #'         p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI, SRMR,
 #'         AIC, and BIC).
 #' @export
-#' @references Schreiber, J. B., Nora, A., Stage, F. K., Barlow, E. A., & King,
-#' J. (2006). Reporting structural equation modeling and confirmatory factor
-#' analysis results: A review. *The Journal of educational research*, *99*(6),
-#' 323-338. https://doi.org/10.3200/JOER.99.6.323-338
+#' @references Schreiber, J. B. (2017). Update to core reporting practices in
+#' structural equation modeling. *Research in social and administrative pharmacy*,
+#' *13*(3), 634-643. https://doi.org/10.1016/j.sapharm.2016.06.006
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(
 #'   visual = paste0("x", 1:3),
@@ -91,7 +90,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
     table <- flextable::align(table, align = "center", part = "all")
 
     table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
-      "As proposed by Schreiber et al. (2006)."), ref_symbols = "a", part = "footer")
+      "As proposed by Schreiber (2017)."), ref_symbols = "a", part = "footer")
     table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
     table <- flextable::align(table, i = 2, part = "footer", align = "left")
 

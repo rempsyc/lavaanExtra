@@ -301,27 +301,20 @@ which allows a fine-grained control over the generated figure.
 
 ```r
 mylayout <- data.frame(
-  IV = c("", "x1", "grade", "", "ageyr", "", ""),
-  M = c("", "x2", "", "visual", "", "", ""),
-  DV = c("", "x3", "textual", "", "speed", "", ""),
-  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9)))
-# mylayout <- data.frame(
-#   IV = c("x1", "grade", "", "ageyr", ""),
-#   M = c("x2", "", "visual", "", "x7"),
-#   DV = c("x3", "textual", "", "speed", "x8"),
-#   DV.items = c(paste0("x", 4:6), "", "x9"))
+  IV = c("x1", "grade", "", "ageyr", ""),
+  M = c("x2", "", "visual", "", ""),
+  DV = c("x3", "textual", "", "speed", "x9"),
+  DV.items = c(paste0("x", 4:8)))
 as.matrix(mylayout)
 ```
 
 ```
 ##      IV      M        DV        DV.items
-## [1,] ""      ""       ""        "x4"    
-## [2,] "x1"    "x2"     "x3"      "x5"    
-## [3,] "grade" ""       "textual" "x6"    
-## [4,] ""      "visual" ""        ""      
-## [5,] "ageyr" ""       "speed"   "x7"    
-## [6,] ""      ""       ""        "x8"    
-## [7,] ""      ""       ""        "x9"
+## [1,] "x1"    "x2"     "x3"      "x4"    
+## [2,] "grade" ""       "textual" "x5"    
+## [3,] ""      "visual" ""        "x6"    
+## [4,] "ageyr" ""       "speed"   "x7"    
+## [5,] ""      ""       "x9"      "x8"
 ```
 
 
@@ -344,7 +337,6 @@ x$edges[x$edges$from == "grade" & x$edges$to == "speed",
         "curvature"] <- 40
 x$edges[x$edges$from == "ageyr" & x$edges$to == "textual", 
         "curvature"] <- -40
-x$edges$linetype <- ifelse(x$edges$arrow == "none", 2, 1)
 x$nodes[6:14,]$node_xmin <- x$nodes[6:14,]$node_xmin + 0.4
 x$nodes[6:14,]$node_xmax <- x$nodes[6:14,]$node_xmax - 0.4
 x$nodes[6:14,]$node_ymin <- x$nodes[6:14,]$node_ymin + 0.2
@@ -365,8 +357,10 @@ Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the
 latter displays standardized coefficients by default (but unstandardized
 coefficients can be specified with `est_std = FALSE`), (b) if using 
 standardized coefficients, the leading zero is omitted (as per APA 
-requirements); (c) does not plot the variances per default, and (d) allows 
-defining an automatic layout in specific cases (as described earlier).
+requirements); (c) does not plot the variances per default, (d) uses
+full double-headed arrows instead of dashed lines with no arrows for
+covariances, and (e) allows defining an automatic layout in specific 
+cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult 
 to customize in depth. For the aesthetics of `nice_tidySEM()`, 

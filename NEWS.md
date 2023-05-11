@@ -3,6 +3,7 @@
 
 ## lavaanExtra 0.1.4.6
 * `nice_tidySEM`: now omit the leading zero when using standardized coefficients (for APA style).
+* Update fit indices recommendations from Schreiber et al. (2006) to Schreiber (2017).
 
 ## lavaanExtra 0.1.4.5
 * `lavaan_cov`: renamed r column to covariance since in some cases standardized residual variances were not real correlations.
