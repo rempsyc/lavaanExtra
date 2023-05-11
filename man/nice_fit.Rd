@@ -4,7 +4,7 @@
 \alias{nice_fit}
 \title{Extract relevant fit indices from lavaan model}
 \usage{
-nice_fit(model, model.labels, nice_table = FALSE)
+nice_fit(model, model.labels, nice_table = FALSE, stars = FALSE)
 }
 \arguments{
 \item{model}{lavaan model object(s) to extract fit indices from}
@@ -16,6 +16,9 @@ is unnamed, defaults to generic numbering.}
 \item{nice_table}{Logical, whether to print the table as a
 \code{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
+
+\item{stars}{Logical, if \code{nice_table = TRUE}, whether to display
+significance stars (defaults to \code{FALSE}).}
 }
 \value{
 A dataframe, representing select fit indices (chi2, df, chi2/df,

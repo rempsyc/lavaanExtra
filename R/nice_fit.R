@@ -11,6 +11,8 @@
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
+#' @param stars Logical, if `nice_table = TRUE`, whether to display
+#'              significance stars (defaults to `FALSE`).
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, representing select fit indices (chi2, df, chi2/df,
 #'         p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI, SRMR,
@@ -38,7 +40,7 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' nice_fit(fit)
 #'
-nice_fit <- function(model, model.labels, nice_table = FALSE) {
+nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
 
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
@@ -68,7 +70,15 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
   row.names(df) <- NULL
   if (nice_table) {
     rlang::check_installed("rempsyc", reason = "for this feature.")
-    table <- rempsyc::nice_table(df)
+    x <- df
+
+    x[c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")] <- rempsyc::format_r(as.numeric(
+      unlist(x[, c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")])))
+    x$`RMSEA [90% CI]` <- paste0(x$rmsea, " [", x$rmsea.ci.lower, ", ", x$rmsea.ci.upper, "]")
+    x <- x[!names(x) %in% c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")]
+    x <- x[c(1:7, 11, 8:10)]
+
+    table <- rempsyc::nice_table(x, stars = stars)
     table <- flextable::add_footer_row(table,
       values = c(
         Model = "Ideal Value",
@@ -78,11 +88,10 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
         p = "> .05",
         CFI = "\u2265 .95",
         TLI = "\u2265 .95",
-        RMSEA = "< .06-.08",
-        `90% CI (RMSEA)` = "[.00, .10]",
+        `RMSEA (90% CI)` = "< .06-.08 [.00, .10]",
         SRMR = "\u2264 .08",
-        AIC = "Smaller is better",
-        BIC = "Smaller is better"
+        AIC = "Smaller",
+        BIC = "Smaller"
       ),
       colwidths = rep(1, length(table$col_keys))
     )
@@ -107,14 +116,20 @@ nice_fit <- function(model, model.labels, nice_table = FALSE) {
 }
 
 nice_fit_internal <- function(fit) {
-  x <- lavaan::fitMeasures(fit, c(
+
+  x <- lavaan::fitMeasures(fit)
+  x <- as.data.frame(t(as.data.frame(x)))
+  # cfi.list <- c(x["cfi.robust"], x["cfi.scaled"], x["cfi"])
+  # x$cfi <- cfi.list[[which(!is.na(cfi.list))[1]]]
+  keep <- c(
     "chisq", "df", "pvalue", "cfi", "tli",
     "rmsea", "rmsea.ci.lower", "rmsea.ci.upper",
     "srmr", "aic", "bic"
-  ))
-  x <- as.data.frame(t(as.data.frame(x)))
+  )
+  x <- x[keep]
   chi2.df <- x$chisq / x$df
   x <- cbind(x[1:2], chi2.df, x[3:length(x)])
   x <- round(x, 3)
   x
+
 }
