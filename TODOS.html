@@ -89,7 +89,12 @@
 <ul><li>
 <code>cfa_fit_plot</code>, add covariances of items on plot? Problem is that is does not keep a vertical structure so does not look pretty when putting the default to <code>TRUE</code>. Perhaps there is a programmatic way in <code>lavaanPlot</code> to specify a vertical structure at all times.</li>
 <li>
-<code>nice_tidySEM</code>: improve algorithm when odd number of variables for layout matrix by adding two empty rows around the odd levels, and one empty row in the middle of the even levels?</li>
+<code>nice_fit</code>: automatically pick robust fit indices, if available</li>
+<li>
+<code>nice_tidySEM</code>:
+<ul><li>Allow specifying BOTH standardized and unstandardized coefficients on the same figure, e.g., <code>c("b", "B")</code>.</li>
+<li>improve algorithm when odd number of variables for layout matrix by adding two empty rows around the odd levels, and one empty row in the middle of the even levels?</li>
+</ul></li>
 <li>Add automatic covariances (specify levels, e.g.,: “level1 = IV”, “level2 = M”, “level3 = DV”)</li>
 <li>Get community feedback</li>
 </ul></div>
