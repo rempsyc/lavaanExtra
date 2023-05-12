@@ -16,7 +16,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.4.7</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -101,6 +101,7 @@
 <span>  est_std <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">label</span>,</span>
 <span>  label_location <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  reduce_items <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  plot <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -151,6 +152,16 @@ format <code>(colname = "label")</code>.</p></dd>
 <dt>label_location</dt>
 <dd><p>Location of label along the path, as a percentage
 (defaults to middle, 0.5).</p></dd>
+
+
+<dt>reduce_items</dt>
+<dd><p>A numeric vector of length 1 (x) or 2 (x &amp; y) defining
+how much space to trim from the nodes (boxes) of the
+items defining the latent variables. Can be provided
+either as <code>reduce_items = 0.4</code> (will only affect
+horizontal space, x), or
+<code>reduce_items = c(x = 0.4, y = 0.2)</code> (will affect
+both horizontal x and vertical y).</p></dd>
 
 
 <dt>plot</dt>
