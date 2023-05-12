@@ -88,7 +88,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
         p = "> .05",
         CFI = "\u2265 .95",
         TLI = "\u2265 .95",
-        `RMSEA (90% CI)` = "< .06-.08 [.00, .10]",
+        `RMSEA (90% CI)` = "< .05 [.00, .08]",
         SRMR = "\u2264 .08",
         AIC = "Smaller",
         BIC = "Smaller"

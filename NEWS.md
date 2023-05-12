@@ -7,7 +7,7 @@
 ## lavaanExtra 0.1.4.6
 * `nice_tidySEM`: now omit the leading zero when using standardized coefficients (for APA style).
 * `nice_fit`:
-  * Update fit indices recommendations from Schreiber et al. (2006) to Schreiber (2017).
+  * Update fit indices recommendations from Schreiber et al. (2006) to Schreiber (2017). Only benchmark that has changed is RMSEA, moving to `< .05 [.00, .08]` from  `< .06-.08 [.00, .10]`.
   * Make table shorter by combining the RMSEA column and its confidence interval and shortening the AIC and BIC interpretations.
 
 ## lavaanExtra 0.1.4.5
