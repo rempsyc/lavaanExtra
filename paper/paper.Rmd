@@ -268,7 +268,8 @@ x$edges[from == "ageyr" & to == "textual", "curvature"] <- -40
 plot(x)
 ```
 
-In any case, the resulting figure can be saved using `ggplot2::ggsave()`.
+In any case, the resulting figure can be saved using `ggplot2::ggsave()`
+[@ggplot2Package].
 
 ```{r, eval=FALSE}
 ggplot2::ggsave("my_semPlot.pdf", width = 8, height = 6)

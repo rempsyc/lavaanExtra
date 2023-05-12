@@ -342,7 +342,8 @@ plot(x)
 
 ![](paper_files/figure-latex/nice_tidySEM3-1.pdf)<!-- --> 
 
-In any case, the resulting figure can be saved using `ggplot2::ggsave()`.
+In any case, the resulting figure can be saved using `ggplot2::ggsave()`
+[@ggplot2Package].
 
 
 ```r
