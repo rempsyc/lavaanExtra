@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-11"
+date: "2023-05-12"
 bibliography: paper.bib
 output:
   rticles::joss_article
@@ -123,9 +123,9 @@ define all indirect paths automatically.
 
 
 ```r
-DV <- c("speed", "textual")
+DV <- c("textual", "speed")
 M <- "visual"
-IV <- c("ageyr", "grade")
+IV <- c("grade", "ageyr")
 
 mediation <- list(speed = M, textual = M, visual = IV)
 regression <- list(speed = IV, textual = IV)
@@ -150,13 +150,13 @@ cat(model.sem)
 ## 
 ## speed ~ visual_speed*visual
 ## textual ~ visual_textual*visual
-## visual ~ ageyr_visual*ageyr + grade_visual*grade
+## visual ~ grade_visual*grade + ageyr_visual*ageyr
 ## 
 ## ##################################################
 ## # [---------Regressions (Direct effects)---------]
 ## 
-## speed ~ ageyr + grade
-## textual ~ ageyr + grade
+## speed ~ grade + ageyr
+## textual ~ grade + ageyr
 ## 
 ## ##################################################
 ## # [------------------Covariances-----------------]
@@ -168,10 +168,10 @@ cat(model.sem)
 ## ##################################################
 ## # [--------Mediations (indirect effects)---------]
 ## 
-## ageyr_visual_speed := ageyr_visual * visual_speed
-## ageyr_visual_textual := ageyr_visual * visual_textual
-## grade_visual_speed := grade_visual * visual_speed
 ## grade_visual_textual := grade_visual * visual_textual
+## grade_visual_speed := grade_visual * visual_speed
+## ageyr_visual_textual := ageyr_visual * visual_textual
+## ageyr_visual_speed := ageyr_visual * visual_speed
 ```
 
 ## Tables
@@ -332,15 +332,11 @@ fine-tune and finalize the figure.
 
 ```r
 x <- nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.65, 
-                  plot = FALSE)
-x$edges[x$edges$from == "grade" & x$edges$to == "speed",
-        "curvature"] <- 40
-x$edges[x$edges$from == "ageyr" & x$edges$to == "textual", 
-        "curvature"] <- -40
-x$nodes[6:14,]$node_xmin <- x$nodes[6:14,]$node_xmin + 0.4
-x$nodes[6:14,]$node_xmax <- x$nodes[6:14,]$node_xmax - 0.4
-x$nodes[6:14,]$node_ymin <- x$nodes[6:14,]$node_ymin + 0.2
-x$nodes[6:14,]$node_ymax <- x$nodes[6:14,]$node_ymax - 0.2
+                  reduce_items = c(x = 0.4, y = 0.2), plot = FALSE)
+from <- x$edges$from
+to <- x$edges$to
+x$edges[from == "grade" & to == "speed", "curvature"] <- 40
+x$edges[from == "ageyr" & to == "textual", "curvature"] <- -40
 plot(x)
 ```
 
@@ -359,7 +355,8 @@ coefficients can be specified with `est_std = FALSE`), (b) if using
 standardized coefficients, the leading zero is omitted (as per APA 
 requirements); (c) does not plot the variances per default, (d) uses
 full double-headed arrows instead of dashed lines with no arrows for
-covariances, and (e) allows defining an automatic layout in specific 
+covariances, (e) has further arguments for easy customization (e.g.,
+`reduce_items`), and (f) allows defining an automatic layout in specific 
 cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult 

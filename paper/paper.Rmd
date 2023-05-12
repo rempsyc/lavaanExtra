@@ -116,9 +116,9 @@ our variables directly instead. When such is the case, `write_lvaan()` will
 define all indirect paths automatically.
 
 ```{r}
-DV <- c("speed", "textual")
+DV <- c("textual", "speed")
 M <- "visual"
-IV <- c("ageyr", "grade")
+IV <- c("grade", "ageyr")
 
 mediation <- list(speed = M, textual = M, visual = IV)
 regression <- list(speed = IV, textual = IV)
@@ -260,15 +260,11 @@ fine-tune and finalize the figure.
 
 ```{r nice_tidySEM3, fig.width=8, fig.height=6}
 x <- nice_tidySEM(fit.sem, layout = mylayout, label_location = 0.65, 
-                  plot = FALSE)
-x$edges[x$edges$from == "grade" & x$edges$to == "speed",
-        "curvature"] <- 40
-x$edges[x$edges$from == "ageyr" & x$edges$to == "textual", 
-        "curvature"] <- -40
-x$nodes[6:14,]$node_xmin <- x$nodes[6:14,]$node_xmin + 0.4
-x$nodes[6:14,]$node_xmax <- x$nodes[6:14,]$node_xmax - 0.4
-x$nodes[6:14,]$node_ymin <- x$nodes[6:14,]$node_ymin + 0.2
-x$nodes[6:14,]$node_ymax <- x$nodes[6:14,]$node_ymax - 0.2
+                  reduce_items = c(x = 0.4, y = 0.2), plot = FALSE)
+from <- x$edges$from
+to <- x$edges$to
+x$edges[from == "grade" & to == "speed", "curvature"] <- 40
+x$edges[from == "ageyr" & to == "textual", "curvature"] <- -40
 plot(x)
 ```
 
@@ -284,7 +280,8 @@ coefficients can be specified with `est_std = FALSE`), (b) if using
 standardized coefficients, the leading zero is omitted (as per APA 
 requirements); (c) does not plot the variances per default, (d) uses
 full double-headed arrows instead of dashed lines with no arrows for
-covariances, and (e) allows defining an automatic layout in specific 
+covariances, (e) has further arguments for easy customization (e.g.,
+`reduce_items`), and (f) allows defining an automatic layout in specific 
 cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult 

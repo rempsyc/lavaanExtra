@@ -15,14 +15,21 @@
 #' @param hide_mean Logical, hides means/node labels. Defaults to TRUE.
 #' @param est_std Logical, whether to use the standardized coefficients.
 #'                Defaults to TRUE.
-#' @param plot Logical, whether to plot the result (default). If `FALSE`,
-#'             returns the `tidy_sem` object, which can be further edited
-#'             as needed.
 #' @param label Labels to be used on the plot. As elsewhere in
 #'              `lavaanExtra`, it is provided as a named list with
 #'              format `(colname = "label")`.
 #' @param label_location Location of label along the path, as a percentage
 #'                      (defaults to middle, 0.5).
+#' @param reduce_items A numeric vector of length 1 (x) or 2 (x & y) defining
+#'                     how much space to trim from the nodes (boxes) of the
+#'                     items defining the latent variables. Can be provided
+#'                     either as `reduce_items = 0.4` (will only affect
+#'                     horizontal space, x), or
+#'                     `reduce_items = c(x = 0.4, y = 0.2)` (will affect
+#'                     both horizontal x and vertical y).
+#' @param plot Logical, whether to plot the result (default). If `FALSE`,
+#'             returns the `tidy_sem` object, which can be further edited
+#'             as needed.
 #' @param ... Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.
 #' @keywords CFA lavaan plot fit tidySEM table_results
 #' @return A tidySEM plot, of class ggplot, representing the specified
@@ -71,6 +78,7 @@ nice_tidySEM <- function(fit,
                          est_std = TRUE,
                          label,
                          label_location = NULL,
+                         reduce_items = NULL,
                          plot = TRUE,
                          ...) {
   rlang::check_installed(c("tidySEM", "tmvnsim"), reason = "for this function.")
@@ -137,6 +145,21 @@ nice_tidySEM <- function(fit,
     x <- sub("^0", "", x)
     x <- sub("^-0", "-", x)
     p$edges$label <- x
+  }
+  if (!is.null(reduce_items)) {
+    if (length(reduce_items) > 2) {
+      stop("'reduce_items' cannot contain more than two elements.")
+    } else if (!inherits(reduce_items, "numeric")) {
+      stop("'reduce_items' must be numeric.")
+    }
+    items <- p$edges[p$edges$op == "=~", "rhs"]
+    i <- p$nodes$name %in% items
+    p$nodes[i,]$node_xmin <- p$nodes[i,]$node_xmin + reduce_items[1]
+    p$nodes[i,]$node_xmax <- p$nodes[i,]$node_xmax - reduce_items[1]
+    if (length(reduce_items) == 2) {
+      p$nodes[i,]$node_ymin <- p$nodes[i,]$node_ymin + reduce_items[2]
+      p$nodes[i,]$node_ymax <- p$nodes[i,]$node_ymax - reduce_items[2]
+    }
   }
   # Use full line (2) everywhere instead of dashed lines (2) for variances
   p$edges$linetype <- 1

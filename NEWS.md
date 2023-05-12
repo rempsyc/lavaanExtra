@@ -1,6 +1,9 @@
 # lavaanExtra 0.1.x
 * Work in progress!
 
+## lavaanExtra 0.1.4.7
+* `nice_tidySEM`: new argument: `reduce_items`, to change the size of the nodes (boxes) of the items defining the latent variables (which often require less emphasis).
+
 ## lavaanExtra 0.1.4.6
 * `nice_tidySEM`: now omit the leading zero when using standardized coefficients (for APA style).
 * `nice_fit`:
