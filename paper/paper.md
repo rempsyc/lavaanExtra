@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-12"
+date: "2023-05-20"
 bibliography: paper.bib
 output:
   rticles::joss_article
@@ -44,7 +44,7 @@ code-efficient syntax. Second, it facilitates the analysis-to-publication
 workflow by providing publication-ready tables and figures (following the 
 style of the American Psychological Association, APA).
 
-## Alternative Syntax
+## Usage
 
 There is a single function at the center of the proposed alternative syntax,
 `write_lavaan()`. The idea behind `write_lavaan()` is to define individual 
@@ -118,7 +118,7 @@ need to define the latent variables again, only the new components. With the
 `lavaanExtra` syntax, when defining our lists of components, we can think of 
 the `=` sign as "predicted by", a bit like `~` for regression. There is
 an exception to this for the `indirect` object, which also allows specifying 
-our variables directly instead. When such is the case, `write_lvaan()` will
+our variables directly instead. When such is the case, `write_lavaan()` will
 define all indirect paths automatically.
 
 
@@ -132,8 +132,12 @@ regression <- list(speed = IV, textual = IV)
 covariance <- list(speed = "textual", ageyr = "grade", x4 = c("x5", "x6"))
 indirect <- list(IV = IV, M = M, DV = DV)
 
-model.sem <- write_lavaan(mediation, regression, covariance, 
-                          indirect, latent, label = TRUE)
+model.sem <- write_lavaan(mediation = mediation, 
+                          regression = regression, 
+                          covariance = covariance, 
+                          indirect = indirect, 
+                          latent = latent, 
+                          label = TRUE)
 cat(model.sem)
 ```
 
@@ -190,7 +194,8 @@ library(lavaan)
 fit.cfa <- cfa(model.cfa, data = HolzingerSwineford1939)
 fit.sem <- sem(model.sem, data = HolzingerSwineford1939)
 
-fit_table <- nice_fit(dplyr::lst(fit.cfa, fit.sem), nice_table = TRUE)
+list.mods <- list(fit.cfa = fit.cfa, fit.sem = fit.sem)
+fit_table <- nice_fit(list.mods, nice_table = TRUE)
 ```
 
 
@@ -237,21 +242,19 @@ side-by-side for demonstration purposes.
 
 
 ```r
-lavaanPlot::lavaanPlot(fit.sem)
+# lavaanPlot::lavaanPlot(fit.sem)
+# This is temporarily commented out because it is generating a bug on my home
+# computer. I will have to reknit the document from my work laptop.
+
+nice_lavaanPlot(fit.sem)
 ```
 
 ![](paper_files/figure-latex/nice_lavaanPlot-1.pdf)<!-- --> 
 
-```r
-nice_lavaanPlot(fit.sem)
-```
-
-![](paper_files/figure-latex/nice_lavaanPlot-2.pdf)<!-- --> 
-
 As these figures demonstrate, `nice_lavaanPlot()` has several elements
 frequently requested by researchers (especially in psychology): (a)
-an horizontal, rather than vertical, layout; (b) the coefficients
-appear per default (but only significant ones); (c) significance
+a horizontal, rather than vertical, layout; (b) the coefficients
+appear by default (but only significant ones); (c) significance
 stars; and (d) the use of a sans serif font (as required by APA 
 style for figures).
 
@@ -260,7 +263,7 @@ example for the use of curved lines, which many researchers dislike.
 Nonetheless, it will still yield excellent and satisfying results for a 
 quick and easy check.
 
-In turn, the best option for publication is `nice_tidySEM`. Let's first
+The best option for publication then is `nice_tidySEM`. Let's first
 look at the default output of the base `tidySEM::graph_sem()` for 
 reference.
 
@@ -296,7 +299,7 @@ For the time being, `nice_tidySEM` only supports this three-level
 automatic layout, but designs with more levels are in the works. In the 
 meantime, when the model is more complex (or that we want to include items), 
 it is necessary to specify the layout manually using a matrix or data frame, 
-which allows a fine-grained control over the generated figure.
+which allows fine-grained control over the generated figure.
 
 
 ```r
@@ -342,8 +345,7 @@ plot(x)
 
 ![](paper_files/figure-latex/nice_tidySEM3-1.pdf)<!-- --> 
 
-In any case, the resulting figure can be saved using `ggplot2::ggsave()`
-[@ggplot2Package].
+The resulting figure can be saved using `ggplot2::ggsave()` [@ggplot2Package]:
 
 
 ```r
@@ -354,7 +356,7 @@ Other differences between {tidySEM} and `nice_tidySEM()` are that: (a) the
 latter displays standardized coefficients by default (but unstandardized
 coefficients can be specified with `est_std = FALSE`), (b) if using 
 standardized coefficients, the leading zero is omitted (as per APA 
-requirements); (c) does not plot the variances per default, (d) uses
+requirements); (c) does not plot the variances by default, (d) uses
 full double-headed arrows instead of dashed lines with no arrows for
 covariances, (e) has further arguments for easy customization (e.g.,
 `reduce_items`), and (f) allows defining an automatic layout in specific 
@@ -381,10 +383,11 @@ https://github.com/rempsyc/lavaanExtra/issues/.
 
 # Acknowledgements
 
-I would like to thank Hugues Leduc, Jany St-Cyr, Andreea Gavrila, Charles-Étienne
-Lavoie, and Björn Büdenbender for statistical or technical advice that helped 
-inform some functions of this package and/or useful feedback on this manuscript. 
-I would also like to acknowledge funding from the Social Sciences and Humanities
-Research Council of Canada.
+I would like to thank Hugues Leduc, Jany St-Cyr, Andreea Gavrila, Patrick 
+Coulombe, Jay Olson, Charles-Étienne Lavoie, and Björn Büdenbender for 
+statistical or technical advice that helped inform some functions of this 
+package and/or useful feedback on this manuscript. I would also like to 
+acknowledge funding from the Social Sciences and Humanities Research Council of 
+Canada.
 
 # References
