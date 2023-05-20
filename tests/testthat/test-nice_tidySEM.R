@@ -126,6 +126,7 @@ test_that("nice_tidySEM on sem with reduce_items", {
     c("gg", "ggplot")
   )
   expect_error(nice_tidySEM(fit.sem, reduce_items = "not numeric"))
+  expect_error(nice_tidySEM(fit.sem, reduce_items = c(1, 2, 3)))
 })
 
 test_that("nice_tidySEM on sem with plot = FALSE", {

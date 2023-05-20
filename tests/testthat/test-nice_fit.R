@@ -68,3 +68,9 @@ test_that("nice_fit warns on labels", {
   )
 })
 
+test_that("nice_fit error on wronb object class", {
+  expect_error(
+    nice_fit(HS.model, model.labels = seq(1,10))
+  )
+})
+
