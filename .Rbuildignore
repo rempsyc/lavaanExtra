@@ -15,4 +15,7 @@ models
 ^CRAN-SUBMISSION$
 ^tink$
 ^paper$
-^vignettes$
+^vignettes/fullworkflow\.Rmd$
+^vignettes/indirect\.Rmd$
+^vignettes/regression\.Rmd$
+^vignettes/special\.Rmd$
