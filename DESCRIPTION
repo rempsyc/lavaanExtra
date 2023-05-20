@@ -17,7 +17,7 @@ Depends:
 Imports: 
     lavaan,
 Suggests: 
-    rempsyc (>= 0.1.2),
+    rempsyc,
     flextable,
     lavaanPlot,
     DiagrammeRsvg,
