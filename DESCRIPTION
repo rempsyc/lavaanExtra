@@ -1,7 +1,7 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package 'lavaan'
-Version: 0.1.4.7
-Date: 2023-05-12
+Version: 0.1.5
+Date: 2023-05-20
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))
@@ -17,7 +17,7 @@ Depends:
 Imports: 
     lavaan,
 Suggests: 
-    rempsyc (>= 0.1.1.9),
+    rempsyc (>= 0.1.2),
     flextable,
     lavaanPlot,
     DiagrammeRsvg,
