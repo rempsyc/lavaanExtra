@@ -119,7 +119,7 @@ cat(cfa.model)
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
-#> lavaan 0.6-12 ended normally after 35 iterations
+#> lavaan 0.6.15 ended normally after 35 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -128,7 +128,7 @@ fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 #>   Number of observations                           301
 #> 
 #> Model Test User Model:
-#>                                               Standard      Robust
+#>                                               Standard      Scaled
 #>   Test Statistic                                85.306      87.132
 #>   Degrees of freedom                                24          24
 #>   P-value (Chi-square)                           0.000       0.000
@@ -161,18 +161,21 @@ fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 #>                                                                   
 #>   Akaike (AIC)                                7517.490    7517.490
 #>   Bayesian (BIC)                              7595.339    7595.339
-#>   Sample-size adjusted Bayesian (BIC)         7528.739    7528.739
+#>   Sample-size adjusted Bayesian (SABIC)       7528.739    7528.739
 #> 
 #> Root Mean Square Error of Approximation:
 #> 
 #>   RMSEA                                          0.092       0.093
 #>   90 Percent confidence interval - lower         0.071       0.073
 #>   90 Percent confidence interval - upper         0.114       0.115
-#>   P-value RMSEA <= 0.05                          0.001       0.001
+#>   P-value H_0: RMSEA <= 0.050                    0.001       0.001
+#>   P-value H_0: RMSEA >= 0.080                    0.840       0.862
 #>                                                                   
 #>   Robust RMSEA                                               0.092
 #>   90 Percent confidence interval - lower                     0.072
 #>   90 Percent confidence interval - upper                     0.114
+#>   P-value H_0: Robust RMSEA <= 0.050                         0.001
+#>   P-value H_0: Robust RMSEA >= 0.080                         0.849
 #> 
 #> Standardized Root Mean Square Residual:
 #> 
@@ -242,7 +245,7 @@ fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
 nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-cfa2-1.png" width="90%" />
+<img src="man/figures/README-cfa2-1.png" width="100%" />
 
 ## SEM example
 
@@ -302,19 +305,21 @@ cat(model)
 #> grade_visual_textual := grade_visual * visual_textual
 
 fit.sem <- sem(model, data = HolzingerSwineford1939)
+```
 
+``` r
 # Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
 ```
 
-<img src="man/figures/README-saturated-1.png" width="30%" />
+<img src="man/figures/README-saturated-1.png" width="60%" />
 
 ``` r
-# Get covariance indices and make it pretty with the `rempsyc::nice_table` integration
-lavaan_cov(fit.sem, nice_table = TRUE)
+# Get correlations and make them pretty with the `rempsyc::nice_table` integration
+lavaan_cor(fit.sem, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-covariance-1.png" width="30%" />
+<img src="man/figures/README-covariance-1.png" width="40%" />
 
 ``` r
 # Get nice fit indices with the `rempsyc::nice_table` integration
@@ -322,7 +327,7 @@ fit_table <- nice_fit(list(fit.cfa, fit.sem), nice_table = TRUE)
 fit_table
 ```
 
-<img src="man/figures/README-path2-1.png" width="90%" />
+<img src="man/figures/README-path2-1.png" width="100%" />
 
 ``` r
 # Save fit table to Word!
@@ -332,7 +337,7 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 lavaan_ind(fit.sem, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-indirect2-1.png" width="50%" />
+<img src="man/figures/README-indirect2-1.png" width="90%" />
 
 ``` r
 # Plot our model
