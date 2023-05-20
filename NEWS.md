@@ -1,5 +1,5 @@
-# lavaanExtra 0.1.x
-* Work in progress!
+# lavaanExtra 0.1.5
+* CRAN resubmission
 
 ## lavaanExtra 0.1.4.7
 * `nice_tidySEM`: new argument: `reduce_items`, to change the size of the nodes (boxes) of the items defining the latent variables (which often require less emphasis).

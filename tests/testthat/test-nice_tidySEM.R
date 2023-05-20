@@ -113,6 +113,21 @@ test_that("nice_tidySEM on sem with hide_nonsig_edges", {
   )
 })
 
+test_that("nice_tidySEM on sem with hide_cov", {
+  expect_s3_class(
+    nice_tidySEM(fit.sem, hide_cov = TRUE),
+    c("gg", "ggplot")
+  )
+})
+
+test_that("nice_tidySEM on sem with reduce_items", {
+  expect_s3_class(
+    nice_tidySEM(fit.sem, reduce_items = c(x = 0.4, y = 0.2)),
+    c("gg", "ggplot")
+  )
+  expect_error(nice_tidySEM(fit.sem, reduce_items = "not numeric"))
+})
+
 test_that("nice_tidySEM on sem with plot = FALSE", {
   expect_s3_class(
     nice_tidySEM(fit.sem, plot = FALSE),
