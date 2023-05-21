@@ -90,20 +90,18 @@ Finally, for beginners, it can be difficult to remember the correct
 `lavaan` symbols for each specific operation. `write_lavaan()` uses
 intuitive names to convert the information to the correct symbols,
 meaning the user does not have to rely on memory as much. Even for
-people familiar with `lavaan` syntax, this approach can save time. The
-function also saves time by offering the possibility to define the named
+people familiar with `lavaan` syntax, this approach can save time. The 
+function also offers the possibility to define the named
 paths automatically with clear and intuitive names.
-<!-- 2 x saves time, maybe rephrase the second with? Some suggestions: 
-- efficentize the workflow
-- optimizie ...
-- streamline
-- Cut down on time-->
 
-I provide a simple Confirmatory Factor Analysis (CFA) example below,
-where the latent variables `visual`, `textual`, and `speed` are defined
-by items 1 to 9. We can then use the `cat()` function on the resulting
-object (of type character) to read it in the traditional way and make
-sure we have not made any mistake.
+I provide a simple Confirmatory Factor Analysis (CFA) example below using
+the `HolzingerSwineford1939` dataset [@holzinger1939study]. The dataset 
+contains the mental ability test scores of children. In this example, we want 
+to define the latent variables `visual` (visual perception ability), 
+`textual` (reading and writing ability), and `speed` (processing speed ability), 
+which are defined by items 1 to 9, respectively. We can then use the `cat()` 
+function on the resulting object (of type character) to read it in the 
+traditional way and make sure we have not made any mistake.
 
 ```{r, warning=F, message=F, echo=F}
 library(lavaanExtra)
@@ -124,18 +122,18 @@ cat(model.cfa)
 
 Should we want to use these latent variables in a full SEM model, we do
 not need to define the latent variables again, only the new components.
+In the example below, I add regressions, covariances, and indirect effects to 
+the model. Two of our latent variables (`textual` and `speed`) are now 
+predicted by our mediating variable, `visual`. In turn, `visual` is now 
+predicted by our independent variables, `grade` (the students' grade) and 
+`ageyr` (the students' age, in years).
+
 With the `lavaanExtra` syntax, when defining our lists of components, we
 can think of the `=` sign as "predicted by", a bit like `~` for
 regression. There is an exception to this for the `indirect` object,
 which also allows specifying our variables directly instead. When such
 is the case, `write_lavaan()` will define all indirect paths
 automatically.
-
-<!-- While the example you describe is pretty much the prototypcial example for SEM -->
-<!-- still it is hard to follow if you have never seen the dataset before. -->
-<!-- What is ageyr? What does it mean, what do we try to model? Maybe give one -->
-<!-- paragraph (including the reference for the data) in which you highlight -->
-<!-- what is being modelled here? -->
 
 ```{r}
 DV <- c("textual", "speed")
@@ -158,14 +156,8 @@ cat(model.sem)
 
 ## Tables
 
-<!-- Popular is maybe not the best scientific adjective, how would
-you quantify this if asked? Also 2 x times popular in one sentence,
-I would encourage to change the first adjective. Do not get me wrong
-I think this function is so awesome, comment just relates to phrasing-->
-
-The most popular {lavaanExtra} function for tables is `nice_fit()`,
-which extracts only some of the most popular fit indices and organize
-them such that it is easy to compare models. There is an option to
+The `nice_fit()` function extracts only some of the most popular fit indices 
+and organize them such that it is easy to compare models. There is an option to
 format the table as an APA {flextable} [@flextablePackage], through the
 {rempsyc} package [@rempsycPackage], using option `nice_table = TRUE`.
 This `flextable` object can then be easily exported to Microsoft Word.
@@ -307,10 +299,6 @@ The resulting figure can be saved using `ggplot2::ggsave()`
 ```{r, eval=FALSE}
 ggplot2::ggsave("my_semPlot.pdf", width = 8, height = 6)
 ```
-
-<!-- A huge compliment for the visualizations / plots. I know from first hand  -->
-<!-- experience how much work and hassle is involved in creating these plots and  -->
-<!-- the two functions seem to do an excellent job. -->
 
 Other differences between {tidySEM} and `nice_tidySEM()` are that: (a)
 the latter displays standardized coefficients by default (but
