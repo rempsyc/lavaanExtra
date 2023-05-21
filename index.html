@@ -136,7 +136,7 @@
 <p>Or from GitHub, for the very latest version:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># If package `remotes` isn't already installed, install it with `install.packages("remotes")`</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rempsyc/lavaanExtra"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"rempsyc/lavaanExtra"</span><span class="op">)</span></span></code></pre></div>
 <p>You can load the package and open the help file, and click “Index” at the bottom. You will see all the available functions listed.</p>
 </div>
 <div class="section level2">
@@ -197,7 +197,7 @@
 <span><span class="co"># Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`</span></span>
 <span><span class="co"># to get the factor loadings visually (optionally as PDF)</span></span>
 <span><span class="va">fit.cfa</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/cfa_fit_plot.html">cfa_fit_plot</a></span><span class="op">(</span><span class="va">cfa.model</span>, <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span>
-<span><span class="co">#&gt; lavaan 0.6-12 ended normally after 35 iterations</span></span>
+<span><span class="co">#&gt; lavaan 0.6.15 ended normally after 35 iterations</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Estimator                                         ML</span></span>
 <span><span class="co">#&gt;   Optimization method                           NLMINB</span></span>
@@ -206,7 +206,7 @@
 <span><span class="co">#&gt;   Number of observations                           301</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Model Test User Model:</span></span>
-<span><span class="co">#&gt;                                               Standard      Robust</span></span>
+<span><span class="co">#&gt;                                               Standard      Scaled</span></span>
 <span><span class="co">#&gt;   Test Statistic                                85.306      87.132</span></span>
 <span><span class="co">#&gt;   Degrees of freedom                                24          24</span></span>
 <span><span class="co">#&gt;   P-value (Chi-square)                           0.000       0.000</span></span>
@@ -239,18 +239,21 @@
 <span><span class="co">#&gt;                                                                   </span></span>
 <span><span class="co">#&gt;   Akaike (AIC)                                7517.490    7517.490</span></span>
 <span><span class="co">#&gt;   Bayesian (BIC)                              7595.339    7595.339</span></span>
-<span><span class="co">#&gt;   Sample-size adjusted Bayesian (BIC)         7528.739    7528.739</span></span>
+<span><span class="co">#&gt;   Sample-size adjusted Bayesian (SABIC)       7528.739    7528.739</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Root Mean Square Error of Approximation:</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   RMSEA                                          0.092       0.093</span></span>
 <span><span class="co">#&gt;   90 Percent confidence interval - lower         0.071       0.073</span></span>
 <span><span class="co">#&gt;   90 Percent confidence interval - upper         0.114       0.115</span></span>
-<span><span class="co">#&gt;   P-value RMSEA &lt;= 0.05                          0.001       0.001</span></span>
+<span><span class="co">#&gt;   P-value H_0: RMSEA &lt;= 0.050                    0.001       0.001</span></span>
+<span><span class="co">#&gt;   P-value H_0: RMSEA &gt;= 0.080                    0.840       0.862</span></span>
 <span><span class="co">#&gt;                                                                   </span></span>
 <span><span class="co">#&gt;   Robust RMSEA                                               0.092</span></span>
 <span><span class="co">#&gt;   90 Percent confidence interval - lower                     0.072</span></span>
 <span><span class="co">#&gt;   90 Percent confidence interval - upper                     0.114</span></span>
+<span><span class="co">#&gt;   P-value H_0: Robust RMSEA &lt;= 0.050                         0.001</span></span>
+<span><span class="co">#&gt;   P-value H_0: Robust RMSEA &gt;= 0.080                         0.849</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Standardized Root Mean Square Residual:</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -315,7 +318,7 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="va">fit.cfa</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-cfa2-1.png" width="90%"></p>
+<p><img src="reference/figures/README-cfa2-1.png" width="100%"></p>
 </div>
 <div class="section level2">
 <h2 id="sem-example">SEM example<a class="anchor" aria-label="anchor" href="#sem-example"></a>
@@ -373,32 +376,32 @@
 <span><span class="co">#&gt; grade_visual_speed := grade_visual * visual_speed</span></span>
 <span><span class="co">#&gt; grade_visual_textual := grade_visual * visual_textual</span></span>
 <span></span>
-<span><span class="va">fit.sem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
-<span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-saturated-1.png" width="30%"></p>
+<span><span class="va">fit.sem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get covariance indices and make it pretty with the `rempsyc::nice_table` integration</span></span>
-<span><span class="fu"><a href="reference/lavaan_cov.html">lavaan_cov</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-covariance-1.png" width="30%"></p>
+<code class="sourceCode R"><span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
+<span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-saturated-1.png" width="60%"></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get correlations and make them pretty with the `rempsyc::nice_table` integration</span></span>
+<span><span class="fu"><a href="reference/lavaan_cor.html">lavaan_cor</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-covariance-1.png" width="40%"></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="va">fit_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.sem</span><span class="op">)</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
 <span><span class="va">fit_table</span></span></code></pre></div>
-<p><img src="reference/figures/README-path2-1.png" width="90%"></p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<p><img src="reference/figures/README-path2-1.png" width="100%"></p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save fit table to Word!</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">fit_table</span>, path <span class="op">=</span> <span class="st">"fit_table.docx"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-indirect2-1.png" width="50%"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p><img src="reference/figures/README-indirect2-1.png" width="90%"></p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot our model</span></span>
 <span><span class="fu"><a href="reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit.sem</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/semplot.png" width="70%"></p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Alternative way to plot</span></span>
 <span><span class="va">mylayout</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
 <span>  IV <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">""</span>, <span class="st">"x1"</span>, <span class="st">"grade"</span>, <span class="st">""</span>, <span class="st">"ageyr"</span>, <span class="st">""</span>, <span class="st">""</span><span class="op">)</span>,</span>
@@ -415,7 +418,7 @@
 <span><span class="co">#&gt; [5,] "ageyr" ""       "speed"   "x7"    </span></span>
 <span><span class="co">#&gt; [6,] ""      ""       ""        "x8"    </span></span>
 <span><span class="co">#&gt; [7,] ""      ""       ""        "x9"</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/nice_tidySEM.html">nice_tidySEM</a></span><span class="op">(</span><span class="va">fit.sem</span>, layout <span class="op">=</span> <span class="va">mylayout</span>, label_location <span class="op">=</span> <span class="fl">0.7</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggsave.html" class="external-link">ggsave</a></span><span class="op">(</span><span class="st">"my_semPlot.pdf"</span>, width <span class="op">=</span> <span class="fl">6</span>, height <span class="op">=</span> <span class="fl">6</span>, limitsize <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
