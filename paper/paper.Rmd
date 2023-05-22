@@ -217,8 +217,6 @@ side-by-side for demonstration purposes.
 
 ```{r nice_lavaanPlot}
 lavaanPlot::lavaanPlot(fit.sem)
-# This is temporarily commented out because it is generating a bug on my home
-# computer. I will have to reknit the document from my work laptop.
 
 nice_lavaanPlot(fit.sem)
 ```
