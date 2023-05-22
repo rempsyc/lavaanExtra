@@ -5,6 +5,9 @@ date: "August 24, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
+vignette: >
+  %\VignetteIndexEntry{Example lavaan models}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 This article attempts to reproduce several different possible `lavaan` models. We start with the source itself: The lavaan project at https://lavaan.ugent.be. Let's start by loading both packages.
