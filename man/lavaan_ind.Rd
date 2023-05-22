@@ -23,7 +23,7 @@ estimate ("b").}
 \code{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
 
-\item{underscores_to_arrows}{Logical, whether to convert underscorse
+\item{underscores_to_arrows}{Logical, whether to convert underscore
 to arrows in the "Indirect Effect column".}
 
 \item{...}{Arguments to be passed to \code{rempsyc::nice_table}}

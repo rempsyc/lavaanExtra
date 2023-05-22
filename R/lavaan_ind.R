@@ -12,7 +12,7 @@
 #' @param nice_table Logical, whether to print the table as a
 #'                   `rempsyc::nice_table` as well as print the
 #'                   reference values at the bottom of the table.
-#' @param underscores_to_arrows Logical, whether to convert underscorse
+#' @param underscores_to_arrows Logical, whether to convert underscore
 #' to arrows in the "Indirect Effect column".
 #' @param ... Arguments to be passed to `rempsyc::nice_table`
 #' @keywords lavaan structural equation modeling path analysis CFA
