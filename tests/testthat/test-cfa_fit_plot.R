@@ -32,6 +32,7 @@ test_that("cfa_fit_plot comparison to cfa", {
 
 test_that("cfa_fit_plot save as PDF", {
   skip_on_cran()
+  skip_if_not_installed("lavaanPlot")
   fit3 <- cfa_fit_plot(model, data, save.as.pdf = TRUE, file.name = "cfaplot")
   expect_equal(
     summary(fit3),
