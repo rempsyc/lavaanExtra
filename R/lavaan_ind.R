@@ -63,7 +63,7 @@ lavaan_ind <- function(fit, estimate = "B", nice_table = FALSE,
     x[[1]] <- gsub("_", " \u2192 ", x[[1]])
   }
   if (nice_table) {
-    rlang::check_installed("rempsyc", reason = "for this feature.")
+    insight::check_if_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
   }
   x

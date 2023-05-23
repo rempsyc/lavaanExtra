@@ -50,7 +50,7 @@ lavaan_reg <- function(fit, estimate = "B", nice_table = FALSE, ...) {
   x <- x[og.names]
   names(x) <- new.names
   if (nice_table) {
-    rlang::check_installed("rempsyc", reason = "for this feature.")
+    insight::check_if_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
   }
   x

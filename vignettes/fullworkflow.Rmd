@@ -5,7 +5,26 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
+vignette: >
+  %\VignetteIndexEntry{Full CFA/SEM workflow}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
+
+```{r , include=FALSE}
+library(knitr)
+
+pkgs <- c("tibble", "rlang", "flextable", "lavaanPlot", "DiagrammeRsvg",
+          "rsvg", "png", "webshot", "tidySEM", "tmvnsim")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
 
 ## CFA example
 

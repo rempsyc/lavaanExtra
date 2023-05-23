@@ -5,9 +5,28 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
+vignette: >
+  %\VignetteIndexEntry{Automatic indirect effects}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 This article demonstrates ways to produce indirect effects automatically for different scenarios. This is an experimental feature and does not support all scenarios. Right now, it only supports designs with 3 clear levels: independent (usually exogenous) variables, mediating variables, and dependent (outcome) variables. Progress for more scenarios will be implemented progressively. If using this feature, always triple check that your model was specified correctly.
+
+```{r , include=FALSE}
+library(knitr)
+
+pkgs <- c("rlang", "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", 
+          "webshot", "tidySEM", "tmvnsim")
+successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
+can_evaluate <- all(successfully_loaded)
+
+if (can_evaluate) {
+  knitr::opts_chunk$set(eval = TRUE)
+  vapply(pkgs, require, FUN.VALUE = logical(1L), quietly = TRUE, character.only = TRUE)
+} else {
+  knitr::opts_chunk$set(eval = FALSE)
+}
+```
 
 ```{r, message = FALSE}
 library(lavaan)

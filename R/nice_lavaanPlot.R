@@ -38,7 +38,7 @@ nice_lavaanPlot <- function(
     edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
     covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
     graph_options = c(rankdir = "LR"), ...) {
-  rlang::check_installed(c(
+  insight::check_if_installed(c(
     "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"),
     reason = "for this function.")
   lavaanPlot::lavaanPlot(model = model,

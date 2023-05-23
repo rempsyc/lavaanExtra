@@ -47,7 +47,7 @@ cfa_fit_plot <- function(
     model, data, covs = FALSE, estimator = "MLR", remove.items = "",
     print = TRUE, save.as.pdf = FALSE, file.name, ...){
 
-  rlang::check_installed("lavaanPlot", reason = "for this function.")
+  insight::check_if_installed("lavaanPlot", reason = "for this function.")
 
   if (missing(file.name) && isTRUE(save.as.pdf)) {
     stop("To save as PDF, the file name must also be specified.")

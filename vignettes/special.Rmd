@@ -5,6 +5,9 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
+vignette: >
+  %\VignetteIndexEntry{Special cases}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 Intercepts, various constraints, and even custom specifications can also be specified, e.g.:

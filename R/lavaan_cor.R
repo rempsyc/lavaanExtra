@@ -40,7 +40,7 @@ lavaan_cor <- function(fit, nice_table = FALSE, ...) {
   x <- x[-not.cor,]
   names(x) <- c("Variable 1", "Variable 2", "r", "p")
   if (nice_table) {
-    rlang::check_installed("rempsyc", reason = "for this feature.")
+    insight::check_if_installed("rempsyc", reason = "for this feature.")
     x <- rempsyc::nice_table(x, ...)
   }
   x

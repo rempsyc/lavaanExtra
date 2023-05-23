@@ -16,6 +16,7 @@ Depends:
     R (>= 3.5)
 Imports: 
     lavaan,
+    insight
 Suggests: 
     rempsyc (>= 0.1.2),
     flextable,

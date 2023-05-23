@@ -81,7 +81,7 @@ nice_tidySEM <- function(fit,
                          reduce_items = NULL,
                          plot = TRUE,
                          ...) {
-  rlang::check_installed(c("tidySEM", "tmvnsim"), reason = "for this function.")
+  insight::check_if_installed(c("tidySEM", "tmvnsim"), reason = "for this function.")
 
   # We are forced to reimport some tidySEM functions manually here...
   get_edges <- tidySEM::get_edges

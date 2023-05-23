@@ -5,6 +5,9 @@ date: "August 29, 2022"
 output:
   rmarkdown::html_vignette:
     toc: true
+vignette: >
+  %\VignetteIndexEntry{Regressions}
+  %\VignetteEngine{knitr::rmarkdown}
 ---
 
 ## Regression example
@@ -30,5 +33,4 @@ lavaan_reg(fit.reg)
 
 # We can get it prettier with the `rempsyc::nice_table` integration
 lavaan_reg(fit.reg, nice_table = TRUE, highlight = TRUE)
-
 ```

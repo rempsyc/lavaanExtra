@@ -69,7 +69,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
   df <- cbind(Model, df)
   row.names(df) <- NULL
   if (nice_table) {
-    rlang::check_installed("rempsyc", reason = "for this feature.")
+    insight::check_if_installed("rempsyc", reason = "for this feature.")
     x <- df
 
     x[c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")] <- rempsyc::format_r(as.numeric(
