@@ -1,5 +1,3 @@
-skip_if_not_installed(c("lavaan", "lavaanPlot"))
-
 suppressWarnings(library(lavaan))
 
 .old_wd <- setwd(tempdir())
@@ -24,7 +22,7 @@ fit2 <- cfa(model, data, estimator = estimator)
 
 
 test_that("cfa_fit_plot comparison to cfa", {
-  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  skip_if_not_installed("lavaanPlot")
   fit1 <- cfa_fit_plot(model, data)
   expect_equal(
     summary(fit1),

@@ -44,7 +44,7 @@ test_that("nice_lavaanPlot on CFA", {
 })
 
 test_that("nice_lavaanPlot on SEM", {
-  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  skip_if_not_installed("lavaanPlot")
   expect_s3_class(
     nice_lavaanPlot(fit.sem),
     c("grViz", "htmlwidget")

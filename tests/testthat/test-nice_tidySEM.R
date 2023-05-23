@@ -1,5 +1,3 @@
-skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
-
 suppressWarnings(library(lavaan))
 
 # Define our other variables
@@ -43,7 +41,7 @@ fit.sem2 <- sem(HS.model2, data)
 
 
 test_that("nice_tidySEM on CFA", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.cfa),
     c("gg", "ggplot")
@@ -51,14 +49,14 @@ test_that("nice_tidySEM on CFA", {
 })
 
 test_that("nice_tidySEM wrong labels", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_error(
     nice_tidySEM(fit.cfa, label = "wrong.labels")
   )
 })
 
 test_that("nice_tidySEM on CFA with manual structure", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.cfa, layout = manual.structure),
     c("gg", "ggplot")
@@ -66,7 +64,7 @@ test_that("nice_tidySEM on CFA with manual structure", {
 })
 
 test_that("nice_tidySEM on SEM", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem),
     c("gg", "ggplot")
@@ -74,7 +72,7 @@ test_that("nice_tidySEM on SEM", {
 })
 
 test_that("nice_tidySEM on SEM with manual structure", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem, layout = manual.structure),
     c("gg", "ggplot")
@@ -82,7 +80,7 @@ test_that("nice_tidySEM on SEM with manual structure", {
 })
 
 test_that("nice_tidySEM on SEM with automatic structure", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem2, layout = indirect),
     c("gg", "ggplot")
@@ -90,7 +88,7 @@ test_that("nice_tidySEM on SEM with automatic structure", {
 })
 
 test_that("nice_tidySEM on SEM with automatic structure and labels", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem2, layout = indirect,
                  label = label),
@@ -100,7 +98,7 @@ test_that("nice_tidySEM on SEM with automatic structure and labels", {
 
 
 test_that("nice_tidySEM on lavaan", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.lavaan),
     c("gg", "ggplot")
@@ -108,7 +106,7 @@ test_that("nice_tidySEM on lavaan", {
 })
 
 test_that("nice_tidySEM on lavaan with manual structure", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.lavaan, layout = manual.structure),
     c("gg", "ggplot")
@@ -116,7 +114,7 @@ test_that("nice_tidySEM on lavaan with manual structure", {
 })
 
 test_that("nice_tidySEM on sem with hide_nonsig_edges", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem, hide_nonsig_edges = TRUE),
     c("gg", "ggplot")
@@ -124,7 +122,7 @@ test_that("nice_tidySEM on sem with hide_nonsig_edges", {
 })
 
 test_that("nice_tidySEM on sem with hide_cov", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem, hide_cov = TRUE),
     c("gg", "ggplot")
@@ -132,7 +130,7 @@ test_that("nice_tidySEM on sem with hide_cov", {
 })
 
 test_that("nice_tidySEM on sem with reduce_items", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem, reduce_items = c(x = 0.4, y = 0.2)),
     c("gg", "ggplot")
@@ -142,7 +140,7 @@ test_that("nice_tidySEM on sem with reduce_items", {
 })
 
 test_that("nice_tidySEM on sem with plot = FALSE", {
-  skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
+  skip_if_not_installed("tidySEM")
   expect_s3_class(
     nice_tidySEM(fit.sem, plot = FALSE),
     "sem_graph"
