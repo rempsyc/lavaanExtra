@@ -26,6 +26,7 @@ test_that("nice_fit regular", {
 })
 
 test_that("nice_fit as nice_table", {
+  skip_if_not_installed(c("rempsyc", "flextable"))
   expect_s3_class(
     lavaan_cor(fit, nice_table = TRUE),
     c("nice_table", "flextable")

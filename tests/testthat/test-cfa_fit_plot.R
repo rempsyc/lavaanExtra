@@ -12,7 +12,6 @@ model <- write_lavaan(latent = latent)
 
 data <- HolzingerSwineford1939
 estimator <- "MLR"
-fit1 <- cfa_fit_plot(model, data)
 fit2 <- cfa(model, data, estimator = estimator)
 
 (latent2 <- list(visual = paste0("x", 2:3),
@@ -25,6 +24,8 @@ fit2 <- cfa(model, data, estimator = estimator)
 
 
 test_that("cfa_fit_plot comparison to cfa", {
+  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  fit1 <- cfa_fit_plot(model, data)
   expect_equal(
     summary(fit1),
     summary(fit2)
