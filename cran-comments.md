@@ -1,4 +1,15 @@
+## Resubmission lavaanExtra 0.1.6
+
+> Thanks, but without suggested packages installed we still see: * checking tests ... ERROR
+You can check yourself by setting the env var _R_CHECK_DEPENDS_ONLY_=true
+
+Thank you, with command `devtools::check(env_vars = c(`_R_CHECK_DEPENDS_ONLY_` = TRUE))`, I was able to fix all problems related to suggested dependencies.
+
 ## Resubmission lavaanExtra 0.1.5
+
+> Packages in Suggests should be used conditionally: see 'Writing R Extensions'.
+This needs to be corrected even if the missing package(s) become available.
+It can be tested by checking with _R_CHECK_DEPENDS_ONLY_=true.
 
 0 errors | 0 warnings | 0 notes
 

@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-22"
+date: "2023-05-23"
 bibliography: paper.bib
 output:
   rticles::joss_article
@@ -377,8 +377,8 @@ Other differences between {tidySEM} and `nice_tidySEM()` are that: (a)
 the latter displays standardized coefficients by default (but
 unstandardized coefficients can be specified with `est_std = FALSE`),
 (b) if using standardized coefficients, the leading zero is omitted (as
-per APA requirements); (c) does not plot the variances by default, (d)
-uses full double-headed arrows instead of dashed lines with no arrows
+preferred by many researchers); (c) does not plot the variances by default, 
+(d) uses full double-headed arrows instead of dashed lines with no arrows
 for covariances, (e) has further arguments for easy customization (e.g.,
 `reduce_items`), and (f) allows defining an automatic layout in specific
 cases (as described earlier).

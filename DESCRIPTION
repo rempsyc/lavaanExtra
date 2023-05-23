@@ -1,7 +1,7 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package 'lavaan'
-Version: 0.1.5
-Date: 2023-05-20
+Version: 0.1.6
+Date: 2023-05-23
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))

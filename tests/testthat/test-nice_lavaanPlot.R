@@ -36,7 +36,7 @@ fit.sem2 <- sem(HS.model2, data)
 #   Tests                                                                   ####
 
 test_that("nice_lavaanPlot on CFA", {
-  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  skip_if_not_installed("lavaanPlot")
   expect_s3_class(
     nice_lavaanPlot(fit.cfa),
     c("grViz", "htmlwidget")
@@ -52,7 +52,7 @@ test_that("nice_lavaanPlot on SEM", {
 })
 
 test_that("nice_lavaanPlot on lavaan", {
-  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  skip_if_not_installed("lavaanPlot")
   expect_s3_class(
     nice_lavaanPlot(fit.lavaan),
     c("grViz", "htmlwidget")
@@ -60,7 +60,7 @@ test_that("nice_lavaanPlot on lavaan", {
 })
 
 test_that("nice_lavaanPlot different sem model", {
-  skip_if_not_installed(c("lavaan", "lavaanPlot"))
+  skip_if_not_installed("lavaanPlot")
   expect_s3_class(
     nice_lavaanPlot(fit.sem2),
     c("grViz", "htmlwidget")

@@ -1,3 +1,6 @@
+# lavaanExtra 0.1.6
+* CRAN resubmission: tests now run even without suggested dependencies.
+
 # lavaanExtra 0.1.5
 * CRAN resubmission
 

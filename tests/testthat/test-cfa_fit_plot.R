@@ -39,11 +39,12 @@ test_that("cfa_fit_plot save as PDF", {
   )
 })
 
-fit4 <- cfa_fit_plot(model, data, print = FALSE, remove.items = c("x1"))
 model <- write_lavaan(latent = latent2)
 fit5 <- cfa(model, data, estimator = estimator)
 
 test_that("cfa_fit_plot remove items", {
+  skip_if_not_installed("lavaanPlot")
+  fit4 <- cfa_fit_plot(model, data, print = FALSE, remove.items = c("x1"))
   expect_equal(
     summary(fit4),
     summary(fit5)
