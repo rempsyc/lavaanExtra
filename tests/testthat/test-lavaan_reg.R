@@ -1,5 +1,3 @@
-skip_if_not_installed(c("lavaan", "rempsyc", "flextable"))
-
 suppressWarnings(library(lavaan))
 
 latent <- list(visual = paste0("x", 1:3),
