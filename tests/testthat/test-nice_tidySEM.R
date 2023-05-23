@@ -1,4 +1,4 @@
-skip_if_not_installed(c("lavaan", "tidySEM"))
+skip_if_not_installed(c("lavaan", "tidySEM", "tmvnsim"))
 
 suppressWarnings(library(lavaan))
 
