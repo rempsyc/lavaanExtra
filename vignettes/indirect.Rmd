@@ -15,7 +15,7 @@ This article demonstrates ways to produce indirect effects automatically for dif
 ```{r , include=FALSE}
 library(knitr)
 
-pkgs <- c("rlang", "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", 
+pkgs <- c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png", 
           "webshot", "tidySEM", "tmvnsim")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)

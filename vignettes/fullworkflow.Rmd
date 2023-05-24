@@ -13,7 +13,7 @@ vignette: >
 ```{r , include=FALSE}
 library(knitr)
 
-pkgs <- c("tibble", "rlang", "flextable", "lavaanPlot", "DiagrammeRsvg",
+pkgs <- c("tibble", "flextable", "lavaanPlot", "DiagrammeRsvg",
           "rsvg", "png", "webshot", "tidySEM", "tmvnsim")
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
