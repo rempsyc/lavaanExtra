@@ -1,3 +1,6 @@
+# lavaanExtra 0.1.7
+* CRAN resubmission: suggested dependencies now check for the correct version with `rlang::check_installed()`.
+
 # lavaanExtra 0.1.6
 * CRAN resubmission: tests now run even without suggested dependencies.
 

@@ -1,3 +1,7 @@
+## Resubmission lavaanExtra 0.1.7
+
+0 errors | 0 warnings | 0 notes
+
 ## Resubmission lavaanExtra 0.1.6
 
 > Thanks, but without suggested packages installed we still see: * checking tests ... ERROR
