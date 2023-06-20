@@ -55,9 +55,11 @@ Make a quick and decent-looking \code{lavaanPlot}.
 
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+(latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
 HS.model <- write_lavaan(latent = latent)
 cat(HS.model)

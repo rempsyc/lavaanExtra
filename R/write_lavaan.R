@@ -31,19 +31,22 @@
 #' @return A character string, representing the specified `lavaan` model.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
-#' (latent <- list(visual = paste0("x", 1:3),
-#'                 textual = paste0("x", 4:6),
-#'                 speed = paste0("x", 7:9)))
+#' (latent <- list(
+#'   visual = paste0("x", 1:3),
+#'   textual = paste0("x", 4:6),
+#'   speed = paste0("x", 7:9)
+#' ))
 #'
 #' HS.model <- write_lavaan(latent = latent)
 #' cat(HS.model)
 #'
 #' library(lavaan)
-#' fit <- lavaan(HS.model, data = HolzingerSwineford1939,
-#'               auto.var = TRUE, auto.fix.first = TRUE,
-#'               auto.cov.lv.x = TRUE)
-#' summary(fit, fit.measures=TRUE)
-
+#' fit <- lavaan(HS.model,
+#'   data = HolzingerSwineford1939,
+#'   auto.var = TRUE, auto.fix.first = TRUE,
+#'   auto.cov.lv.x = TRUE
+#' )
+#' summary(fit, fit.measures = TRUE)
 write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
                          indirect = NULL, latent = NULL, intercept = NULL,
                          constraint.equal = NULL, constraint.smaller = NULL,
@@ -52,14 +55,15 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
   constraint <- NULL
   hashtag <- sprintf("%s\n", paste0(rep("#", 50), collapse = ""))
   process_vars <- function(
-    x, symbol, label = FALSE, collapse = " + ", header = paste0(
-      hashtag, paste0("# ", title, "\n\n")), title = NULL, spacer = "\n\n") {
-    if(isTRUE(label)) {
+      x, symbol, label = FALSE, collapse = " + ", header = paste0(
+        hashtag, paste0("# ", title, "\n\n")
+      ), title = NULL, spacer = "\n\n") {
+    if (isTRUE(label)) {
       labels <- paste0(names(x))
       if (isTRUE(use.letters)) {
         x <- lapply(seq(x), function(i) {
           paste0(letters[seq(length(x[[i]]))], "_", labels[i], "*", x[[i]])
-          })
+        })
       } else {
         x <- lapply(seq(x), function(i) {
           paste0(x[[i]], "_", labels[i], "*", x[[i]])
@@ -73,8 +77,10 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
     paste0(header, x, spacer, collapse = "")
   }
   if (!is.null(latent)) {
-    latent <- process_vars(latent, symbol = "=~", title =
-                             "[-----Latent variables (measurement model)-----]")
+    latent <- process_vars(latent,
+      symbol = "=~", title =
+        "[-----Latent variables (measurement model)-----]"
+    )
   }
   #### AUTOMATIC INDIRECT EFFECTS!!! ####
   if (!is.null(indirect)) {
@@ -92,61 +98,83 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
       }
       x <- stats::setNames(x, labels)
       indirect.names <- lapply(indirect$M, function(x) {
-        paste0(rep(indirect$IV, each = length(indirect$DV)), "_", x, "_",
-               rep(indirect$DV, length(indirect$IV)))
+        paste0(
+          rep(indirect$IV, each = length(indirect$DV)), "_", x, "_",
+          rep(indirect$DV, length(indirect$IV))
+        )
       })
       indirect.names <- unlist(indirect.names)
       indirect2 <- lapply(indirect$M, function(x) {
-        paste0(rep(indirect$IV, each = length(indirect$DV)), "_", x, " * ", x,
-               "_", rep(indirect$DV, length(indirect$IV)))
+        paste0(
+          rep(indirect$IV, each = length(indirect$DV)), "_", x, " * ", x,
+          "_", rep(indirect$DV, length(indirect$IV))
+        )
       })
       indirect.list <- as.list(unlist(indirect2))
       stats::setNames(indirect.list, indirect.names)
       indirect <- stats::setNames(indirect.list, indirect.names)
     }
     indirect <- process_vars(
-      indirect, symbol = ":=", collapse = " * ", title =
-        "[--------Mediations (indirect effects)---------]")
+      indirect,
+      symbol = ":=", collapse = " * ", title =
+        "[--------Mediations (indirect effects)---------]"
+    )
   }
   if (!is.null(mediation)) {
     mediation <- process_vars(
-      mediation, symbol = "~", label = label, title =
-        "[-----------Mediations (named paths)-----------]")
+      mediation,
+      symbol = "~", label = label, title =
+        "[-----------Mediations (named paths)-----------]"
+    )
   }
   if (!is.null(regression)) {
     regression <- process_vars(
-      regression, symbol = "~", title =
-        "[---------Regressions (Direct effects)---------]")
+      regression,
+      symbol = "~", title =
+        "[---------Regressions (Direct effects)---------]"
+    )
   }
   if (!is.null(covariance)) {
     covariance <- process_vars(
-      covariance, symbol = "~~", title =
-        "[------------------Covariances-----------------]")
+      covariance,
+      symbol = "~~", title =
+        "[------------------Covariances-----------------]"
+    )
   }
   if (!is.null(intercept)) {
     title <- "[------------------Intercepts------------------]"
     header <- paste0(hashtag, paste0("# ", title, "\n\n"))
-    intercept <- paste0(header, paste0(intercept, " ~ 1", collapse = "\n"),
-                        "\n\n")
+    intercept <- paste0(
+      header, paste0(intercept, " ~ 1", collapse = "\n"),
+      "\n\n"
+    )
   }
   if (!is.null(constraint.equal) || !is.null(constraint.smaller) ||
-      !is.null(constraint.larger)) {
+    !is.null(constraint.larger)) {
     title <- "[-----------------Constraints------------------]"
     header <- paste0(hashtag, paste0("# ", title, "\n\n"))
     if (!is.null(constraint.equal)) {
-      constraint.equal <- process_vars(constraint.equal, symbol = "==",
-                                       header = NULL, spacer = "\n")
+      constraint.equal <- process_vars(constraint.equal,
+        symbol = "==",
+        header = NULL, spacer = "\n"
+      )
     }
     if (!is.null(constraint.smaller)) {
-      constraint.smaller <- process_vars(constraint.smaller, symbol = "<",
-                                         header = NULL, spacer = "\n")
+      constraint.smaller <- process_vars(constraint.smaller,
+        symbol = "<",
+        header = NULL, spacer = "\n"
+      )
     }
     if (!is.null(constraint.larger)) {
-      constraint.larger <- process_vars(constraint.larger, symbol = ">",
-                                        header = NULL, spacer = "\n")
+      constraint.larger <- process_vars(constraint.larger,
+        symbol = ">",
+        header = NULL, spacer = "\n"
+      )
     }
-    constraint <- paste0(header, constraint.equal, constraint.smaller,
-                         constraint.larger, "\n")
+    constraint <- paste0(
+      header, constraint.equal, constraint.smaller,
+      constraint.larger, "\n"
+    )
   }
   if (!is.null(custom)) {
     title <- "[------------Custom Specifications-------------]"
@@ -154,5 +182,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
     custom <- paste0(header, custom)
   }
   paste0(latent, mediation, regression, covariance, indirect, intercept,
-         constraint, custom, collapse = "")
+    constraint, custom,
+    collapse = ""
+  )
 }

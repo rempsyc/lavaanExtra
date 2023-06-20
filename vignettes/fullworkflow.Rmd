@@ -13,8 +13,10 @@ vignette: >
 ```{r , include=FALSE}
 library(knitr)
 
-pkgs <- c("tibble", "flextable", "lavaanPlot", "DiagrammeRsvg",
-          "rsvg", "png", "webshot", "tidySEM", "tmvnsim")
+pkgs <- c(
+  "tibble", "flextable", "lavaanPlot", "DiagrammeRsvg",
+  "rsvg", "png", "webshot", "tidySEM", "tmvnsim"
+)
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
@@ -35,9 +37,11 @@ library(lavaanExtra)
 library(tibble)
 
 # Define latent variables
-latent <- list(visual = paste0("x", 1:3),
-               textual = paste0("x", 4:6),
-               speed = paste0("x", 7:9))
+latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
 
 # Write the model, and check it
 cfa.model <- write_lavaan(latent = latent)
@@ -56,7 +60,6 @@ nice_fit(fit.cfa)
 
 # We can get it prettier with the `rempsyc::nice_table` integration
 nice_fit(fit.cfa, nice_table = TRUE)
-
 ```
 
 But let's say you had a bad fit and wanted to remove the three items with the lowest loadings, you can do so without have to respecify the model, only what items you wish to remove:
@@ -65,7 +68,8 @@ But let's say you had a bad fit and wanted to remove the three items with the lo
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (as PDF)
 fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
-                         remove.items = paste0("x", c(2:3, 7)))
+  remove.items = paste0("x", c(2:3, 7))
+)
 ```
 
 <img src="https://lavaanextra.remi-theriault.com/reference/figures/cfaplot2.png" width="30%" />
@@ -118,31 +122,33 @@ covariance <- list(speed = "textual", ageyr = "grade")
 # Write the model, and check it
 model.saturated <- write_lavaan(mediation, regression, covariance)
 cat(model.saturated)
-
 ```
 
 This looks good so far, but we might also want to check our indirect effects (mediations). For this, we have to obtain the path names by setting `label = TRUE`. This will allow us to define our indirect effects and feed them back to `write_lavaan`.
 
 ```{r saturated2}
-# We can run the model again. 
+# We can run the model again.
 # However, we set `label = TRUE` to get the path names
 model.saturated <- write_lavaan(mediation, regression, covariance, label = TRUE)
 cat(model.saturated)
-
 ```
 
 Here, if we check the mediation section of the model, we see that it has been "augmented" with the path names. Those are `visual_speed`, `visual_textual`, `ageyr_visual`, and `grade_visual`. The logic for the determination of the path names is predictable: it is always the predictor variable, on the left, followed by the predicted variable, on the right. So if we were to test all possible indirect effects, we would define our `indirect` object as such:
 
 ```{r saturated3}
 # Define indirect object
-indirect <- list(ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
-                 ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
-                 grade_visual_speed = c("grade_visual", "visual_speed"),
-                 grade_visual_textual = c("grade_visual", "visual_textual"))
+indirect <- list(
+  ageyr_visual_speed = c("ageyr_visual", "visual_speed"),
+  ageyr_visual_textual = c("ageyr_visual", "visual_textual"),
+  grade_visual_speed = c("grade_visual", "visual_speed"),
+  grade_visual_textual = c("grade_visual", "visual_textual")
+)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance, 
-                                indirect, label = TRUE)
+model.saturated <- write_lavaan(mediation, regression, covariance,
+  indirect,
+  label = TRUE
+)
 cat(model.saturated)
 ```
 
@@ -150,8 +156,9 @@ If preferred (e.g., when dealing with long variable names), one can choose to us
 
 ```{r letters}
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance, 
-                                label = TRUE, use.letters = TRUE)
+model.saturated <- write_lavaan(mediation, regression, covariance,
+  label = TRUE, use.letters = TRUE
+)
 cat(model.saturated)
 ```
 
@@ -159,14 +166,18 @@ In this case, the path names are `a_speed`, `a_textual`, `a_visual`, and `b_visu
 
 ```{r letters2}
 # Define indirect object
-indirect <- list(ageyr_visual_speed = c("a_visual", "a_speed"),
-                 ageyr_visual_textual = c("a_visual", "a_textual"),
-                 grade_visual_speed = c("b_visual", "a_speed"),
-                 grade_visual_textual = c("b_visual", "a_textual"))
+indirect <- list(
+  ageyr_visual_speed = c("a_visual", "a_speed"),
+  ageyr_visual_textual = c("a_visual", "a_textual"),
+  grade_visual_speed = c("b_visual", "a_speed"),
+  grade_visual_textual = c("b_visual", "a_textual")
+)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance, 
-                                indirect, label = TRUE, use.letters = TRUE)
+model.saturated <- write_lavaan(mediation, regression, covariance,
+  indirect,
+  label = TRUE, use.letters = TRUE
+)
 cat(model.saturated)
 ```
 
@@ -177,8 +188,10 @@ There is also an experimental feature that attempts to produce the indirect effe
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance, 
-                                indirect, label = TRUE)
+model.saturated <- write_lavaan(mediation, regression, covariance,
+  indirect,
+  label = TRUE
+)
 cat(model.saturated)
 ```
 
@@ -188,7 +201,7 @@ We are now satisfied with our model, so we can finally fit it!
 # Fit the model with `lavaan`
 fit.saturated <- sem(model.saturated, data = data)
 
-# Get regression parameters only 
+# Get regression parameters only
 # And make it pretty with the `rempsyc::nice_table` integration
 lavaan_reg(fit.saturated, nice_table = TRUE, highlight = TRUE)
 ```
@@ -205,16 +218,20 @@ regression <- list(speed = "grade", textual = IV)
 # We can run the model again, setting `label = TRUE` to get the path names
 model.path <- write_lavaan(mediation, regression, covariance, label = TRUE)
 cat(model.path)
-# We check that we have removed "ageyr" correctly from "speed" in the 
+# We check that we have removed "ageyr" correctly from "speed" in the
 # regression section. OK.
 
 # Define just our indirect effects of interest
-indirect <- list(age_visual_speed = c("ageyr_visual", "visual_speed"),
-                 grade_visual_textual = c("grade_visual", "visual_textual"))
+indirect <- list(
+  age_visual_speed = c("ageyr_visual", "visual_speed"),
+  grade_visual_textual = c("grade_visual", "visual_textual")
+)
 
 # We run the model again, with the indirect effects
-model.path <- write_lavaan(mediation, regression, covariance, 
-                           indirect, label = TRUE)
+model.path <- write_lavaan(mediation, regression, covariance,
+  indirect,
+  label = TRUE
+)
 cat(model.path)
 
 # Fit the model with `lavaan`
@@ -254,16 +271,19 @@ For reference, this is our model, visually speaking
 We could also attempt to draw it with `lavaanExtra::nice_tidySEM`, a convenience wrapper around the amazing `tidySEM` package.
 
 ```{r nice_tidySEM, message=FALSE}
-labels <- list(ageyr = "Age (year)",
-               grade = "Grade",
-               visual = "Visual",
-               speed = "Speed",
-               textual = "Textual")
+labels <- list(
+  ageyr = "Age (year)",
+  grade = "Grade",
+  visual = "Visual",
+  speed = "Speed",
+  textual = "Textual"
+)
 layout <- list(IV = IV, M = M, DV = DV)
 
-nice_tidySEM(fit.path, layout = layout, label = labels,
-             hide_nonsig_edges = TRUE, label_location = .60)
-
+nice_tidySEM(fit.path,
+  layout = layout, label = labels,
+  hide_nonsig_edges = TRUE, label_location = .60
+)
 ```
 
 
@@ -272,8 +292,10 @@ nice_tidySEM(fit.path, layout = layout, label = labels,
 Finally, perhaps we change our mind and decide to run a full SEM instead, with latent variables. Fear not: we don't have to redo everything again. We can simply define our latent variables and proceed. In this example, we have *already* defined our latent variable for our CFA earlier, so we don't even need to write that again!
 
 ```{r latent}
-model.latent <- write_lavaan(mediation, regression, covariance, 
-                             indirect, latent, label = TRUE)
+model.latent <- write_lavaan(mediation, regression, covariance,
+  indirect, latent,
+  label = TRUE
+)
 cat(model.latent)
 
 # Run model

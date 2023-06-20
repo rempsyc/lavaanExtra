@@ -6,28 +6,38 @@ IV <- c("ageyr", "grade")
 DV <- c("speed", "textual")
 
 # Prepare model specification
-latent <- list(visual = paste0("x", 1:3),
-               textual = paste0("x", 4:6),
-               speed = paste0("x", 7:9))
+latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
 indirect <- list(IV = IV, M = M, DV = DV)
 mediation <- list(speed = M, textual = M, visual = IV)
 HS.model <- write_lavaan(latent = latent)
 
 fit.cfa <- cfa(HS.model, HolzingerSwineford1939)
 fit.sem <- sem(HS.model, HolzingerSwineford1939)
-fit.lavaan <- lavaan(HS.model, HolzingerSwineford1939, auto.var = TRUE,
-                     auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+fit.lavaan <- lavaan(HS.model, HolzingerSwineford1939,
+  auto.var = TRUE,
+  auto.fix.first = TRUE, auto.cov.lv.x = TRUE
+)
 
-HS.model2 <- write_lavaan(mediation = mediation,
-                          indirect = indirect,
-                          label = TRUE)
+HS.model2 <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 
-label <- list(ageyr = "Age", speed = "Speed", grade = "Grade",
-              visual = "Visual", textual = "Textual")
+label <- list(
+  ageyr = "Age", speed = "Speed", grade = "Grade",
+  visual = "Visual", textual = "Textual"
+)
 
 s3 <- rep("", 3)
-manual.structure <- data.frame(factors = c(s3, names(latent), s3),
-                               items = unlist(latent))
+manual.structure <- data.frame(
+  factors = c(s3, names(latent), s3),
+  items = unlist(latent)
+)
 
 data <- HolzingerSwineford1939
 data$visual <- rowMeans(data[paste0("x", 1:3)])
@@ -90,8 +100,10 @@ test_that("nice_tidySEM on SEM with automatic structure", {
 test_that("nice_tidySEM on SEM with automatic structure and labels", {
   skip_if_not_installed("tidySEM")
   expect_s3_class(
-    nice_tidySEM(fit.sem2, layout = indirect,
-                 label = label),
+    nice_tidySEM(fit.sem2,
+      layout = indirect,
+      label = label
+    ),
     c("gg", "ggplot")
   )
 })

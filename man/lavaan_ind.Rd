@@ -44,24 +44,32 @@ details.
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+(latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
-(mediation <- list(speed = "visual",
-                   textual = "visual",
-                   visual = c("ageyr", "grade")))
+(mediation <- list(
+  speed = "visual",
+  textual = "visual",
+  visual = c("ageyr", "grade")
+))
 
-(indirect <- list(IV = c("ageyr", "grade"),
-                  M = "visual",
-                  DV = c("speed", "textual")))
+(indirect <- list(
+  IV = c("ageyr", "grade"),
+  M = "visual",
+  DV = c("speed", "textual")
+))
 
-HS.model <- write_lavaan(mediation, indirect = indirect,
-                         latent = latent, label = TRUE)
+HS.model <- write_lavaan(mediation,
+  indirect = indirect,
+  latent = latent, label = TRUE
+)
 cat(HS.model)
 
 library(lavaan)
-fit <- sem(HS.model, data=HolzingerSwineford1939)
+fit <- sem(HS.model, data = HolzingerSwineford1939)
 lavaan_ind(fit)
 \dontshow{\}) # examplesIf}
 }

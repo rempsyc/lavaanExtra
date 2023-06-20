@@ -6,24 +6,32 @@ IV <- c("ageyr", "grade")
 DV <- c("speed", "textual")
 
 # Prepare model specification
-latent <- list(visual = paste0("x", 1:3),
-               textual = paste0("x", 4:6),
-               speed = paste0("x", 7:9))
+latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
 indirect <- list(IV = IV, M = M, DV = DV)
 mediation <- list(speed = M, textual = M, visual = IV)
 HS.model <- write_lavaan(latent = latent)
 
 fit.cfa <- cfa(HS.model, HolzingerSwineford1939)
 fit.sem <- sem(HS.model, HolzingerSwineford1939)
-fit.lavaan <- lavaan(HS.model, HolzingerSwineford1939, auto.var = TRUE,
-                     auto.fix.first = TRUE, auto.cov.lv.x = TRUE)
+fit.lavaan <- lavaan(HS.model, HolzingerSwineford1939,
+  auto.var = TRUE,
+  auto.fix.first = TRUE, auto.cov.lv.x = TRUE
+)
 
-HS.model2 <- write_lavaan(mediation = mediation,
-                          indirect = indirect,
-                          label = TRUE)
+HS.model2 <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 
-label <- list(ageyr = "Age", speed = "Speed", grade = "Grade",
-              visual = "Visual", textual = "Textual")
+label <- list(
+  ageyr = "Age", speed = "Speed", grade = "Grade",
+  visual = "Visual", textual = "Textual"
+)
 
 data <- HolzingerSwineford1939
 data$visual <- rowMeans(data[paste0("x", 1:3)])
@@ -66,4 +74,3 @@ test_that("nice_lavaanPlot different sem model", {
     c("grViz", "htmlwidget")
   )
 })
-

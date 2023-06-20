@@ -19,9 +19,11 @@
 #'         specified `lavaan` model.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE)
-#' (latent <- list(visual = paste0("x", 1:3),
-#'                 textual = paste0("x", 4:6),
-#'                 speed = paste0("x", 7:9)))
+#' (latent <- list(
+#'   visual = paste0("x", 1:3),
+#'   textual = paste0("x", 4:6),
+#'   speed = paste0("x", 7:9)
+#' ))
 #'
 #' HS.model <- write_lavaan(latent = latent)
 #' cat(HS.model)
@@ -38,17 +40,22 @@ nice_lavaanPlot <- function(
     edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
     covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
     graph_options = c(rankdir = "LR"), ...) {
-  insight::check_if_installed(c(
-    "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"),
-    reason = "for this function.")
-  lavaanPlot::lavaanPlot(model = model,
-                         node_options = node_options,
-                         edge_options = edge_options,
-                         coefs = coefs,
-                         stand = stand,
-                         covs = covs,
-                         stars = stars,
-                         graph_options = graph_options,
-                         sig = sig,
-                         ...)
-  }
+  insight::check_if_installed(
+    c(
+      "lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"
+    ),
+    reason = "for this function."
+  )
+  lavaanPlot::lavaanPlot(
+    model = model,
+    node_options = node_options,
+    edge_options = edge_options,
+    coefs = coefs,
+    stand = stand,
+    covs = covs,
+    stars = stars,
+    graph_options = graph_options,
+    sig = sig,
+    ...
+  )
+}

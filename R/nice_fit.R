@@ -41,14 +41,15 @@
 #' nice_fit(fit)
 #'
 nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
-
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
   } else if (inherits(model, "lavaan")) {
     models.list <- list(model)
   } else {
-    stop(paste("Model must be of class 'lavaan' or be a 'list()' of lavaan models (using 'c()' won't work).\n",
-               "Have you perhaps provided the model specification (of class character) instead of the sem or cfa object?"))
+    stop(paste(
+      "Model must be of class 'lavaan' or be a 'list()' of lavaan models (using 'c()' won't work).\n",
+      "Have you perhaps provided the model specification (of class character) instead of the sem or cfa object?"
+    ))
   }
 
   x <- lapply(models.list, nice_fit_internal)
@@ -61,19 +62,23 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
     } else if (!length(x) == length(model.labels)) {
       warning("Number of models and labels do not match.")
     }
-    } else if (!is.null(names(models.list))) {
-        Model <- names(models.list)
-      } else {
-      Model <- paste0("Model ", seq_len(length(models.list)))
+  } else if (!is.null(names(models.list))) {
+    Model <- names(models.list)
+  } else {
+    Model <- paste0("Model ", seq_len(length(models.list)))
   }
   df <- cbind(Model, df)
   row.names(df) <- NULL
   if (nice_table) {
-    insight::check_if_installed("rempsyc", reason = "for this feature.")
+    insight::check_if_installed("rempsyc",
+      version = get_dep_version("rempsyc"),
+      reason = "for this feature."
+    )
     x <- df
 
     x[c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")] <- rempsyc::format_r(as.numeric(
-      unlist(x[, c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")])))
+      unlist(x[, c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")])
+    ))
     x$`RMSEA [90% CI]` <- paste0(x$rmsea, " [", x$rmsea.ci.lower, ", ", x$rmsea.ci.upper, "]")
     x <- x[!names(x) %in% c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")]
     x <- x[c(1:7, 11, 8:10)]
@@ -99,7 +104,8 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
     table <- flextable::align(table, align = "center", part = "all")
 
     table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
-      "As proposed by Schreiber (2017)."), ref_symbols = "a", part = "footer")
+      "As proposed by Schreiber (2017)."
+    ), ref_symbols = "a", part = "footer")
     table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
     table <- flextable::align(table, i = 2, part = "footer", align = "left")
 
@@ -109,14 +115,13 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
       table,
       part = "body", border = nice.borders
     )
-     table <- flextable::hline(table, i = 1, border = nice.borders, part = "footer")
+    table <- flextable::hline(table, i = 1, border = nice.borders, part = "footer")
     df <- table
   }
   df
 }
 
 nice_fit_internal <- function(fit) {
-
   x <- lavaan::fitMeasures(fit)
   x <- as.data.frame(t(as.data.frame(x)))
   # cfi.list <- c(x["cfi.robust"], x["cfi.scaled"], x["cfi"])
@@ -131,5 +136,4 @@ nice_fit_internal <- function(fit) {
   x <- cbind(x[1:2], chi2.df, x[3:length(x)])
   x <- round(x, 3)
   x
-
 }

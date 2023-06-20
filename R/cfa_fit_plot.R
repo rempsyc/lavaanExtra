@@ -27,9 +27,11 @@
 #'         `lavaanPlot` of the `lavaan` fit object.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE)
-#' (latent <- list(visual = paste0("x", 1:3),
-#'                 textual = paste0("x", 4:6),
-#'                 speed = paste0("x", 7:9)))
+#' (latent <- list(
+#'   visual = paste0("x", 1:3),
+#'   textual = paste0("x", 4:6),
+#'   speed = paste0("x", 7:9)
+#' ))
 #'
 #' HS.model <- write_lavaan(latent = latent)
 #' cat(HS.model)
@@ -45,8 +47,7 @@
 
 cfa_fit_plot <- function(
     model, data, covs = FALSE, estimator = "MLR", remove.items = "",
-    print = TRUE, save.as.pdf = FALSE, file.name, ...){
-
+    print = TRUE, save.as.pdf = FALSE, file.name, ...) {
   insight::check_if_installed("lavaanPlot", reason = "for this function.")
 
   if (missing(file.name) && isTRUE(save.as.pdf)) {
@@ -54,7 +55,7 @@ cfa_fit_plot <- function(
   }
 
   # Remove requested items
-  if(!missing(remove.items)) {
+  if (!missing(remove.items)) {
     remove.items0 <- paste0("\\s", remove.items, "\\s")
     remove.items1 <- paste0(remove.items, collapse = " \\+ |")
     remove.items1 <- paste0(remove.items1, " \\+")
@@ -69,8 +70,10 @@ cfa_fit_plot <- function(
   # Fit model
   fit <- lavaan::cfa(model, data = data, estimator = estimator, ...)
   if (isTRUE(print)) {
-    print(summary(fit, standardized = TRUE,
-                  fit.measures = TRUE, rsquare = TRUE))
+    print(summary(fit,
+      standardized = TRUE,
+      fit.measures = TRUE, rsquare = TRUE
+    ))
   }
   # Plot the model
   my.plot <- nice_lavaanPlot(fit, covs = covs)

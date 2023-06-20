@@ -44,7 +44,7 @@ test_that("nice_fit list", {
 
 test_that("nice_fit named list", {
   expect_s3_class(
-    nice_fit(list(zz1 = fit, zz2= fit)),
+    nice_fit(list(zz1 = fit, zz2 = fit)),
     "data.frame"
   )
 })
@@ -63,13 +63,12 @@ test_that("nice_fit warns on labels", {
   )
   # Testing more labels
   expect_error(
-    nice_fit(fit, fit, model.labels = seq(1,10))
+    nice_fit(fit, fit, model.labels = seq(1, 10))
   )
 })
 
 test_that("nice_fit error on wronb object class", {
   expect_error(
-    nice_fit(HS.model, model.labels = seq(1,10))
+    nice_fit(HS.model, model.labels = seq(1, 10))
   )
 })
-

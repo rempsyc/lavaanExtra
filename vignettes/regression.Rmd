@@ -34,8 +34,10 @@ library(lavaan)
 library(lavaanExtra)
 
 # Define our regression terms
-regression <- list(mpg = names(mtcars)[2:5],
-                   disp = names(mtcars)[4:7])
+regression <- list(
+  mpg = names(mtcars)[2:5],
+  disp = names(mtcars)[4:7]
+)
 
 # Write the model, and check it
 mtcars.model <- write_lavaan(regression = regression)

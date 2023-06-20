@@ -104,23 +104,29 @@ nice_tidySEM <- function(fit,
     structure <- lapply(structure, function(x) {
       if (is.odd(length(x))) {
         c("", x)
-        } else {
-          x
-          }
+      } else {
+        x
+      }
     })
-    max.length <- max(c(length(structure$IV),
-                        length(structure$M),
-                        length(structure$DV)))
-    IV.s <- (max.length - length(structure$IV))/2
-    M.s <- (max.length - length(structure$M))/2
-    DV.s <- (max.length - length(structure$DV))/2
+    max.length <- max(c(
+      length(structure$IV),
+      length(structure$M),
+      length(structure$DV)
+    ))
+    IV.s <- (max.length - length(structure$IV)) / 2
+    M.s <- (max.length - length(structure$M)) / 2
+    DV.s <- (max.length - length(structure$DV)) / 2
 
-    structure <- data.frame(IV = c(sx(IV.s), structure$IV, sx(IV.s)),
-                            M = c(sx(M.s), structure$M, sx(M.s)),
-                            DV = c(sx(DV.s), structure$DV, sx(DV.s)))
+    structure <- data.frame(
+      IV = c(sx(IV.s), structure$IV, sx(IV.s)),
+      M = c(sx(M.s), structure$M, sx(M.s)),
+      DV = c(sx(DV.s), structure$DV, sx(DV.s))
+    )
   }
   p <- tidySEM::prepare_graph(fit, layout = structure, ...)
-  p <- tidySEM::edit_graph(p, {label_location <- label_location})
+  p <- tidySEM::edit_graph(p, {
+    label_location <- label_location
+  })
   if (isTRUE(hide_nonsig_edges)) {
     p <- tidySEM::hide_nonsig_edges(p)
   }
@@ -154,11 +160,11 @@ nice_tidySEM <- function(fit,
     }
     items <- p$edges[p$edges$op == "=~", "rhs"]
     i <- p$nodes$name %in% items
-    p$nodes[i,]$node_xmin <- p$nodes[i,]$node_xmin + reduce_items[1]
-    p$nodes[i,]$node_xmax <- p$nodes[i,]$node_xmax - reduce_items[1]
+    p$nodes[i, ]$node_xmin <- p$nodes[i, ]$node_xmin + reduce_items[1]
+    p$nodes[i, ]$node_xmax <- p$nodes[i, ]$node_xmax - reduce_items[1]
     if (length(reduce_items) == 2) {
-      p$nodes[i,]$node_ymin <- p$nodes[i,]$node_ymin + reduce_items[2]
-      p$nodes[i,]$node_ymax <- p$nodes[i,]$node_ymax - reduce_items[2]
+      p$nodes[i, ]$node_ymin <- p$nodes[i, ]$node_ymin + reduce_items[2]
+      p$nodes[i, ]$node_ymax <- p$nodes[i, ]$node_ymax - reduce_items[2]
     }
   }
   # Use full line (2) everywhere instead of dashed lines (2) for variances
@@ -167,7 +173,6 @@ nice_tidySEM <- function(fit,
   if (isTRUE(plot)) {
     return(plot(p))
   } else {
-      p
-    }
+    p
+  }
 }
-

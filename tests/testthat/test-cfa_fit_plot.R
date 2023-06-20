@@ -2,9 +2,11 @@ suppressWarnings(library(lavaan))
 
 .old_wd <- setwd(tempdir())
 
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+(latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
 model <- write_lavaan(latent = latent)
 
@@ -12,9 +14,11 @@ data <- HolzingerSwineford1939
 estimator <- "MLR"
 fit2 <- cfa(model, data, estimator = estimator)
 
-(latent2 <- list(visual = paste0("x", 2:3),
-                 textual = paste0("x", 4:6),
-                 speed = paste0("x", 7:9)))
+(latent2 <- list(
+  visual = paste0("x", 2:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
 
 #   ____________________________________________________________________________

@@ -33,18 +33,22 @@ See "Value" section for more details.
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-(latent <- list(visual = paste0("x", 1:3),
-                textual = paste0("x", 4:6),
-                speed = paste0("x", 7:9)))
+(latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+))
 
-(regression <- list(ageyr = c("visual", "textual", "speed"),
-                    grade = c("visual", "textual", "speed")))
+(regression <- list(
+  ageyr = c("visual", "textual", "speed"),
+  grade = c("visual", "textual", "speed")
+))
 
 HS.model <- write_lavaan(latent = latent, regression = regression)
 cat(HS.model)
 
 library(lavaan)
-fit <- sem(HS.model, data=HolzingerSwineford1939)
+fit <- sem(HS.model, data = HolzingerSwineford1939)
 lavaan_reg(fit)
 \dontshow{\}) # examplesIf}
 }

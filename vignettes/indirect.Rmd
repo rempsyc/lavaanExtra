@@ -15,8 +15,10 @@ This article demonstrates ways to produce indirect effects automatically for dif
 ```{r , include=FALSE}
 library(knitr)
 
-pkgs <- c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png", 
-          "webshot", "tidySEM", "tmvnsim")
+pkgs <- c(
+  "lavaanPlot", "DiagrammeRsvg", "rsvg", "png",
+  "webshot", "tidySEM", "tmvnsim"
+)
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
 
@@ -60,7 +62,6 @@ cat(model)
 # Fit and plot
 fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
-
 ```
 
 # 1 IV, 1 mediator, 2 DVs
@@ -294,7 +295,6 @@ cat(model)
 # Fit and plot
 fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
-
 ```
 
 ```{r, fig.height = 6}
@@ -309,8 +309,10 @@ M <- c("visual", "grade", "x8")
 DV <- c("speed", "textual", "x4", "x5", "x7")
 
 # Define our lavaan lists
-mediation <- list(speed = M, textual = M, x4 = M, x5 = M,
-                   x7 = M, x8 = IV, visual = IV, grade = IV)
+mediation <- list(
+  speed = M, textual = M, x4 = M, x5 = M,
+  x7 = M, x8 = IV, visual = IV, grade = IV
+)
 
 # Define indirect object
 indirect <- list(IV = IV, M = M, DV = DV)
@@ -322,27 +324,27 @@ cat(model)
 # Fit and plot
 fit <- sem(model, data = data)
 nice_lavaanPlot(fit)
-
 ```
 
 ```{r, fig.height = 8}
-labels <- list(sex = "Sex",
-               ageyr = "Age (year)",
-               agemo = "Age (month)",
-               school = "School",
-               x2 = "Item 2",
-               x3 = "Item 3",
-               visual = "Visual",
-               grade = "Grade",
-               x8 = "Item 8",
-               speed = "Speed",
-               textual = "Textual",
-               x4 = "Item 4",
-               x5 = "Item 5",
-               x7 = "Item 7")
+labels <- list(
+  sex = "Sex",
+  ageyr = "Age (year)",
+  agemo = "Age (month)",
+  school = "School",
+  x2 = "Item 2",
+  x3 = "Item 3",
+  visual = "Visual",
+  grade = "Grade",
+  x8 = "Item 8",
+  speed = "Speed",
+  textual = "Textual",
+  x4 = "Item 4",
+  x5 = "Item 5",
+  x7 = "Item 7"
+)
 
 nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE, label = labels)
-
 ```
 
 Etc.
