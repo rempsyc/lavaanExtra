@@ -137,40 +137,48 @@ packages.</p>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax1.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax1.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="st">' # regressions</span></span>
+<code class="sourceCode R"><span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="st">" # regressions</span></span>
 <span><span class="st">             y1 + y2 ~ f1 + f2 + x1 + x2</span></span>
 <span><span class="st">                  f1 ~ f2 + f3</span></span>
 <span><span class="st">                  f2 ~ f3 + x1 + x2</span></span>
 <span><span class="st"></span></span>
-<span><span class="st">             # latent variable definitions </span></span>
-<span><span class="st">               f1 =~ y1 + y2 + y3 </span></span>
-<span><span class="st">               f2 =~ y4 + y5 + y6 </span></span>
+<span><span class="st">             # latent variable definitions</span></span>
+<span><span class="st">               f1 =~ y1 + y2 + y3</span></span>
+<span><span class="st">               f2 =~ y4 + y5 + y6</span></span>
 <span><span class="st">               f3 =~ y7 + y8 + y9 + y10</span></span>
 <span><span class="st"></span></span>
-<span><span class="st">             # variances and covariances </span></span>
-<span><span class="st">               y1 ~~ y1 </span></span>
-<span><span class="st">               y1 ~~ y2 </span></span>
+<span><span class="st">             # variances and covariances</span></span>
+<span><span class="st">               y1 ~~ y1</span></span>
+<span><span class="st">               y1 ~~ y2</span></span>
 <span><span class="st">               f1 ~~ f2</span></span>
 <span><span class="st"></span></span>
-<span><span class="st">             # intercepts </span></span>
-<span><span class="st">               y1 ~ 1 </span></span>
+<span><span class="st">             # intercepts</span></span>
+<span><span class="st">               y1 ~ 1</span></span>
 <span><span class="st">               f1 ~ 1</span></span>
-<span><span class="st">           '</span></span></code></pre></div>
+<span><span class="st">           "</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
-<span>            y2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
-<span>            f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f2"</span>, <span class="st">"f3"</span><span class="op">)</span>,</span>
-<span>            f2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f3"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>            f2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, </span>
-<span>            f3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y1 <span class="op">=</span> <span class="st">"y1"</span>,</span>
-<span>            y1 <span class="op">=</span> <span class="st">"y2"</span>,</span>
-<span>            f1 <span class="op">=</span> <span class="st">"f2"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
+<span>  y2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f1"</span>, <span class="st">"f2"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span>,</span>
+<span>  f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f2"</span>, <span class="st">"f3"</span><span class="op">)</span>,</span>
+<span>  f2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"f3"</span>, <span class="st">"x1"</span>, <span class="st">"x2"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  f1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  f2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  f3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y1 <span class="op">=</span> <span class="st">"y1"</span>,</span>
+<span>  y1 <span class="op">=</span> <span class="st">"y2"</span>,</span>
+<span>  f1 <span class="op">=</span> <span class="st">"f2"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y1"</span>, <span class="st">"f1"</span><span class="op">)</span></span>
-<span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">reg</span>, latent <span class="op">=</span> <span class="va">lat</span>, covariance <span class="op">=</span> <span class="va">cov</span>,</span>
-<span>                        intercept <span class="op">=</span> <span class="va">int</span><span class="op">)</span></span>
+<span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, latent <span class="op">=</span> <span class="va">lat</span>, covariance <span class="op">=</span> <span class="va">cov</span>,</span>
+<span>  intercept <span class="op">=</span> <span class="va">int</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">myModel</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----Latent variables (measurement model)-----]</span></span>
@@ -206,14 +214,16 @@ packages.</p>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/cfa.html" class="external-link uri">https://lavaan.ugent.be/tutorial/cfa.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="st">' visual  =~ x1 + x2 + x3 </span></span>
+<code class="sourceCode R"><span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="st">" visual  =~ x1 + x2 + x3</span></span>
 <span><span class="st">              textual =~ x4 + x5 + x6</span></span>
-<span><span class="st">              speed   =~ x7 + x8 + x9 '</span></span></code></pre></div>
+<span><span class="st">              speed   =~ x7 + x8 + x9 "</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
-<span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">myModel</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -229,7 +239,7 @@ packages.</p>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/sem.html" class="external-link uri">https://lavaan.ugent.be/tutorial/sem.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">  # measurement model</span></span>
 <span><span class="st">    ind60 =~ x1 + x2 + x3</span></span>
 <span><span class="st">    dem60 =~ y1 + y2 + y3 + y4</span></span>
@@ -243,19 +253,25 @@ packages.</p>
 <span><span class="st">    y3 ~~ y7</span></span>
 <span><span class="st">    y4 ~~ y8</span></span>
 <span><span class="st">    y6 ~~ y8</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ind60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>            dem60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
-<span>            dem65 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>dem60 <span class="op">=</span> <span class="st">"ind60"</span>,</span>
-<span>            dem65 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ind60"</span>, <span class="st">"dem60"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y1 <span class="op">=</span> <span class="st">"y5"</span>,</span>
-<span>            y2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y4"</span>, <span class="st">"y6"</span><span class="op">)</span>,</span>
-<span>            y3 <span class="op">=</span> <span class="st">"y7"</span>,</span>
-<span>            y4 <span class="op">=</span> <span class="st">"y8"</span>,</span>
-<span>            y6 <span class="op">=</span> <span class="st">"y8"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  ind60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  dem60 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
+<span>  dem65 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  dem60 <span class="op">=</span> <span class="st">"ind60"</span>,</span>
+<span>  dem65 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ind60"</span>, <span class="st">"dem60"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y1 <span class="op">=</span> <span class="st">"y5"</span>,</span>
+<span>  y2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y4"</span>, <span class="st">"y6"</span><span class="op">)</span>,</span>
+<span>  y3 <span class="op">=</span> <span class="st">"y7"</span>,</span>
+<span>  y4 <span class="op">=</span> <span class="st">"y8"</span>,</span>
+<span>  y6 <span class="op">=</span> <span class="st">"y8"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span>, regression <span class="op">=</span> <span class="va">reg</span>, covariance <span class="op">=</span> <span class="va">cov</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -289,7 +305,7 @@ packages.</p>
 </h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st"># three-factor model</span></span>
 <span><span class="st">  visual =~ x1 + x2 + x3</span></span>
 <span><span class="st">  textual =~ x4 + x5 + x6</span></span>
@@ -299,15 +315,19 @@ packages.</p>
 <span><span class="st">  textual ~~ 0*speed</span></span>
 <span><span class="st"># fix variance of speed factor</span></span>
 <span><span class="st">  speed ~~ 1*speed</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
-<span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA*x7"</span>, <span class="st">"x8"</span>, <span class="st">"x9"</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="st">"0*speed"</span>,</span>
-<span>            textual <span class="op">=</span> <span class="st">"0*speed"</span>,</span>
-<span>            speed <span class="op">=</span> <span class="st">"1*speed"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,</span>
+<span>  textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NA*x7"</span>, <span class="st">"x8"</span>, <span class="st">"x9"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="st">"0*speed"</span>,</span>
+<span>  textual <span class="op">=</span> <span class="st">"0*speed"</span>,</span>
+<span>  speed <span class="op">=</span> <span class="st">"1*speed"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span>, covariance <span class="op">=</span> <span class="va">cov</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -329,16 +349,18 @@ packages.</p>
 </h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">visual  =~ x1 + start(0.8)*x2 + start(1.2)*x3</span></span>
 <span><span class="st">textual =~ x4 + start(0.5)*x5 + start(1.0)*x6</span></span>
 <span><span class="st">speed   =~ x7 + start(0.7)*x8 + start(1.8)*x9</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"start(0.8)*x2"</span>, <span class="st">"start(1.2)*x3"</span><span class="op">)</span>,</span>
-<span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x4"</span>, <span class="st">"start(0.5)*x5"</span>, <span class="st">"start(1.0)*x6"</span><span class="op">)</span>,</span>
-<span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x7"</span>, <span class="st">"start(0.7)*x8"</span>, <span class="st">"start(1.8)*x9"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"start(0.8)*x2"</span>, <span class="st">"start(1.2)*x3"</span><span class="op">)</span>,</span>
+<span>  textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x4"</span>, <span class="st">"start(0.5)*x5"</span>, <span class="st">"start(1.0)*x6"</span><span class="op">)</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x7"</span>, <span class="st">"start(0.7)*x8"</span>, <span class="st">"start(1.8)*x9"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -353,9 +375,9 @@ packages.</p>
 </h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>f <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y1"</span>, <span class="st">"y2"</span>, <span class="st">"myLabel*y3"</span>, <span class="st">"start(0.5)*y3"</span>, <span class="st">"y4"</span><span class="op">)</span><span class="op">)</span></span>
@@ -371,16 +393,18 @@ packages.</p>
 </h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">visual  =~ x1 + v2*x2 + v2*x3</span></span>
 <span><span class="st">textual =~ x4 + x5 + x6</span></span>
 <span><span class="st">speed   =~ x7 + x8 + x9</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"v2*x2"</span>, <span class="st">"v2*x3"</span><span class="op">)</span>,</span>
-<span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
-<span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"v2*x2"</span>, <span class="st">"v2*x3"</span><span class="op">)</span>,</span>
+<span>  textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -417,9 +441,11 @@ packages.</p>
 <span><span class="co">##   P-value (Chi-square)                           0.000</span></span></code></pre>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"equal('visual=~x2')*x3"</span><span class="op">)</span>,</span>
-<span>            textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
-<span>            speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  visual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x1"</span>, <span class="st">"x2"</span>, <span class="st">"equal('visual=~x2')*x3"</span><span class="op">)</span>,</span>
+<span>  textual <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">4</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>,</span>
+<span>  speed <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fl">7</span><span class="op">:</span><span class="fl">9</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -450,18 +476,20 @@ packages.</p>
 </h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model.constr</span> <span class="op">&lt;-</span> <span class="st">' # model with labeled parameters</span></span>
+<code class="sourceCode R"><span><span class="va">model.constr</span> <span class="op">&lt;-</span> <span class="st">" # model with labeled parameters</span></span>
 <span><span class="st">                    y ~ b1*x1 + b2*x2 + b3*x3</span></span>
 <span><span class="st">                  # constraints</span></span>
 <span><span class="st">                    b1 == (b2 + b3)^2</span></span>
-<span><span class="st">                    b1 &gt; exp(b2 + b3) '</span></span></code></pre></div>
+<span><span class="st">                    b1 &gt; exp(b2 + b3) "</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"b1*x1"</span>, <span class="st">"b2*x2"</span>, <span class="st">"b3*x3"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">cstr1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"(b2 + b3)^2"</span><span class="op">)</span></span>
 <span><span class="va">cstr2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1 <span class="op">=</span> <span class="st">"exp(b2 + b3)"</span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">reg</span>, constraint.equal <span class="op">=</span> <span class="va">cstr1</span>,</span>
-<span>                      constraint.larger <span class="op">=</span> <span class="va">cstr2</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, constraint.equal <span class="op">=</span> <span class="va">cstr1</span>,</span>
+<span>  constraint.larger <span class="op">=</span> <span class="va">cstr2</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [---------Regressions (Direct effects)---------]</span></span>
@@ -481,7 +509,7 @@ packages.</p>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">' # direct effect</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">" # direct effect</span></span>
 <span><span class="st">             Y ~ c*X</span></span>
 <span><span class="st">           # mediator</span></span>
 <span><span class="st">             M ~ a*X</span></span>
@@ -490,14 +518,18 @@ packages.</p>
 <span><span class="st">             ab := a*b</span></span>
 <span><span class="st">           # total effect</span></span>
 <span><span class="st">             total := c + (a*b)</span></span>
-<span><span class="st">         '</span></span></code></pre></div>
+<span><span class="st">         "</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>Y <span class="op">=</span> <span class="st">"c*X"</span>,</span>
-<span>                  M <span class="op">=</span> <span class="st">"a*X"</span>,</span>
-<span>                  Y <span class="op">=</span> <span class="st">"b*M"</span><span class="op">)</span></span>
-<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>ab <span class="op">=</span> <span class="st">"a*b"</span>,</span>
-<span>                total <span class="op">=</span> <span class="st">"c + (a*b)"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">mediation</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  Y <span class="op">=</span> <span class="st">"c*X"</span>,</span>
+<span>  M <span class="op">=</span> <span class="st">"a*X"</span>,</span>
+<span>  Y <span class="op">=</span> <span class="st">"b*M"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">indirect</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  ab <span class="op">=</span> <span class="st">"a*b"</span>,</span>
+<span>  total <span class="op">=</span> <span class="st">"c + (a*b)"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span><span class="va">mediation</span>, indirect <span class="op">=</span> <span class="va">indirect</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
@@ -519,18 +551,18 @@ packages.</p>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/multilevel.html" class="external-link uri">https://lavaan.ugent.be/tutorial/multilevel.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">    level: 1</span></span>
 <span><span class="st">        fw =~ y1 + y2 + y3</span></span>
 <span><span class="st">        fw ~ x1 + x2 + x3</span></span>
 <span><span class="st">    level: 2</span></span>
 <span><span class="st">        fb =~ y1 + y2 + y3</span></span>
 <span><span class="st">        fb ~ w1 + w2</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">cus</span> <span class="op">&lt;-</span> </span>
-<span><span class="st">"level: 1</span></span>
+<code class="sourceCode R"><span><span class="va">cus</span> <span class="op">&lt;-</span></span>
+<span>  <span class="st">"level: 1</span></span>
 <span><span class="st">    fw =~ y1 + y2 + y3</span></span>
 <span><span class="st">    fw ~ x1 + x2 + x3</span></span>
 <span><span class="st">level: 2</span></span>
@@ -555,7 +587,7 @@ packages.</p>
 <p>Source: <a href="https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem" class="external-link uri">https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">model_mediation</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">model_mediation</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st"># Measurement model</span></span>
 <span><span class="st">SUP_Parents =~ sup_parents_p1 + sup_parents_p2 + sup_parents_p3</span></span>
 <span><span class="st">SUP_Friends =~ sup_friends_p1 + sup_friends_p2 + sup_friends_p3</span></span>
@@ -563,11 +595,11 @@ packages.</p>
 <span><span class="st">SE_Social =~ se_social_p1 + se_social_p2 + se_social_p3</span></span>
 <span><span class="st">LS  =~ ls_p1 + ls_p2 + ls_p3</span></span>
 <span><span class="st"></span></span>
-<span><span class="st"># Structural model </span></span>
+<span><span class="st"># Structural model</span></span>
 <span><span class="st"># Regressions</span></span>
 <span><span class="st">SE_Academic ~ b1*SUP_Parents + b3*SUP_Friends</span></span>
 <span><span class="st">SE_Social ~ b2*SUP_Parents + b4*SUP_Friends</span></span>
-<span><span class="st">LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social </span></span>
+<span><span class="st">LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social</span></span>
 <span><span class="st"></span></span>
 <span><span class="st"># Residual covariances</span></span>
 <span><span class="st">SE_Academic ~~ SE_Social</span></span>
@@ -582,41 +614,51 @@ packages.</p>
 <span><span class="st"></span></span>
 <span><span class="st"># Total effects</span></span>
 <span><span class="st">total_eltern := b1*b7 + b2*b8 + b5</span></span>
-<span><span class="st">total_freunde := b3*b7 + b4*b8 + b6  </span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">total_freunde := b3*b7 + b4*b8 + b6</span></span>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sup_parents"</span>, <span class="st">"sup_friends"</span>, <span class="st">"se_acad"</span>, <span class="st">"se_social"</span>, <span class="st">"ls"</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">paste0</span>, <span class="st">"_p"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">x</span><span class="op">)</span></span>
-<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SUP_Parents <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_parents</span>,</span>
-<span>            SUP_Friends <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_friends</span>,</span>
-<span>            SE_Academic <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_acad</span>,</span>
-<span>            SE_Social <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_social</span>,</span>
-<span>            LS <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">ls</span><span class="op">)</span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  SUP_Parents <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_parents</span>,</span>
+<span>  SUP_Friends <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">sup_friends</span>,</span>
+<span>  SE_Academic <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_acad</span>,</span>
+<span>  SE_Social <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">se_social</span>,</span>
+<span>  LS <span class="op">=</span> <span class="va">y</span><span class="op">$</span><span class="va">ls</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"b"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span></span>
-<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>, </span>
-<span>       <span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span>, <span class="st">"SE_Academic"</span>, <span class="st">"SE_Social"</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span><span class="op">)</span>, each <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  <span class="st">"SUP_Parents"</span>, <span class="st">"SUP_Friends"</span>, <span class="st">"SE_Academic"</span>, <span class="st">"SE_Social"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="va">e</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">b</span>, <span class="st">"*"</span>, <span class="va">d</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SE_Academic <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span>,</span>
-<span>            SE_Social <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,</span>
-<span>            LS <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  SE_Academic <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  SE_Social <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>,</span>
+<span>  LS <span class="op">=</span> <span class="va">e</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>SE_Academic <span class="op">=</span> <span class="st">"SE_Social"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>b1b7 <span class="op">=</span> <span class="st">"b1*b7"</span>,</span>
-<span>            b2b8 <span class="op">=</span> <span class="st">"b2*b8"</span>,</span>
-<span>            totalind_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8"</span>,</span>
-<span>            b3b7 <span class="op">=</span> <span class="st">"b3*b7"</span>,</span>
-<span>            b4b8 <span class="op">=</span> <span class="st">"b4*b8"</span>,</span>
-<span>            totalind_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8"</span>,</span>
-<span>            total_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8 + b5"</span>,</span>
-<span>            total_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8 + b6"</span><span class="op">)</span></span>
+<span><span class="va">ind</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  b1b7 <span class="op">=</span> <span class="st">"b1*b7"</span>,</span>
+<span>  b2b8 <span class="op">=</span> <span class="st">"b2*b8"</span>,</span>
+<span>  totalind_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8"</span>,</span>
+<span>  b3b7 <span class="op">=</span> <span class="st">"b3*b7"</span>,</span>
+<span>  b4b8 <span class="op">=</span> <span class="st">"b4*b8"</span>,</span>
+<span>  totalind_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8"</span>,</span>
+<span>  total_eltern <span class="op">=</span> <span class="st">"b1*b7 + b2*b8 + b5"</span>,</span>
+<span>  total_freunde <span class="op">=</span> <span class="st">"b3*b7 + b4*b8 + b6"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>regression <span class="op">=</span> <span class="va">reg</span>, covariance <span class="op">=</span> <span class="va">cov</span>, </span>
-<span>                      indirect <span class="op">=</span> <span class="va">ind</span>, latent <span class="op">=</span> <span class="va">lat</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, covariance <span class="op">=</span> <span class="va">cov</span>,</span>
+<span>  indirect <span class="op">=</span> <span class="va">ind</span>, latent <span class="op">=</span> <span class="va">lat</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----Latent variables (measurement model)-----]</span></span>
