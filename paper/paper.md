@@ -41,13 +41,16 @@ sharing workflows.
 {lavaan} [@lavaanPackage] is a very popular R package for structural
 equation modeling (SEM). The package requires familiarizing oneself with a
 specific syntax to define latent variables, regressions, covariances,
-indirect effects, and so on.
+indirect effects, and so on, but this syntax is neither very intuitive for
+beginners nor very modular for more advanced users. Furthermore, it is 
+relatively difficult to extract relevant statistical outputs in the form of
+tables and figures that are suitable for scientific publication.
 
-{lavaanExtra} does mainly two things. First, it offers an alternative,
-code-efficient syntax. Second, it facilitates the
-analysis-to-publication workflow by providing publication-ready tables
-and figures following the style requirements of the American Psychological
-Association (APA).
+{lavaanExtra} does mainly two things to address these issues. First, it offers 
+an alternative, code-efficient modular syntax that allows automatizing certain 
+steps. Second, it facilitates the analysis-to-publication workflow by providing 
+publication-ready tables and figures following the style requirements of the 
+American Psychological Association (APA).
 
 ## Usage
 
