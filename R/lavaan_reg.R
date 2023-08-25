@@ -1,7 +1,7 @@
 #' @title Extract relevant regression indices from lavaan model
 #'
 #' @description Extract relevant regression indices from lavaan model through
-#'              `lavaan::parameterEstimates` with `standardized = TRUE`. In this
+#'              [lavaan::parameterEstimates] with `standardized = TRUE`. In this
 #'              case, the beta (B) represents the resulting `std.all` column.
 #'              See "Value" section for more details.
 #'
@@ -10,9 +10,9 @@
 #'                 estimate ("B", default), or unstandardized
 #'                 estimate ("b").
 #' @param nice_table Logical, whether to print the table as a
-#'                   `rempsyc::nice_table` as well as print the
+#'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
-#' @param ... Arguments to be passed to `rempsyc::nice_table`
+#' @param ... Arguments to be passed to [rempsyc::nice_table]
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, including the outcome ("lhs"), predictor ("rhs"),
 #'         standardized regression coefficient ("std.all"), corresponding

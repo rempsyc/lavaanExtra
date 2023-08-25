@@ -54,10 +54,9 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
                          use.letters = FALSE) {
   constraint <- NULL
   hashtag <- sprintf("%s\n", paste0(rep("#", 50), collapse = ""))
-  process_vars <- function(
-      x, symbol, label = FALSE, collapse = " + ", header = paste0(
-        hashtag, paste0("# ", title, "\n\n")
-      ), title = NULL, spacer = "\n\n") {
+  process_vars <- function(x, symbol, label = FALSE, collapse = " + ", header = paste0(
+                             hashtag, paste0("# ", title, "\n\n")
+                           ), title = NULL, spacer = "\n\n") {
     if (isTRUE(label)) {
       labels <- paste0(names(x))
       if (isTRUE(use.letters)) {

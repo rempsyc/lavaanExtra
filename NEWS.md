@@ -1,3 +1,7 @@
+# lavaanExtra 0.1.8
+* CRAN resubmission
+* New function: `nice_modindices`, which outputs modification indices along item labels and a similarity score between the left-hand side and right-hand side items. Useful to assess item redundancy when considering modification indices.
+
 # lavaanExtra 0.1.7
 * CRAN resubmission: suggested dependencies now check for the correct version with `rlang::check_installed()`.
 

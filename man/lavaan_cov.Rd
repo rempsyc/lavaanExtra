@@ -14,10 +14,10 @@ estimate ("B", default), or unstandardized
 estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
-\code{rempsyc::nice_table} as well as print the
+\link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
 
-\item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
+\item{...}{Arguments to be passed to \link[rempsyc:nice_table]{rempsyc::nice_table}}
 }
 \value{
 A dataframe of covariances, including the covaried variables,
@@ -25,7 +25,7 @@ the covariance, and corresponding p-value.
 }
 \description{
 Extract relevant covariance indices from lavaan model through
-\code{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
+\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
 case, the covariances represent the resulting
 \code{std.all} column.
 }

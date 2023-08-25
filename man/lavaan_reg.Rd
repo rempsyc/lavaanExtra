@@ -14,10 +14,10 @@ estimate ("B", default), or unstandardized
 estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
-\code{rempsyc::nice_table} as well as print the
+\link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
 
-\item{...}{Arguments to be passed to \code{rempsyc::nice_table}}
+\item{...}{Arguments to be passed to \link[rempsyc:nice_table]{rempsyc::nice_table}}
 }
 \value{
 A dataframe, including the outcome ("lhs"), predictor ("rhs"),
@@ -27,7 +27,7 @@ p-value, as well as the unstandardized regression coefficient
 }
 \description{
 Extract relevant regression indices from lavaan model through
-\code{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
+\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
 case, the beta (B) represents the resulting \code{std.all} column.
 See "Value" section for more details.
 }

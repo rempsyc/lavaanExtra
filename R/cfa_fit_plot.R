@@ -7,7 +7,7 @@
 #' @param data Data set on which to fit the CFA model.
 #' @param covs Logical, whether to include covariances on the lavaan plot.
 #' @param estimator What estimator to use for the CFA.
-#' @param ... Arguments to be passed to function `lavaan::cfa`.
+#' @param ... Arguments to be passed to function [lavaan::cfa].
 #' @param remove.items Optional, if one wants to remove items from the CFA model
 #'                     without having to redefine it completely again.
 #' @param print Logical, whether to print model summary to console.
@@ -48,7 +48,7 @@
 cfa_fit_plot <- function(
     model, data, covs = FALSE, estimator = "MLR", remove.items = "",
     print = TRUE, save.as.pdf = FALSE, file.name, ...) {
-  insight::check_if_installed("lavaanPlot", reason = "for this function.")
+  insight::check_if_installed("lavaanPlot")
 
   if (missing(file.name) && isTRUE(save.as.pdf)) {
     stop("To save as PDF, the file name must also be specified.")
