@@ -89,11 +89,14 @@ nice_modindices <- function(fit,
         NA
       )
     }
-    # x <- x[5:6]
-    x$similarity <- stringdist::stringsim(x$lhs.labels,
-      x$rhs.labels,
-      method = method
-    )
+    if (all(is.na(x$lhs.labels))) {
+      x$similarity <- NA
+    } else {
+      x$similarity <- stringdist::stringsim(x$lhs.labels,
+                                            x$rhs.labels,
+                                            method = method
+      )
+    }
     x$similar <- x$similarity > .50
     x$similar <- ifelse(is.na(x$similar), FALSE, x$similar <- x$similar)
   }
