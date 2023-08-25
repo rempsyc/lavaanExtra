@@ -31,6 +31,7 @@ data_labels <- data.frame(
 #   Tests                                                                   ####
 
 test_that("nice_modindices regular", {
+  skip_if_not_installed("sjlabelled")
   expect_snapshot(
     nice_modindices(fit, maximum.number = 5)
   )
