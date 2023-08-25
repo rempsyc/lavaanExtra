@@ -35,7 +35,7 @@ with a similarity score provided to help guide decision-making
 for removing redundant items with high covariance.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE) && requireNamespace("stringdist", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 (latent <- list(
   visual = paste0("x", 1:3),
   textual = paste0("x", 4:6),

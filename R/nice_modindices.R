@@ -20,7 +20,7 @@
 #'         p-value, as well as the unstandardized regression coefficient
 #'         ("est") and its confidence interval ("ci.lower", "ci.upper").
 #' @export
-#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE) && requireNamespace("stringdist", quietly = TRUE)
 #' (latent <- list(
 #'   visual = paste0("x", 1:3),
 #'   textual = paste0("x", 4:6),

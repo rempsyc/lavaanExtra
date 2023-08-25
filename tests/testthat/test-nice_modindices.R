@@ -38,6 +38,7 @@ test_that("nice_modindices regular", {
 })
 
 test_that("nice_modindices labels", {
+  skip_if_not_installed("stringdist")
   expect_snapshot(
     nice_modindices(
       fit,
@@ -49,6 +50,7 @@ test_that("nice_modindices labels", {
 
 test_that("nice_modindices auto-labels", {
   skip_if_not_installed("sjlabelled")
+  skip_if_not_installed("stringdist")
   x <- HolzingerSwineford1939
   x <- sjlabelled::set_label(x, label = paste0("I am ", 1:ncol(x), " years old."))
   fit <- sem(HS.model, data = x)
