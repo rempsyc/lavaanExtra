@@ -35,7 +35,7 @@ with a similarity score provided to help guide decision-making
 for removing redundant items with high covariance.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 (latent <- list(
   visual = paste0("x", 1:3),
   textual = paste0("x", 4:6),
@@ -65,8 +65,7 @@ data_labels <- data.frame(
   x9 = "I am quick at discriminating straight and curved capitals"
 )
 nice_modindices(fit, maximum.number = 10, labels = data_labels, op = "~~")
-\dontshow{\}) # examplesIf}
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+
 x <- HolzingerSwineford1939
 x <- sjlabelled::set_label(x, label = c(rep("", 6), data_labels))
 fit <- sem(HS.model, data = x)

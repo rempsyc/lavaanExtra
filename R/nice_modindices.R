@@ -20,7 +20,7 @@
 #'         p-value, as well as the unstandardized regression coefficient
 #'         ("est") and its confidence interval ("ci.lower", "ci.upper").
 #' @export
-#' @examplesIf requireNamespace("lavaan", quietly = TRUE)
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)
 #' (latent <- list(
 #'   visual = paste0("x", 1:3),
 #'   textual = paste0("x", 4:6),
@@ -50,7 +50,7 @@
 #'   x9 = "I am quick at discriminating straight and curved capitals"
 #' )
 #' nice_modindices(fit, maximum.number = 10, labels = data_labels, op = "~~")
-#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE)
+#'
 #' x <- HolzingerSwineford1939
 #' x <- sjlabelled::set_label(x, label = c(rep("", 6), data_labels))
 #' fit <- sem(HS.model, data = x)
