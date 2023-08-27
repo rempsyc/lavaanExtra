@@ -265,7 +265,7 @@ side-by-side for demonstration purposes.
 
 
 ```r
-lavaanPlot::lavaanPlot(fit.sem)
+lavaanPlot::lavaanPlot(model = fit.sem)
 ```
 
 ![](paper_files/figure-latex/nice_lavaanPlot-1.pdf)<!-- --> 

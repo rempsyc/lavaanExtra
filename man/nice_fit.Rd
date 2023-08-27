@@ -22,13 +22,19 @@ significance stars (defaults to \code{FALSE}).}
 }
 \value{
 A dataframe, representing select fit indices (chi2, df, chi2/df,
-p-value of the chi2 test, CFI, TLI, RMSEA and its 90\% CI, SRMR,
-AIC, and BIC).
+p-value of the chi2 test, CFI, TLI, RMSEA and its 90\% CI,
+unbiased SRMR, AIC, and BIC).
 }
 \description{
 Compares fit from one or several lavaan models. Also
 optionally includes references values. The reference fit values are
 based on Schreiber et al. (2006).
+}
+\details{
+Note that \code{nice_fit} reports the unbiased SRMR through
+\code{\link[lavaan:lavResiduals]{lavaan::lavResiduals()}} because the standard SRMR is upwardly
+biased (https://doi.org/10.1007/s11336-016-9552-7) in a noticeable way for
+smaller samples (thanks to James Uanhoro for this change).
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
