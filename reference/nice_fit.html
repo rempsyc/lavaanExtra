@@ -128,8 +128,15 @@ significance stars (defaults to <code>FALSE</code>).</p></dd>
     
 
 <p>A dataframe, representing select fit indices (chi2, df, chi2/df,
-p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI, SRMR,
-AIC, and BIC).</p>
+p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI,
+unbiased SRMR, AIC, and BIC).</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Note that <code>nice_fit</code> reports the unbiased SRMR through
+<code><a href="https://rdrr.io/pkg/lavaan/man/lavResiduals.html" class="external-link">lavaan::lavResiduals()</a></code> because the standard SRMR is upwardly
+biased (https://doi.org/10.1007/s11336-016-9552-7) in a noticeable way for
+smaller samples (thanks to James Uanhoro for this change).</p>
     </div>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
