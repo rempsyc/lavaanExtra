@@ -57,7 +57,7 @@ lavaan_ind <- function(fit, estimate = "B", nice_table = FALSE,
   if (estimate == "b") {
     x <- lavaan::parameterEstimates(fit)
   } else if (estimate == "B") {
-    x <- standardizedsolution(fit, level = 0.95)
+    x <- lavaan::standardizedsolution(fit, level = 0.95)
     og.names[4] <- "est.std"
     new.names[4] <- "B"
   } else {

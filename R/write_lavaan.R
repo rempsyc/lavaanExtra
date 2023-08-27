@@ -61,7 +61,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
       labels <- paste0(names(x))
       if (isTRUE(use.letters)) {
         x <- lapply(seq(x), function(i) {
-          paste0(letters[seq(length(x[[i]]))], "_", labels[i], "*", x[[i]])
+          paste0(letters[seq_along(x[[i]])], "_", labels[i], "*", x[[i]])
         })
       } else {
         x <- lapply(seq(x), function(i) {
@@ -88,7 +88,7 @@ write_lavaan <- function(mediation = NULL, regression = NULL, covariance = NULL,
       labels <- names(x)
       if (isTRUE(use.letters)) {
         x <- lapply(seq(x), function(i) {
-          paste0(letters[seq(length(x[[i]]))], "_", labels[i])
+          paste0(letters[seq_along(x[[i]])], "_", labels[i])
         })
       } else {
         x <- lapply(seq(x), function(i) {
