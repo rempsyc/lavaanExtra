@@ -220,7 +220,7 @@ compare the default `lavaanPlot()` and `nice_lavaanPlot()` outputs
 side-by-side for demonstration purposes.
 
 ```{r nice_lavaanPlot}
-lavaanPlot::lavaanPlot(fit.sem)
+lavaanPlot::lavaanPlot(model = fit.sem)
 
 nice_lavaanPlot(fit.sem)
 ```
