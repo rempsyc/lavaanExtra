@@ -23,7 +23,7 @@ nice_tidySEM(
 \item{fit}{SEM or CFA model fit to plot.}
 
 \item{layout}{A matrix (or data.frame) that describes the structure; see
-\code{\link[tidySEM]{get_layout}}. If a named list is provided,
+\link[tidySEM:get_layout]{tidySEM::get_layout}. If a named list is provided,
 with names "IV" (independent variables), "M" (mediator), and
 "DV" (dependent variables), \code{nice_tidySEM} attempts to write
 the layout matrix automatically.}
@@ -59,7 +59,7 @@ both horizontal x and vertical y).}
 returns the \code{tidy_sem} object, which can be further edited
 as needed.}
 
-\item{...}{Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.}
+\item{...}{Arguments to be passed to \link[tidySEM:prepare_graph]{tidySEM::prepare_graph}.}
 }
 \value{
 A tidySEM plot, of class ggplot, representing the specified

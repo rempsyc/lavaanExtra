@@ -38,7 +38,7 @@ Defaults to TRUE.}
 
 \item{graph_options}{Read from left to right, rather than from top to bottom.}
 
-\item{...}{Arguments to be passed to function \code{lavaanPlot::lavaanPlot}.}
+\item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
 A lavaanPlot, of classes \code{c("grViz", "htmlwidget")}, representing the

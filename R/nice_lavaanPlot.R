@@ -13,7 +13,7 @@
 #'              `c("regress", "latent", "covs")`.
 #' @param sig Significance threshold.
 #' @param graph_options Read from left to right, rather than from top to bottom.
-#' @param ... Arguments to be passed to function `lavaanPlot::lavaanPlot`.
+#' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @keywords CFA lavaan plot fit
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.

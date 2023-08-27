@@ -4,7 +4,7 @@
 #'
 #' @param fit SEM or CFA model fit to plot.
 #' @param layout A matrix (or data.frame) that describes the structure; see
-#'               \code{\link[tidySEM]{get_layout}}. If a named list is provided,
+#'               [tidySEM::get_layout]. If a named list is provided,
 #'               with names "IV" (independent variables), "M" (mediator), and
 #'               "DV" (dependent variables), `nice_tidySEM` attempts to write
 #'               the layout matrix automatically.
@@ -30,7 +30,7 @@
 #' @param plot Logical, whether to plot the result (default). If `FALSE`,
 #'             returns the `tidy_sem` object, which can be further edited
 #'             as needed.
-#' @param ... Arguments to be passed to \code{\link[tidySEM]{prepare_graph}}.
+#' @param ... Arguments to be passed to [tidySEM::prepare_graph].
 #' @keywords CFA lavaan plot fit tidySEM table_results
 #' @return A tidySEM plot, of class ggplot, representing the specified
 #'         `lavaan` model.
@@ -81,7 +81,7 @@ nice_tidySEM <- function(fit,
                          reduce_items = NULL,
                          plot = TRUE,
                          ...) {
-  insight::check_if_installed(c("tidySEM", "tmvnsim"), reason = "for this function.")
+  insight::check_if_installed(c("tidySEM", "tmvnsim"))
 
   # We are forced to reimport some tidySEM functions manually here...
   get_edges <- tidySEM::get_edges

@@ -1,7 +1,7 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package 'lavaan'
-Version: 0.1.7
-Date: 2023-06-20
+Version: 0.1.8
+Date: 2023-08-25
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0003-4315-6788"))
@@ -29,12 +29,16 @@ Suggests:
     tmvnsim,
     knitr,
     tibble,
+    sjlabelled,
+    stringdist,
     rmarkdown,
     markdown,
     testthat (>= 3.0.0),
-    covr
+    covr,
+    spelling
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 VignetteBuilder: knitr
+Language: en-US

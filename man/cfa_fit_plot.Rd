@@ -42,7 +42,7 @@ wants something different than the default file name.
 It saves to pdf per default, so the .pdf extension
 should not be specified as it will add it automatically.}
 
-\item{...}{Arguments to be passed to function \code{lavaan::cfa}.}
+\item{...}{Arguments to be passed to function \link[lavaan:cfa]{lavaan::cfa}.}
 }
 \value{
 The function returns a \code{lavaan} fit object. However, it also: prints

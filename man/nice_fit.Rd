@@ -14,7 +14,7 @@ for \code{model}, default to the names of the list. Otherwise, if the list
 is unnamed, defaults to generic numbering.}
 
 \item{nice_table}{Logical, whether to print the table as a
-\code{rempsyc::nice_table} as well as print the
+\link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
 
 \item{stars}{Logical, if \code{nice_table = TRUE}, whether to display
