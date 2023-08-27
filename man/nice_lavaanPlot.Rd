@@ -34,7 +34,8 @@ Defaults to TRUE.}
 \item{stars}{Which links to plot significance stars for. One of
 \code{c("regress", "latent", "covs")}.}
 
-\item{sig}{Significance threshold.}
+\item{sig}{Which significance threshold to use to plot coefficients (defaults
+to .05). To plot all coefficients, set \code{sig} to 1.}
 
 \item{graph_options}{Read from left to right, rather than from top to bottom.}
 

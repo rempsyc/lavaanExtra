@@ -11,7 +11,8 @@
 #' @param covs Logical, whether to plot covariances. Defaults to FALSE.
 #' @param stars Which links to plot significance stars for. One of
 #'              `c("regress", "latent", "covs")`.
-#' @param sig Significance threshold.
+#' @param sig Which significance threshold to use to plot coefficients (defaults
+#'  to .05). To plot all coefficients, set `sig` to 1.
 #' @param graph_options Read from left to right, rather than from top to bottom.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @keywords CFA lavaan plot fit
