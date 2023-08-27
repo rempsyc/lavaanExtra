@@ -137,6 +137,8 @@ nice_fit_internal <- function(fit) {
     "srmr", "aic", "bic"
   )
   x <- x[keep]
+  x_srmr <- lavaan::lavResiduals(fit)$summary["usrmr", 1]
+  x[names(x) == "srmr"] <- x_srmr
   chi2.df <- x$chisq / x$df
   x <- cbind(x[1:2], chi2.df, x[3:length(x)])
   x <- round(x, 3)
