@@ -49,12 +49,10 @@ Or from GitHub, for the very latest version:
 remotes::install_github("rempsyc/lavaanExtra")
 ```
 
-You can load the package and open the help file, and click “Index” at
-the bottom. You will see all the available functions listed.
+To see all the available functions, use:
 
 ``` r
-library(lavaanExtra)
-?lavaanExtra
+help(package = "lavaanExtra")
 ```
 
 **Dependencies:** Because `lavaanExtra` is a package of convenience
@@ -116,14 +114,18 @@ library(lavaan)
 library(lavaanExtra)
 
 # Define latent variables
-latent <- list(visual = c("x1", "x2", "x3"),
-               textual = c("x4", "x5", "x6"),
-               speed = c("x7", "x8", "x9"))
+latent <- list(
+  visual = c("x1", "x2", "x3"),
+  textual = c("x4", "x5", "x6"),
+  speed = c("x7", "x8", "x9")
+)
 
 # If you have many items, you can also use:
-latent <- list(visual = paste0("x", 1:3),
-               textual = paste0("x", 4:6),
-               speed = paste0("x", 7:9))
+latent <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
 
 # Write the model, and check it
 cfa.model <- write_lavaan(latent = latent)
@@ -138,7 +140,7 @@ cat(cfa.model)
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
-#> lavaan 0.6.15 ended normally after 35 iterations
+#> lavaan 0.6.16 ended normally after 35 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -286,8 +288,10 @@ covariance <- list(speed = "textual", ageyr = "grade")
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation, regression, covariance, 
-                      indirect, latent, label = TRUE)
+model <- write_lavaan(mediation, regression, covariance,
+  indirect, latent,
+  label = TRUE
+)
 cat(model)
 #> ##################################################
 #> # [-----Latent variables (measurement model)-----]
@@ -371,7 +375,8 @@ mylayout <- data.frame(
   IV = c("", "x1", "grade", "", "ageyr", "", ""),
   M = c("", "x2", "", "visual", "", "", ""),
   DV = c("", "x3", "textual", "", "speed", "", ""),
-  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9))) |> 
+  DV.items = c(paste0("x", 4:6), "", paste0("x", 7:9))
+) |>
   as.matrix()
 mylayout
 #>      IV      M        DV        DV.items

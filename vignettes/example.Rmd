@@ -338,7 +338,7 @@ model <- write_lavaan(custom = cus)
 cat(model)
 ```
 
-# Example 7 (total effects)
+## Example 7 (total effects)
 Source: https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem
 
 `lavaan`:

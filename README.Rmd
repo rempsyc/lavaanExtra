@@ -58,10 +58,9 @@ Or from GitHub, for the very latest version:
 remotes::install_github("rempsyc/lavaanExtra")
 ```
 
-You can load the package and open the help file, and click "Index" at the bottom. You will see all the available functions listed.
+To see all the available functions, use:
 ``` r
-library(lavaanExtra)
-?lavaanExtra
+help(package = "lavaanExtra")
 ```
 
 **Dependencies:** Because `lavaanExtra` is a package of convenience functions relying on several external packages, it uses (inspired by the [`easystats`](https://easystats.github.io/easystats/) packages) a minimalist philosophy of only installing packages that you need when you need them through `rlang::check_installed()`. Should you wish to specifically install all suggested dependencies at once (you can view the full list by clicking on the CRAN badge on this page), you can run the following (be warned that this may take a long time, as some of the suggested packages are only used in the vignettes or examples):
