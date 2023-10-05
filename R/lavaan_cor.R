@@ -43,7 +43,7 @@ lavaan_cor <- function(fit, nice_table = FALSE, ...) {
   x <- x[c("lhs", "rhs", "std.all", "pvalue")]
   not.cor <- which(x$lhs == x$rhs)
   x <- x[-not.cor, ]
-  names(x) <- c("Variable 1", "Variable 2", "r", "p")
+  names(x) <- c("Variable_1", "Variable_2", "r", "p")
   if (nice_table) {
     insight::check_if_installed(
       "rempsyc",

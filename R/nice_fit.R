@@ -2,7 +2,7 @@
 #'
 #' @description Compares fit from one or several lavaan models. Also
 #' optionally includes references values. The reference fit values are
-#' based on Schreiber et al. (2006).
+#' based on Schreiber (2017).
 #'
 #' @details Note that `nice_fit` reports the unbiased SRMR through
 #'  [lavaan::lavResiduals()] because the standard SRMR is upwardly
