@@ -120,7 +120,10 @@ regression <- list(speed = IV, textual = IV)
 covariance <- list(speed = "textual", ageyr = "grade")
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance)
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance)
 cat(model.saturated)
 ```
 
@@ -129,7 +132,11 @@ This looks good so far, but we might also want to check our indirect effects (me
 ```{r saturated2}
 # We can run the model again.
 # However, we set `label = TRUE` to get the path names
-model.saturated <- write_lavaan(mediation, regression, covariance, label = TRUE)
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance, 
+  label = TRUE)
 cat(model.saturated)
 ```
 
@@ -145,8 +152,11 @@ indirect <- list(
 )
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance,
-  indirect,
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect,
   label = TRUE
 )
 cat(model.saturated)
@@ -156,8 +166,12 @@ If preferred (e.g., when dealing with long variable names), one can choose to us
 
 ```{r letters}
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance,
-  label = TRUE, use.letters = TRUE
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  label = TRUE, 
+  use.letters = TRUE
 )
 cat(model.saturated)
 ```
@@ -174,9 +188,13 @@ indirect <- list(
 )
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance,
-  indirect,
-  label = TRUE, use.letters = TRUE
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect,
+  label = TRUE, 
+  use.letters = TRUE
 )
 cat(model.saturated)
 ```
@@ -188,8 +206,11 @@ There is also an experimental feature that attempts to produce the indirect effe
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model.saturated <- write_lavaan(mediation, regression, covariance,
-  indirect,
+model.saturated <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect,
   label = TRUE
 )
 cat(model.saturated)
@@ -216,7 +237,11 @@ Because we use `lavaanExtra`, we don't have to redefine the entire model: simply
 regression <- list(speed = "grade", textual = IV)
 
 # We can run the model again, setting `label = TRUE` to get the path names
-model.path <- write_lavaan(mediation, regression, covariance, label = TRUE)
+model.path <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance, 
+  label = TRUE)
 cat(model.path)
 # We check that we have removed "ageyr" correctly from "speed" in the
 # regression section. OK.
@@ -228,8 +253,11 @@ indirect <- list(
 )
 
 # We run the model again, with the indirect effects
-model.path <- write_lavaan(mediation, regression, covariance,
-  indirect,
+model.path <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect,
   label = TRUE
 )
 cat(model.path)
@@ -292,8 +320,12 @@ nice_tidySEM(fit.path,
 Finally, perhaps we change our mind and decide to run a full SEM instead, with latent variables. Fear not: we don't have to redo everything again. We can simply define our latent variables and proceed. In this example, we have *already* defined our latent variable for our CFA earlier, so we don't even need to write that again!
 
 ```{r latent}
-model.latent <- write_lavaan(mediation, regression, covariance,
-  indirect, latent,
+model.latent <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect, 
+  latent = latent,
   label = TRUE
 )
 cat(model.latent)

@@ -305,7 +305,7 @@ indirect <- list(
   ab = "a*b",
   total = "c + (a*b)"
 )
-model <- write_lavaan(mediation, indirect = indirect)
+model <- write_lavaan(mediation = mediation, indirect = indirect)
 cat(model)
 ```
 

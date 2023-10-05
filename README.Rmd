@@ -173,8 +173,12 @@ covariance <- list(speed = "textual", ageyr = "grade")
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation, regression, covariance,
-  indirect, latent,
+model <- write_lavaan(
+  mediation = mediation, 
+  regression = regression, 
+  covariance = covariance,
+  indirect = indirect, 
+  latent = latent,
   label = TRUE
 )
 cat(model)
