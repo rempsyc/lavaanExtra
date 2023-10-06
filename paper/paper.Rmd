@@ -40,18 +40,23 @@ sharing workflows.
 # Statement of need
 
 {lavaan} [@lavaanPackage] is a very popular R package for structural
-equation modeling (SEM). The package requires familiarizing oneself with a
-specific syntax to define latent variables, regressions, covariances,
-indirect effects, and so on, but this syntax is neither very intuitive for
-beginners nor very modular for more advanced users. Furthermore, it is 
-relatively difficult to extract relevant statistical outputs in the form of
-tables and figures that are suitable for scientific publication.
+equation modeling (SEM). The package relies on specific operators to define
+latent variables, regressions, covariances, indirect effects, and so on.
+However, some individuals (e.g,. beginners to R and {lavaan}) may prefer 
+not having to specify the operators themselves, or would like to see some 
+steps automatized, such as defining indirect effects. Furthermore, for 
+researchers, it can be relatively difficult to extract relevant statistical 
+outputs in the form of tables and figures that are suitable for scientific 
+publication.
 
 {lavaanExtra} does mainly two things to address these issues. First, it offers 
-an alternative, code-efficient modular syntax that allows automatizing certain 
-steps. Second, it facilitates the analysis-to-publication workflow by providing 
-publication-ready tables and figures following the style requirements of the 
-American Psychological Association (APA).
+an alternative, code-efficient flexible modular syntax that allows automatizing 
+certain steps, such as defining indirect effects in certain scenarios or the 
+desired structure of a SEM model to be plotted (however, note that {lavaan} is
+also compatible with a modular approach). Second, it facilitates the 
+analysis-to-publication workflow by providing publication-ready tables and 
+figures following the style requirements of the American Psychological 
+Association (APA).
 
 ## Usage
 
@@ -74,26 +79,25 @@ models.
 This aspect also allows better control over the user's code. If the user
 makes a mistake in one of, say, five SEM models definition, the user will
 have to change it at all five places within the script. With
-`write_lavaan()`, the user only needs to change it once, at the appropriate
-location, and it will update future occurrences automatically since it
-relies on reusable components.
+`write_lavaan()`, users only needs to define the reusable component the first 
+time, or until they need to change that component again.
 
 The vector-based approach also allows the use of functions to define
 components. For example, if all scale items are named consistently, say
 `x1` to `x50`, one can use `paste0("x", 1:50)` instead of typing all the
-items by hand and risk making mistakes.
+items by hand and risk making mistakes. However, note that reusable components
+through functions is also compatible with {lavaan}.
 
 Another issue with `lavaan` models is the readability of the code defining
 the model. One can go to lengths to make it pretty, but not everyone
 does, and many people do not use the same strategies to organize the
-information of the model definition. With `write_lavaan()`, not only is the model
-information standardized, but it is also neatly divided into clear and
+information of the model definition. With `write_lavaan()`, not only is the 
+model information standardized, but it is also neatly divided into clear and
 useful categories.
 
 Finally, for beginners, it can be difficult to remember the correct
 `lavaan` symbols for each specific operation. `write_lavaan()` uses
-intuitive names to convert the information to the correct symbols,
-meaning the user does not have to rely on memory as much. Even for
+familiar names to convert the information to the correct symbols. Even for
 people familiar with `lavaan` syntax, this approach can save time. The 
 function also offers the possibility to define the named
 paths automatically with clear and intuitive names.

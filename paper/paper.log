@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.4)  6 OCT 2023 17:16
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.4)  6 OCT 2023 18:27
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -988,7 +988,7 @@ Package hyperref Warning: Suppressing link with empty target on input line 295.
 Package hyperref Warning: Suppressing link with empty target on input line 295.
 
 
-Underfull \hbox (badness 3118) in paragraph at lines 328--335
+Underfull \hbox (badness 3118) in paragraph at lines 332--339
 \TU/lmr/m/n/10 There is a single function at the center of the proposed alternative syntax,
  []
 
@@ -1002,12 +1002,12 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 364.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 362.
 [1
 
 ]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 387.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 393.
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1032,8 +1032,6 @@ File: fit_table.png Graphic file (type bmp)
 <fit_table.png>
 File: ind.png Graphic file (type bmp)
 <ind.png>
-File: paper_files/figure-latex/nice_lavaanPlot-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/nice_lavaanPlot-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1044,11 +1042,17 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [4]
+File: paper_files/figure-latex/nice_lavaanPlot-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_lavaanPlot-1.pdf>
 File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
 
-Overfull \hbox (2.75342pt too wide) in paragraph at lines 569--572
+Overfull \hbox (2.75342pt too wide) in paragraph at lines 575--578
 []\TU/lmr/m/n/10 For reference, \TU/lmtt/m/n/10 nice_lavaaPlot() \TU/lmr/m/n/10 is a simple wrapper around \TU/lmtt/m/n/10 lavaanPlot::lavaanPlot()
+ []
+
+
+Overfull \vbox (0.13634pt too high) detected at line 591
  []
 
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
