@@ -79,7 +79,7 @@ models.
 This aspect also allows better control over the user's code. If the user
 makes a mistake in one of, say, five SEM models definition, the user will
 have to change it at all five places within the script. With
-`write_lavaan()`, users only needs to define the reusable component the first 
+`write_lavaan()`, users only need to define the reusable component the first 
 time, or until they need to change that component again.
 
 The vector-based approach also allows the use of functions to define
