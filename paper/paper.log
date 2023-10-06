@@ -1,14 +1,15 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.5.8)  23 MAY 2023 10:51
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023) (preloaded format=xelatex 2023.10.4)  6 OCT 2023 17:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **paper.tex
 (./paper.tex
-LaTeX2e <2022-11-01> patch level 1
-L3 programming layer <2023-05-05> (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
-Document Class: article 2022/07/02 v1.4n Standard LaTeX document class
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+(c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2023/05/17 v1.4n Standard LaTeX document class
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
-File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
+File: size10.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 )
 \c@part=\count181
 \c@section=\count182
@@ -22,13 +23,13 @@ File: size10.clo 2022/07/02 v1.4n Standard LaTeX file (size option)
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/marginnote/marginnote.sty
-Package: marginnote 2018/08/09 v1.4b non floating margin notes for LaTeX
+Package: marginnote 2018/08/09 1.4b non floating margin notes for LaTeX
 \c@mn@abspage=\count189
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks16
+\KV@toks@=\toks17
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
@@ -74,7 +75,7 @@ Package: titlesec 2021/07/05 v2.14 Sectioning titles
 \aftertitleunit=\skip53
 \ttl@plus=\dimen143
 \ttl@minus=\dimen144
-\ttl@toksa=\toks17
+\ttl@toksa=\toks18
 \titlewidth=\dimen145
 \titlewidthlast=\dimen146
 \titlewidthfirst=\dimen147
@@ -91,7 +92,7 @@ LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count196
 \calc@Cskip=\skip56
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
-\pgfutil@everybye=\toks18
+\pgfutil@everybye=\toks19
 \pgfutil@tempdima=\dimen150
 \pgfutil@tempdimb=\dimen151
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
@@ -103,10 +104,10 @@ Package: pgf 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
 Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
-\pgfkeys@pathtoks=\toks19
-\pgfkeys@temptoks=\toks20
+\pgfkeys@pathtoks=\toks20
+\pgfkeys@temptoks=\toks21
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/utilities/pgfkeyslibraryfiltered.code.tex
-\pgfkeys@tmptoks=\toks21
+\pgfkeys@tmptoks=\toks22
 ))
 \pgf@x=\dimen152
 \pgf@y=\dimen153
@@ -124,9 +125,9 @@ Package: pgfsys 2023-01-15 v3.1.10 (3.1.10)
 \c@pgf@countb=\count198
 \c@pgf@countc=\count199
 \c@pgf@countd=\count266
-\t@pgf@toka=\toks22
-\t@pgf@tokb=\toks23
-\t@pgf@tokc=\toks24
+\t@pgf@toka=\toks23
+\t@pgf@tokb=\toks24
+\t@pgf@tokc=\toks25
 \pgf@sys@id@count=\count267
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
 File: pgf.cfg 2023-01-15 v3.1.10 (3.1.10)
@@ -152,9 +153,9 @@ Package: pgfcore 2023-01-15 v3.1.10 (3.1.10)
 \pgfmath@dimen=\dimen162
 \pgfmath@count=\count271
 \pgfmath@box=\box53
-\pgfmath@toks=\toks25
-\pgfmath@stack@operand=\toks26
-\pgfmath@stack@operation=\toks27
+\pgfmath@toks=\toks26
+\pgfmath@stack@operand=\toks27
+\pgfmath@stack@operation=\toks28
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.integerarithmetics.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
 \c@pgfmathroundto@lastzeros=\count272
 )) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/math/pgfint.code.tex) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
@@ -237,8 +238,8 @@ Package: pgfcomp-version-1-18 2023-01-15 v3.1.10 (3.1.10)
 Package: pgffor 2023-01-15 v3.1.10 (3.1.10)
 \pgffor@iter=\dimen189
 \pgffor@skip=\dimen190
-\pgffor@stack=\toks28
-\pgffor@toks=\toks29
+\pgffor@stack=\toks29
+\pgffor@toks=\toks30
 )) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
 Package: tikz 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.tex
@@ -272,7 +273,7 @@ File: pgfmodulematrix.code.tex 2023-01-15 v3.1.10 (3.1.10)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2023-01-15 v3.1.10 (3.1.10)
 ))) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2023-04-22 v7.00x Hypertext links for LaTeX
+Package: hyperref 2023-07-08 v7.01b Hypertext links for LaTeX
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
 Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
@@ -298,7 +299,7 @@ Package: letltxmacro 2019/12/03 v1.6 Let assignment for LaTeX macros (HO)
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/auxhook/auxhook.sty
 Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
-Package: nameref 2022-05-17 v2.50 Cross-referencing by name of section
+Package: nameref 2023-08-07 v2.53 Cross-referencing by name of section
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
 Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
@@ -312,27 +313,27 @@ Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 \Hy@linkcounter=\count286
 \Hy@pagecounter=\count287
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2023-04-22 v7.00x Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2023-07-08 v7.01b Hyperref: PDFDocEncoding definition (HO)
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
 \Hy@SavedSpaceFactor=\count288
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
-File: puenc.def 2023-04-22 v7.00x Hyperref: PDF Unicode definition (HO)
+File: puenc.def 2023-07-08 v7.01b Hyperref: PDF Unicode definition (HO)
 )
-Package hyperref Info: Hyper figures OFF on input line 4182.
-Package hyperref Info: Link nesting OFF on input line 4187.
-Package hyperref Info: Hyper index ON on input line 4190.
-Package hyperref Info: Plain pages OFF on input line 4197.
-Package hyperref Info: Backreferencing OFF on input line 4202.
+Package hyperref Info: Hyper figures OFF on input line 4167.
+Package hyperref Info: Link nesting OFF on input line 4172.
+Package hyperref Info: Hyper index ON on input line 4175.
+Package hyperref Info: Plain pages OFF on input line 4182.
+Package hyperref Info: Backreferencing OFF on input line 4187.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4449.
+Package hyperref Info: Bookmarks ON on input line 4434.
 \c@Hy@tempcnt=\count289
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4787.
+LaTeX Info: Redefining \url on input line 4772.
 \XeTeXLinkMargin=\dimen257
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -342,13 +343,13 @@ Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 \Fld@menulength=\count290
 \Field@Width=\dimen258
 \Fld@charsize=\dimen259
-Package hyperref Info: Hyper figures OFF on input line 6066.
-Package hyperref Info: Link nesting OFF on input line 6071.
-Package hyperref Info: Hyper index ON on input line 6074.
-Package hyperref Info: backreferencing OFF on input line 6081.
-Package hyperref Info: Link coloring OFF on input line 6086.
-Package hyperref Info: Link coloring with OCG OFF on input line 6091.
-Package hyperref Info: PDF/A mode OFF on input line 6096.
+Package hyperref Info: Hyper figures OFF on input line 6051.
+Package hyperref Info: Link nesting OFF on input line 6056.
+Package hyperref Info: Hyper index ON on input line 6059.
+Package hyperref Info: backreferencing OFF on input line 6066.
+Package hyperref Info: Link coloring OFF on input line 6071.
+Package hyperref Info: Link coloring with OCG OFF on input line 6076.
+Package hyperref Info: PDF/A mode OFF on input line 6081.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
@@ -359,7 +360,7 @@ package with kernel methods
 )
 Package hyperref Info: Driver (autodetected): hxetex.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
-File: hxetex.def 2023-04-22 v7.00x Hyperref driver for XeTeX
+File: hxetex.def 2023-07-08 v7.01b Hyperref driver for XeTeX
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
 Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
 )
@@ -383,9 +384,9 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 Package hyperref Info: Option `colorlinks' set `true' on input line 12.
 Package hyperref Info: Option `breaklinks' set `true' on input line 12.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
-Package: caption 2023/03/12 v3.6j Customizing captions (AR)
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
-Package: caption3 2023/03/12 v2.4 caption3 kernel (AR)
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
 \caption@tempdima=\dimen260
 \captionmargin=\dimen261
 \caption@leftmargin=\dimen262
@@ -400,18 +401,18 @@ Package caption Info: Standard document class detected.
 \c@continuedfloat=\count299
 Package caption Info: hyperref package is loaded.
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tcolorbox/tcolorbox.sty
-Package: tcolorbox 2023/03/17 version 6.0.3 text color boxes
+Package: tcolorbox 2023/09/26 version 6.1.0 text color boxes
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/verbatim.sty
 Package: verbatim 2022-07-02 v1.5u LaTeX2e package for verbatim enhancements
-\every@verbatim=\toks30
-\verbatim@line=\toks31
+\every@verbatim=\toks31
+\verbatim@line=\toks32
 \verbatim@in@stream=\read3
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/environ/environ.sty
 Package: environ 2014/05/04 v0.3 A new way to define environments
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/trimspaces/trimspaces.sty
 Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 )
-\@envbody=\toks32
+\@envbody=\toks33
 )
 \tcb@titlebox=\box64
 \tcb@upperbox=\box65
@@ -428,21 +429,21 @@ Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
 Package: amssymb 2013/01/14 v3.01 AMS font symbols
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
 Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\@emptytoks=\toks33
+\@emptytoks=\toks34
 \symAMSa=\mathgroup4
 \symAMSb=\mathgroup5
 LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
 LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
 (Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
 )) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
-Package: amsmath 2022/04/08 v2.17n AMS math features
+Package: amsmath 2023/05/13 v2.17o AMS math features
 \@mathmargin=\skip58
 For additional information on amsmath, use the `?' option.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
 Package: amstext 2021/08/26 v2.01 AMS text
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
 File: amsgen.sty 1999/11/30 v2.0 generic functions
-\@emptytoks=\toks34
+\@emptytoks=\toks35
 \ex@=\dimen268
 )) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
 Package: amsbsy 1999/11/29 v1.2d Bold Symbols
@@ -480,21 +481,21 @@ LaTeX Info: Redefining \Relbar on input line 971.
 \dotsspace@=\muskip17
 \c@parentequation=\count310
 \dspbrk@lvl=\count311
-\tag@help=\toks35
+\tag@help=\toks36
 \row@=\count312
 \column@=\count313
 \maxfields@=\count314
-\andhelp@=\toks36
+\andhelp@=\toks37
 \eqnshift@=\dimen271
 \alignsep@=\dimen272
 \tagshift@=\dimen273
 \tagwidth@=\dimen274
 \totwidth@=\dimen275
 \lineht@=\dimen276
-\@envbody=\toks37
+\@envbody=\toks38
 \multlinegap=\skip59
 \multlinetaggap=\skip60
-\mathdisplay@stack=\toks38
+\mathdisplay@stack=\toks39
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifxetex.sty
@@ -730,7 +731,7 @@ Package biblatex Info: XeTeX detected.
 (biblatex)             Assuming input encoding 'utf8'.
 Package biblatex Info: Document encoding is UTF8 ....
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
-Package: expl3 2023-05-05 L3 programming layer (loader) 
+Package: expl3 2023-08-29 L3 programming layer (loader) 
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
 File: l3backend-xetex.def 2023-04-19 L3 backend support: XeTeX
 \g__graphics_track_int=\count441
@@ -740,11 +741,11 @@ File: l3backend-xetex.def 2023-04-19 L3 backend support: XeTeX
 \g__pdf_backend_link_int=\count444
 ))
 Package biblatex Info: ... and expl3
-(biblatex)             2023-05-05 L3 programming layer (loader) 
+(biblatex)             2023-08-29 L3 programming layer (loader) 
 (biblatex)             is new enough (at least 2020/04/06),
 (biblatex)             setting 'casechanger=expl3'.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
-Package: xparse 2023-02-02 L3 Experimental document command parser
+Package: xparse 2023-08-29 L3 Experimental document command parser
 )
 Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
 )) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
@@ -763,7 +764,7 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layoutheight=\dimen282
 \Gm@layouthoffset=\dimen283
 \Gm@layoutvoffset=\dimen284
-\Gm@dimlist=\toks39
+\Gm@dimlist=\toks40
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@headwidth=\skip83
@@ -800,8 +801,8 @@ Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xkeyval/xkeyval.sty
 Package: xkeyval 2022/06/16 v2.9 package option processing (HA)
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkeyval.tex (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/xkeyval/xkvutils.tex
-\XKV@toks=\toks40
-\XKV@tempa@toks=\toks41
+\XKV@toks=\toks41
+\XKV@tempa@toks=\toks42
 )
 \XKV@depth=\count459
 File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
@@ -811,12 +812,12 @@ File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
 \c@mkern=\count462
 ) (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
 Package: microtype 2023/03/13 v3.1a Micro-typographical refinements (RS)
-\MT@toks=\toks42
+\MT@toks=\toks43
 \MT@tempbox=\box75
 \MT@count=\count463
 LaTeX Info: Redefining \noprotrusionifhmode on input line 1059.
 LaTeX Info: Redefining \leftprotrusion on input line 1060.
-\MT@prot@toks=\toks43
+\MT@prot@toks=\toks44
 LaTeX Info: Redefining \rightprotrusion on input line 1078.
 LaTeX Info: Redefining \textls on input line 1368.
 \MT@outer@kern=\dimen288
@@ -872,7 +873,7 @@ LaTeX Font Info:    ... okay on input line 268.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 268.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 268.
 (c:/Users/rempsyc/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1cmr.fd
-File: ts1cmr.fd 2022/07/10 v2.5l Standard LaTeX font definitions
+File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 268.
 LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 268.
@@ -987,7 +988,7 @@ Package hyperref Warning: Suppressing link with empty target on input line 295.
 Package hyperref Warning: Suppressing link with empty target on input line 295.
 
 
-Underfull \hbox (badness 3118) in paragraph at lines 323--330
+Underfull \hbox (badness 3118) in paragraph at lines 328--335
 \TU/lmr/m/n/10 There is a single function at the center of the proposed alternative syntax,
  []
 
@@ -1001,10 +1002,12 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 LaTeX Font Info:    Font shape `TU/lmss/m/it' in size <8> not available
-(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 359.
+(Font)              Font shape `TU/lmss/m/sl' tried instead on input line 364.
 [1
 
 ]
+LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <10> not available
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 387.
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1043,6 +1046,11 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 [4]
 File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
+
+Overfull \hbox (2.75342pt too wide) in paragraph at lines 569--572
+[]\TU/lmr/m/n/10 For reference, \TU/lmtt/m/n/10 nice_lavaaPlot() \TU/lmr/m/n/10 is a simple wrapper around \TU/lmtt/m/n/10 lavaanPlot::lavaanPlot()
+ []
+
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1069,8 +1077,6 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 [6]
 File: paper_files/figure-latex/nice_tidySEM2-1.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_tidySEM2-1.pdf>
-File: paper_files/figure-latex/nice_tidySEM3-1.pdf Graphic file (type pdf)
-<use paper_files/figure-latex/nice_tidySEM3-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1081,6 +1087,8 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
 [7]
+File: paper_files/figure-latex/nice_tidySEM3-1.pdf Graphic file (type pdf)
+<use paper_files/figure-latex/nice_tidySEM3-1.pdf>
 File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
 <D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
 
@@ -1100,7 +1108,21 @@ Package fancyhdr Warning: \headheight is too small (62.59596pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
 
-[9] (./paper.aux)
+[9]
+File: D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png Graphic file (type bmp)
+<D:/Rpackages/rticles/rmarkdown/templates/joss/resources/JOSS-logo.png>
+
+Package fancyhdr Warning: \headheight is too small (62.59596pt): 
+(fancyhdr)                Make it at least 63.55022pt, for example:
+(fancyhdr)                \setlength{\headheight}{63.55022pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-0.95425pt}.
+
+[10] (./paper.aux)
+ ***********
+LaTeX2e <2023-06-01> patch level 1
+L3 programming layer <2023-08-29>
+ ***********
 Package rerunfilecheck Info: File `paper.out' has not changed.
 (rerunfilecheck)             Checksum: 1A11F048E428965427BD85AFB1B72445;797.
 Package logreq Info: Writing requests to 'paper.run.xml'.
@@ -1108,12 +1130,12 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 36803 strings out of 478705
- 760367 string characters out of 5847479
- 1870873 words of memory out of 5000000
- 56335 multiletter control sequences out of 15000+600000
- 519151 words of font info for 79 fonts, out of 8000000 for 9000
+ 36644 strings out of 477589
+ 752878 string characters out of 5817003
+ 1938416 words of memory out of 5000000
+ 57301 multiletter control sequences out of 15000+600000
+ 564941 words of font info for 84 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 84i,13n,81p,1194b,848s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,13n,87p,1194b,850s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on paper.pdf (9 pages).
+Output written on paper.pdf (10 pages).

@@ -14,38 +14,38 @@ This vignette covers the arguments of the `write_lavaan()` function and links to
 
 ## regression
 
-The `regression` argument is a shorthand for the `~` operator. For example usage, see the Regression vignette: https://lavaanextra.remi-theriault.com/articles/regression.html
+The `regression` argument is a shorthand for the `~` operator. For example usage, see the [Regression vignette](https://lavaanextra.remi-theriault.com/articles/regression.html).
 
 ## covariance
 
-The covariance argument is a shorthand for the `~~` operator. For example usage, see Example 1: https://lavaanextra.remi-theriault.com/articles/example.html#example-1-model-syntax-1
+The covariance argument is a shorthand for the `~~` operator. For example usage, see [Example 1](https://lavaanextra.remi-theriault.com/articles/example.html#example-1-model-syntax-1).
 
 ## intercept
 
-The latent argument is a shorthand for the `~ 1` operator. For example usage, see Example 1: https://lavaanextra.remi-theriault.com/articles/example.html#example-1-model-syntax-1
+The latent argument is a shorthand for the `~ 1` operator. For example usage, see [Example 1](https://lavaanextra.remi-theriault.com/articles/example.html#example-1-model-syntax-1).
 
 ## latent
 
-The latent argument is a shorthand for the `=~⁠⁠` operator. For example usage see Example 2: https://lavaanextra.remi-theriault.com/articles/example.html#example-2-a-cfa-example
+The latent argument is a shorthand for the `=~⁠⁠` operator. For example usage see [Example 2](https://lavaanextra.remi-theriault.com/articles/example.html#example-2-a-cfa-example). 
 
 ## constraints
 
-Constraints can be specified with the `constraint.equal`, `constraint.smaller`, and `constraint.larger` argument, as showcased in articles/example.html#example-4-6
+Constraints can be specified with the `constraint.equal`, `constraint.smaller`, and `constraint.larger` argument, as showcased in [Example 4.6](https://lavaanextra.remi-theriault.com/articles/example.html#example-4-6).
 
 ## mediation
 
-The `mediation` argument is also a shorthand for the `~` operator. However, the difference with the `regression` argument is that it can automatically specify path names when the argument `label` is set to `TRUE`. It is also possible to name the paths with letters instead of the variable names by setting `use.letters = TRUE`. For example usage, see example 5: https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation
+The `mediation` argument is also a shorthand for the `~` operator. However, the difference with the `regression` argument is that it can automatically specify path names when the argument `label` is set to `TRUE`. It is also possible to name the paths with letters instead of the variable names by setting `use.letters = TRUE`. For example usage, see [Example 5](https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation).
 
 ## indirect
 
-The indirect argument is a shorthand for the `:=⁠` operator. For example usage, see Example 5: https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation
+The indirect argument is a shorthand for the `:=⁠` operator. For example usage, see [Example 5](https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation).
 
 ## user-defined parameters
 
-For user-defined parameters (e.g,. total effects), see example 5: https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation
+For user-defined parameters (e.g,. total effects), see [Example 5](https://lavaanextra.remi-theriault.com/articles/example.html#example-5-mediation).
 
 ## custom
 
-Sometimes, some elements cannot be specified with the other arguments, and so the `custom` argument becomes handy to make tailored specifications, such as with Multilevel SEM: https://lavaanextra.remi-theriault.com/articles/example.html#example-6-multilevel-sem
+Sometimes, some elements cannot be specified with the other arguments, and so the `custom` argument becomes handy to make tailored specifications, such as with Multilevel SEM in [Example 6](https://lavaanextra.remi-theriault.com/articles/example.html#example-6-multilevel-sem).
 
 The `custom` argument can also be useful when having to specify thresholds with the "|" operator.

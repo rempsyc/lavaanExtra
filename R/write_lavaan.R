@@ -29,6 +29,7 @@
 #'                    instead of the variable names.
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A character string, representing the specified `lavaan` model.
+#' @seealso The corresponding vignette: <https://lavaanextra.remi-theriault.com/articles/write_lavaan.html>
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(

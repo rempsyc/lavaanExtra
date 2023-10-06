@@ -13,10 +13,11 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-05-23"
+date: "2023-10-06"
 bibliography: paper.bib
 output:
-  rticles::joss_article
+  rticles::joss_article:
+    fig_crop: yes
   # md_document:
   #   preserve_yaml: TRUE
   #   variant: "markdown_strict"
@@ -253,8 +254,8 @@ lavaan_ind(fit.sem, nice_table = TRUE)
 ## Figures
 
 There are several packages designed to plot SEM models, but few that
-people consider satisfying or sufficiently good for publication. There
-are two packages that stand out however, {lavaanPlot}
+people consider satisfying or sufficiently good for publication by default.
+There are two packages that stand out however, {lavaanPlot}
 [@lavaanPlotPackage] and {tidySEM} [@tidySEMPackage]. Yet, even for
 those excellent packages, most people do not view them as
 publication-ready or at least optimized in the best possible way.
@@ -275,6 +276,21 @@ nice_lavaanPlot(fit.sem)
 ```
 
 ![](paper_files/figure-latex/nice_lavaanPlot-2.pdf)<!-- --> 
+
+For reference, `nice_lavaaPlot()` is a simple wrapper around `lavaanPlot::lavaanPlot()` and an identical figure can be obtained using only `lavaanPlot` with the following code:
+
+
+```r
+lavaanPlot::lavaanPlot(
+    model = fit.sem,
+    node_options = list(shape = "box", fontname = "Helvetica"),
+    coefs = TRUE, 
+    stand = TRUE,
+    stars = c("regress", "latent", "covs"), 
+    graph_options = c(rankdir = "LR"),
+    sig = .05
+  )
+```
 
 As these figures demonstrate, `nice_lavaanPlot()` has several elements
 frequently requested by researchers (especially in psychology): (a) a
@@ -317,6 +333,28 @@ nice_tidySEM(fit.sem, layout = indirect)
 ```
 
 ![](paper_files/figure-latex/nice_tidySEM-1.pdf)<!-- --> 
+
+For reference, below I provide the code necessary to reproduce this figure using the `tidySEM` package only.
+
+
+```r
+library(tidySEM)
+
+mylayout <- data.frame(
+  IV = c("grade", "ageyr"),
+  M = c("", "visual"),
+  DV = c("textual", "speed")
+)
+p <- prepare_graph(fit.sem, layout = mylayout)
+p <- hide_var(p)
+x <- p$edges$est_sig_std
+x <- sub("^0", "", x)
+x <- sub("^-0", "-", x)
+p$edges$label <- x
+p$edges$linetype <- 1
+p$edges$arrow <- ifelse(p$edges$arrow == "none", "both", p$edges$arrow)
+plot(p)
+```
 
 For the time being, `nice_tidySEM` only supports this three-level
 automatic layout, but designs with more levels are in the works. In the
@@ -374,6 +412,34 @@ The resulting figure can be saved using `ggplot2::ggsave()`
 
 ```r
 ggplot2::ggsave("my_semPlot.pdf", width = 8, height = 6)
+```
+
+For reference, below I provide the code necessary to reproduce this figure using the `tidySEM` package only.
+
+
+```r
+library(tidySEM)
+
+p <- prepare_graph(fit.sem, layout = mylayout)
+p <- edit_graph(p, { label_location <- 0.65 })
+p <- hide_var(p)
+x <- p$edges$est_sig_std
+x <- sub("^0", "", x)
+x <- sub("^-0", "-", x)
+p$edges$label <- x
+items <- p$edges[p$edges$op == "=~", "rhs"]
+i <- p$nodes$name %in% items
+p$nodes[i, ]$node_xmin <- p$nodes[i, ]$node_xmin + 0.4
+p$nodes[i, ]$node_xmax <- p$nodes[i, ]$node_xmax - 0.4
+p$nodes[i, ]$node_ymin <- p$nodes[i, ]$node_ymin + 0.2
+p$nodes[i, ]$node_ymax <- p$nodes[i, ]$node_ymax - 0.2
+p$edges$linetype <- 1
+p$edges$arrow <- ifelse(p$edges$arrow == "none", "both", p$edges$arrow)
+from <- p$edges$from
+to <- p$edges$to
+p$edges[from == "grade" & to == "speed", "curvature"] <- 40
+p$edges[from == "ageyr" & to == "textual", "curvature"] <- -40
+plot(p)
 ```
 
 Other differences between {tidySEM} and `nice_tidySEM()` are that: (a)

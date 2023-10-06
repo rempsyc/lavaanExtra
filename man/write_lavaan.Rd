@@ -83,6 +83,9 @@ fit <- lavaan(HS.model,
 summary(fit, fit.measures = TRUE)
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+The corresponding vignette: \url{https://lavaanextra.remi-theriault.com/articles/write_lavaan.html}
+}
 \keyword{CFA}
 \keyword{analysis}
 \keyword{equation}
