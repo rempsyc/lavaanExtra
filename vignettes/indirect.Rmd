@@ -375,4 +375,4 @@ Etc.
 
 # Other scenarios
 
-If you experience any issues with other scenarios, please open a GitHub issue with your example, and I will try to adapt the function to support that case. Thank you!
+If you experience any issues with other scenarios, please open a [GitHub issue](https://github.com/rempsyc/lavaanExtra/issues) with your example, and I will try to adapt the function to support that case. Thank you!
