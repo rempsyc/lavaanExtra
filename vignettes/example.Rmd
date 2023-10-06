@@ -420,3 +420,35 @@ model <- write_lavaan(
 )
 cat(model)
 ```
+
+## Example 8 (intercepts)
+Source: https://lavaan.ugent.be/tutorial/means.html
+
+`lavaan`:
+```{r}
+HS.model <- "
+# three-factor model
+  visual  =~ x1 + x2 + x3
+  textual =~ x4 + x5 + x6
+  speed   =~ x7 + x8 + x9
+# intercepts with fixed values
+  x1 + x2 + x3 + x4 ~ 0.5*1
+"
+```
+
+`lavaanExtra`:
+
+```{r}
+lat <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
+
+cus <- "x1 + x2 + x3 + x4 ~ 0.5*1"
+
+HS.model <- write_lavaan(
+  latent = lat, custom = cus
+)
+cat(HS.model)
+```
