@@ -34,8 +34,8 @@ navbar:
         href: articles/example.html
       - text: Automatic indirect effects
         href: articles/indirect.html
-      - text: Special cases
-        href: articles/special.html
+      - text: write_lavaan
+        href: articles/write_lavaan.html
   - text: Functions
     href: reference/index.html
   - text: News
@@ -51,8 +51,6 @@ toc:
 authors:
   Rémi Thériault:
     href: https://remi-theriault.com
-  Jolly Good:
-    href: https://nice.com
 
 template:
   bootstrap: 5
