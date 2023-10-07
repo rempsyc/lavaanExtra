@@ -4,7 +4,13 @@
 \alias{nice_fit}
 \title{Extract relevant fit indices from lavaan model}
 \usage{
-nice_fit(model, model.labels, nice_table = FALSE, stars = FALSE)
+nice_fit(
+  model,
+  model.labels,
+  nice_table = FALSE,
+  cutoffs = TRUE,
+  stars = FALSE
+)
 }
 \arguments{
 \item{model}{lavaan model object(s) to extract fit indices from}
@@ -14,8 +20,11 @@ for \code{model}, default to the names of the list. Otherwise, if the list
 is unnamed, defaults to generic numbering.}
 
 \item{nice_table}{Logical, whether to print the table as a
-\link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
-reference values at the bottom of the table.}
+\link[rempsyc:nice_table]{rempsyc::nice_table}.}
+
+\item{cutoffs}{Logical, if \code{nice_table = TRUE}, whether to display
+include reference values based on Schreiber (2017), Table 3, at the
+bottom of the table.}
 
 \item{stars}{Logical, if \code{nice_table = TRUE}, whether to display
 significance stars (defaults to \code{FALSE}).}
@@ -28,7 +37,7 @@ unbiased SRMR, AIC, and BIC).
 \description{
 Compares fit from one or several lavaan models. Also
 optionally includes references values. The reference fit values are
-based on Schreiber (2017).
+based on Schreiber (2017), Table 3.
 }
 \details{
 Note that \code{nice_fit} reports the unbiased SRMR through

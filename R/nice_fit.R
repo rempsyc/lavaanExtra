@@ -2,7 +2,7 @@
 #'
 #' @description Compares fit from one or several lavaan models. Also
 #' optionally includes references values. The reference fit values are
-#' based on Schreiber (2017).
+#' based on Schreiber (2017), Table 3.
 #'
 #' @details Note that `nice_fit` reports the unbiased SRMR through
 #'  [lavaan::lavResiduals()] because the standard SRMR is upwardly
@@ -14,8 +14,10 @@
 #' for `model`, default to the names of the list. Otherwise, if the list
 #' is unnamed, defaults to generic numbering.
 #' @param nice_table Logical, whether to print the table as a
-#'                   [rempsyc::nice_table] as well as print the
-#'                   reference values at the bottom of the table.
+#'                   [rempsyc::nice_table].
+#' @param cutoffs Logical, if `nice_table = TRUE`, whether to display
+#'  include reference values based on Schreiber (2017), Table 3, at the
+#'  bottom of the table.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
 #'              significance stars (defaults to `FALSE`).
 #' @keywords lavaan structural equation modeling path analysis CFA
@@ -45,7 +47,7 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' nice_fit(fit)
 #'
-nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
+nice_fit <- function(model, model.labels, nice_table = FALSE, cutoffs = TRUE, stars = FALSE) {
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
   } else if (inherits(model, "lavaan")) {
@@ -89,9 +91,12 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
     x <- x[c(1:7, 11, 8:10)]
 
     table <- rempsyc::nice_table(x, stars = stars)
+
+    table <- flextable::align(table, align = "center", part = "all")
+    if (isTRUE(cutoffs)) {
     table <- flextable::add_footer_row(table,
       values = c(
-        Model = "Ideal Value",
+        Model = "Suggested soft cutoffs",
         chi2 = "\u2014",
         df = "\u2014",
         chi2.df = "< 2 or 3",
@@ -107,12 +112,12 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, stars = FALSE) {
     )
     table <- flextable::bold(table, part = "footer")
     table <- flextable::align(table, align = "center", part = "all")
-
     table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
-      "As proposed by Schreiber (2017)."
-    ), ref_symbols = "a", part = "footer")
+      "Based on Schreiber (2017), Table 3."
+      ), ref_symbols = "a", part = "footer")
     table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
     table <- flextable::align(table, i = 2, part = "footer", align = "left")
+    }
 
     table <- flextable::font(table, part = "all", fontname = "Times New Roman")
     nice.borders <- list("width" = 0.5, color = "black", style = "solid")
