@@ -15,7 +15,8 @@ library(knitr)
 
 pkgs <- c(
   "tibble", "flextable", "lavaanPlot", "DiagrammeRsvg",
-  "rsvg", "png", "webshot", "tidySEM", "tmvnsim"
+  "rsvg", "png", "webshot", "tidySEM", "tmvnsim", "semTools",
+  "psych"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
@@ -35,12 +36,15 @@ if (can_evaluate) {
 library(lavaan)
 library(lavaanExtra)
 library(tibble)
+library(semTools)
+library(psych)
 
 # Define latent variables
+x <- paste0("x", 1:9)
 latent <- list(
-  visual = paste0("x", 1:3),
-  textual = paste0("x", 4:6),
-  speed = paste0("x", 7:9)
+  visual = x[1:3],
+  textual = x[4:6],
+  speed = x[7:9]
 )
 
 # Write the model, and check it
@@ -62,30 +66,28 @@ nice_fit(fit.cfa)
 nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
-But let's say you had a bad fit and wanted to remove the three items with the lowest loadings, you can do so without have to respecify the model, only what items you wish to remove:
+But let's say you wanted to develop a short-scale with only x items per dimension. You could decide to remove, for each dimension, the items with the lowest loadings to reach your desired number of items per dimension (but have a look at the #estimation-of-items-reliability section below). You can do so without have to respecify the model, only what items you wish to remove:
 
 ```{r cfaplot4}
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (as PDF)
 fit.cfa2 <- cfa_fit_plot(cfa.model, HolzingerSwineford1939,
-  remove.items = paste0("x", c(2:3, 7))
+  remove.items = x[c(2, 6:7)]
 )
 ```
 
 <img src="https://lavaanextra.remi-theriault.com/reference/figures/cfaplot2.png" width="30%" />
 
-Let's compare the fit to see if it's better now:
+Let's compare the fit with this short version:
 
 ```{r cfaplot5}
-nice_fit(lst(fit.cfa, fit.cfa2), nice_table = TRUE)
+fit_table <- nice_fit(lst(fit.cfa, fit.cfa2), nice_table = TRUE)
+fit_table
 ```
 
-It is! If you like this table, you may also wish to save it to Word. Also easy:
+If you like this table, you may also wish to save it to Word. Also easy:
 
 ```{r cfaplot6}
-# Save fit table as an object
-fit_table <- nice_fit(lst(fit.cfa, fit.cfa2), nice_table = TRUE)
-
 # Save fit table to Word!
 flextable::save_as_docx(fit_table, path = "fit_table.docx")
 ```
@@ -98,6 +100,52 @@ in tables like with the `nice_fit()` function.
 unlink("fit_table.docx")
 ```
 
+### Estimation of items reliability
+
+Ideally, rather than just looking at the loadings, we would also estimate the item reliability of our dimensions for our long vs short scales to help select which items to drop for our short scale. We can first look at the alpha when an item is dropped using the `psych::alpha` function.
+
+```{r, message=FALSE}
+visual <- HolzingerSwineford1939[names(HolzingerSwineford1939) %in% x[1:3]]
+textual <- HolzingerSwineford1939[names(HolzingerSwineford1939) %in% x[4:6]]
+speed <- HolzingerSwineford1939[names(HolzingerSwineford1939) %in% x[7:9]]
+
+alpha(visual)
+alpha(textual)
+alpha(speed)
+
+```
+
+Looking at the "Reliability if an item is dropped" section, we can see that our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7. Indeed, according to this reliability estimation, it would be better to drop item 9 instead.
+
+We can also have a look at omega instead, using the `semTools::compRelSEM()` function. First, we look at the omega reliability indice for the three dimensions for each of our models.
+
+```{r}
+compRelSEM(fit.cfa)
+compRelSEM(fit.cfa2)
+```
+
+We can see that the omegas are pretty similar between the two models. Next, let's look at each dimension's omega when a particular item is dropped.
+
+```{r}
+mod1 <- write_lavaan(latent = list(visual = x[1:3]))
+mod2 <- write_lavaan(latent = list(textual = x[4:6]))
+mod3 <- write_lavaan(latent = list(speed = x[7:9]))
+
+fit1 <- cfa(mod1, HolzingerSwineford1939)
+fit2 <- cfa(mod2, HolzingerSwineford1939)
+fit3 <- cfa(mod3, HolzingerSwineford1939)
+
+data.frame(Drop = x[1:3], Omega = sapply(
+  x[1:3], USE.NAMES = FALSE, function(i) compRelSEM(fit1, omit.indicators = i)))
+data.frame(Drop = x[4:6], Omega = sapply(
+  x[4:6], USE.NAMES = FALSE, function(i) compRelSEM(fit2, omit.indicators = i)))
+data.frame(Drop = x[7:9], Omega = sapply(
+  x[7:9], USE.NAMES = FALSE, function(i) compRelSEM(fit3, omit.indicators = i)))
+
+```
+
+Looking at the omega values when a specific item is dropped, we can see that, again, our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7, where it would be slightly better to drop item 9 instead (so same conclusion as with alpha).
+
 ## SEM example
 
 Here is a structural equation model example. We start with a path analysis first.
@@ -109,9 +157,9 @@ One might decide to look at the saturated `lavaan` model first.
 ```{r saturated}
 # Calculate scale averages
 data <- HolzingerSwineford1939
-data$visual <- rowMeans(data[paste0("x", 1:3)])
-data$textual <- rowMeans(data[paste0("x", 4:6)])
-data$speed <- rowMeans(data[paste0("x", 7:9)])
+data$visual <- rowMeans(data[x[1:3]])
+data$textual <- rowMeans(data[x[4:6]])
+data$speed <- rowMeans(data[x[7:9]])
 
 # Define our variables
 M <- "visual"
