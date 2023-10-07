@@ -503,7 +503,7 @@ HS.model <- write_lavaan(
 cat(HS.model)
 ```
 
-# Example 10 (longitudinal invariance)
+## Example 10 (longitudinal invariance)
 Source: https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/
 
 `lavaan`:

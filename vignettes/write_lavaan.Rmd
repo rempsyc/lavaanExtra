@@ -48,4 +48,4 @@ For user-defined parameters (e.g,. total effects), see [Example 5](https://lavaa
 
 Sometimes, some elements cannot be specified with the other arguments, and so the `custom` argument becomes handy to make tailored specifications, such as with Multilevel SEM in [Example 6](https://lavaanextra.remi-theriault.com/articles/example.html#example-6-multilevel-sem).
 
-The `custom` argument can also be useful when having to specify thresholds with the "|" operator.
+The `custom` argument can also be useful when having to specify thresholds with the "|" operator. For example usage, see [Example 10](https://lavaanextra.remi-theriault.com/articles/example.html#example-10-longitudinal-invariance).

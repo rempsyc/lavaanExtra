@@ -34,7 +34,7 @@ navbar:
         href: articles/example.html
       - text: Automatic indirect effects
         href: articles/indirect.html
-      - text: write_lavaan
+      - text: Using `write_lavaan`
         href: articles/write_lavaan.html
   - text: Functions
     href: reference/index.html
