@@ -733,6 +733,64 @@ packages.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## x1 + x2 + x3 + x4 ~ 0.5*1</span></span></code></pre>
 </div>
+<div class="section level2">
+<h2 id="example-9-thresholds">Example 9 (thresholds)<a class="anchor" aria-label="anchor" href="#example-9-thresholds"></a>
+</h2>
+<p>Source: <a href="https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf" class="external-link uri">https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf</a></p>
+<p><code>lavaan</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<span><span class="st">## LIR means</span></span>
+<span><span class="st">  y2w1 ~ mean1*1</span></span>
+<span><span class="st">  y2w2 ~ mean2*1</span></span>
+<span><span class="st">## LIR (co)variances</span></span>
+<span><span class="st">  y2w1 ~~ var1*y2w1 + y2w2</span></span>
+<span><span class="st">  y2w2 ~~ var2*y2w2</span></span>
+<span><span class="st">## thresholds link LIRs to observed items</span></span>
+<span><span class="st">  y2w1 | thr1*t1</span></span>
+<span><span class="st">  y2w2 | thr2*t1</span></span>
+<span><span class="st">'</span></span></code></pre></div>
+<p><code>lavaanExtra</code>:</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y2w1 <span class="op">=</span> <span class="st">"mean1*1"</span>,</span>
+<span>  y2w2 <span class="op">=</span> <span class="st">"mean2*1"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y2w1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"var1*y2w1"</span>, <span class="st">"y2w2"</span><span class="op">)</span>,</span>
+<span>  y2w2 <span class="op">=</span> <span class="st">"var2*y2w2"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">thres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  y2w1 <span class="op">=</span> <span class="st">"thr1*t1"</span>,</span>
+<span>  y2w2 <span class="op">=</span> <span class="st">"thr2*t1"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span>, </span>
+<span>  threshold <span class="op">=</span> <span class="va">thres</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## y2w1 ~ mean1*1</span></span>
+<span><span class="co">## y2w2 ~ mean2*1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [------------------Covariances-----------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## y2w1 ~~ var1*y2w1 + y2w2</span></span>
+<span><span class="co">## y2w2 ~~ var2*y2w2</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [------------------Thresholds------------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## y2w1 | thr1*t1</span></span>
+<span><span class="co">## y2w2 | thr2*t1</span></span></code></pre>
+</div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
 </div>
