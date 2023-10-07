@@ -131,9 +131,9 @@ packages.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaanExtra.remi-theriault.com">lavaanExtra</a></span><span class="op">)</span></span></code></pre></div>
-<div class="section level2">
-<h2 id="example-1-model-syntax-1">Example 1 (Model syntax 1):<a class="anchor" aria-label="anchor" href="#example-1-model-syntax-1"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-1-model-syntax-1">Example 1 (Model syntax 1):<a class="anchor" aria-label="anchor" href="#example-1-model-syntax-1"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax1.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax1.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -176,7 +176,9 @@ packages.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y1"</span>, <span class="st">"f1"</span><span class="op">)</span></span>
 <span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>  regression <span class="op">=</span> <span class="va">reg</span>, latent <span class="op">=</span> <span class="va">lat</span>, covariance <span class="op">=</span> <span class="va">cov</span>,</span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
+<span>  latent <span class="op">=</span> <span class="va">lat</span>, </span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span>,</span>
 <span>  intercept <span class="op">=</span> <span class="va">int</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">myModel</span><span class="op">)</span></span></code></pre></div>
@@ -208,9 +210,9 @@ packages.</p>
 <span><span class="co">## y1 ~ 1</span></span>
 <span><span class="co">## f1 ~ 1</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-2-a-cfa-example">Example 2 (A CFA example):<a class="anchor" aria-label="anchor" href="#example-2-a-cfa-example"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-2-a-cfa-example">Example 2 (A CFA example):<a class="anchor" aria-label="anchor" href="#example-2-a-cfa-example"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/cfa.html" class="external-link uri">https://lavaan.ugent.be/tutorial/cfa.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
@@ -233,9 +235,9 @@ packages.</p>
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-3-a-sem-example">Example 3 (A SEM example):<a class="anchor" aria-label="anchor" href="#example-3-a-sem-example"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-3-a-sem-example">Example 3 (A SEM example):<a class="anchor" aria-label="anchor" href="#example-3-a-sem-example"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/sem.html" class="external-link uri">https://lavaan.ugent.be/tutorial/sem.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
@@ -272,7 +274,10 @@ packages.</p>
 <span>  y4 <span class="op">=</span> <span class="st">"y8"</span>,</span>
 <span>  y6 <span class="op">=</span> <span class="st">"y8"</span></span>
 <span><span class="op">)</span></span>
-<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span>latent <span class="op">=</span> <span class="va">lat</span>, regression <span class="op">=</span> <span class="va">reg</span>, covariance <span class="op">=</span> <span class="va">cov</span><span class="op">)</span></span>
+<span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>  latent <span class="op">=</span> <span class="va">lat</span>, </span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----Latent variables (measurement model)-----]</span></span>
@@ -296,13 +301,13 @@ packages.</p>
 <span><span class="co">## y4 ~~ y8</span></span>
 <span><span class="co">## y6 ~~ y8</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-4-model-syntax-2">Example 4 (Model syntax 2):<a class="anchor" aria-label="anchor" href="#example-4-model-syntax-2"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-4-model-syntax-2">Example 4 (Model syntax 2):<a class="anchor" aria-label="anchor" href="#example-4-model-syntax-2"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/syntax2.html" class="external-link uri">https://lavaan.ugent.be/tutorial/syntax2.html</a></p>
-<div class="section level4">
-<h4 id="example-4-1">Example 4.1<a class="anchor" aria-label="anchor" href="#example-4-1"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-1">Example 4.1<a class="anchor" aria-label="anchor" href="#example-4-1"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
@@ -344,9 +349,9 @@ packages.</p>
 <span><span class="co">## textual ~~ 0*speed</span></span>
 <span><span class="co">## speed ~~ 1*speed</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-2">Example 4.2<a class="anchor" aria-label="anchor" href="#example-4-2"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-2">Example 4.2<a class="anchor" aria-label="anchor" href="#example-4-2"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
@@ -370,9 +375,9 @@ packages.</p>
 <span><span class="co">## textual =~ x4 + start(0.5)*x5 + start(1.0)*x6</span></span>
 <span><span class="co">## speed =~ x7 + start(0.7)*x8 + start(1.8)*x9</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-3">Example 4.3<a class="anchor" aria-label="anchor" href="#example-4-3"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-3">Example 4.3<a class="anchor" aria-label="anchor" href="#example-4-3"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
@@ -388,9 +393,9 @@ packages.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-4">Example 4.4<a class="anchor" aria-label="anchor" href="#example-4-4"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-4">Example 4.4<a class="anchor" aria-label="anchor" href="#example-4-4"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
@@ -414,9 +419,9 @@ packages.</p>
 <span><span class="co">## textual =~ x4 + x5 + x6</span></span>
 <span><span class="co">## speed =~ x7 + x8 + x9</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-5">Example 4.5<a class="anchor" aria-label="anchor" href="#example-4-5"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-5">Example 4.5<a class="anchor" aria-label="anchor" href="#example-4-5"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
@@ -471,9 +476,9 @@ packages.</p>
 <span><span class="co">##   Degrees of freedom                                25</span></span>
 <span><span class="co">##   P-value (Chi-square)                           0.000</span></span></code></pre>
 </div>
-<div class="section level4">
-<h4 id="example-4-6">Example 4.6<a class="anchor" aria-label="anchor" href="#example-4-6"></a>
-</h4>
+<div class="section level5">
+<h5 id="example-4-6">Example 4.6<a class="anchor" aria-label="anchor" href="#example-4-6"></a>
+</h5>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">model.constr</span> <span class="op">&lt;-</span> <span class="st">" # model with labeled parameters</span></span>
@@ -503,9 +508,9 @@ packages.</p>
 <span><span class="co">## b1 &gt; exp(b2 + b3)</span></span></code></pre>
 </div>
 </div>
-<div class="section level2">
-<h2 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-5-mediation">Example 5 (Mediation)<a class="anchor" aria-label="anchor" href="#example-5-mediation"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/mediation.html" class="external-link uri">https://lavaan.ugent.be/tutorial/mediation.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
@@ -545,9 +550,9 @@ packages.</p>
 <span><span class="co">## ab := a*b</span></span>
 <span><span class="co">## total := c + (a*b)</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-6-multilevel-sem">Example 6 (Multilevel SEM)<a class="anchor" aria-label="anchor" href="#example-6-multilevel-sem"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-6-multilevel-sem">Example 6 (Multilevel SEM)<a class="anchor" aria-label="anchor" href="#example-6-multilevel-sem"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/multilevel.html" class="external-link uri">https://lavaan.ugent.be/tutorial/multilevel.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
@@ -581,9 +586,9 @@ packages.</p>
 <span><span class="co">##     fb =~ y1 + y2 + y3</span></span>
 <span><span class="co">##     fb ~ w1 + w2</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-7-total-effects">Example 7 (total effects)<a class="anchor" aria-label="anchor" href="#example-7-total-effects"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-7-total-effects">Example 7 (total effects)<a class="anchor" aria-label="anchor" href="#example-7-total-effects"></a>
+</h3>
 <p>Source: <a href="https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem" class="external-link uri">https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
@@ -693,9 +698,9 @@ packages.</p>
 <span><span class="co">## total_eltern := b1*b7 + b2*b8 + b5</span></span>
 <span><span class="co">## total_freunde := b3*b7 + b4*b8 + b6</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-8-intercepts">Example 8 (intercepts)<a class="anchor" aria-label="anchor" href="#example-8-intercepts"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-8-intercepts">Example 8 (intercepts)<a class="anchor" aria-label="anchor" href="#example-8-intercepts"></a>
+</h3>
 <p>Source: <a href="https://lavaan.ugent.be/tutorial/means.html" class="external-link uri">https://lavaan.ugent.be/tutorial/means.html</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -733,9 +738,9 @@ packages.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## x1 + x2 + x3 + x4 ~ 0.5*1</span></span></code></pre>
 </div>
-<div class="section level2">
-<h2 id="example-9-thresholds">Example 9 (thresholds)<a class="anchor" aria-label="anchor" href="#example-9-thresholds"></a>
-</h2>
+<div class="section level3">
+<h3 id="example-9-thresholds">Example 9 (thresholds)<a class="anchor" aria-label="anchor" href="#example-9-thresholds"></a>
+</h3>
 <p>Source: <a href="https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf" class="external-link uri">https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
@@ -790,6 +795,139 @@ packages.</p>
 <span><span class="co">## </span></span>
 <span><span class="co">## y2w1 | thr1*t1</span></span>
 <span><span class="co">## y2w2 | thr2*t1</span></span></code></pre>
+</div>
+<div class="section level2">
+<h2 id="example-10-longitudinal-invariance">Example 10 (longitudinal invariance)<a class="anchor" aria-label="anchor" href="#example-10-longitudinal-invariance"></a>
+</h2>
+<p>Source: <a href="https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/" class="external-link uri">https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/</a></p>
+<p><code>lavaan</code>:</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">configural_invar</span> <span class="op">&lt;-</span> <span class="st">' #opening quote</span></span>
+<span><span class="st">#factor loadings</span></span>
+<span><span class="st">  eta1 =~ 1*t1_sc + #for identification</span></span>
+<span><span class="st">          t1_intp + </span></span>
+<span><span class="st">          t1_ext</span></span>
+<span><span class="st">  eta2 =~ 1*t2_sc + #for identification</span></span>
+<span><span class="st">          t2_intp + </span></span>
+<span><span class="st">          t2_ext</span></span>
+<span><span class="st">  eta3 =~ 1*t4_sc + #for identification</span></span>
+<span><span class="st">          t4_intp + </span></span>
+<span><span class="st">          t4_ext</span></span>
+<span><span class="st">                       </span></span>
+<span><span class="st">#latent variable variances</span></span>
+<span><span class="st">   eta1~~eta1 </span></span>
+<span><span class="st">   eta2~~eta2</span></span>
+<span><span class="st">   eta3~~eta3</span></span>
+<span><span class="st">   </span></span>
+<span><span class="st">#latent variable covariances</span></span>
+<span><span class="st">   eta1~~eta2</span></span>
+<span><span class="st">   eta1~~eta3</span></span>
+<span><span class="st">   eta2~~eta3</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">#latent variable means</span></span>
+<span><span class="st">   eta1~0*1 #for scaling</span></span>
+<span><span class="st">   eta2~0*1 #for scaling</span></span>
+<span><span class="st">   eta3~0*1 #for scaling</span></span>
+<span><span class="st">   </span></span>
+<span><span class="st">#propensity variances</span></span>
+<span><span class="st">   t1_sc  ~~ 1*t1_sc</span></span>
+<span><span class="st">   t1_intp~~ 1*t1_intp</span></span>
+<span><span class="st">   t1_ext ~~ 1*t1_ext</span></span>
+<span><span class="st">   t2_sc  ~~ 1*t2_sc</span></span>
+<span><span class="st">   t2_intp~~ 1*t2_intp</span></span>
+<span><span class="st">   t2_ext ~~ 1*t2_ext</span></span>
+<span><span class="st">   t4_sc  ~~ 1*t4_sc</span></span>
+<span><span class="st">   t4_intp~~ 1*t4_intp</span></span>
+<span><span class="st">   t4_ext ~~ 1*t4_ext</span></span>
+<span><span class="st"></span></span>
+<span><span class="st">#unique covariances</span></span>
+<span><span class="st">   </span></span>
+<span><span class="st">   </span></span>
+<span><span class="st">#observed variable intercepts/thresholds (4 categories = 3 thresholds)</span></span>
+<span><span class="st">   t1_sc   |t1 + t2 + t3</span></span>
+<span><span class="st">   t1_intp |t1 + t2 + t3</span></span>
+<span><span class="st">   t1_ext  |t1 + t2 + t3</span></span>
+<span><span class="st">   t2_sc   |t1 + t2 + t3</span></span>
+<span><span class="st">   t2_intp |t1 + t2 + t3</span></span>
+<span><span class="st">   t2_ext  |t1 + t2 + t3</span></span>
+<span><span class="st">   t4_sc   |t1 + t2 + t3</span></span>
+<span><span class="st">   t4_intp |t1 + t2 + t3</span></span>
+<span><span class="st">   t4_ext  |t1 + t2 + t3</span></span>
+<span><span class="st">'</span> <span class="co">#closing quote</span></span></code></pre></div>
+<p><code>lavaanExtra</code>:</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">eta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"eta"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"t"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">term</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sc"</span>, <span class="st">"intp"</span>, <span class="st">"ext"</span><span class="op">)</span></span>
+<span><span class="va">tnames</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="va">t</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span><span class="op">]</span>, each <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>, <span class="st">"_"</span>, <span class="va">term</span><span class="op">)</span></span>
+<span><span class="va">tnames2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"1*"</span>, <span class="va">tnames</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
+<span>  eta1 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tnames2</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">tnames</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  eta2 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tnames2</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, <span class="va">tnames</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">6</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  eta3 <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">tnames2</span><span class="op">[</span><span class="fl">7</span><span class="op">]</span>, <span class="va">tnames</span><span class="op">[</span><span class="fl">8</span><span class="op">:</span><span class="fl">9</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cov</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">eta</span>, <span class="va">eta</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, <span class="va">eta</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, <span class="va">tnames2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">cov</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">eta</span>, <span class="va">eta</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, <span class="va">eta</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>, <span class="va">tnames</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">thres</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">t</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span>, <span class="fl">9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">thres</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">tnames</span></span>
+<span></span>
+<span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"0*1"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">eta</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
+<span>   regression <span class="op">=</span> <span class="va">reg</span>, </span>
+<span>  latent <span class="op">=</span> <span class="va">lat</span>,</span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span>, </span>
+<span>  threshold <span class="op">=</span> <span class="va">thres</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [-----Latent variables (measurement model)-----]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## eta1 =~ 1*t1_sc + t1_intp + t1_ext</span></span>
+<span><span class="co">## eta2 =~ 1*t2_sc + t2_intp + t2_ext</span></span>
+<span><span class="co">## eta3 =~ 1*t4_sc + t4_intp + t4_ext</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [---------Regressions (Direct effects)---------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## eta1 ~ 0*1</span></span>
+<span><span class="co">## eta2 ~ 0*1</span></span>
+<span><span class="co">## eta3 ~ 0*1</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [------------------Covariances-----------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## eta1 ~~ eta1</span></span>
+<span><span class="co">## eta2 ~~ eta2</span></span>
+<span><span class="co">## eta3 ~~ eta3</span></span>
+<span><span class="co">## eta1 ~~ eta2</span></span>
+<span><span class="co">## eta1 ~~ eta3</span></span>
+<span><span class="co">## eta2 ~~ eta3</span></span>
+<span><span class="co">## t1_sc ~~ 1*t1_sc</span></span>
+<span><span class="co">## t1_intp ~~ 1*t1_intp</span></span>
+<span><span class="co">## t1_ext ~~ 1*t1_ext</span></span>
+<span><span class="co">## t2_sc ~~ 1*t2_sc</span></span>
+<span><span class="co">## t2_intp ~~ 1*t2_intp</span></span>
+<span><span class="co">## t2_ext ~~ 1*t2_ext</span></span>
+<span><span class="co">## t4_sc ~~ 1*t4_sc</span></span>
+<span><span class="co">## t4_intp ~~ 1*t4_intp</span></span>
+<span><span class="co">## t4_ext ~~ 1*t4_ext</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## ##################################################</span></span>
+<span><span class="co">## # [------------------Thresholds------------------]</span></span>
+<span><span class="co">## </span></span>
+<span><span class="co">## t1_sc | t1 + t2 + t3</span></span>
+<span><span class="co">## t1_intp | t1 + t2 + t3</span></span>
+<span><span class="co">## t1_ext | t1 + t2 + t3</span></span>
+<span><span class="co">## t2_sc | t1 + t2 + t3</span></span>
+<span><span class="co">## t2_intp | t1 + t2 + t3</span></span>
+<span><span class="co">## t2_ext | t1 + t2 + t3</span></span>
+<span><span class="co">## t4_sc | t1 + t2 + t3</span></span>
+<span><span class="co">## t4_intp | t1 + t2 + t3</span></span>
+<span><span class="co">## t4_ext | t1 + t2 + t3</span></span></code></pre>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
