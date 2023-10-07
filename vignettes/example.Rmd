@@ -63,7 +63,9 @@ cov <- list(
 )
 int <- c("y1", "f1")
 myModel <- write_lavaan(
-  regression = reg, latent = lat, covariance = cov,
+  regression = reg, 
+  latent = lat, 
+  covariance = cov,
   intercept = int
 )
 cat(myModel)
@@ -130,7 +132,10 @@ cov <- list(
   y4 = "y8",
   y6 = "y8"
 )
-model <- write_lavaan(latent = lat, regression = reg, covariance = cov)
+model <- write_lavaan(
+  latent = lat, 
+  regression = reg, 
+  covariance = cov)
 cat(model)
 ```
 
@@ -492,6 +497,98 @@ thres <- list(
 
 HS.model <- write_lavaan(
   regression = reg, 
+  covariance = cov, 
+  threshold = thres
+)
+cat(HS.model)
+```
+
+# Example 10 (longitudinal invariance)
+Source: https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/
+
+`lavaan`:
+```{r}
+configural_invar <- ' #opening quote
+#factor loadings
+  eta1 =~ 1*t1_sc + #for identification
+          t1_intp + 
+          t1_ext
+  eta2 =~ 1*t2_sc + #for identification
+          t2_intp + 
+          t2_ext
+  eta3 =~ 1*t4_sc + #for identification
+          t4_intp + 
+          t4_ext
+                       
+#latent variable variances
+   eta1~~eta1 
+   eta2~~eta2
+   eta3~~eta3
+   
+#latent variable covariances
+   eta1~~eta2
+   eta1~~eta3
+   eta2~~eta3
+
+#latent variable means
+   eta1~0*1 #for scaling
+   eta2~0*1 #for scaling
+   eta3~0*1 #for scaling
+   
+#propensity variances
+   t1_sc  ~~ 1*t1_sc
+   t1_intp~~ 1*t1_intp
+   t1_ext ~~ 1*t1_ext
+   t2_sc  ~~ 1*t2_sc
+   t2_intp~~ 1*t2_intp
+   t2_ext ~~ 1*t2_ext
+   t4_sc  ~~ 1*t4_sc
+   t4_intp~~ 1*t4_intp
+   t4_ext ~~ 1*t4_ext
+
+#unique covariances
+   
+   
+#observed variable intercepts/thresholds (4 categories = 3 thresholds)
+   t1_sc   |t1 + t2 + t3
+   t1_intp |t1 + t2 + t3
+   t1_ext  |t1 + t2 + t3
+   t2_sc   |t1 + t2 + t3
+   t2_intp |t1 + t2 + t3
+   t2_ext  |t1 + t2 + t3
+   t4_sc   |t1 + t2 + t3
+   t4_intp |t1 + t2 + t3
+   t4_ext  |t1 + t2 + t3
+' #closing quote
+
+```
+
+`lavaanExtra`:
+
+```{r}
+eta <- paste0("eta", 1:3)
+t <- paste0("t", 1:4)
+term <- c("sc", "intp", "ext")
+tnames <- paste0(rep(t[c(1:2, 4)], each = 3), "_", term)
+tnames2 <- paste0("1*", tnames)
+
+lat <- list(
+  eta1 = c(tnames2[1], tnames[2:3]),
+  eta2 = c(tnames2[4], tnames[5:6]),
+  eta3 = c(tnames2[7], tnames[8:9])
+)
+
+cov <- as.list(c(eta, eta[2:3], eta[3], tnames2))
+names(cov) <- c(eta, eta[1], eta[1:2], tnames)
+
+thres <- rep(list(t[1:3]), 9)
+names(thres) <- tnames
+
+reg <- as.list(setNames(rep("0*1", 3), eta))
+
+HS.model <- write_lavaan(
+   regression = reg, 
+  latent = lat,
   covariance = cov, 
   threshold = thres
 )
