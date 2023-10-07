@@ -66,7 +66,7 @@ nice_fit(fit.cfa)
 nice_fit(fit.cfa, nice_table = TRUE)
 ```
 
-But let's say you wanted to develop a short-scale with only x items per dimension. You could decide to remove, for each dimension, the items with the lowest loadings to reach your desired number of items per dimension (but have a look at the #estimation-of-items-reliability section below). You can do so without have to respecify the model, only what items you wish to remove:
+But let's say you wanted to develop a short-scale with only x items per dimension. You could decide to remove, for each dimension, the items with the lowest loadings to reach your desired number of items per dimension (but have a look at the [Estimation of items reliability] section below). You can do so without have to respecify the model, only what items you wish to remove:
 
 ```{r cfaplot4}
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
