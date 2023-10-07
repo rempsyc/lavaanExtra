@@ -194,6 +194,10 @@ The table can then be saved to word simply using
 flextable::save_as_docx(fit_table, path = "fit_table.docx")
 ```
 
+It will also render to PDF in an `rmarkdown` document with `output: pdf_document`, 
+but using `latex_engine: xelatex` is necessary when including Unicode symbols
+in tables like with the `nice_fit()` function.
+
 It is similarly possible to prepare APA tables in Word with the
 regression coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`),
 correlations (`lavaan_cor()`), or indirect effects (`lavaan_ind()`). For
