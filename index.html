@@ -135,7 +135,7 @@
 <span>  CRAN <span class="op">=</span> <span class="st">"https://cloud.r-project.org"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Or from GitHub, for the very latest version:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># If package `remotes` isn't already installed, install it with `install.packages("remotes")`</span></span>
+<code class="sourceCode R"><span><span class="co"># If not already installed, install package `remotes` with `install.packages("remotes")`</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"rempsyc/lavaanExtra"</span><span class="op">)</span></span></code></pre></div>
 <p>To see all the available functions, use:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -393,7 +393,7 @@
 <span></span>
 <span><span class="va">fit.sem</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get regression parameters only and make it pretty with the `rempsyc::nice_table` integration</span></span>
+<code class="sourceCode R"><span><span class="co"># Get regression parameters and make pretty with `rempsyc::nice_table`</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-saturated-1.png" width="60%"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
@@ -408,8 +408,13 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save fit table to Word!</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">fit_table</span>, path <span class="op">=</span> <span class="st">"fit_table.docx"</span><span class="op">)</span></span>
+<span><span class="co"># Note that it will also render to PDF in an `rmarkdown` document </span></span>
+<span><span class="co"># with `output: pdf_document`, but using `latex_engine: xelatex` </span></span>
+<span><span class="co"># is necessary when including Unicode symbols in tables like with </span></span>
+<span><span class="co"># the `nice_fit()` function.</span></span>
 <span></span>
-<span><span class="co"># Let's get the indirect effects only and make it pretty with the `rempsyc::nice_table` integration</span></span>
+<span><span class="co"># Let's get the indirect effects only and make it pretty </span></span>
+<span><span class="co"># with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_ind.html">lavaan_ind</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect2-1.png" width="90%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
