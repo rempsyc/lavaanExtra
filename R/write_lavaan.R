@@ -64,27 +64,6 @@ write_lavaan <- function(mediation = NULL,
                          use.letters = FALSE) {
   constraint <- NULL
   hashtag <- sprintf("%s\n", paste0(rep("#", 50), collapse = ""))
-  process_vars <- function(x, symbol, label = FALSE, collapse = " + ", header = paste0(
-                             hashtag, paste0("# ", title, "\n\n")
-                           ), title = NULL, spacer = "\n\n") {
-    if (isTRUE(label)) {
-      labels <- paste0(names(x))
-      if (isTRUE(use.letters)) {
-        x <- lapply(seq(x), function(i) {
-          paste0(letters[seq_along(x[[i]])], "_", labels[i], "*", x[[i]])
-        })
-      } else {
-        x <- lapply(seq(x), function(i) {
-          paste0(x[[i]], "_", labels[i], "*", x[[i]])
-        })
-      }
-      x <- stats::setNames(x, labels)
-    }
-    x <- lapply(x, paste0, collapse = collapse)
-    x <- paste0(names(x), paste0(" ", symbol, " "), x, collapse = "\n")
-    header <- header
-    paste0(header, x, spacer, collapse = "")
-  }
   if (!is.null(latent)) {
     latent <- process_vars(latent,
       symbol = "=~", title =
@@ -200,4 +179,31 @@ write_lavaan <- function(mediation = NULL,
   paste0(latent, mediation, regression, covariance, indirect, intercept,
          threshold, constraint, custom, collapse = ""
   )
+}
+
+#' @noRd
+process_vars <- function(x,
+                         symbol,
+                         label = FALSE,
+                         collapse = " + ",
+                         header = paste0(hashtag, paste0("# ", title, "\n\n")),
+                         title = NULL,
+                         spacer = "\n\n") {
+  if (isTRUE(label)) {
+    labels <- paste0(names(x))
+    if (isTRUE(use.letters)) {
+      x <- lapply(seq(x), function(i) {
+        paste0(letters[seq_along(x[[i]])], "_", labels[i], "*", x[[i]])
+      })
+    } else {
+      x <- lapply(seq(x), function(i) {
+        paste0(x[[i]], "_", labels[i], "*", x[[i]])
+      })
+    }
+    x <- stats::setNames(x, labels)
+  }
+  x <- lapply(x, paste0, collapse = collapse)
+  x <- paste0(names(x), paste0(" ", symbol, " "), x, collapse = "\n")
+  header <- header
+  paste0(header, x, spacer, collapse = "")
 }
