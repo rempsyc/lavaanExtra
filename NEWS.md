@@ -3,6 +3,7 @@
 
 ## lavaanExtra 0.1.8.1
 * `?lavaanExtra` now works as expected.
+* `write_lavaan()`: accepts a new argument, `threshold`, represented by the "|" operator.
 
 # lavaanExtra 0.1.8
 * CRAN resubmission

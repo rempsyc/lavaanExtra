@@ -452,3 +452,48 @@ HS.model <- write_lavaan(
 )
 cat(HS.model)
 ```
+
+## Example 9 (thresholds)
+Source: https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf
+
+`lavaan`:
+```{r}
+mod2 <- '
+## LIR means
+  y2w1 ~ mean1*1
+  y2w2 ~ mean2*1
+## LIR (co)variances
+  y2w1 ~~ var1*y2w1 + y2w2
+  y2w2 ~~ var2*y2w2
+## thresholds link LIRs to observed items
+  y2w1 | thr1*t1
+  y2w2 | thr2*t1
+'
+
+```
+
+`lavaanExtra`:
+
+```{r}
+reg <- list(
+  y2w1 = "mean1*1",
+  y2w2 = "mean2*1"
+)
+
+cov <- list(
+  y2w1 = c("var1*y2w1", "y2w2"),
+  y2w2 = "var2*y2w2"
+)
+
+thres <- list(
+  y2w1 = "thr1*t1",
+  y2w2 = "thr2*t1"
+)
+
+HS.model <- write_lavaan(
+  regression = reg, 
+  covariance = cov, 
+  threshold = thres
+)
+cat(HS.model)
+```

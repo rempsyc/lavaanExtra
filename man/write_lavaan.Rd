@@ -11,6 +11,7 @@ write_lavaan(
   indirect = NULL,
   latent = NULL,
   intercept = NULL,
+  threshold = NULL,
   constraint.equal = NULL,
   constraint.smaller = NULL,
   constraint.larger = NULL,
@@ -40,6 +41,8 @@ write indirect effects automatically. In this case, the
 \item{latent}{Latent variable indicators (\verb{=~} symbol: "is measured by").}
 
 \item{intercept}{Intercept indicators (\code{~ 1} symbol: "intercept").}
+
+\item{threshold}{Threshold indicators (\code{|} symbol: "threshold").}
 
 \item{constraint.equal}{Equality indicators (\code{==} symbol).}
 

@@ -42,12 +42,12 @@ sharing workflows.
 {lavaan} [@lavaanPackage] is a very popular R package for structural
 equation modeling (SEM). The package relies on specific operators to define
 latent variables, regressions, covariances, indirect effects, and so on.
-However, some individuals (e.g,. beginners to R and {lavaan}) may prefer 
-not having to specify the operators themselves, or would like to see some 
-steps automatized, such as defining indirect effects. Furthermore, for 
-researchers, it can be relatively difficult to extract relevant statistical 
-outputs in the form of tables and figures that are suitable for scientific 
-publication.
+However, some individuals (e.g., beginners to R and {lavaan})—or in some
+cases power users—may prefer not having to specify the operators themselves, 
+or would like to see some steps automatized, such as generating the {lavaan} 
+model layout or defining indirect effects. Furthermore, for researchers, it 
+can be relatively difficult to extract relevant statistical outputs in the 
+form of tables and figures that are suitable for scientific publication.
 
 {lavaanExtra} does mainly two things to address these issues. First, it offers 
 an alternative, code-efficient flexible modular syntax that allows automatizing 
