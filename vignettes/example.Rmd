@@ -63,8 +63,8 @@ cov <- list(
 )
 int <- c("y1", "f1")
 myModel <- write_lavaan(
-  regression = reg, 
-  latent = lat, 
+  regression = reg,
+  latent = lat,
   covariance = cov,
   intercept = int
 )
@@ -133,9 +133,10 @@ cov <- list(
   y6 = "y8"
 )
 model <- write_lavaan(
-  latent = lat, 
-  regression = reg, 
-  covariance = cov)
+  latent = lat,
+  regression = reg,
+  covariance = cov
+)
 cat(model)
 ```
 
@@ -463,7 +464,7 @@ Source: https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.
 
 `lavaan`:
 ```{r}
-mod2 <- '
+mod2 <- "
 ## LIR means
   y2w1 ~ mean1*1
   y2w2 ~ mean2*1
@@ -473,8 +474,7 @@ mod2 <- '
 ## thresholds link LIRs to observed items
   y2w1 | thr1*t1
   y2w2 | thr2*t1
-'
-
+"
 ```
 
 `lavaanExtra`:
@@ -496,8 +496,8 @@ thres <- list(
 )
 
 HS.model <- write_lavaan(
-  regression = reg, 
-  covariance = cov, 
+  regression = reg,
+  covariance = cov,
   threshold = thres
 )
 cat(HS.model)
@@ -508,23 +508,23 @@ Source: https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-cha
 
 `lavaan`:
 ```{r}
-configural_invar <- ' #opening quote
+configural_invar <- " #opening quote
 #factor loadings
   eta1 =~ 1*t1_sc + #for identification
-          t1_intp + 
+          t1_intp +
           t1_ext
   eta2 =~ 1*t2_sc + #for identification
-          t2_intp + 
+          t2_intp +
           t2_ext
   eta3 =~ 1*t4_sc + #for identification
-          t4_intp + 
+          t4_intp +
           t4_ext
-                       
+
 #latent variable variances
-   eta1~~eta1 
+   eta1~~eta1
    eta2~~eta2
    eta3~~eta3
-   
+
 #latent variable covariances
    eta1~~eta2
    eta1~~eta3
@@ -534,7 +534,7 @@ configural_invar <- ' #opening quote
    eta1~0*1 #for scaling
    eta2~0*1 #for scaling
    eta3~0*1 #for scaling
-   
+
 #propensity variances
    t1_sc  ~~ 1*t1_sc
    t1_intp~~ 1*t1_intp
@@ -547,8 +547,8 @@ configural_invar <- ' #opening quote
    t4_ext ~~ 1*t4_ext
 
 #unique covariances
-   
-   
+
+
 #observed variable intercepts/thresholds (4 categories = 3 thresholds)
    t1_sc   |t1 + t2 + t3
    t1_intp |t1 + t2 + t3
@@ -559,8 +559,7 @@ configural_invar <- ' #opening quote
    t4_sc   |t1 + t2 + t3
    t4_intp |t1 + t2 + t3
    t4_ext  |t1 + t2 + t3
-' #closing quote
-
+" # closing quote
 ```
 
 `lavaanExtra`:
@@ -587,9 +586,9 @@ names(thres) <- tnames
 reg <- as.list(setNames(rep("0*1", 3), eta))
 
 HS.model <- write_lavaan(
-   regression = reg, 
+  regression = reg,
   latent = lat,
-  covariance = cov, 
+  covariance = cov,
   threshold = thres
 )
 cat(HS.model)

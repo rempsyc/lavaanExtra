@@ -202,7 +202,7 @@ write_lavaan <- function(mediation = NULL,
     custom <- paste0(header, custom)
   }
   paste0(latent, mediation, regression, covariance, indirect, intercept,
-         threshold, constraint, custom, collapse = ""
+    threshold, constraint, custom,
+    collapse = ""
   )
 }
-

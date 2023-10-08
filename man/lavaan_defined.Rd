@@ -29,7 +29,7 @@ reference values at the bottom of the table.}
 
 \item{underscores_to_symbol}{Character to convert underscores
 to arrows in the first column, like for indirect effects. Default to
-the arrow symbol (→ "u2192"), but can be set to NULL or "_", or to any
+the arrow symbol (→), but can be set to NULL or "_", or to any
 other desired  symbol. It is also possible to provide a vector of
 replacements if they they are not all the same.}
 

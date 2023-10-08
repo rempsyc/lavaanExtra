@@ -112,7 +112,6 @@ speed <- HolzingerSwineford1939[x[7:9]]
 alpha(visual)
 alpha(textual)
 alpha(speed)
-
 ```
 
 Looking at the "Reliability if an item is dropped" section, we can see that our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7. Indeed, according to this reliability estimation, it would be better to drop item 9 instead.
@@ -136,12 +135,17 @@ fit2 <- cfa(mod2, HolzingerSwineford1939)
 fit3 <- cfa(mod3, HolzingerSwineford1939)
 
 data.frame(Drop = x[1:3], Omega = sapply(
-  x[1:3], USE.NAMES = FALSE, function(i) compRelSEM(fit1, omit.indicators = i)))
+  x[1:3],
+  USE.NAMES = FALSE, function(i) compRelSEM(fit1, omit.indicators = i)
+))
 data.frame(Drop = x[4:6], Omega = sapply(
-  x[4:6], USE.NAMES = FALSE, function(i) compRelSEM(fit2, omit.indicators = i)))
+  x[4:6],
+  USE.NAMES = FALSE, function(i) compRelSEM(fit2, omit.indicators = i)
+))
 data.frame(Drop = x[7:9], Omega = sapply(
-  x[7:9], USE.NAMES = FALSE, function(i) compRelSEM(fit3, omit.indicators = i)))
-
+  x[7:9],
+  USE.NAMES = FALSE, function(i) compRelSEM(fit3, omit.indicators = i)
+))
 ```
 
 Looking at the omega values when a specific item is dropped, we can see that, again, our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7, where it would be slightly better to drop item 9 instead (so same conclusion as with alpha).
@@ -173,9 +177,10 @@ covariance <- list(speed = "textual", ageyr = "grade")
 
 # Write the model, and check it
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
-  covariance = covariance)
+  mediation = mediation,
+  regression = regression,
+  covariance = covariance
+)
 cat(model.saturated)
 ```
 
@@ -185,10 +190,11 @@ This looks good so far, but we might also want to check our indirect effects (me
 # We can run the model again.
 # However, we set `label = TRUE` to get the path names
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
-  covariance = covariance, 
-  label = TRUE)
+  mediation = mediation,
+  regression = regression,
+  covariance = covariance,
+  label = TRUE
+)
 cat(model.saturated)
 ```
 
@@ -205,8 +211,8 @@ indirect <- list(
 
 # Write the model, and check it
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
   indirect = indirect,
   label = TRUE
@@ -219,10 +225,10 @@ If preferred (e.g., when dealing with long variable names), one can choose to us
 ```{r letters}
 # Write the model, and check it
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
-  label = TRUE, 
+  label = TRUE,
   use.letters = TRUE
 )
 cat(model.saturated)
@@ -241,11 +247,11 @@ indirect <- list(
 
 # Write the model, and check it
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
   indirect = indirect,
-  label = TRUE, 
+  label = TRUE,
   use.letters = TRUE
 )
 cat(model.saturated)
@@ -259,8 +265,8 @@ indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model.saturated <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
   indirect = indirect,
   label = TRUE
@@ -290,10 +296,11 @@ regression <- list(speed = "grade", textual = IV)
 
 # We can run the model again, setting `label = TRUE` to get the path names
 model.path <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
-  covariance = covariance, 
-  label = TRUE)
+  mediation = mediation,
+  regression = regression,
+  covariance = covariance,
+  label = TRUE
+)
 cat(model.path)
 # We check that we have removed "ageyr" correctly from "speed" in the
 # regression section. OK.
@@ -306,8 +313,8 @@ indirect <- list(
 
 # We run the model again, with the indirect effects
 model.path <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
   indirect = indirect,
   label = TRUE
@@ -373,10 +380,10 @@ Finally, perhaps we change our mind and decide to run a full SEM instead, with l
 
 ```{r latent}
 model.latent <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
-  indirect = indirect, 
+  indirect = indirect,
   latent = latent,
   label = TRUE
 )

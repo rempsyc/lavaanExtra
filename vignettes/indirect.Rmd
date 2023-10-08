@@ -56,9 +56,11 @@ mediation <- list(speed = M, visual = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -79,9 +81,11 @@ mediation <- list(speed = M, textual = M, visual = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -105,9 +109,11 @@ mediation <- list(speed = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -130,9 +136,11 @@ mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -157,9 +165,11 @@ mediation <- list(speed = M, visual = IV)
 indirect <- list(M = M, DV = DV, IV = IV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -182,9 +192,11 @@ mediation <- list(speed = M, textual = M, visual = IV)
 indirect <- list(M = M, DV = DV, IV = IV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -208,9 +220,11 @@ mediation <- list(speed = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -233,9 +247,11 @@ mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -259,9 +275,11 @@ mediation <- list(speed = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -284,9 +302,11 @@ mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -309,9 +329,11 @@ mediation <- list(speed = M, textual = M, visual = IV, grade = IV)
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot
@@ -340,9 +362,11 @@ mediation <- list(
 indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
-model <- write_lavaan(mediation = mediation, 
-                      indirect = indirect, 
-                      label = TRUE)
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = indirect,
+  label = TRUE
+)
 cat(model)
 
 # Fit and plot

@@ -94,29 +94,29 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, cutoffs = TRUE, st
 
     table <- flextable::align(table, align = "center", part = "all")
     if (isTRUE(cutoffs)) {
-    table <- flextable::add_footer_row(table,
-      values = c(
-        Model = "Suggested soft cutoffs",
-        chi2 = "\u2014",
-        df = "\u2014",
-        chi2.df = "< 2 or 3",
-        p = "> .05",
-        CFI = "\u2265 .95",
-        TLI = "\u2265 .95",
-        `RMSEA (90% CI)` = "< .05 [.00, .08]",
-        SRMR = "\u2264 .08",
-        AIC = "Smaller",
-        BIC = "Smaller"
-      ),
-      colwidths = rep(1, length(table$col_keys))
-    )
-    table <- flextable::bold(table, part = "footer")
-    table <- flextable::align(table, align = "center", part = "all")
-    table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
-      "Based on Schreiber (2017), Table 3."
+      table <- flextable::add_footer_row(table,
+        values = c(
+          Model = "Suggested soft cutoffs",
+          chi2 = "\u2014",
+          df = "\u2014",
+          chi2.df = "< 2 or 3",
+          p = "> .05",
+          CFI = "\u2265 .95",
+          TLI = "\u2265 .95",
+          `RMSEA (90% CI)` = "< .05 [.00, .08]",
+          SRMR = "\u2264 .08",
+          AIC = "Smaller",
+          BIC = "Smaller"
+        ),
+        colwidths = rep(1, length(table$col_keys))
+      )
+      table <- flextable::bold(table, part = "footer")
+      table <- flextable::align(table, align = "center", part = "all")
+      table <- flextable::footnote(table, i = 1, j = 1, value = flextable::as_paragraph(
+        "Based on Schreiber (2017), Table 3."
       ), ref_symbols = "a", part = "footer")
-    table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
-    table <- flextable::align(table, i = 2, part = "footer", align = "left")
+      table <- flextable::bold(table, i = 2, bold = FALSE, part = "footer")
+      table <- flextable::align(table, i = 2, part = "footer", align = "left")
     }
 
     table <- flextable::font(table, part = "all", fontname = "Times New Roman")

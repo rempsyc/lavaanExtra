@@ -55,7 +55,8 @@ test_that("write_lavaan using mediation with letters", {
   expect_snapshot(cat(write_lavaan(
     mediation = mediation,
     label = TRUE,
-    use.letters = TRUE)))
+    use.letters = TRUE
+  )))
 })
 
 test_that("write_lavaan using mediation with letters and indirect", {
@@ -63,7 +64,8 @@ test_that("write_lavaan using mediation with letters and indirect", {
     mediation = mediation,
     indirect = indirect,
     label = TRUE,
-    use.letters = TRUE)))
+    use.letters = TRUE
+  )))
 })
 
 
@@ -114,5 +116,6 @@ test_that("write_lavaan using everything", {
     constraint.smaller = constraint.smaller,
     constraint.larger = constraint.larger,
     custom = custom,
-    label = TRUE)))
+    label = TRUE
+  )))
 })

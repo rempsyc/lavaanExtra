@@ -15,7 +15,7 @@
 #'                   reference values at the bottom of the table.
 #' @param underscores_to_symbol Character to convert underscores
 #'  to arrows in the first column, like for indirect effects. Default to
-#'  the arrow symbol (→ "u2192"), but can be set to NULL or "_", or to any
+#'  the arrow symbol (→), but can be set to NULL or "_", or to any
 #'  other desired  symbol. It is also possible to provide a vector of
 #'  replacements if they they are not all the same.
 #' @param lhs_name Name of first column, referring to the left-hand side
@@ -81,7 +81,13 @@ lavaan_defined <- function(fit,
   x <- x[og.names]
   names(x) <- new.names
   if (!is.null(underscores_to_symbol)) {
-    x[[1]] <- gsub("_", paste0(" ", underscores_to_symbol, " "), x[[1]])
+    if (length(underscores_to_symbol) == 1 || length(underscores_to_symbol) == nrow(x)) {
+      x[[1]] <- unlist(lapply(seq_along(underscores_to_symbol), function(i) {
+        gsub("_", paste0(" ", underscores_to_symbol[[i]], " "), as.list(x[[1]])[[i]])
+      }))
+    } else {
+      stop("'underscores_to_symbol' must match the number of rows.")
+    }
   }
   if (nice_table) {
     insight::check_if_installed("rempsyc",
