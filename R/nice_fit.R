@@ -29,10 +29,11 @@
 #' structural equation modeling. *Research in social and administrative pharmacy*,
 #' *13*(3), 634-643. <https://doi.org/10.1016/j.sapharm.2016.06.006>
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
+#' x <- paste0("x", 1:9)
 #' (latent <- list(
-#'   visual = paste0("x", 1:3),
-#'   textual = paste0("x", 4:6),
-#'   speed = paste0("x", 7:9)
+#'   visual = x[1:3],
+#'   textual = x[4:6],
+#'   speed = x[7:9]
 #' ))
 #'
 #' (regression <- list(

@@ -21,10 +21,11 @@
 #'         ("est") and its confidence interval ("ci.lower", "ci.upper").
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("sjlabelled", quietly = TRUE) && requireNamespace("stringdist", quietly = TRUE)
+#' x <- paste0("x", 1:9)
 #' (latent <- list(
-#'   visual = paste0("x", 1:3),
-#'   textual = paste0("x", 4:6),
-#'   speed = paste0("x", 7:9)
+#'   visual = x[1:3],
+#'   textual = x[4:6],
+#'   speed = x[7:9]
 #' ))
 #'
 #' (regression <- list(

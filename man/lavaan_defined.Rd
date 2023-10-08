@@ -57,10 +57,11 @@ for more details.
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+x <- paste0("x", 1:9)
 (latent <- list(
-  visual = paste0("x", 1:3),
-  textual = paste0("x", 4:6),
-  speed = paste0("x", 7:9)
+  visual = x[1:3],
+  textual = x[4:6],
+  speed = x[7:9]
 ))
 
 (mediation <- list(
