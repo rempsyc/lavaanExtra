@@ -52,9 +52,6 @@
     <loc>https://lavaanExtra.remi-theriault.com/reference/lavaanExtra-package.html</loc>
   </url>
   <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_cor.html</loc>
-  </url>
-  <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_cov.html</loc>
   </url>
   <url>
@@ -62,6 +59,9 @@
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_reg.html</loc>
+  </url>
+  <url>
+    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_var.html</loc>
   </url>
   <url>
     <loc>https://lavaanExtra.remi-theriault.com/reference/nice_fit.html</loc>
