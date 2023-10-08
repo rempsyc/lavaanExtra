@@ -53,10 +53,3 @@ fit <- sem(HS.model, data = HolzingerSwineford1939)
 lavaan_reg(fit)
 \dontshow{\}) # examplesIf}
 }
-\keyword{CFA}
-\keyword{analysis}
-\keyword{equation}
-\keyword{lavaan}
-\keyword{modeling}
-\keyword{path}
-\keyword{structural}

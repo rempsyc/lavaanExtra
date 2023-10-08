@@ -23,7 +23,6 @@
 #' @param rhs_name Name of first column, referring to the right-hand side
 #'  expression (rhs).
 #' @param ... Arguments to be passed to [rempsyc::nice_table]
-#' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, including the indirect effect ("lhs"),
 #'         corresponding paths ("rhs"), standardized regression
 #'         coefficient ("std.all"), corresponding p-value, as well

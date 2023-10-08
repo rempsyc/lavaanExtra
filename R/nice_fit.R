@@ -20,7 +20,6 @@
 #'  bottom of the table.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
 #'              significance stars (defaults to `FALSE`).
-#' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, representing select fit indices (chi2, df, chi2/df,
 #'         p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI,
 #'         unbiased SRMR, AIC, and BIC).

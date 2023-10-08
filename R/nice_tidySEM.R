@@ -31,7 +31,6 @@
 #'             returns the `tidy_sem` object, which can be further edited
 #'             as needed.
 #' @param ... Arguments to be passed to [tidySEM::prepare_graph].
-#' @keywords CFA lavaan plot fit tidySEM table_results
 #' @return A tidySEM plot, of class ggplot, representing the specified
 #'         `lavaan` model.
 #' @export

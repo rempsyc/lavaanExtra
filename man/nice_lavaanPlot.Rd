@@ -71,7 +71,3 @@ fit <- cfa(HS.model, HolzingerSwineford1939)
 nice_lavaanPlot(fit)
 \dontshow{\}) # examplesIf}
 }
-\keyword{CFA}
-\keyword{fit}
-\keyword{lavaan}
-\keyword{plot}

@@ -72,10 +72,3 @@ Schreiber, J. B. (2017). Update to core reporting practices in
 structural equation modeling. \emph{Research in social and administrative pharmacy},
 \emph{13}(3), 634-643. \url{https://doi.org/10.1016/j.sapharm.2016.06.006}
 }
-\keyword{CFA}
-\keyword{analysis}
-\keyword{equation}
-\keyword{lavaan}
-\keyword{modeling}
-\keyword{path}
-\keyword{structural}

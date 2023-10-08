@@ -77,7 +77,3 @@ library(lavaan)
 fit <- cfa_fit_plot(HS.model, HolzingerSwineford1939)
 \dontshow{\}) # examplesIf}
 }
-\keyword{CFA}
-\keyword{fit}
-\keyword{lavaan}
-\keyword{plot}

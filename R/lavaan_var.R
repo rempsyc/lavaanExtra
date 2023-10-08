@@ -1,13 +1,15 @@
-#' @title Extract relevant covariance/correlation indices from lavaan model
+#' @title Extract relevant variance indices from lavaan model
 #'
-#' @description Extract relevant covariance/correlation indices from lavaan
+#' @description Extract relevant variance indices from lavaan
 #'  model through [lavaan::parameterEstimates] (when estimate = "sigma",
-#'  `est.std` column)) or [lavaan::standardizedsolution] (when estimate = "r",
-#'  `est.std` column).
+#'  `est` column)) or [lavaan::standardizedsolution] (when estimate = "r2",
+#'  `est.std` column). R2 values are then calculated as `1 - est.std`, and
+#'  the new _p_ values for the R2, with the following formula:
+#'  `stats::pnorm((1 - est) / se)`.
 #'
 #' @param fit lavaan fit object to extract covariance indices from
 #' @param estimate What estimate to use, either the standardized
-#'                 estimate ("r", default), or unstandardized
+#'                 estimate ("r2", default), or unstandardized
 #'                 estimate ("sigma").
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
@@ -39,24 +41,28 @@
 #'
 #' library(lavaan)
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
-#' lavaan_cov(fit)
-#' lavaan_cov(fit, estimate = "r")
-#' lavaan_cor(fit) # same as previous
-lavaan_cov <- function(fit, estimate = "sigma", nice_table = FALSE, ...) {
+#' lavaan_var(fit)
+lavaan_var <- function(fit, estimate = "r2", nice_table = FALSE, ...) {
   og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
   new.names <- c("Variable 1", "Variable 2", "p", "sigma", "CI_lower", "CI_upper")
   if (estimate == "sigma") {
     x <- lavaan::parameterEstimates(fit)
-  } else if (estimate == "r") {
+  } else if (estimate == "r2") {
     x <- lavaan::standardizedsolution(fit, level = 0.95)
     og.names[4] <- "est.std"
-    new.names[4] <- "r"
+    new.names[4] <- "R2"
+    x$est.std <- abs(1 - x$est.std)
+    x$ci.lower_temp <- abs(1 - x$ci.lower)
+    x$ci.upper_temp <- abs(1 - x$ci.upper)
+    x$ci.upper <- x$ci.lower_temp
+    x$ci.lower <- x$ci.upper_temp
+    x$pvalue <- r2_pvalue(x$est.std, x$se)
   } else {
-    stop("The 'estimate' argument may only be one of c('sigma', 'r').")
+    stop("The 'estimate' argument may only be one of c('sigma', 'r2').")
   }
   x <- x[which(x["op"] == "~~"), ]
   diag <- which(x$lhs == x$rhs)
-  x <- x[-diag, ] # keep only off-diagonal elements
+  x <- x[diag, ] # keep only diagonal elements
   x <- x[og.names]
   names(x) <- new.names
   if (nice_table) {
@@ -69,8 +75,7 @@ lavaan_cov <- function(fit, estimate = "sigma", nice_table = FALSE, ...) {
   x
 }
 
-#' @export
-#' @describeIn lavaan_cov Shortcut for `lavaan_cov(fit, estimate = "r")`
-lavaan_cor <- function(fit, nice_table = FALSE, ...) {
-  lavaan_cov(fit, estimate = "r", nice_table = nice_table, ...)
+r2_pvalue <- function(est, se) {
+  wald_z <- (1 - est) / se
+  stats::pnorm(wald_z)
 }

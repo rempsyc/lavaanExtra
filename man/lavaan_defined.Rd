@@ -87,10 +87,3 @@ fit <- sem(HS.model, data = HolzingerSwineford1939)
 lavaan_defined(fit, lhs_name = "Indirect Effect")
 \dontshow{\}) # examplesIf}
 }
-\keyword{CFA}
-\keyword{analysis}
-\keyword{equation}
-\keyword{lavaan}
-\keyword{modeling}
-\keyword{path}
-\keyword{structural}

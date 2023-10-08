@@ -90,10 +90,3 @@ summary(fit, fit.measures = TRUE)
 \seealso{
 The corresponding vignette: \url{https://lavaanextra.remi-theriault.com/articles/write_lavaan.html}
 }
-\keyword{CFA}
-\keyword{analysis}
-\keyword{equation}
-\keyword{lavaan}
-\keyword{modeling}
-\keyword{path}
-\keyword{structural}

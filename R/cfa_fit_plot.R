@@ -21,7 +21,6 @@
 #'                  wants something different than the default file name.
 #'                  It saves to pdf per default, so the .pdf extension
 #'                  should not be specified as it will add it automatically.
-#' @keywords CFA lavaan plot fit
 #' @return The function returns a `lavaan` fit object. However, it also: prints
 #'         a summary of the `lavaan` fit object to the console, and; prints a
 #'         `lavaanPlot` of the `lavaan` fit object.

@@ -107,9 +107,3 @@ nice_tidySEM(fit, layout = structure)
 }
 \dontshow{\}) # examplesIf}
 }
-\keyword{CFA}
-\keyword{fit}
-\keyword{lavaan}
-\keyword{plot}
-\keyword{table_results}
-\keyword{tidySEM}

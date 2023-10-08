@@ -13,7 +13,6 @@
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
 #' @param ... Arguments to be passed to [rempsyc::nice_table]
-#' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, including the outcome ("lhs"), predictor ("rhs"),
 #'         standardized regression coefficient ("std.all"), corresponding
 #'         p-value, as well as the unstandardized regression coefficient
