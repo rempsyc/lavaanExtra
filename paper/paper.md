@@ -248,16 +248,16 @@ It will also render to PDF in an `rmarkdown` document with `output: pdf_document
 but using `latex_engine: xelatex` is necessary when including Unicode symbols
 in tables like with the `nice_fit()` function.
 
-It is similarly possible to prepare APA tables in Word with the
+It is similarly possible to prepare APA tables in Word or other formats with the
 regression coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`),
-correlations (`lavaan_cor()`), or indirect effects (`lavaan_ind()`). For
-example, for indirect effects:
+correlations (`lavaan_cor()`), variances (`lavaan_var()`), or indirect effects 
+(`lavaan_defined()`). For example, for indirect effects:
 
 
 
 
 ```r
-lavaan_ind(fit.sem, nice_table = TRUE)
+lavaan_defined(fit.sem, lhs_name = "Indirect Effect", nice_table = TRUE)
 ```
 
 ![](ind.png)
