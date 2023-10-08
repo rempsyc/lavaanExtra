@@ -13,7 +13,7 @@ authors:
 affiliations:
   - name: "Department of Psychology, Université du Québec à Montréal, Québec, Canada"
     index: 1
-date: "2023-10-06"
+date: "2023-10-08"
 bibliography: paper.bib
 output:
   rticles::joss_article:
@@ -42,12 +42,12 @@ sharing workflows.
 {lavaan} [@lavaanPackage] is a very popular R package for structural
 equation modeling (SEM). The package relies on specific operators to define
 latent variables, regressions, covariances, indirect effects, and so on.
-However, some individuals (e.g,. beginners to R and {lavaan}) may prefer 
-not having to specify the operators themselves, or would like to see some 
-steps automatized, such as defining indirect effects. Furthermore, for 
-researchers, it can be relatively difficult to extract relevant statistical 
-outputs in the form of tables and figures that are suitable for scientific 
-publication.
+However, some individuals (e.g., beginners to R and {lavaan})—or in some
+cases power users—may prefer not having to specify the operators themselves, 
+or would like to see some steps automatized, such as generating the {lavaan} 
+model layout or defining indirect effects. Furthermore, for researchers, it 
+can be relatively difficult to extract relevant statistical outputs in the 
+form of tables and figures that are suitable for scientific publication.
 
 {lavaanExtra} does mainly two things to address these issues. First, it offers 
 an alternative, code-efficient flexible modular syntax that allows automatizing 
@@ -79,7 +79,7 @@ models.
 This aspect also allows better control over the user's code. If the user
 makes a mistake in one of, say, five SEM models definition, the user will
 have to change it at all five places within the script. With
-`write_lavaan()`, users only needs to define the reusable component the first 
+`write_lavaan()`, users only need to define the reusable component the first 
 time, or until they need to change that component again.
 
 The vector-based approach also allows the use of functions to define
@@ -117,9 +117,12 @@ traditional way and make sure we have not made any mistake.
 ```r
 library(lavaanExtra)
 
-latent <- list(visual = paste0("x", 1:3),
-               textual = paste0("x", 4:6),
-               speed = paste0("x", 7:9))
+x <- paste0("x", 1:9)
+latent <- list(
+  visual = x[1:3],
+  textual = x[4:6],
+  speed = x[7:9]
+)
 
 model.cfa <- write_lavaan(latent = latent)
 cat(model.cfa)
@@ -157,7 +160,7 @@ IV <- c("grade", "ageyr")
 
 mediation <- list(speed = M, textual = M, visual = IV)
 regression <- list(speed = IV, textual = IV)
-covariance <- list(speed = "textual", ageyr = "grade", x4 = c("x5", "x6"))
+covariance <- list(speed = "textual", ageyr = "grade", x4 = x[5:6])
 indirect <- list(IV = IV, M = M, DV = DV)
 
 model.sem <- write_lavaan(mediation = mediation, 
@@ -240,6 +243,10 @@ The table can then be saved to word simply using
 ```r
 flextable::save_as_docx(fit_table, path = "fit_table.docx")
 ```
+
+It will also render to PDF in an `rmarkdown` document with `output: pdf_document`, 
+but using `latex_engine: xelatex` is necessary when including Unicode symbols
+in tables like with the `nice_fit()` function.
 
 It is similarly possible to prepare APA tables in Word with the
 regression coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`),

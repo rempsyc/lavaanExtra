@@ -244,13 +244,13 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 # is necessary when including Unicode symbols in tables like with 
 # the `nice_fit()` function.
 
-# Let's get the indirect effects only and make it pretty 
+# Let's get the user-defined (e.g., indirect) effects only and make it pretty 
 # with the `rempsyc::nice_table` integration
-lavaan_ind(fit.sem, nice_table = TRUE)
+lavaan_defined(fit.sem, nice_table = TRUE)
 ```
 
 ```{r indirect2.save, include=FALSE}
-table_temp <- lavaan_ind(fit.sem, nice_table = TRUE) |>
+table_temp <- lavaan_defined(fit.sem, nice_table = TRUE) |>
   flextable::autofit()
 flextable::save_as_image(table_temp,
   path = "man/figures/README-indirect2-1.png",

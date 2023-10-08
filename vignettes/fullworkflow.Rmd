@@ -335,10 +335,10 @@ lavaan_cor(fit.path, nice_table = TRUE)
 nice_fit(lst(fit.cfa, fit.saturated, fit.path), nice_table = TRUE)
 
 # Let's get the indirect effects only
-lavaan_ind(fit.path)
+lavaan_defined(fit.path, lhs_name = "Indirect Effect")
 
 # We can get it prettier with the `rempsyc::nice_table` integration
-lavaan_ind(fit.path, nice_table = TRUE)
+lavaan_defined(fit.path, lhs_name = "Indirect Effect", nice_table = TRUE)
 
 # Get modification indices only
 modindices(fit.path, sort = TRUE, maximum.number = 5)

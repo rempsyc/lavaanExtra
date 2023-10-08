@@ -120,11 +120,12 @@ latent <- list(
   speed = c("x7", "x8", "x9")
 )
 
-# If you have many items, you can also use:
+# If you have many items, you can also use the `paste0` function:
+x <- paste0("x", 1:9)
 latent <- list(
-  visual = paste0("x", 1:3),
-  textual = paste0("x", 4:6),
-  speed = paste0("x", 7:9)
+  visual = x[1:3],
+  textual = x[4:6],
+  speed = x[7:9]
 )
 
 # Write the model, and check it
@@ -364,9 +365,9 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 # is necessary when including Unicode symbols in tables like with 
 # the `nice_fit()` function.
 
-# Let's get the indirect effects only and make it pretty 
+# Let's get the user-defined (e.g., indirect) effects only and make it pretty 
 # with the `rempsyc::nice_table` integration
-lavaan_ind(fit.sem, nice_table = TRUE)
+lavaan_defined(fit.sem, nice_table = TRUE)
 ```
 
 <img src="man/figures/README-indirect2-1.png" width="90%" />

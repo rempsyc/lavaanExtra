@@ -203,16 +203,16 @@ in tables like with the `nice_fit()` function.
 
 It is similarly possible to prepare APA tables in Word with the
 regression coefficients (`lavaan_reg()`), covariances (`lavaan_cov()`),
-correlations (`lavaan_cor()`), or indirect effects (`lavaan_ind()`). For
+correlations (`lavaan_cor()`), or indirect effects (`lavaan_defined()`). For
 example, for indirect effects:
 
 ```{r, include=F, eval=F}
-x <- lavaan_ind(fit.sem, nice_table = TRUE)
+x <- lavaan_defined(fit.sem, lhs_name = "Indirect Effect", nice_table = TRUE)
 flextable::save_as_docx(x, path = "ind_table.docx")
 ```
 
 ```{r, eval=F}
-lavaan_ind(fit.sem, nice_table = TRUE)
+lavaan_defined(fit.sem, lhs_name = "Indirect Effect", nice_table = TRUE)
 ```
 
 ![](ind.png)

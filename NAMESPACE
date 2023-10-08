@@ -3,7 +3,7 @@
 export(cfa_fit_plot)
 export(lavaan_cor)
 export(lavaan_cov)
-export(lavaan_ind)
+export(lavaan_defined)
 export(lavaan_reg)
 export(nice_fit)
 export(nice_lavaanPlot)

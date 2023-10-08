@@ -1,10 +1,11 @@
-#' @title Extract relevant indirect effects indices from lavaan model
+#' @title Extract relevant user-defined parameters (e.g., indirect or total
+#'  effects) indices from lavaan model
 #'
-#' @description Extract relevant indirect effects indices from lavaan model
-#'              through [lavaan::parameterEstimates] with
-#'              `standardized = TRUE`. In this case, the beta (B) represents
-#'              the resulting `std.all` column. See "Value" section for more
-#'              details.
+#' @description Extract relevant user-defined parameters (e.g., indirect or
+#'  total effects) indices from lavaan model through
+#'  [lavaan::parameterEstimates] with `standardized = TRUE`. In this case,
+#'  the beta (B) represents the resulting `std.all` column. See "Value" section
+#'  for more details.
 #' @param fit lavaan fit object to extract fit indices from
 #' @param estimate What estimate to use, either the standardized
 #'                 estimate ("B", default), or unstandardized
@@ -12,8 +13,15 @@
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
-#' @param underscores_to_arrows Logical, whether to convert underscore
-#' to arrows in the "Indirect Effect column".
+#' @param underscores_to_symbol Character to convert underscores
+#'  to arrows in the first column, like for indirect effects. Default to
+#'  the arrow symbol (→ "u2192"), but can be set to NULL or "_", or to any
+#'  other desired  symbol. It is also possible to provide a vector of
+#'  replacements if they they are not all the same.
+#' @param lhs_name Name of first column, referring to the left-hand side
+#'  expression (lhs).
+#' @param rhs_name Name of first column, referring to the right-hand side
+#'  expression (rhs).
 #' @param ... Arguments to be passed to [rempsyc::nice_table]
 #' @keywords lavaan structural equation modeling path analysis CFA
 #' @return A dataframe, including the indirect effect ("lhs"),
@@ -21,6 +29,7 @@
 #'         coefficient ("std.all"), corresponding p-value, as well
 #'         as the unstandardized regression coefficient ("est") and
 #'         its confidence interval ("ci.lower", "ci.upper").
+#' @aliases lavaan_ind
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' (latent <- list(
@@ -49,11 +58,16 @@
 #'
 #' library(lavaan)
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
-#' lavaan_ind(fit)
-lavaan_ind <- function(fit, estimate = "B", nice_table = FALSE,
-                       underscores_to_arrows = TRUE, ...) {
+#' lavaan_defined(fit, lhs_name = "Indirect Effect")
+lavaan_defined <- function(fit,
+                           estimate = "B",
+                           nice_table = FALSE,
+                           underscores_to_symbol = "\u2192",
+                           lhs_name = "User-Defined Parameter",
+                           rhs_name = "Paths",
+                           ...) {
   og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c("Indirect Effect", "Paths", "p", "b", "CI_lower", "CI_upper")
+  new.names <- c(lhs_name, rhs_name, "p", "b", "CI_lower", "CI_upper")
   if (estimate == "b") {
     x <- lavaan::parameterEstimates(fit)
   } else if (estimate == "B") {
@@ -66,8 +80,8 @@ lavaan_ind <- function(fit, estimate = "B", nice_table = FALSE,
   x <- x[which(x["op"] == ":="), ]
   x <- x[og.names]
   names(x) <- new.names
-  if (isTRUE(underscores_to_arrows)) {
-    x[[1]] <- gsub("_", " \u2192 ", x[[1]])
+  if (!is.null(underscores_to_symbol)) {
+    x[[1]] <- gsub("_", paste0(" ", underscores_to_symbol, " "), x[[1]])
   }
   if (nice_table) {
     insight::check_if_installed("rempsyc",
@@ -78,3 +92,5 @@ lavaan_ind <- function(fit, estimate = "B", nice_table = FALSE,
   }
   x
 }
+
+lavaan_ind <- lavaan_defined

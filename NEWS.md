@@ -4,6 +4,7 @@
 ## lavaanExtra 0.1.8.1
 * `?lavaanExtra` now works as expected.
 * `write_lavaan()`: accepts a new argument, `threshold`, represented by the "|" operator.
+* `lavaan_ind()` renames to `lavaan_defined()` because it was not specific to indirect effects but actually extracts any user-defined parameters such as total effects and moderated slopes using the `:=` operator.
 
 # lavaanExtra 0.1.8
 * CRAN resubmission
