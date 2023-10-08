@@ -36,6 +36,7 @@ test_that("nice_fit regular", {
 })
 
 test_that("nice_fit as nice_table", {
+  skip_on_os("linux")
   skip_if_not_installed("rempsyc")
   expect_snapshot(
     lavaan_defined(fit, nice_table = TRUE)

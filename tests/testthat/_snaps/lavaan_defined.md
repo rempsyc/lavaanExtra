@@ -67,6 +67,15 @@
       32    0.345
       33    0.344
 
+# nice_fit total effects
+
+    Code
+      lavaan_defined(fit)
+    Output
+        User.Defined.Parameter   Paths p     B CI_lower CI_upper
+      7                     ab     a*b 0 0.285    0.164    0.405
+      8                     ab c+(a*b) 0 0.312    0.140    0.485
+
 # nice_fit multiple symbols, lhs, rhs
 
     Code
