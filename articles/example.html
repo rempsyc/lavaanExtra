@@ -176,8 +176,8 @@ packages.</p>
 <span><span class="op">)</span></span>
 <span><span class="va">int</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"y1"</span>, <span class="st">"f1"</span><span class="op">)</span></span>
 <span><span class="va">myModel</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
-<span>  latent <span class="op">=</span> <span class="va">lat</span>, </span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>,</span>
+<span>  latent <span class="op">=</span> <span class="va">lat</span>,</span>
 <span>  covariance <span class="op">=</span> <span class="va">cov</span>,</span>
 <span>  intercept <span class="op">=</span> <span class="va">int</span></span>
 <span><span class="op">)</span></span>
@@ -275,9 +275,10 @@ packages.</p>
 <span>  y6 <span class="op">=</span> <span class="st">"y8"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>  latent <span class="op">=</span> <span class="va">lat</span>, </span>
-<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
-<span>  covariance <span class="op">=</span> <span class="va">cov</span><span class="op">)</span></span>
+<span>  latent <span class="op">=</span> <span class="va">lat</span>,</span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>,</span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## ##################################################</span></span>
 <span><span class="co">## # [-----Latent variables (measurement model)-----]</span></span>
@@ -744,7 +745,7 @@ packages.</p>
 <p>Source: <a href="https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf" class="external-link uri">https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="st">'</span></span>
+<code class="sourceCode R"><span><span class="va">mod2</span> <span class="op">&lt;-</span> <span class="st">"</span></span>
 <span><span class="st">## LIR means</span></span>
 <span><span class="st">  y2w1 ~ mean1*1</span></span>
 <span><span class="st">  y2w2 ~ mean2*1</span></span>
@@ -754,7 +755,7 @@ packages.</p>
 <span><span class="st">## thresholds link LIRs to observed items</span></span>
 <span><span class="st">  y2w1 | thr1*t1</span></span>
 <span><span class="st">  y2w2 | thr2*t1</span></span>
-<span><span class="st">'</span></span></code></pre></div>
+<span><span class="st">"</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span></span>
@@ -773,8 +774,8 @@ packages.</p>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>  regression <span class="op">=</span> <span class="va">reg</span>, </span>
-<span>  covariance <span class="op">=</span> <span class="va">cov</span>, </span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>,</span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="va">thres</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></code></pre></div>
@@ -802,23 +803,23 @@ packages.</p>
 <p>Source: <a href="https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/" class="external-link uri">https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/</a></p>
 <p><code>lavaan</code>:</p>
 <div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">configural_invar</span> <span class="op">&lt;-</span> <span class="st">' #opening quote</span></span>
+<code class="sourceCode R"><span><span class="va">configural_invar</span> <span class="op">&lt;-</span> <span class="st">" #opening quote</span></span>
 <span><span class="st">#factor loadings</span></span>
 <span><span class="st">  eta1 =~ 1*t1_sc + #for identification</span></span>
-<span><span class="st">          t1_intp + </span></span>
+<span><span class="st">          t1_intp +</span></span>
 <span><span class="st">          t1_ext</span></span>
 <span><span class="st">  eta2 =~ 1*t2_sc + #for identification</span></span>
-<span><span class="st">          t2_intp + </span></span>
+<span><span class="st">          t2_intp +</span></span>
 <span><span class="st">          t2_ext</span></span>
 <span><span class="st">  eta3 =~ 1*t4_sc + #for identification</span></span>
-<span><span class="st">          t4_intp + </span></span>
+<span><span class="st">          t4_intp +</span></span>
 <span><span class="st">          t4_ext</span></span>
-<span><span class="st">                       </span></span>
+<span><span class="st"></span></span>
 <span><span class="st">#latent variable variances</span></span>
-<span><span class="st">   eta1~~eta1 </span></span>
+<span><span class="st">   eta1~~eta1</span></span>
 <span><span class="st">   eta2~~eta2</span></span>
 <span><span class="st">   eta3~~eta3</span></span>
-<span><span class="st">   </span></span>
+<span><span class="st"></span></span>
 <span><span class="st">#latent variable covariances</span></span>
 <span><span class="st">   eta1~~eta2</span></span>
 <span><span class="st">   eta1~~eta3</span></span>
@@ -828,7 +829,7 @@ packages.</p>
 <span><span class="st">   eta1~0*1 #for scaling</span></span>
 <span><span class="st">   eta2~0*1 #for scaling</span></span>
 <span><span class="st">   eta3~0*1 #for scaling</span></span>
-<span><span class="st">   </span></span>
+<span><span class="st"></span></span>
 <span><span class="st">#propensity variances</span></span>
 <span><span class="st">   t1_sc  ~~ 1*t1_sc</span></span>
 <span><span class="st">   t1_intp~~ 1*t1_intp</span></span>
@@ -841,8 +842,8 @@ packages.</p>
 <span><span class="st">   t4_ext ~~ 1*t4_ext</span></span>
 <span><span class="st"></span></span>
 <span><span class="st">#unique covariances</span></span>
-<span><span class="st">   </span></span>
-<span><span class="st">   </span></span>
+<span><span class="st"></span></span>
+<span><span class="st"></span></span>
 <span><span class="st">#observed variable intercepts/thresholds (4 categories = 3 thresholds)</span></span>
 <span><span class="st">   t1_sc   |t1 + t2 + t3</span></span>
 <span><span class="st">   t1_intp |t1 + t2 + t3</span></span>
@@ -853,7 +854,7 @@ packages.</p>
 <span><span class="st">   t4_sc   |t1 + t2 + t3</span></span>
 <span><span class="st">   t4_intp |t1 + t2 + t3</span></span>
 <span><span class="st">   t4_ext  |t1 + t2 + t3</span></span>
-<span><span class="st">'</span> <span class="co">#closing quote</span></span></code></pre></div>
+<span><span class="st">"</span> <span class="co"># closing quote</span></span></code></pre></div>
 <p><code>lavaanExtra</code>:</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">eta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"eta"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
@@ -877,9 +878,9 @@ packages.</p>
 <span><span class="va">reg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/setNames.html" class="external-link">setNames</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"0*1"</span>, <span class="fl">3</span><span class="op">)</span>, <span class="va">eta</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">HS.model</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>   regression <span class="op">=</span> <span class="va">reg</span>, </span>
+<span>  regression <span class="op">=</span> <span class="va">reg</span>,</span>
 <span>  latent <span class="op">=</span> <span class="va">lat</span>,</span>
-<span>  covariance <span class="op">=</span> <span class="va">cov</span>, </span>
+<span>  covariance <span class="op">=</span> <span class="va">cov</span>,</span>
 <span>  threshold <span class="op">=</span> <span class="va">thres</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="va">HS.model</span><span class="op">)</span></span></code></pre></div>
