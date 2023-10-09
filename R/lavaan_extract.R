@@ -57,6 +57,7 @@ lavaan_extract <- function(fit,
                            lhs_name = "Left-Hand Side",
                            rhs_name = "Right-Hand Side",
                            underscores_to_symbol = "\u2192",
+                           diag = NULL,
                            nice_table = FALSE,
                            ...) {
   if (missing(operator)) {
@@ -68,10 +69,18 @@ lavaan_extract <- function(fit,
 
   x <- lavaan::parameterEstimates(fit)
   x <- x[which(x["op"] == operator), ]
-  x <- x[og.names]
 
   es <- lavaan::standardizedsolution(fit, level = 0.95)
   es <- es[which(es["op"] == operator), ]
+
+  if (!is.null(diag) && diag == "exclude") {
+    diag <- which(x$lhs == x$rhs)
+    x <- x[-diag, ] # keep only off-diagonal elements
+    es <- es[-diag, ] # keep only off-diagonal elements
+    new.names[c(6, 9:11)] <- c("sigma", "r", "CI_lower_r", "CI_upper_r")
+  }
+
+  x <- x[og.names]
   es <- es[c("est.std", og.names[7:8])]
   names(es)[2:3] <- paste0(names(es)[2:3], ".std")
 

@@ -40,37 +40,17 @@
 #' library(lavaan)
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' lavaan_cov(fit)
-#' lavaan_cov(fit, estimate = "r")
-#' lavaan_cor(fit) # same as previous
-lavaan_cov <- function(fit, estimate = "sigma", nice_table = FALSE, ...) {
-  og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c("Variable 1", "Variable 2", "p", "sigma", "CI_lower", "CI_upper")
-  if (estimate == "sigma") {
-    x <- lavaan::parameterEstimates(fit)
-  } else if (estimate == "r") {
-    x <- lavaan::standardizedsolution(fit, level = 0.95)
-    og.names[4] <- "est.std"
-    new.names[4] <- "r"
-  } else {
-    stop("The 'estimate' argument may only be one of c('sigma', 'r').")
-  }
-  x <- x[which(x["op"] == "~~"), ]
-  diag <- which(x$lhs == x$rhs)
-  x <- x[-diag, ] # keep only off-diagonal elements
-  x <- x[og.names]
-  names(x) <- new.names
-  if (nice_table) {
-    insight::check_if_installed("rempsyc",
-      version = get_dep_version("rempsyc"),
-      reason = "for this feature."
-    )
-    x <- rempsyc::nice_table(x, ...)
-  }
-  x
+lavaan_cov <- function(fit, nice_table = FALSE, ...) {
+  lavaan_extract(fit,
+                 operator = "~~",
+                 lhs_name = "Variable 1",
+                 rhs_name = "Variable 2",
+                 diag = "exclude",
+                 nice_table = nice_table)
 }
 
 #' @export
 #' @describeIn lavaan_cov Shortcut for `lavaan_cov(fit, estimate = "r")`
 lavaan_cor <- function(fit, nice_table = FALSE, ...) {
-  lavaan_cov(fit, estimate = "r", nice_table = nice_table, ...)
+  lavaan_cov(fit, nice_table = nice_table, ...)
 }

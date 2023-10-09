@@ -35,17 +35,3 @@ test_that("nice_fit as nice_table", {
     c("nice_table", "flextable")
   )
 })
-
-test_that("nice_fit estimates", {
-  expect_s3_class(
-    lavaan_cov(fit, estimate = "sigma"),
-    c("lavaan.data.frame", "data.frame")
-  )
-  expect_s3_class(
-    lavaan_cov(fit, estimate = "r"),
-    c("lavaan.data.frame", "data.frame")
-  )
-  expect_error(
-    lavaan_cov(fit, estimate = "B"),
-  )
-})
