@@ -1,4 +1,4 @@
-#' @title Extract relevant user-defined parameters (e.g., indirect or total
+#' @title Extract relevant user-defined parameter (e.g., indirect or total
 #'  effects) indices from lavaan model
 #'
 #' @description Extract relevant user-defined parameters (e.g., indirect or

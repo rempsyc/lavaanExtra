@@ -3,7 +3,7 @@
 \name{lavaan_defined}
 \alias{lavaan_defined}
 \alias{lavaan_ind}
-\title{Extract relevant user-defined parameters (e.g., indirect or total
+\title{Extract relevant user-defined parameter (e.g., indirect or total
 effects) indices from lavaan model}
 \usage{
 lavaan_defined(

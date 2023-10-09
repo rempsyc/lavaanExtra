@@ -4,14 +4,10 @@
 \alias{lavaan_reg}
 \title{Extract relevant regression indices from lavaan model}
 \usage{
-lavaan_reg(fit, estimate = "B", nice_table = FALSE, ...)
+lavaan_reg(fit, nice_table = FALSE, ...)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
-
-\item{estimate}{What estimate to use, either the standardized
-estimate ("B", default), or unstandardized
-estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
