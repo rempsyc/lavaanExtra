@@ -1,5 +1,5 @@
 # lavaanExtra 0.1.9
-* ✨Incoming✨
+* New release
 
 ## lavaanExtra 0.1.8.1
 * `?lavaanExtra` now works as expected.
