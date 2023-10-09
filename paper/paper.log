@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.5) (preloaded format=xelatex 2023.5.20)  8 OCT 2023 20:03
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.5) (preloaded format=xelatex 2023.5.20)  8 OCT 2023 23:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1280,6 +1280,10 @@ File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
 Overfull \hbox (2.75342pt too wide) in paragraph at lines 585--588
 []\TU/lmr/m/n/10 For reference, \TU/lmtt/m/n/10 nice_lavaaPlot() \TU/lmr/m/n/10
  is a simple wrapper around \TU/lmtt/m/n/10 lavaanPlot::lavaanPlot()
+ []
+
+
+Overfull \vbox (1.60632pt too high) detected at line 601
  []
 
 File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
