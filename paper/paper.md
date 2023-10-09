@@ -145,7 +145,7 @@ predicted by our mediating variable, `visual`. In turn, `visual` is now
 predicted by our independent variables, `grade` (the students' grade) and 
 `ageyr` (the students' age, in years).
 
-With the `lavaanExtra` syntax, when defining our lists of components, we
+With the {lavaanExtra} syntax, when defining our lists of components, we
 can think of the `=` sign as "predicted by", a bit like `~` for
 regression. There is an exception to this for the `indirect` object,
 which also allows specifying our variables directly instead. When such
