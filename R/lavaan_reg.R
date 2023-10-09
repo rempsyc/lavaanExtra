@@ -36,7 +36,7 @@
 #' lavaan_reg(fit)
 lavaan_reg <- function(fit, nice_table = FALSE, ...) {
   og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c("Outcome", "Predictor", "SE", "z", "p", "b", "CI_lower", "CI_upper", "B", "CI_lower_B", "CI_upper_B")
+  new.names <- c("Outcome", "Predictor", "SE", "Z", "p", "b", "CI_lower", "CI_upper", "B", "CI_lower_B", "CI_upper_B")
 
   x <- lavaan::parameterEstimates(fit)
   x <- x[which(x["op"] == "~"), ]

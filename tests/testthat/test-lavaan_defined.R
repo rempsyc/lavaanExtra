@@ -43,18 +43,6 @@ test_that("nice_fit as nice_table", {
   )
 })
 
-test_that("nice_fit estimates", {
-  expect_snapshot(
-    lavaan_defined(fit, estimate = "b")
-  )
-  expect_snapshot(
-    lavaan_defined(fit, estimate = "B")
-  )
-  expect_error(
-    lavaan_defined(fit, estimate = "C"),
-  )
-})
-
 test_that("nice_fit total effects", {
   set.seed(1234)
   X <- rnorm(100)

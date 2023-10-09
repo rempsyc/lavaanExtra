@@ -7,9 +7,6 @@
 #'  the beta (B) represents the resulting `std.all` column. See "Value" section
 #'  for more details.
 #' @param fit lavaan fit object to extract fit indices from
-#' @param estimate What estimate to use, either the standardized
-#'                 estimate ("B", default), or unstandardized
-#'                 estimate ("b").
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
@@ -60,26 +57,28 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' lavaan_defined(fit, lhs_name = "Indirect Effect")
 lavaan_defined <- function(fit,
-                           estimate = "B",
                            nice_table = FALSE,
                            underscores_to_symbol = "\u2192",
                            lhs_name = "User-Defined Parameter",
                            rhs_name = "Paths",
                            ...) {
-  og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c(lhs_name, rhs_name, "p", "b", "CI_lower", "CI_upper")
-  if (estimate == "b") {
-    x <- lavaan::parameterEstimates(fit)
-  } else if (estimate == "B") {
-    x <- lavaan::standardizedsolution(fit, level = 0.95)
-    og.names[4] <- "est.std"
-    new.names[4] <- "B"
-  } else {
-    stop("The 'estimate' argument may only be one of c('B', 'b').")
-  }
+  og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
+  new.names <- c(lhs_name, rhs_name, "SE", "Z", "p", "b", "CI_lower", "CI_upper", "B", "CI_lower_B", "CI_upper_B")
+
+  x <- lavaan::parameterEstimates(fit)
   x <- x[which(x["op"] == ":="), ]
   x <- x[og.names]
+
+  es <- lavaan::standardizedsolution(fit, level = 0.95)
+  es <- es[which(es["op"] == ":="), ]
+  es <- es[c("est.std", og.names[7:8])]
+
+  names(es)[2:3] <- paste0(names(es)[2:3], ".std")
+
+  x <- cbind(x, es)
+
   names(x) <- new.names
+
   if (!is.null(underscores_to_symbol)) {
     if (length(underscores_to_symbol) == 1 || length(underscores_to_symbol) == nrow(x)) {
       x[[1]] <- unlist(lapply(seq_along(underscores_to_symbol), function(i) {

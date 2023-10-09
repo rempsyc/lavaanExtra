@@ -8,7 +8,6 @@ effects) indices from lavaan model}
 \usage{
 lavaan_defined(
   fit,
-  estimate = "B",
   nice_table = FALSE,
   underscores_to_symbol = "→",
   lhs_name = "User-Defined Parameter",
@@ -18,10 +17,6 @@ lavaan_defined(
 }
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
-
-\item{estimate}{What estimate to use, either the standardized
-estimate ("B", default), or unstandardized
-estimate ("b").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
