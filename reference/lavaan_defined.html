@@ -108,7 +108,6 @@ for more details.</p>
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">lavaan_defined</span><span class="op">(</span></span>
 <span>  <span class="va">fit</span>,</span>
-<span>  estimate <span class="op">=</span> <span class="st">"B"</span>,</span>
 <span>  nice_table <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  underscores_to_symbol <span class="op">=</span> <span class="st">"→"</span>,</span>
 <span>  lhs_name <span class="op">=</span> <span class="st">"User-Defined Parameter"</span>,</span>
@@ -121,12 +120,6 @@ for more details.</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>fit</dt>
 <dd><p>lavaan fit object to extract fit indices from</p></dd>
-
-
-<dt>estimate</dt>
-<dd><p>What estimate to use, either the standardized
-estimate ("B", default), or unstandardized
-estimate ("b").</p></dd>
 
 
 <dt>nice_table</dt>
@@ -247,16 +240,21 @@ its confidence interval ("ci.lower", "ci.upper").</p>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://lavaan.ugent.be" class="external-link">lavaan</a></span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/sem.html" class="external-link">sem</a></span><span class="op">(</span><span class="va">HS.model</span>, data <span class="op">=</span> <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">lavaan_defined</span><span class="op">(</span><span class="va">fit</span>, lhs_name <span class="op">=</span> <span class="st">"Indirect Effect"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>           Indirect.Effect                       Paths     p      B CI_lower</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30 ageyr → visual → speed   ageyr_visual*visual_speed 0.001 -0.151   -0.236</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31 ageyr → visual → speed ageyr_visual*visual_textual 0.000 -0.153   -0.237</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32 ageyr → visual → speed   grade_visual*visual_speed 0.000  0.248    0.150</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33 ageyr → visual → speed grade_visual*visual_textual 0.000  0.252    0.160</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    CI_upper</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 30   -0.066</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 31   -0.070</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 32    0.345</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 33    0.344</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>           Indirect Effect                       Paths         SE         Z</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 ageyr → visual → speed   ageyr_visual*visual_speed 0.02808889 -3.198387</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31 ageyr → visual → speed ageyr_visual*visual_textual 0.04191650 -3.461890</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32 ageyr → visual → speed   grade_visual*visual_speed 0.07291514  4.257496</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33 ageyr → visual → speed grade_visual*visual_textual 0.10134908  4.947490</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               p           b   CI_lower    CI_upper          B CI_lower_B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 1.381987e-03 -0.08983914 -0.1448924 -0.03478593 -0.1508037 -0.2358595</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31 5.363956e-04 -0.14511033 -0.2272652 -0.06295550 -0.1534909 -0.2371048</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32 2.067294e-05  0.31043593  0.1675249  0.45334698  0.2477787  0.1503789</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33 7.517664e-07  0.50142352  0.3027830  0.70006406  0.2521937  0.1601663</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     CI_upper_B</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 30 -0.06574796</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 31 -0.06987694</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 32  0.34517843</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 33  0.34422119</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
