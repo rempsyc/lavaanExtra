@@ -10,7 +10,7 @@
 #' @param fit lavaan fit object to extract covariance indices from
 #' @param estimate What estimate to use, either the standardized
 #'                 estimate ("r2", default), or unstandardized
-#'                 estimate ("sigma").
+#'                 estimate ("sigma2").
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
@@ -43,22 +43,22 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' lavaan_var(fit)
 lavaan_var <- function(fit, estimate = "r2", nice_table = FALSE, ...) {
-  og.names <- c("lhs", "rhs", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c("Variable 1", "Variable 2", "p", "sigma", "CI_lower", "CI_upper")
-  if (estimate == "sigma") {
+  og.names <- c("lhs", "pvalue", "est", "ci.lower", "ci.upper")
+  new.names <- c("Variable", "p", "sigma2", "CI_lower", "CI_upper")
+  if (estimate == "sigma2") {
     x <- lavaan::parameterEstimates(fit)
   } else if (estimate == "r2") {
     x <- lavaan::standardizedsolution(fit, level = 0.95)
-    og.names[4] <- "est.std"
-    new.names[4] <- "R2"
+    og.names[3] <- "est.std"
+    new.names[3] <- "R2"
     x$est.std <- abs(1 - x$est.std)
     x$ci.lower_temp <- abs(1 - x$ci.lower)
     x$ci.upper_temp <- abs(1 - x$ci.upper)
     x$ci.upper <- x$ci.lower_temp
     x$ci.lower <- x$ci.upper_temp
-    x$pvalue <- r2_pvalue(x$est.std, x$se)
+    x$pvalue <- stats::pnorm(x$est.std / x$se, lower.tail = FALSE)
   } else {
-    stop("The 'estimate' argument may only be one of c('sigma', 'r2').")
+    stop("The 'estimate' argument may only be one of c('sigma2', 'r2').")
   }
   x <- x[which(x["op"] == "~~"), ]
   diag <- which(x$lhs == x$rhs)
@@ -73,9 +73,4 @@ lavaan_var <- function(fit, estimate = "r2", nice_table = FALSE, ...) {
     x <- rempsyc::nice_table(x, ...)
   }
   x
-}
-
-r2_pvalue <- function(est, se) {
-  wald_z <- (1 - est) / se
-  stats::pnorm(wald_z)
 }

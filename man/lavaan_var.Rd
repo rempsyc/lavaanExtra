@@ -11,7 +11,7 @@ lavaan_var(fit, estimate = "r2", nice_table = FALSE, ...)
 
 \item{estimate}{What estimate to use, either the standardized
 estimate ("r2", default), or unstandardized
-estimate ("sigma").}
+estimate ("sigma2").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
