@@ -8,7 +8,7 @@ nice_fit(
   model,
   model.labels,
   nice_table = FALSE,
-  cutoffs = TRUE,
+  guidelines = TRUE,
   stars = FALSE
 )
 }
@@ -22,7 +22,7 @@ is unnamed, defaults to generic numbering.}
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table}.}
 
-\item{cutoffs}{Logical, if \code{nice_table = TRUE}, whether to display
+\item{guidelines}{Logical, if \code{nice_table = TRUE}, whether to display
 include reference values based on Schreiber (2017), Table 3, at the
 bottom of the table.}
 

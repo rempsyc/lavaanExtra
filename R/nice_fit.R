@@ -15,7 +15,7 @@
 #' is unnamed, defaults to generic numbering.
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table].
-#' @param cutoffs Logical, if `nice_table = TRUE`, whether to display
+#' @param guidelines Logical, if `nice_table = TRUE`, whether to display
 #'  include reference values based on Schreiber (2017), Table 3, at the
 #'  bottom of the table.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
@@ -47,7 +47,7 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' nice_fit(fit)
 #'
-nice_fit <- function(model, model.labels, nice_table = FALSE, cutoffs = TRUE, stars = FALSE) {
+nice_fit <- function(model, model.labels, nice_table = FALSE, guidelines = TRUE, stars = FALSE) {
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
   } else if (inherits(model, "lavaan")) {
@@ -93,10 +93,10 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, cutoffs = TRUE, st
     table <- rempsyc::nice_table(x, stars = stars)
 
     table <- flextable::align(table, align = "center", part = "all")
-    if (isTRUE(cutoffs)) {
+    if (isTRUE(guidelines)) {
       table <- flextable::add_footer_row(table,
         values = c(
-          Model = "Suggested soft cutoffs",
+          Model = "Common guidelines",
           chi2 = "\u2014",
           df = "\u2014",
           chi2.df = "< 2 or 3",
