@@ -32,6 +32,9 @@ the arrow symbol (→), but can be set to NULL or "_", or to any
 other desired  symbol. It is also possible to provide a vector of
 replacements if they they are not all the same.}
 
+\item{diag}{When extracting covariances (\verb{~~}), whether to include or
+exclude diagonal values (one of "exclude" or "include").}
+
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
 reference values at the bottom of the table.}
