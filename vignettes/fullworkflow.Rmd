@@ -15,8 +15,7 @@ library(knitr)
 
 pkgs <- c(
   "tibble", "flextable", "lavaanPlot", "DiagrammeRsvg",
-  "rsvg", "png", "webshot", "tidySEM", "tmvnsim", "semTools",
-  "psych"
+  "rsvg", "png", "webshot", "tidySEM", "tmvnsim", "psych"
 )
 successfully_loaded <- vapply(pkgs, requireNamespace, FUN.VALUE = logical(1L), quietly = TRUE)
 can_evaluate <- all(successfully_loaded)
@@ -36,7 +35,6 @@ if (can_evaluate) {
 library(lavaan)
 library(lavaanExtra)
 library(tibble)
-library(semTools)
 library(psych)
 
 # Define latent variables
@@ -115,40 +113,6 @@ alpha(speed)
 ```
 
 Looking at the "Reliability if an item is dropped" section, we can see that our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7. Indeed, according to this reliability estimation, it would be better to drop item 9 instead.
-
-We can also have a look at omega instead, using the `semTools::compRelSEM()` function. First, we look at the omega reliability indice for the three dimensions for each of our models.
-
-```{r}
-compRelSEM(fit.cfa)
-compRelSEM(fit.cfa2)
-```
-
-We can see that the omegas are pretty similar between the two models. Next, let's look at each dimension's omega when a particular item is dropped.
-
-```{r}
-mod1 <- write_lavaan(latent = list(visual = x[1:3]))
-mod2 <- write_lavaan(latent = list(textual = x[4:6]))
-mod3 <- write_lavaan(latent = list(speed = x[7:9]))
-
-fit1 <- cfa(mod1, HolzingerSwineford1939)
-fit2 <- cfa(mod2, HolzingerSwineford1939)
-fit3 <- cfa(mod3, HolzingerSwineford1939)
-
-data.frame(Drop = x[1:3], Omega = sapply(
-  x[1:3],
-  USE.NAMES = FALSE, function(i) compRelSEM(fit1, omit.indicators = i)
-))
-data.frame(Drop = x[4:6], Omega = sapply(
-  x[4:6],
-  USE.NAMES = FALSE, function(i) compRelSEM(fit2, omit.indicators = i)
-))
-data.frame(Drop = x[7:9], Omega = sapply(
-  x[7:9],
-  USE.NAMES = FALSE, function(i) compRelSEM(fit3, omit.indicators = i)
-))
-```
-
-Looking at the omega values when a specific item is dropped, we can see that, again, our decision to drop items 2, 6, and 7, is consistent with these new results except for item 7, where it would be slightly better to drop item 9 instead (so same conclusion as with alpha).
 
 ## SEM example
 

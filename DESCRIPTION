@@ -31,7 +31,6 @@ Suggests:
     tibble,
     sjlabelled,
     stringdist,
-    semTools,
     psych,
     testthat (>= 3.0.0),
     rmarkdown,
