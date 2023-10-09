@@ -95,6 +95,8 @@
 <code><a href="../reference/write_lavaan.html">write_lavaan()</a></code>: accepts a new argument, <code>threshold</code>, represented by the “|” operator.</li>
 <li>
 <code><a href="../reference/lavaan_defined.html">lavaan_ind()</a></code> renames to <code><a href="../reference/lavaan_defined.html">lavaan_defined()</a></code> because it was not specific to indirect effects but actually extracts any user-defined parameters such as total effects and moderated slopes using the <code>:=</code> operator.</li>
+<li>
+<code>lavaan_reg</code> gets rid of the estimate argument, to comply with best practices of reporting both unstandardized and standardized parameters with their respective confidence intervals.</li>
 </ul></div>
 </div>
     <div class="section level2">
