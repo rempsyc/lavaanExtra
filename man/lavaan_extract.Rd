@@ -10,6 +10,7 @@ lavaan_extract(
   lhs_name = "Left-Hand Side",
   rhs_name = "Right-Hand Side",
   underscores_to_symbol = "→",
+  diag = NULL,
   nice_table = FALSE,
   ...
 )

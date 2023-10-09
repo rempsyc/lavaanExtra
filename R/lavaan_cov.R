@@ -1,14 +1,9 @@
 #' @title Extract relevant covariance/correlation indices from lavaan model
 #'
 #' @description Extract relevant covariance/correlation indices from lavaan
-#'  model through [lavaan::parameterEstimates] (when estimate = "sigma",
-#'  `est.std` column)) or [lavaan::standardizedsolution] (when estimate = "r",
-#'  `est.std` column).
+#'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
 #'
 #' @param fit lavaan fit object to extract covariance indices from
-#' @param estimate What estimate to use, either the standardized
-#'                 estimate ("r", default), or unstandardized
-#'                 estimate ("sigma").
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.

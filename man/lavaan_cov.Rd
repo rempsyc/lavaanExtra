@@ -5,16 +5,12 @@
 \alias{lavaan_cor}
 \title{Extract relevant covariance/correlation indices from lavaan model}
 \usage{
-lavaan_cov(fit, estimate = "sigma", nice_table = FALSE, ...)
+lavaan_cov(fit, nice_table = FALSE, ...)
 
 lavaan_cor(fit, nice_table = FALSE, ...)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract covariance indices from}
-
-\item{estimate}{What estimate to use, either the standardized
-estimate ("r", default), or unstandardized
-estimate ("sigma").}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
@@ -28,9 +24,7 @@ variables, the covariance/correlation, and corresponding p-value.
 }
 \description{
 Extract relevant covariance/correlation indices from lavaan
-model through \link[lavaan:parameterEstimates]{lavaan::parameterEstimates} (when estimate = "sigma",
-\code{est.std} column)) or \link[lavaan:standardizedSolution]{lavaan::standardizedsolution} (when estimate = "r",
-\code{est.std} column).
+\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} and \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}.
 }
 \section{Functions}{
 \itemize{
@@ -62,7 +56,5 @@ cat(HS.model)
 library(lavaan)
 fit <- sem(HS.model, data = HolzingerSwineford1939)
 lavaan_cov(fit)
-lavaan_cov(fit, estimate = "r")
-lavaan_cor(fit) # same as previous
 \dontshow{\}) # examplesIf}
 }
