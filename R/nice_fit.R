@@ -9,6 +9,22 @@
 #'  biased (<https://doi.org/10.1007/s11336-016-9552-7>) in a noticeable
 #'  way for smaller samples (thanks to James Uanhoro for this change).
 #'
+#'  If using `guidelines = TRUE`, please carefully consider the following 2023
+#'  quote from Terrence D. Jorgensen:
+#'
+#'  _I do not recommend including cutoffs in the table, as doing so would
+#'  perpetuate their misuse. Fit indices are not test statistics, and their
+#'  suggested cutoffs are not critical values associated with known Type I
+#'  error rates. Numerous simulation studies have shown how poorly cutoffs
+#'  perform in model selection (e.g., , Jorgensen et al. (2018). Instead of
+#'  test statistics, fit indices were designed to be measures of effect size
+#'  (practical significance), which complement the chi-squared test of
+#'  statistical significance. The range of RMSEA interpretations above is more
+#'  reminiscent of the range of small/medium/large effect sizes proposed by
+#'  Cohen for use in power analyses, which are as arbitrary as alpha levels,
+#'  but at least they better respect the idea that (mis)fit is a matter of
+#'  magnitude, not nearly so simple as "perfect or imperfect."_
+#'
 #' @param model lavaan model object(s) to extract fit indices from
 #' @param model.labels Model labels to use. If a named list is provided
 #' for `model`, default to the names of the list. Otherwise, if the list
