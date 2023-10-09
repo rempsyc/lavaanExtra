@@ -5,7 +5,8 @@
 * `?lavaanExtra` now works as expected.
 * `write_lavaan()`: accepts a new argument, `threshold`, represented by the "|" operator.
 * `lavaan_ind()` renames to `lavaan_defined()` because it was not specific to indirect effects but actually extracts any user-defined parameters such as total effects and moderated slopes using the `:=` operator.
-* `lavaan_reg` gets rid of the estimate argument, to comply with best practices of reporting both unstandardized and standardized parameters with their respective confidence intervals.
+* `lavaan_reg()` gets rid of the estimate argument, to comply with best practices of reporting both unstandardized and standardized parameters with their respective confidence intervals.
+* new function: `lavaan_extract()`, which takes a specific operator and extracts relevant information (now used internally for `lavaan_reg()`, `lavaan_defined()`)
 
 # lavaanExtra 0.1.8
 * CRAN resubmission

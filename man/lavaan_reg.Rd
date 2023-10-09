@@ -23,9 +23,7 @@ p-value, as well as the unstandardized regression coefficient
 }
 \description{
 Extract relevant regression indices from lavaan model through
-\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}. In this
-case, the beta (B) represents the resulting \code{std.all} column.
-See "Value" section for more details.
+\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} and \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}.
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
