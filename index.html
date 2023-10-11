@@ -350,10 +350,10 @@
 <span></span>
 <span><span class="co"># Write the model, and check it</span></span>
 <span><span class="va">model</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/write_lavaan.html">write_lavaan</a></span><span class="op">(</span></span>
-<span>  mediation <span class="op">=</span> <span class="va">mediation</span>, </span>
-<span>  regression <span class="op">=</span> <span class="va">regression</span>, </span>
+<span>  mediation <span class="op">=</span> <span class="va">mediation</span>,</span>
+<span>  regression <span class="op">=</span> <span class="va">regression</span>,</span>
 <span>  covariance <span class="op">=</span> <span class="va">covariance</span>,</span>
-<span>  indirect <span class="op">=</span> <span class="va">indirect</span>, </span>
+<span>  indirect <span class="op">=</span> <span class="va">indirect</span>,</span>
 <span>  latent <span class="op">=</span> <span class="va">latent</span>,</span>
 <span>  label <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span>
@@ -409,12 +409,12 @@
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Save fit table to Word!</span></span>
 <span><span class="fu">flextable</span><span class="fu">::</span><span class="fu"><a href="https://davidgohel.github.io/flextable/reference/save_as_docx.html" class="external-link">save_as_docx</a></span><span class="op">(</span><span class="va">fit_table</span>, path <span class="op">=</span> <span class="st">"fit_table.docx"</span><span class="op">)</span></span>
-<span><span class="co"># Note that it will also render to PDF in an `rmarkdown` document </span></span>
-<span><span class="co"># with `output: pdf_document`, but using `latex_engine: xelatex` </span></span>
-<span><span class="co"># is necessary when including Unicode symbols in tables like with </span></span>
+<span><span class="co"># Note that it will also render to PDF in an `rmarkdown` document</span></span>
+<span><span class="co"># with `output: pdf_document`, but using `latex_engine: xelatex`</span></span>
+<span><span class="co"># is necessary when including Unicode symbols in tables like with</span></span>
 <span><span class="co"># the `nice_fit()` function.</span></span>
 <span></span>
-<span><span class="co"># Let's get the user-defined (e.g., indirect) effects only and make it pretty </span></span>
+<span><span class="co"># Let's get the user-defined (e.g., indirect) effects only and make it pretty</span></span>
 <span><span class="co"># with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_defined.html">lavaan_defined</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-indirect2-1.png" width="90%"></p>
@@ -501,7 +501,7 @@
 <ul class="list-unstyled">
 <li><a href="https://github.com/rempsyc/lavaanExtra/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/rempsyc/lavaanExtra/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
 <li><a href="https://cran.r-project.org/package=lavaanExtra" class="external-link"><img src="https://www.r-pkg.org/badges/version/lavaanExtra" alt="CRAN status"></a></li>
-<li><a href="https://rempsyc.r-universe.dev/ui/#package:lavaanExtra" class="external-link"><img src="https://rempsyc.r-universe.dev/badges/lavaanExtra" alt="r-universe"></a></li>
+<li><a href="https://rempsyc.r-universe.dev/lavaanExtra" class="external-link"><img src="https://rempsyc.r-universe.dev/badges/lavaanExtra" alt="r-universe"></a></li>
 <li><a href="https://github.com/rempsyc/lavaanExtra/commits/main" class="external-link"><img src="https://img.shields.io/github/last-commit/rempsyc/lavaanExtra" alt="Last-commit"></a></li>
 <li><a href="https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main" class="external-link"><img src="https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
