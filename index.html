@@ -399,11 +399,12 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get regression parameters and make pretty with `rempsyc::nice_table`</span></span>
 <span><span class="fu"><a href="reference/lavaan_reg.html">lavaan_reg</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span>, highlight <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-saturated-1.png" width="60%"></p>
+<p><img src="reference/figures/README-saturated-1.png" width="100%"></p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Get correlations and make them pretty with the `rempsyc::nice_table` integration</span></span>
+<code class="sourceCode R"><span><span class="co"># Get covariances/correlations and make them pretty with </span></span>
+<span><span class="co"># the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_cov.html">lavaan_cor</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-covariance-1.png" width="40%"></p>
+<p><img src="reference/figures/README-covariance-1.png" width="100%"></p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get nice fit indices with the `rempsyc::nice_table` integration</span></span>
 <span><span class="va">fit_table</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/nice_fit.html">nice_fit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="va">fit.cfa</span>, <span class="va">fit.sem</span><span class="op">)</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
@@ -420,7 +421,7 @@
 <span><span class="co"># Let's get the user-defined (e.g., indirect) effects only and make it pretty</span></span>
 <span><span class="co"># with the `rempsyc::nice_table` integration</span></span>
 <span><span class="fu"><a href="reference/lavaan_defined.html">lavaan_defined</a></span><span class="op">(</span><span class="va">fit.sem</span>, nice_table <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-indirect2-1.png" width="90%"></p>
+<p><img src="reference/figures/README-indirect2-1.png" width="100%"></p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Plot our model</span></span>
 <span><span class="fu"><a href="reference/nice_lavaanPlot.html">nice_lavaanPlot</a></span><span class="op">(</span><span class="va">fit.sem</span><span class="op">)</span></span></code></pre></div>
@@ -509,6 +510,7 @@
 <li><a href="https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main" class="external-link"><img src="https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-maturing-blue.svg" alt="lifecycle"></a></li>
 <li><a href="https://cran.r-project.org/package=lavaanExtra" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/lavaanExtra" alt="downloads"></a></li>
+<li><a href="https://doi.org/10.21105/joss.05701" class="external-link"><img src="https://joss.theoj.org/papers/10.21105/joss.05701/status.svg" alt="DOI"></a></li>
 <li><a href="https://cranlogs.r-pkg.org/" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra" alt="total"></a></li>
 <li><a href="https://github.com/sponsors/rempsyc" class="external-link"><img src="https://img.shields.io/github/sponsors/rempsyc" alt="sponsors"></a></li>
 <li><a href="https://github.com/rempsyc?tab=followers" class="external-link"><img src="https://img.shields.io/github/followers/rempsyc?style=social" alt="followers"></a></li>
