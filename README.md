@@ -8,7 +8,7 @@
 [![R-CMD-check](https://github.com/rempsyc/lavaanExtra/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rempsyc/lavaanExtra/actions/workflows/R-CMD-check.yaml)
 [![CRAN
 status](https://www.r-pkg.org/badges/version/lavaanExtra)](https://cran.r-project.org/package=lavaanExtra)
-[![r-universe](https://rempsyc.r-universe.dev/badges/lavaanExtra)](https://rempsyc.r-universe.dev/ui/#package:lavaanExtra)
+[![r-universe](https://rempsyc.r-universe.dev/badges/lavaanExtra)](https://rempsyc.r-universe.dev/lavaanExtra)
 [![Last-commit](https://img.shields.io/github/last-commit/rempsyc/lavaanExtra)](https://github.com/rempsyc/lavaanExtra/commits/main)
 [![Codecov test
 coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
@@ -290,10 +290,10 @@ indirect <- list(IV = IV, M = M, DV = DV)
 
 # Write the model, and check it
 model <- write_lavaan(
-  mediation = mediation, 
-  regression = regression, 
+  mediation = mediation,
+  regression = regression,
   covariance = covariance,
-  indirect = indirect, 
+  indirect = indirect,
   latent = latent,
   label = TRUE
 )
@@ -360,12 +360,12 @@ fit_table
 ``` r
 # Save fit table to Word!
 flextable::save_as_docx(fit_table, path = "fit_table.docx")
-# Note that it will also render to PDF in an `rmarkdown` document 
-# with `output: pdf_document`, but using `latex_engine: xelatex` 
-# is necessary when including Unicode symbols in tables like with 
+# Note that it will also render to PDF in an `rmarkdown` document
+# with `output: pdf_document`, but using `latex_engine: xelatex`
+# is necessary when including Unicode symbols in tables like with
 # the `nice_fit()` function.
 
-# Let's get the user-defined (e.g., indirect) effects only and make it pretty 
+# Let's get the user-defined (e.g., indirect) effects only and make it pretty
 # with the `rempsyc::nice_table` integration
 lavaan_defined(fit.sem, nice_table = TRUE)
 ```

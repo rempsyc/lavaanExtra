@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.5) (preloaded format=xelatex 2023.5.20)  9 OCT 2023 13:28
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 23.5) (preloaded format=xelatex 2023.5.20)  11 OCT 2023 08:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1277,13 +1277,13 @@ File: paper_files/figure-latex/nice_lavaanPlot-1.pdf Graphic file (type pdf)
 File: paper_files/figure-latex/nice_lavaanPlot-2.pdf Graphic file (type pdf)
 <use paper_files/figure-latex/nice_lavaanPlot-2.pdf>
 
-Overfull \hbox (2.75342pt too wide) in paragraph at lines 585--588
+Overfull \hbox (2.75342pt too wide) in paragraph at lines 587--590
 []\TU/lmr/m/n/10 For reference, \TU/lmtt/m/n/10 nice_lavaaPlot() \TU/lmr/m/n/10
  is a simple wrapper around \TU/lmtt/m/n/10 lavaanPlot::lavaanPlot()
  []
 
 
-Overfull \vbox (1.60632pt too high) detected at line 601
+Overfull \vbox (1.60632pt too high) detected at line 603
  []
 
 File: C:/Users/there/AppData/Local/R/win-library/4.3/rticles/rmarkdown/template
@@ -1381,7 +1381,7 @@ Package logreq Info: Writing requests to 'paper.run.xml'.
 Here is how much of TeX's memory you used:
  36930 strings out of 411547
  747239 string characters out of 5819451
- 1871476 words of memory out of 5000000
+ 1872476 words of memory out of 5000000
  56583 multiletter control sequences out of 15000+600000
  519159 words of font info for 80 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191

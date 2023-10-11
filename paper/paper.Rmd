@@ -31,28 +31,28 @@ editor_options:
 
 # Summary
 
-{lavaanExtra} is an R package that offers an alternative and vector-based
-syntax to the package {lavaan}, as well as other convenience functions such
+`lavaanExtra` is an R package that offers an alternative and vector-based
+syntax to the package `lavaan`, as well as other convenience functions such
 as naming paths and defining indirect effects automatically. It also
 offers convenience formatting optimized for publication and script
 sharing workflows.
 
 # Statement of need
 
-{lavaan} [@lavaanPackage] is a very popular R package for structural
+`lavaan` [@lavaanPackage] is a very popular R package for structural
 equation modeling (SEM). The package relies on specific operators to define
 latent variables, regressions, covariances, indirect effects, and so on.
-However, some individuals (e.g., beginners to R and {lavaan})—or in some
+However, some individuals (e.g., beginners to R and `lavaan`)—or in some
 cases power users—may prefer not having to specify the operators themselves, 
-or would like to see some steps automatized, such as generating the {lavaan} 
+or would like to see some steps automatized, such as generating the `lavaan` 
 model layout or defining indirect effects. Furthermore, for researchers, it 
 can be relatively difficult to extract relevant statistical outputs in the 
 form of tables and figures that are suitable for scientific publication.
 
-{lavaanExtra} does mainly two things to address these issues. First, it offers 
+`lavaanExtra` does mainly two things to address these issues. First, it offers 
 an alternative, code-efficient flexible modular syntax that allows automatizing 
 certain steps, such as defining indirect effects in certain scenarios or the 
-desired structure of a SEM model to be plotted (however, note that {lavaan} is
+desired structure of a SEM model to be plotted (however, note that `lavaan` is
 also compatible with a modular approach). Second, it facilitates the 
 analysis-to-publication workflow by providing publication-ready tables and 
 figures following the style requirements of the American Psychological 
@@ -69,7 +69,7 @@ specific symbols required for each aspect of the model.
 
 There are several benefits to this approach. Some `lavaan` models can
 become very large. By defining the entire model every time, such as is
-typical with {lavaan} users, not only do we break the DRY (Don't Repeat
+typical with `lavaan` users, not only do we break the DRY (Don't Repeat
 Yourself) principle, but our scripts can also become long and unwieldy.
 This problem gets worse in the scenario where we want to compare several
 variations of the same general model. `write_lavaan()` allows the user
@@ -86,7 +86,7 @@ The vector-based approach also allows the use of functions to define
 components. For example, if all scale items are named consistently, say
 `x1` to `x50`, one can use `paste0("x", 1:50)` instead of typing all the
 items by hand and risk making mistakes. However, note that reusable components
-through functions is also compatible with {lavaan}.
+through functions is also compatible with `lavaan`.
 
 Another issue with `lavaan` models is the readability of the code defining
 the model. One can go to lengths to make it pretty, but not everyone
@@ -139,7 +139,7 @@ predicted by our mediating variable, `visual`. In turn, `visual` is now
 predicted by our independent variables, `grade` (the students' grade) and 
 `ageyr` (the students' age, in years).
 
-With the {lavaanExtra} syntax, when defining our lists of components, we
+With the `lavaanExtra` syntax, when defining our lists of components, we
 can think of the `=` sign as "predicted by", a bit like `~` for
 regression. There is an exception to this for the `indirect` object,
 which also allows specifying our variables directly instead. When such
@@ -169,8 +169,8 @@ cat(model.sem)
 
 The `nice_fit()` function extracts only some of the most popular fit indices 
 and organize them such that it is easy to compare models. There is an option to
-format the table as an APA {flextable} [@flextablePackage], through the
-{rempsyc} package [@rempsycPackage], using option `nice_table = TRUE`.
+format the table as an APA `flextable` [@flextablePackage], through the
+`rempsyc` package [@rempsycPackage], using option `nice_table = TRUE`.
 This `flextable` object can then be easily exported to Microsoft Word.
 Below we fit our two earlier models and feed them to `nice_fit()` as a
 named list:
@@ -222,8 +222,8 @@ lavaan_defined(fit.sem, lhs_name = "Indirect Effect", nice_table = TRUE)
 
 There are several packages designed to plot SEM models, but few that
 people consider satisfying or sufficiently good for publication by default.
-There are two packages that stand out however, {lavaanPlot}
-[@lavaanPlotPackage] and {tidySEM} [@tidySEMPackage]. Yet, even for
+There are two packages that stand out however, `lavaanPlot`
+[@lavaanPlotPackage] and `tidySEM` [@tidySEMPackage]. Yet, even for
 those excellent packages, most people do not view them as
 publication-ready or at least optimized in the best possible way.
 
@@ -270,7 +270,7 @@ at the default output of the base `tidySEM::graph_sem()` for reference.
 tidySEM::graph_sem(fit.sem)
 ```
 
-The author of the {tidySEM} package notes that
+The author of the `tidySEM` package notes that
 
 > This uses a default layout, provided by the `igraph` package. However,
 > the node placement is not very aesthetically pleasing. One of the
@@ -379,7 +379,7 @@ plot(p)
 
 ```
 
-Other differences between {tidySEM} and `nice_tidySEM()` are that: (a)
+Other differences between `tidySEM` and `nice_tidySEM()` are that: (a)
 the latter displays standardized coefficients by default (but
 unstandardized coefficients can be specified with `est_std = FALSE`),
 (b) if using standardized coefficients, the leading zero is omitted (as
@@ -391,18 +391,18 @@ cases (as described earlier).
 
 Finally, the base function, `tidySEM::graph_sem()`, is difficult to
 customize in depth. For the aesthetics of `nice_tidySEM()`, for example,
-we need to rely instead on the {tidySEM}'s `prepare_graph()`,
+we need to rely instead on the `tidySEM`'s `prepare_graph()`,
 `edit_graph()`, and numerous conditional formatting functions. In
 contrast to `nice_tidySEM()`, these `tidySEM` functions act more like a
 grammar of SEM plotting, akin to the popular grammar of graphics,
-{ggplot2} [@ggplot2Package]. This provides great flexibility, but for
+`ggplot2` [@ggplot2Package]. This provides great flexibility, but for
 the occasional user, also comes with an additional burden, as users may
 for example need to skim through almost 400 undocumented functions,
 should they want to conditionally edit the resulting `tidy_sem` object.
 
 # Availability
 
-The {lavaanExtra} package is licensed under the MIT License. It is
+The `lavaanExtra` package is licensed under the MIT License. It is
 available on CRAN, and can be installed using
 `install.packages("lavaanExtra")`. The full tutorial website can be
 accessed at: <https://lavaanExtra.remi-theriault.com/>. All code is
