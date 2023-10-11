@@ -14,6 +14,7 @@ status](https://www.r-pkg.org/badges/version/lavaanExtra)](https://cran.r-projec
 coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 [![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://cran.r-project.org/package=lavaanExtra)
+[![DOI](https://joss.theoj.org/papers/10.21105/joss.05701/status.svg)](https://doi.org/10.21105/joss.05701)
 [![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://cranlogs.r-pkg.org/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
@@ -340,14 +341,15 @@ fit.sem <- sem(model, data = HolzingerSwineford1939)
 lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
 ```
 
-<img src="man/figures/README-saturated-1.png" width="60%" />
+<img src="man/figures/README-saturated-1.png" width="100%" />
 
 ``` r
-# Get correlations and make them pretty with the `rempsyc::nice_table` integration
+# Get covariances/correlations and make them pretty with 
+# the `rempsyc::nice_table` integration
 lavaan_cor(fit.sem, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-covariance-1.png" width="40%" />
+<img src="man/figures/README-covariance-1.png" width="100%" />
 
 ``` r
 # Get nice fit indices with the `rempsyc::nice_table` integration
@@ -370,7 +372,7 @@ flextable::save_as_docx(fit_table, path = "fit_table.docx")
 lavaan_defined(fit.sem, nice_table = TRUE)
 ```
 
-<img src="man/figures/README-indirect2-1.png" width="90%" />
+<img src="man/figures/README-indirect2-1.png" width="100%" />
 
 ``` r
 # Plot our model

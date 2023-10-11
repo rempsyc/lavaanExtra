@@ -202,10 +202,11 @@ flextable::save_as_image(table_temp,
 )
 ```
 
-<img src="man/figures/README-saturated-1.png" width="60%" />
+<img src="man/figures/README-saturated-1.png" width="100%" />
 
 ```{r correlation, results='hide'}
-# Get correlations and make them pretty with the `rempsyc::nice_table` integration
+# Get covariances/correlations and make them pretty with 
+# the `rempsyc::nice_table` integration
 lavaan_cor(fit.sem, nice_table = TRUE)
 ```
 
@@ -218,7 +219,7 @@ flextable::save_as_image(table_temp,
 )
 ```
 
-<img src="man/figures/README-covariance-1.png" width="40%" />
+<img src="man/figures/README-covariance-1.png" width="100%" />
 
 ```{r path2, results='hide'}
 # Get nice fit indices with the `rempsyc::nice_table` integration
@@ -259,7 +260,7 @@ flextable::save_as_image(table_temp,
 )
 ```
 
-<img src="man/figures/README-indirect2-1.png" width="90%" />
+<img src="man/figures/README-indirect2-1.png" width="100%" />
 
 ```{r, echo=FALSE}
 unlink("fit_table.docx")
