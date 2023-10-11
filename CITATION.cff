@@ -1,0 +1,26 @@
+cff-version: "1.2.0"
+authors:
+- family-names: Thériault
+  given-names: Rémi
+  orcid: "https://orcid.org/0000-0003-4315-6788"
+doi: 10.5281/zenodo.8421873
+message: If you use this software, please cite our article in the
+  Journal of Open Source Software.
+preferred-citation:
+  authors:
+  - family-names: Thériault
+    given-names: Rémi
+    orcid: "https://orcid.org/0000-0003-4315-6788"
+  date-published: 2023-10-11
+  doi: 10.21105/joss.05701
+  issn: 2475-9066
+  issue: 90
+  journal: Journal of Open Source Software
+  publisher:
+    name: Open Journals
+  start: 5701
+  title: "lavaanExtra: Convenience Functions for Package lavaan"
+  type: article
+  url: "https://joss.theoj.org/papers/10.21105/joss.05701"
+  volume: 8
+title: "lavaanExtra: Convenience Functions for Package *lavaan*"

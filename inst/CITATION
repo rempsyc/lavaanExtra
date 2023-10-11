@@ -3,11 +3,16 @@ if(is.null(version))
   version <- utils::packageVersion("rempsyc")
 
 bibentry(
-  bibtype  = "Misc",
-  title    = "lavaanExtra: Convenience functions for lavaan",
+  bibtype     = "article",
+  doi         = "10.21105/joss.05701",
+  url         = "https://doi.org/10.21105/joss.05701",
+  year        = "2023",
+  publisher   = "The Open Journal",
+  volume      = "8",
+  number      = "90",
+  pages       = "5701",
   author   = "Rémi Thériault",
-  year     = 2022,
-  note     = paste0("(R package version ", version, ") [Computer software]."),
-  url      = "https://rempsyc.remi-theriault.com",
-  textVersion = paste0("Thériault, R. (2022). lavaanExtra: Convenience functions for lavaan (R package version ", version, ") [Computer software]. https://lavaanExtra.remi-theriault.com/")
+  title    = "lavaanExtra: Convenience functions for lavaan",
+  journal     = "Journal of Open Source Software",
+  textVersion = "Thériault, R., (2023). lavaanExtra: Convenience Functions for Package lavaan. *Journal of Open Source Software*, *8*(90), 5701, https://doi.org/10.21105/joss.05701"
 )

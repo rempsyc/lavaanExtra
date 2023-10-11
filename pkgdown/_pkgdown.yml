@@ -42,6 +42,8 @@ navbar:
     href: news/index.html
   - text: To-dos
     href: TODOS.html
+  - text: JOSS Paper
+    href: https://doi.org/10.21105/joss.05701
 
 permalink: pretty
 
