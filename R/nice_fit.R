@@ -6,7 +6,7 @@
 #'
 #' @details Note that `nice_fit` reports the unbiased SRMR through
 #'  [lavaan::lavResiduals()] because the standard SRMR is upwardly
-#'  biased (<https://doi.org/10.1007/s11336-016-9552-7>) in a noticeable
+#'  biased (\doi{10.1007/s11336-016-9552-7}) in a noticeable
 #'  way for smaller samples (thanks to James Uanhoro for this change).
 #'
 #'  If using `guidelines = TRUE`, please carefully consider the following 2023
@@ -42,7 +42,7 @@
 #' @export
 #' @references Schreiber, J. B. (2017). Update to core reporting practices in
 #' structural equation modeling. *Research in social and administrative pharmacy*,
-#' *13*(3), 634-643. <https://doi.org/10.1016/j.sapharm.2016.06.006>
+#' *13*(3), 634-643. \doi{10.1016/j.sapharm.2016.06.006}
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' x <- paste0("x", 1:9)
 #' (latent <- list(
