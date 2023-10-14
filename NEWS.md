@@ -1,5 +1,6 @@
 # lavaanExtra 0.1.9
 * New release + CRAN
+* New paper in [JOSS](https://doi.org/10.21105/joss.05701)! Citation updated accordingly.
 
 ## lavaanExtra 0.1.8.1
 * `?lavaanExtra` now works as expected. 

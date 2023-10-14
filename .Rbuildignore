@@ -19,3 +19,4 @@ models
 ^vignettes/indirect\.Rmd$
 ^vignettes/regression\.Rmd$
 ^vignettes/special\.Rmd$
+^CITATION.cff$

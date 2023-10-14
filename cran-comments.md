@@ -1,3 +1,7 @@
+## Resubmission lavaanExtra 0.1.9
+
+0 errors | 0 warnings | 0 notes
+
 ## Resubmission lavaanExtra 0.1.8
 
 0 errors | 0 warnings | 0 notes
