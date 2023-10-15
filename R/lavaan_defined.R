@@ -7,7 +7,7 @@
 #' @param fit lavaan fit object to extract fit indices from
 #' @param underscores_to_symbol Character to convert underscores
 #'  to arrows in the first column, like for indirect effects. Default to
-#'  the arrow symbol (→), but can be set to NULL or "_", or to any
+#'  the right arrow symbol, but can be set to NULL or "_", or to any
 #'  other desired  symbol. It is also possible to provide a vector of
 #'  replacements if they they are not all the same.
 #' @param lhs_name Name of first column, referring to the left-hand side

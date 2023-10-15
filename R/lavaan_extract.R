@@ -10,7 +10,7 @@
 #'  expression (rhs).
 #' @param underscores_to_symbol Character to convert underscores
 #'  to arrows in the first column, like for indirect effects. Default to
-#'  the arrow symbol (→), but can be set to NULL or "_", or to any
+#'  the right arrow symbol, but can be set to NULL or "_", or to any
 #'  other desired  symbol. It is also possible to provide a vector of
 #'  replacements if they they are not all the same.
 #' @param diag When extracting covariances (`~~`), whether to include or

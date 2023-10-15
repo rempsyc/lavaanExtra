@@ -1,3 +1,11 @@
+## Resubmission lavaanExtra 0.2.0
+
+> Unfortunately, this got stuck in the publication queue. With the old LaTeX version on the CRAN master we cannot build the manual: [...]
+> So you use twice an arrow symbol not supported by the old LaTeX. PLease 
+replace this and resubmit.
+
+Thank you, I have removed the arrow symbols from the documentation.
+
 ## Resubmission lavaanExtra 0.1.9
 
 0 errors | 0 warnings | 0 notes
