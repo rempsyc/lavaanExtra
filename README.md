@@ -13,9 +13,9 @@ status](https://www.r-pkg.org/badges/version/lavaanExtra)](https://cran.r-projec
 [![Codecov test
 coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://cran.r-project.org/package=lavaanExtra)
+[![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://shinyus.ipub.com/cranview/)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://shinyus.ipub.com/cranview/)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.05701/status.svg)](https://doi.org/10.21105/joss.05701)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://cranlogs.r-pkg.org/)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
 [![stars](https://img.shields.io/github/stars/rempsyc/lavaanExtra?style=social)](https://github.com/rempsyc/lavaanExtra/stargazers)
