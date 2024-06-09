@@ -27,6 +27,7 @@ fit2 <- cfa(model, data, estimator = estimator)
 
 test_that("cfa_fit_plot comparison to cfa", {
   skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
   fit1 <- cfa_fit_plot(model, data)
   expect_equal(
     summary(fit1),
@@ -37,6 +38,7 @@ test_that("cfa_fit_plot comparison to cfa", {
 test_that("cfa_fit_plot save as PDF", {
   skip_on_cran()
   skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
   fit3 <- cfa_fit_plot(model, data, save.as.pdf = TRUE, file.name = "cfaplot")
   expect_equal(
     summary(fit3),
@@ -49,6 +51,7 @@ fit5 <- cfa(model, data, estimator = estimator)
 
 test_that("cfa_fit_plot remove items", {
   skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
   fit4 <- cfa_fit_plot(model, data, print = FALSE, remove.items = c("x1"))
   expect_equal(
     summary(fit4),
@@ -61,6 +64,5 @@ test_that("cfa_fit_plot save as PDF error", {
     cfa_fit_plot(model, data, save.as.pdf = TRUE)
   )
 })
-
 
 setwd(.old_wd)
