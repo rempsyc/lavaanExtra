@@ -25,7 +25,7 @@
 #'         a summary of the `lavaan` fit object to the console, and; prints a
 #'         `lavaanPlot` of the `lavaan` fit object.
 #' @export
-#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE)
+#' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)
 #' x <- paste0("x", 1:9)
 #' (latent <- list(
 #'   visual = x[1:3],
