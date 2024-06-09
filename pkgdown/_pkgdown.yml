@@ -21,7 +21,7 @@ navbar:
     href: https://github.com/sponsors/rempsyc
     aria-label: Donate
   left:
-  - icon: fa-home
+  - icon: fa fa-home
     href: index.html
   - text: Tutorials
     href: articles/index.html
