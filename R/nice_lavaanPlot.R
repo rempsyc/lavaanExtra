@@ -43,8 +43,8 @@ nice_lavaanPlot <- function(
     graph_options = c(rankdir = "LR"), ...) {
   insight::check_if_installed(
     c(
-      "lavaanPlot"#, #"DiagrammeRsvg",
-      # "rsvg", "png", "webshot"
+      "lavaanPlot", "DiagrammeRsvg",
+       "rsvg", "png", "webshot"
     ),
     reason = "for this function."
   )
