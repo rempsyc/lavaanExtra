@@ -15,7 +15,7 @@ BugReports: https://github.com/rempsyc/lavaanExtra/issues
 Depends: 
     R (>= 3.5)
 Imports: 
-    lavaan,
+    lavaan (< 0.6.18),
     insight
 Suggests: 
     rempsyc (> 0.1.6),
