@@ -23,6 +23,22 @@
 
     Code
       lavaan_defined(fit, nice_table = TRUE)
+    Output
+      a flextable object.
+      col_keys: `User-Defined Parameter`, `Paths`, `SE`, `Z`, `p`, `b`, `95% CI (b)`, `B`, `95% CI (B)` 
+      header has 1 row(s) 
+      body has 4 row(s) 
+      original dataset sample: 
+           User-Defined Parameter                       Paths         SE         Z
+      30   ageyr → visual → speed   ageyr_visual*visual_speed 0.02808889 -3.198387
+      31 ageyr → visual → textual ageyr_visual*visual_textual 0.04191650 -3.461890
+      32   grade → visual → speed   grade_visual*visual_speed 0.07291514  4.257496
+      33 grade → visual → textual grade_visual*visual_textual 0.10134908  4.947490
+                    p           b     95% CI (b)          B     95% CI (B)
+      30 1.381987e-03 -0.08983914 [-0.14, -0.03] -0.1508037 [-0.24, -0.07]
+      31 5.363956e-04 -0.14511033 [-0.23, -0.06] -0.1534909 [-0.24, -0.07]
+      32 2.067294e-05  0.31043593   [0.17, 0.45]  0.2477787   [0.15, 0.35]
+      33 7.517664e-07  0.50142352   [0.30, 0.70]  0.2521937   [0.16, 0.34]
 
 # nice_fit total effects
 
