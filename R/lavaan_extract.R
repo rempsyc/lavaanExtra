@@ -91,7 +91,10 @@ lavaan_extract <- function(fit,
   names(x) <- new.names
 
   if (!is.null(underscores_to_symbol) && operator == ":=") {
-    if (length(underscores_to_symbol) == 1 || length(underscores_to_symbol) == nrow(x)) {
+    if (length(underscores_to_symbol) == 1){
+      underscores_to_symbol <- rep(underscores_to_symbol, nrow(x))
+    }
+    if (length(underscores_to_symbol) == nrow(x)) {
       x[[1]] <- unlist(lapply(seq_along(underscores_to_symbol), function(i) {
         gsub("_", paste0(" ", underscores_to_symbol[[i]], " "), as.list(x[[1]])[[i]])
       }))
