@@ -30,8 +30,7 @@ test_that("nice_fit regular", {
 test_that("nice_fit as nice_table", {
    skip_if_not_installed("rempsyc")
   expect_s3_class(
-    nice_fit(fit, nice_table = TRUE),
-    c("nice_table", "flextable")
+    nice_fit(fit, nice_table = TRUE), "flextable"
   )
 })
 
@@ -83,7 +82,8 @@ test_that("nice_fit test categorical variable", {
   ind := a*b
   '
   fit <- sem(mod, dat, ordered = "z")
-  expect_s3_class(nice_fit(fit), "data.frame")
+  expect_s3_class(nice_fit(fit, verbose = FALSE), "data.frame")
+  expect_s3_class(
+    nice_fit(fit, nice_table = TRUE, verbose = FALSE), "flextable"
+  )
 })
-
-

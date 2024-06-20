@@ -9,7 +9,8 @@ nice_fit(
   model.labels,
   nice_table = FALSE,
   guidelines = TRUE,
-  stars = FALSE
+  stars = FALSE,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ bottom of the table.}
 
 \item{stars}{Logical, if \code{nice_table = TRUE}, whether to display
 significance stars (defaults to \code{FALSE}).}
+
+\item{verbose}{Logical, whether to display messages and warnings.}
 }
 \value{
 A dataframe, representing select fit indices (chi2, df, chi2/df,

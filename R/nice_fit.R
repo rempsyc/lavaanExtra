@@ -36,6 +36,7 @@
 #'  bottom of the table.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
 #'              significance stars (defaults to `FALSE`).
+#' @param verbose Logical, whether to display messages and warnings.
 #' @return A dataframe, representing select fit indices (chi2, df, chi2/df,
 #'         p-value of the chi2 test, CFI, TLI, RMSEA and its 90% CI,
 #'         unbiased SRMR, AIC, and BIC).
@@ -63,7 +64,12 @@
 #' fit <- sem(HS.model, data = HolzingerSwineford1939)
 #' nice_fit(fit)
 #'
-nice_fit <- function(model, model.labels, nice_table = FALSE, guidelines = TRUE, stars = FALSE) {
+nice_fit <- function(model,
+                     model.labels,
+                     nice_table = FALSE,
+                     guidelines = TRUE,
+                     stars = FALSE,
+                     verbose = TRUE) {
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
     models.list <- model
   } else if (inherits(model, "lavaan")) {
@@ -75,14 +81,14 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, guidelines = TRUE,
     ))
   }
 
-  x <- lapply(models.list, nice_fit_internal)
+  x <- lapply(models.list, nice_fit_internal, verbose = verbose)
   df <- do.call(rbind, x)
   if (!missing(model.labels)) {
     Model <- model.labels
     # verify labels match number of objects
     if (length(x) < length(model.labels)) {
       stop("Number of labels exceeds number of models.")
-    } else if (!length(x) == length(model.labels)) {
+    } else if (!length(x) == length(model.labels) && verbose == TRUE) {
       warning("Number of models and labels do not match.")
     }
   } else if (!is.null(names(models.list))) {
@@ -97,33 +103,46 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, guidelines = TRUE,
       version = get_dep_version("rempsyc"),
       reason = "for this feature."
     )
-    x <- df
 
+    x <- df
     x[c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")] <- rempsyc::format_r(as.numeric(
       unlist(x[, c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")])
     ))
     x$`RMSEA [90% CI]` <- paste0(x$rmsea, " [", x$rmsea.ci.lower, ", ", x$rmsea.ci.upper, "]")
     x <- x[!names(x) %in% c("rmsea", "rmsea.ci.lower", "rmsea.ci.upper")]
-    x <- x[c(1:7, 11, 8:10)]
 
+    # reposition srmr
+    i <- grep("srmr", names(x))
+    x <- cbind(x[-i], x[i])
+
+    if (any(c("aic", "bic") %in% names(x))) {
+      i <- grep("aic|bic", names(x))
+      x <- cbind(x[-i], x[i])
+    }
     table <- rempsyc::nice_table(x, stars = stars)
-
     table <- flextable::align(table, align = "center", part = "all")
+
     if (isTRUE(guidelines)) {
+      values_to_add <- c(
+        Model = "Common guidelines",
+        chi2 = "\u2014",
+        df = "\u2014",
+        chi2.df = "< 2 or 3",
+        p = "> .05",
+        CFI = "\u2265 .95",
+        TLI = "\u2265 .95",
+        `RMSEA (90% CI)` = "< .05 [.00, .08]",
+        SRMR = "\u2264 .08"
+      )
+
+      if (all(c("aic", "bic") %in% names(x))) {
+        values_to_add <- c(values_to_add,
+                           AIC = "Smaller",
+                           BIC = "Smaller")
+      }
+
       table <- flextable::add_footer_row(table,
-        values = c(
-          Model = "Common guidelines",
-          chi2 = "\u2014",
-          df = "\u2014",
-          chi2.df = "< 2 or 3",
-          p = "> .05",
-          CFI = "\u2265 .95",
-          TLI = "\u2265 .95",
-          `RMSEA (90% CI)` = "< .05 [.00, .08]",
-          SRMR = "\u2264 .08",
-          AIC = "Smaller",
-          BIC = "Smaller"
-        ),
+        values = values_to_add,
         colwidths = rep(1, length(table$col_keys))
       )
       table <- flextable::bold(table, part = "footer")
@@ -147,7 +166,7 @@ nice_fit <- function(model, model.labels, nice_table = FALSE, guidelines = TRUE,
   df
 }
 
-nice_fit_internal <- function(fit) {
+nice_fit_internal <- function(fit, verbose = TRUE) {
   x <- lavaan::fitMeasures(fit)
   x <- as.data.frame(t(as.data.frame(x)))
   # cfi.list <- c(x["cfi.robust"], x["cfi.scaled"], x["cfi"])
@@ -160,7 +179,11 @@ nice_fit_internal <- function(fit) {
   keep <- keep[keep %in% names(x)]
   x <- x[keep]
   x_srmr <- lavaan::lavResiduals(fit)$summary["usrmr", 1]
-  x[names(x) == "srmr"] <- x_srmr
+  if (!is.null(x_srmr)) {
+    x[names(x) == "srmr"] <- x_srmr
+  } else if (verbose == TRUE){
+    message("Using standard SRMR (as unbiased SRMR is unavailable)")
+  }
   chi2.df <- x$chisq / x$df
   x <- cbind(x[1:2], chi2.df, x[3:length(x)])
   x <- round(x, 3)
