@@ -1,6 +1,9 @@
 # lavaanExtra 0.2.1
 * Incoming ✨
 
+## lavaanExtra 0.2.0.2
+* Fix bug in `lavaan_defined()` / `lavaan_extract()` (#36)
+
 ## lavaanExtra 0.2.0.1
 * Now skips tests and examples when `DiagrammeRsvg` is not installed
 
