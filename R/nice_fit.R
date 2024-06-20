@@ -157,6 +157,7 @@ nice_fit_internal <- function(fit) {
     "rmsea", "rmsea.ci.lower", "rmsea.ci.upper",
     "srmr", "aic", "bic"
   )
+  keep <- keep[keep %in% names(x)]
   x <- x[keep]
   x_srmr <- lavaan::lavResiduals(fit)$summary["usrmr", 1]
   x[names(x) == "srmr"] <- x_srmr

@@ -72,3 +72,18 @@ test_that("nice_fit error on wronb object class", {
     nice_fit(HS.model, model.labels = seq(1, 10))
   )
 })
+
+test_that("nice_fit test categorical variable", {
+  dat <- data.frame(z = sample(c(0, 1), 100, replace = TRUE),
+                    x = sample(1:7, 100, replace = TRUE),
+                    y = sample(1:5, 100, replace = TRUE))
+  mod <- '
+  y ~ a*x
+  z ~ b*y + c*x
+  ind := a*b
+  '
+  fit <- sem(mod, dat, ordered = "z")
+  expect_s3_class(nice_fit(fit), "data.frame")
+})
+
+
