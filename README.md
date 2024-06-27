@@ -138,11 +138,14 @@ cat(cfa.model)
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6
 #> speed =~ x7 + x8 + x9
+```
+
+``` r
 
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
-#> lavaan 0.6.16 ended normally after 35 iterations
+#> lavaan 0.6-18 ended normally after 35 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -332,6 +335,9 @@ cat(model)
 #> ageyr_visual_textual := ageyr_visual * visual_textual
 #> grade_visual_speed := grade_visual * visual_speed
 #> grade_visual_textual := grade_visual * visual_textual
+```
+
+``` r
 
 fit.sem <- sem(model, data = HolzingerSwineford1939)
 ```
