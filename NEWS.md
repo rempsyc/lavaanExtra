@@ -1,5 +1,11 @@
-# lavaanExtra 0.2.1
+# lavaanExtra 0.2.2
 * Incoming ✨
+
+# lavaanExtra 0.2.1.1
+* Incoming ✨
+
+# lavaanExtra 0.2.1
+* New CRAN submission
 
 ## lavaanExtra 0.2.0.3
 * Fix bug in `nice_fit()` that created an error with categorical variables (#37)

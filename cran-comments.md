@@ -1,3 +1,7 @@
+## Resubmission lavaanExtra 0.2.1
+
+0 errors | 0 warnings | 0 notes
+
 ## Resubmission lavaanExtra 0.2.0
 
 > Unfortunately, this got stuck in the publication queue. With the old LaTeX version on the CRAN master we cannot build the manual: [...]
