@@ -34,3 +34,32 @@ test_that("nice_fit as nice_table", {
     c("nice_table", "flextable")
   )
 })
+
+test_that("lavaan_reg with bootstrap standardized_se", {
+  # Test bootstrap SE for standardized estimates
+  set.seed(123)
+  fit_bootstrap <- sem(HS.model, data = HolzingerSwineford1939, se = "bootstrap", bootstrap = 50)
+  
+  # Test that bootstrap method gives different results than delta method
+  result_delta <- lavaan_reg(fit_bootstrap, standardized_se = "delta")
+  result_bootstrap <- lavaan_reg(fit_bootstrap, standardized_se = "bootstrap")
+  
+  # Check that results have same structure
+  expect_equal(names(result_delta), names(result_bootstrap))
+  expect_equal(nrow(result_delta), nrow(result_bootstrap))
+  
+  # Check that standardized coefficients are the same 
+  expect_equal(result_delta$B, result_bootstrap$B)
+  
+  # Check that CI bounds are different (key feature being tested)
+  expect_false(identical(result_delta$CI_lower_B, result_bootstrap$CI_lower_B))
+  expect_false(identical(result_delta$CI_upper_B, result_bootstrap$CI_upper_B))
+})
+
+test_that("lavaan_reg standardized_se validation", {
+  # Test that invalid standardized_se values throw error
+  expect_error(
+    lavaan_reg(fit, standardized_se = "invalid"),
+    "standardized_se must be either 'delta' or 'bootstrap'"
+  )
+})

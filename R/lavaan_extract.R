@@ -2,6 +2,11 @@
 #'
 #' @description Extract relevant indices from lavaan model through
 #'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
+#'  Note: When using `standardized_se = "delta"` (default), standardized
+#'  standard errors and confidence intervals are computed using the delta
+#'  method. When using `standardized_se = "bootstrap"`, they are computed
+#'  using the bootstrap method (only available when the model was fitted
+#'  with bootstrap standard errors).
 #' @param fit lavaan fit object to extract fit indices from
 #' @param operator Which operator to subselect with.
 #' @param lhs_name Name of first column, referring to the left-hand side
@@ -15,6 +20,12 @@
 #'  replacements if they they are not all the same.
 #' @param diag When extracting covariances (`~~`), whether to include or
 #'  exclude diagonal values (one of "exclude" or "include").
+#' @param standardized_se Character string indicating the method to use for
+#'  computing standard errors and confidence intervals of standardized estimates.
+#'  Options are "delta" (default, uses delta method via
+#'  [lavaan::standardizedsolution]) or "bootstrap" (uses bootstrap method via
+#'  [lavaan::parameterEstimates] with `standardized = TRUE`, only available
+#'  when the model was fitted with bootstrap standard errors).
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
@@ -23,7 +34,11 @@
 #'         corresponding paths ("rhs"), standardized regression
 #'         coefficient ("std.all"), corresponding p-value, as well
 #'         as the unstandardized regression coefficient ("est") and
-#'         its confidence interval ("ci.lower", "ci.upper").
+#'         its confidence interval ("ci.lower", "ci.upper"). When
+#'         `standardized_se = "delta"` (default), standardized SE and CI
+#'         are computed using the delta method. When `standardized_se =
+#'         "bootstrap"`, they are computed using bootstrap (only available
+#'         when model was fitted with bootstrap standard errors).
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' x <- paste0("x", 1:9)
@@ -60,20 +75,40 @@ lavaan_extract <- function(fit,
                            rhs_name = "Right-Hand Side",
                            underscores_to_symbol = "\u2192",
                            diag = NULL,
+                           standardized_se = "delta",
                            nice_table = FALSE,
                            ...) {
   if (missing(operator)) {
     stop("Please specify the desired operator.")
   }
+
+  # Validate standardized_se argument
+  if (!standardized_se %in% c("delta", "bootstrap")) {
+    stop("standardized_se must be either 'delta' or 'bootstrap'.")
+  }
   og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
-  new.names <- c(lhs_name, rhs_name, "SE", "Z", "p", "b",
-                 "CI_lower", "CI_upper", "B", "CI_lower_B", "CI_upper_B")
+  new.names <- c(
+    lhs_name, rhs_name, "SE", "Z", "p", "b",
+    "CI_lower", "CI_upper", "B", "CI_lower_B", "CI_upper_B"
+  )
 
   x <- lavaan::parameterEstimates(fit)
   x <- x[which(x["op"] == operator), ]
 
-  es <- lavaan::standardizedsolution(fit, level = 0.95)
-  es <- es[which(es["op"] == operator), ]
+  if (standardized_se == "bootstrap") {
+    # Get standardized estimates with bootstrap SE/CI
+    es <- lavaan::parameterEstimates(fit, standardized = TRUE)
+    es <- es[which(es["op"] == operator), ]
+    # Extract standardized coefficient and bootstrap SE/CI
+    es <- es[c("std.all", "se", "z", "pvalue", "ci.lower", "ci.upper")]
+    names(es) <- c("est.std", "se.std", "z.std", "pvalue.std", "ci.lower.std", "ci.upper.std")
+  } else {
+    # Use default delta method for standardized estimates
+    es <- lavaan::standardizedsolution(fit, level = 0.95)
+    es <- es[which(es["op"] == operator), ]
+    es <- es[c("est.std", "se", "z", "pvalue", "ci.lower", "ci.upper")]
+    names(es) <- c("est.std", "se.std", "z.std", "pvalue.std", "ci.lower.std", "ci.upper.std")
+  }
 
   if (!is.null(diag) && diag == "exclude") {
     diag <- which(x$lhs == x$rhs)
@@ -83,15 +118,16 @@ lavaan_extract <- function(fit,
   }
 
   x <- x[og.names]
-  es <- es[c("est.std", og.names[7:8])]
-  names(es)[2:3] <- paste0(names(es)[2:3], ".std")
+  # Extract standardized coefficient and CI with appropriate SE method
+  es_for_output <- es[c("est.std", "ci.lower.std", "ci.upper.std")]
+  names(es_for_output) <- c("est.std", "ci.lower.std", "ci.upper.std")
 
-  x <- cbind(x, es)
+  x <- cbind(x, es_for_output)
 
   names(x) <- new.names
 
   if (!is.null(underscores_to_symbol) && operator == ":=") {
-    if (length(underscores_to_symbol) == 1){
+    if (length(underscores_to_symbol) == 1) {
       underscores_to_symbol <- rep(underscores_to_symbol, nrow(x))
     }
     if (length(underscores_to_symbol) == nrow(x)) {

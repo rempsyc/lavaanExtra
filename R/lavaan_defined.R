@@ -4,6 +4,11 @@
 #' @description Extract relevant user-defined parameters (e.g., indirect or
 #'  total effects) indices from lavaan model through
 #'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
+#'  Note: When using `standardized_se = "delta"` (default), standardized
+#'  standard errors and confidence intervals are computed using the delta
+#'  method. When using `standardized_se = "bootstrap"`, they are computed
+#'  using the bootstrap method (only available when the model was fitted
+#'  with bootstrap standard errors).
 #' @param fit lavaan fit object to extract fit indices from
 #' @param underscores_to_symbol Character to convert underscores
 #'  to arrows in the first column, like for indirect effects. Default to
@@ -14,6 +19,12 @@
 #'  expression (lhs).
 #' @param rhs_name Name of first column, referring to the right-hand side
 #'  expression (rhs).
+#' @param standardized_se Character string indicating the method to use for
+#'  computing standard errors and confidence intervals of standardized estimates.
+#'  Options are "delta" (default, uses delta method via
+#'  [lavaan::standardizedsolution]) or "bootstrap" (uses bootstrap method via
+#'  [lavaan::parameterEstimates] with `standardized = TRUE`, only available
+#'  when the model was fitted with bootstrap standard errors).
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
@@ -22,7 +33,11 @@
 #'         corresponding paths ("rhs"), standardized regression
 #'         coefficient ("std.all"), corresponding p-value, as well
 #'         as the unstandardized regression coefficient ("est") and
-#'         its confidence interval ("ci.lower", "ci.upper").
+#'         its confidence interval ("ci.lower", "ci.upper"). When
+#'         `standardized_se = "delta"` (default), standardized SE and CI
+#'         are computed using the delta method. When `standardized_se =
+#'         "bootstrap"`, they are computed using bootstrap (only available
+#'         when model was fitted with bootstrap standard errors).
 #' @aliases lavaan_ind
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
@@ -58,14 +73,17 @@ lavaan_defined <- function(fit,
                            underscores_to_symbol = "\u2192",
                            lhs_name = "User-Defined Parameter",
                            rhs_name = "Paths",
+                           standardized_se = "delta",
                            nice_table = FALSE,
                            ...) {
   lavaan_extract(fit,
-                 operator = ":=",
-                 lhs_name = lhs_name,
-                 rhs_name = rhs_name,
-                 underscores_to_symbol = underscores_to_symbol,
-                 nice_table = nice_table)
+    operator = ":=",
+    lhs_name = lhs_name,
+    rhs_name = rhs_name,
+    underscores_to_symbol = underscores_to_symbol,
+    standardized_se = standardized_se,
+    nice_table = nice_table
+  )
 }
 
 lavaan_ind <- lavaan_defined

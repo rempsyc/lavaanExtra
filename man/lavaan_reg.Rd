@@ -4,10 +4,17 @@
 \alias{lavaan_reg}
 \title{Extract relevant regression indices from lavaan model}
 \usage{
-lavaan_reg(fit, nice_table = FALSE, ...)
+lavaan_reg(fit, standardized_se = "delta", nice_table = FALSE, ...)
 }
 \arguments{
 \item{fit}{lavaan fit object to extract fit indices from}
+
+\item{standardized_se}{Character string indicating the method to use for
+computing standard errors and confidence intervals of standardized estimates.
+Options are "delta" (default, uses delta method via
+\link[lavaan:standardizedSolution]{lavaan::standardizedsolution}) or "bootstrap" (uses bootstrap method via
+\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}, only available
+when the model was fitted with bootstrap standard errors).}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
@@ -20,10 +27,18 @@ A dataframe, including the outcome ("lhs"), predictor ("rhs"),
 standardized regression coefficient ("std.all"), corresponding
 p-value, as well as the unstandardized regression coefficient
 ("est") and its confidence interval ("ci.lower", "ci.upper").
+When \code{standardized_se = "delta"} (default), standardized SE and CI
+are computed using the delta method. When \code{standardized_se =  "bootstrap"}, they are computed using bootstrap (only available
+when model was fitted with bootstrap standard errors).
 }
 \description{
 Extract relevant regression indices from lavaan model through
 \link[lavaan:parameterEstimates]{lavaan::parameterEstimates} and \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}.
+Note: When using \code{standardized_se = "delta"} (default), standardized
+standard errors and confidence intervals are computed using the delta
+method. When using \code{standardized_se = "bootstrap"}, they are computed
+using the bootstrap method (only available when the model was fitted
+with bootstrap standard errors).
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
