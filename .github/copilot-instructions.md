@@ -199,7 +199,7 @@ if (length(result) > 0) {
 ```bash
 # Step 1: Find which packages your specific function actually requires
 # Check the function's rlang::check_installed() calls in the source code
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
 
 # Or search for all function dependencies:
@@ -256,7 +256,7 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 1. **Identify your function**: Determine which specific function you're modifying
 2. **Find dependencies**: Check what packages that function actually requires:
    ```bash
-   cd /home/runner/work/lavaanExtra/lavaanExtra
+   cd /home/runner/work/rempsyc/lavaanExtra
    grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[your_function].R
    ```
 3. **Install only required packages**: Install ONLY the packages found in step 2
@@ -266,7 +266,7 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 ### Build the Package
 **NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 R CMD build .
 # Creates: lavaanExtra_0.2.1.tar.gz (version may vary)
 ```
@@ -274,7 +274,7 @@ R CMD build .
 ### Install the Package
 **NEVER CANCEL: Install takes ~3 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 R CMD INSTALL lavaanExtra_0.2.1.tar.gz
 # Or install from source:
 # R CMD INSTALL .
@@ -283,7 +283,7 @@ R CMD INSTALL lavaanExtra_0.2.1.tar.gz
 ### Run Tests
 **NEVER CANCEL: Tests take ~11 seconds. Set timeout to 30+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 R --no-restore --no-save -e 'library(testthat); library(lavaanExtra); test_local()'
 ```
 
@@ -296,7 +296,7 @@ Expected results:
 ### Run Linting
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 R --no-restore --no-save -e 'library(lintr); lint_package()'
 ```
 
@@ -307,7 +307,7 @@ Expected results:
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 # Style entire package
 R --no-restore --no-save -e 'library(styler); style_pkg()'
 
@@ -327,7 +327,7 @@ Expected results:
 ### Update Documentation with roxygen2
 **NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 # Update documentation after making changes to roxygen2 comments
 R --no-restore --no-save -e 'roxygen2::document()'
 
@@ -350,7 +350,7 @@ Expected results:
 ### Run R CMD Check
 **NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.**
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 # Without suggested packages (due to network limitations):
 _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check lavaanExtra_0.2.1.tar.gz --no-manual --no-vignettes
 
@@ -370,7 +370,7 @@ Expected results:
 Test the main functions to ensure they work correctly:
 
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 R --no-restore --no-save -e '
 library(lavaanExtra)
 
@@ -400,7 +400,7 @@ print("Core functions working correctly")
 **CRITICAL**: Always verify reprex is working before modifying any code that will require a PR:
 
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
@@ -442,7 +442,7 @@ After making changes to package functions:
 
 1. **Always rebuild and reinstall the package**:
    ```bash
-   cd /home/runner/work/lavaanExtra/lavaanExtra
+   cd /home/runner/work/rempsyc/lavaanExtra
    R CMD build . && R CMD INSTALL lavaanExtra_*.tar.gz
    ```
 
@@ -461,16 +461,16 @@ After making changes to package functions:
 ### Repository Exploration Commands
 ```bash
 # View repository structure
-ls -la /home/runner/work/lavaanExtra/lavaanExtra/
+ls -la /home/runner/work/rempsyc/lavaanExtra/
 
 # View R source files
-ls -la /home/runner/work/lavaanExtra/lavaanExtra/R/
+ls -la /home/runner/work/rempsyc/lavaanExtra/R/
 
 # View test files
-ls -la /home/runner/work/lavaanExtra/lavaanExtra/tests/testthat/
+ls -la /home/runner/work/rempsyc/lavaanExtra/tests/testthat/
 
 # Check package metadata
-cat /home/runner/work/lavaanExtra/lavaanExtra/DESCRIPTION
+cat /home/runner/work/rempsyc/lavaanExtra/DESCRIPTION
 ```
 
 ### Source Code Structure
@@ -542,7 +542,7 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 #### Check Function Dependencies Before Installing
 ```bash
 # Find exactly which packages a function requires:
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[function_file].R
 
 # Examples:
@@ -722,7 +722,7 @@ The lavaanExtra package follows this versioning pattern:
 
 1. **Edit the DESCRIPTION file**:
    ```bash
-   cd /home/runner/work/lavaanExtra/lavaanExtra
+   cd /home/runner/work/rempsyc/lavaanExtra
    # Find current version
    grep "Version:" DESCRIPTION
    # Update to next version (example: 0.2.1 → 0.2.1.1)
@@ -775,7 +775,7 @@ The lavaanExtra package follows this versioning pattern:
 **Follow this exact sequence ONCE PER PR** (not per commit):
 
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 
 # Step 1: Check current version
 grep "Version:" DESCRIPTION
@@ -831,7 +831,7 @@ head -10 NEWS.md
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.
 
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 
 # 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR
 #    (Do NOT update them again if this is a subsequent commit in the same PR)
@@ -927,7 +927,7 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check lavaanExtra_*.tar.gz --no-manual --no
 **ESSENTIAL**: Always generate actual reprex with automatic imgur integration for plots:
 
 ```bash
-cd /home/runner/work/lavaanExtra/lavaanExtra
+cd /home/runner/work/rempsyc/lavaanExtra
 export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 library(lavaanExtra)
@@ -1152,7 +1152,7 @@ The following are outputs from frequently used commands. Reference them instead 
 
 ### Repository Root Structure
 ```
-ls -la /home/runner/work/lavaanExtra/lavaanExtra/
+ls -la /home/runner/work/rempsyc/lavaanExtra/
 
 .Rbuildignore       - Files to exclude from package build
 .github/            - GitHub workflows and actions
