@@ -1,9 +1,9 @@
-# rempsyc: Convenience Functions for Psychology R Package
+# lavaanExtra: Convenience Functions for lavaan R Package
 
 Always follow these instructions EXACTLY and only search for additional context if the information here is incomplete or found to be in error.
 
 ## Overview
-The `rempsyc` package is an R package providing convenience functions for psychology research, including statistical analysis, publication-ready tables (APA style), and data visualization. The package is built using R 4.3.3+ and follows standard R package development practices.
+The `lavaanExtra` package is an R package providing convenience functions for structural equation modeling (SEM) with lavaan. It affords an alternative, vector-based syntax to lavaan, as well as other convenience functions such as naming paths and defining indirect links automatically. The package is built using R 3.5+ and follows standard R package development practices.
 
 **CRITICAL REMINDER**: Every PR must include version number updates in DESCRIPTION and changelog entries in NEWS.md. See the [Version Management section](#version-management-and-changelog-updates) for detailed instructions.
 
@@ -18,7 +18,7 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 - Core development packages (rlang, dplyr, testthat, lintr, styler, roxygen2, reprex, devtools)
 - **Complete reprex setup**: knitr, rmarkdown, pandoc, clipr (all dependencies needed for creating reproducible examples)
 - **IMPORTANT**: Suggested packages are NOT installed during setup (install as needed per PR)
-- The rempsyc package itself (built and installed)
+- The lavaanExtra package itself (built and installed)
 - Verified functionality of core functions and reprex
 
 **For documentation/configuration tasks** (editing .md files, .yml files, copilot instructions, etc.), it runs minimal setup:
@@ -31,7 +31,7 @@ The `rempsyc` package is an R package providing convenience functions for psycho
 
 **Verification**: Check if the environment is pre-configured by running:
 ```bash
-R --no-restore --no-save -e 'library(rempsyc); packageVersion("rempsyc")'
+R --no-restore --no-save -e 'library(lavaanExtra); packageVersion("lavaanExtra")'
 ```
 
 If this works without errors, the environment is ready. If not, follow the manual setup below.
@@ -50,7 +50,7 @@ If this works without errors, the environment is ready. If not, follow the manua
 - ✅ Core development tools (linting, testing, documentation) work immediately
 - ✅ **reprex functionality works out-of-the-box** (knitr, rmarkdown, pandoc, clipr pre-installed)
 - ✅ Basic package building and testing work out of the box  
-- ⚠️ Function-specific packages (ggplot2, flextable, etc.) need to be installed when working on those functions
+- ⚠️ Function-specific packages (lavaanPlot, tidySEM, etc.) need to be installed when working on those functions
 - 📖 Always use the [Targeted Package Installation](#targeted-package-installation-workflow) approach below
 
 ## Resource-Conscious Two-Step Development Approach
@@ -199,7 +199,7 @@ if (length(result) > 0) {
 ```bash
 # Step 1: Find which packages your specific function actually requires
 # Check the function's rlang::check_installed() calls in the source code
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
 
 # Or search for all function dependencies:
@@ -209,34 +209,34 @@ grep -A2 -B2 "rlang::check_installed" R/[your_function_file].R
 #### Install Only Required Packages
 ```bash
 # Step 2: Install ONLY the packages found in Step 1
-# Example: If working on nice_scatter(), you only need ggplot2
-R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+# Example: If working on nice_lavaanPlot(), you only need lavaanPlot
+R --no-restore --no-save -e 'install.packages("lavaanPlot", repos="https://cloud.r-project.org/")'
 
-# Example: If working on nice_table(), you only need flextable  
-R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+# Example: If working on nice_tidySEM(), you need tidySEM  
+R --no-restore --no-save -e 'install.packages("tidySEM", repos="https://cloud.r-project.org/")'
 
-# Example: If working on nice_violin(), you need multiple packages
-R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+# Example: If working on nice_fit(), you may need rempsyc for nice_table
+R --no-restore --no-save -e 'install.packages("rempsyc", repos="https://cloud.r-project.org/")'
 ```
 
-#### Use rempsyc's Built-in Utility (After Building Package)
+#### Use lavaanExtra's Built-in Utility (After Building Package)
 ```bash
-# Alternative: Use rempsyc's install_if_not_installed() for specific packages
+# Alternative: Use lavaanExtra's install_if_not_installed() for specific packages
 R --no-restore --no-save -e '
-# First build and install the current rempsyc package to access utility functions
+# First build and install the current lavaanExtra package to access utility functions
 if (file.exists("DESCRIPTION")) {
   system("R CMD build .")
-  pkg_file <- list.files(pattern = "rempsyc_.*\\.tar\\.gz")[1]
+  pkg_file <- list.files(pattern = "lavaanExtra_.*\\.tar\\.gz")[1]
   if (!is.na(pkg_file)) system(paste("R CMD INSTALL", pkg_file))
 }
 
-# Load rempsyc and install only specific packages for your function
-library(rempsyc)
+# Load lavaanExtra and install only specific packages for your function
+library(lavaanExtra)
 # ONLY install packages needed for your specific function:
 if (exists("install_if_not_installed")) {
-  install_if_not_installed(c("ggplot2"))  # Example: only ggplot2 for nice_scatter
+  install_if_not_installed(c("lavaanPlot"))  # Example: only lavaanPlot for nice_lavaanPlot
 } else {
-  install.packages("ggplot2", repos="https://cloud.r-project.org/")  # Fallback
+  install.packages("lavaanPlot", repos="https://cloud.r-project.org/")  # Fallback
 }
 '
 ```
@@ -256,7 +256,7 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 1. **Identify your function**: Determine which specific function you're modifying
 2. **Find dependencies**: Check what packages that function actually requires:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
+   cd /home/runner/work/lavaanExtra/lavaanExtra
    grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[your_function].R
    ```
 3. **Install only required packages**: Install ONLY the packages found in step 2
@@ -266,16 +266,16 @@ echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
 ### Build the Package
 **NEVER CANCEL: Build takes ~19 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 R CMD build .
-# Creates: rempsyc_0.1.91.tar.gz (version may vary)
+# Creates: lavaanExtra_0.2.1.tar.gz (version may vary)
 ```
 
 ### Install the Package
 **NEVER CANCEL: Install takes ~3 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
-R CMD INSTALL rempsyc_0.1.91.tar.gz
+cd /home/runner/work/lavaanExtra/lavaanExtra
+R CMD INSTALL lavaanExtra_0.2.1.tar.gz
 # Or install from source:
 # R CMD INSTALL .
 ```
@@ -283,32 +283,31 @@ R CMD INSTALL rempsyc_0.1.91.tar.gz
 ### Run Tests
 **NEVER CANCEL: Tests take ~11 seconds. Set timeout to 30+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+cd /home/runner/work/lavaanExtra/lavaanExtra
+R --no-restore --no-save -e 'library(testthat); library(lavaanExtra); test_local()'
 ```
 
 Expected results: 
-- ~99 tests processed across multiple test files
-- ~94 tests should pass
-- 3-5 snapshot failures due to minor precision differences (normal and expected)
+- ~50+ tests processed across multiple test files
+- Most tests should pass
+- Some snapshot failures due to minor precision differences (normal and expected)
 - Some tests may be skipped if optional packages not available
 
 ### Run Linting
 **NEVER CANCEL: Linting takes ~20 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 R --no-restore --no-save -e 'library(lintr); lint_package()'
 ```
 
 Expected results:
-- Many style warnings (673+ issues found - normal for existing codebase)
-- Focus on new code adhering to style guidelines
+- Style warnings may be found - focus on new code adhering to style guidelines
 - Package is functional despite style warnings
 
 ### Auto-format Code with Styler
 **NEVER CANCEL: Styling takes ~10-30 seconds depending on package size. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 # Style entire package
 R --no-restore --no-save -e 'library(styler); style_pkg()'
 
@@ -328,7 +327,7 @@ Expected results:
 ### Update Documentation with roxygen2
 **NEVER CANCEL: Documentation update takes ~5-15 seconds. Set timeout to 60+ seconds.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 # Update documentation after making changes to roxygen2 comments
 R --no-restore --no-save -e 'roxygen2::document()'
 
@@ -351,12 +350,12 @@ Expected results:
 ### Run R CMD Check
 **NEVER CANCEL: R CMD check takes ~30 seconds (without suggested packages) to 5 minutes (full). Set timeout to 10+ minutes.**
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 # Without suggested packages (due to network limitations):
-_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_0.1.91.tar.gz --no-manual --no-vignettes
+_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check lavaanExtra_0.2.1.tar.gz --no-manual --no-vignettes
 
 # With all checks (if network access available):
-# R CMD check rempsyc_0.1.91.tar.gz
+# R CMD check lavaanExtra_0.2.1.tar.gz
 ```
 
 Expected results:
@@ -371,25 +370,28 @@ Expected results:
 Test the main functions to ensure they work correctly:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 R --no-restore --no-save -e '
-library(rempsyc)
+library(lavaanExtra)
 
-# Test t-test function
-result <- nice_t_test(data = mtcars, response = "mpg", group = "am")
-print(result)
+# Test basic lavaan syntax creation
+latent <- list(visual = paste0("x", 1:3), textual = paste0("x", 4:6))
+model <- write_lavaan(latent = latent)
+print("Model syntax creation successful")
+cat(model)
 
-# Test table formatting
+# Test fit extraction function
 library(testthat)  # If available
-if (requireNamespace("flextable", quietly = TRUE)) {
-  table <- nice_table(result)
-  print("Table creation successful")
+if (requireNamespace("lavaan", quietly = TRUE)) {
+  library(lavaan)
+  HS.model <- "visual =~ x1 + x2 + x3"
+  fit <- lavaan::cfa(HS.model, data = HolzingerSwineford1939)
+  fit_results <- nice_fit(fit)
+  print("Fit extraction successful")
 } else {
-  print("Flextable not available - table creation skipped")
+  print("lavaan not available - fit testing skipped")
 }
 
-# Test basic data functions
-data <- extract_duplicates(data.frame(id = c(1,1,2), val = c(1,2,3)), id = "id")
 print("Core functions working correctly")
 '
 ```
@@ -398,34 +400,34 @@ print("Core functions working correctly")
 **CRITICAL**: Always verify reprex is working before modifying any code that will require a PR:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 # Load required packages
 library(reprex)
-library(rempsyc)
+library(lavaanExtra)
 
-# Create a test reprex with actual rempsyc function (WORKING EXAMPLE)
+# Create a test reprex with actual lavaanExtra function (WORKING EXAMPLE)
 reprex_result <- reprex({
-  library(rempsyc)
+  library(lavaanExtra)
   
-  # Example with extract_duplicates function
-  df1 <- data.frame(
-    id = c(1, 2, 3, 1, 3),
-    score = c(NA, 85, 92, 88, 95)
+  # Example with write_lavaan function
+  latent <- list(
+    visual = c("x1", "x2", "x3"),
+    textual = c("x4", "x5", "x6")
   )
   
-  print("Original data:")
-  print(df1)
+  print("Latent variable specification:")
+  print(latent)
   
-  duplicates <- extract_duplicates(df1, id = "id")
-  print("Duplicates found:")
-  print(duplicates)
+  model <- write_lavaan(latent = latent)
+  print("Generated lavaan syntax:")
+  cat(model)
   
 }, venue = "gh", advertise = FALSE, html_preview = FALSE)
 
 # Verify it worked
-if (length(reprex_result) > 0 && any(grepl("library\\(rempsyc\\)", reprex_result))) {
-  cat("SUCCESS: reprex is working correctly with rempsyc functions\n")
+if (length(reprex_result) > 0 && any(grepl("library\\(lavaanExtra\\)", reprex_result))) {
+  cat("SUCCESS: reprex is working correctly with lavaanExtra functions\n")
   cat("Sample reprex output:\n")
   cat(paste(reprex_result, collapse = "\n"))
   cat("\n")
@@ -440,18 +442,18 @@ After making changes to package functions:
 
 1. **Always rebuild and reinstall the package**:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
-   R CMD build . && R CMD INSTALL rempsyc_*.tar.gz
+   cd /home/runner/work/lavaanExtra/lavaanExtra
+   R CMD build . && R CMD INSTALL lavaanExtra_*.tar.gz
    ```
 
 2. **Test the specific function you modified**:
    ```bash
-   R --no-restore --no-save -e 'library(rempsyc); [your_function_test_here]'
+   R --no-restore --no-save -e 'library(lavaanExtra); [your_function_test_here]'
    ```
 
 3. **Run relevant tests**:
    ```bash
-   R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_file("tests/testthat/test-[function_name].R")'
+   R --no-restore --no-save -e 'library(testthat); library(lavaanExtra); test_file("tests/testthat/test-[function_name].R")'
    ```
 
 ## Key Locations and Files
@@ -459,20 +461,20 @@ After making changes to package functions:
 ### Repository Exploration Commands
 ```bash
 # View repository structure
-ls -la /home/runner/work/rempsyc/rempsyc/
+ls -la /home/runner/work/lavaanExtra/lavaanExtra/
 
 # View R source files
-ls -la /home/runner/work/rempsyc/rempsyc/R/
+ls -la /home/runner/work/lavaanExtra/lavaanExtra/R/
 
 # View test files
-ls -la /home/runner/work/rempsyc/rempsyc/tests/testthat/
+ls -la /home/runner/work/lavaanExtra/lavaanExtra/tests/testthat/
 
 # Check package metadata
-cat /home/runner/work/rempsyc/rempsyc/DESCRIPTION
+cat /home/runner/work/lavaanExtra/lavaanExtra/DESCRIPTION
 ```
 
 ### Source Code Structure
-- `/R/` - All R function source files (34+ files)
+- `/R/` - All R function source files (13+ files)
 - `/tests/testthat/` - Test files using testthat framework
 - `/tests/testthat.R` - Test runner entry point  
 - `/man/` - Documentation files (auto-generated from roxygen2)
@@ -485,24 +487,25 @@ cat /home/runner/work/rempsyc/rempsyc/DESCRIPTION
 - `.Rbuildignore` - Files to exclude from package build
 
 ### Important Functions by Category
-**Statistical Analysis**: `nice_t_test()`, `nice_contrasts()`, `nice_mod()`, `nice_lm()`
-**Tables**: `nice_table()` (publication-ready APA tables)
-**Visualization**: `nice_violin()`, `nice_scatter()`, `plot_outliers()`
-**Data Utilities**: `extract_duplicates()`, `nice_na()`, `scale_mad()`
+**SEM Syntax Generation**: `write_lavaan()` (vector-based lavaan syntax)
+**Model Fitting**: `nice_fit()` (extract fit indices with formatting)
+**Visualization**: `nice_lavaanPlot()`, `nice_tidySEM()`, `cfa_fit_plot()`
+**Data Extraction**: `lavaan_extract()`, `lavaan_reg()`, `lavaan_defined()`, `lavaan_cov()`
+**Modification Indices**: `nice_modindices()` (modification indices with labels)
 
 ## Dependencies and Package Management
 
 ### Core Dependencies (Always Required)
 ```r
 # In DESCRIPTION file:
-Imports: rlang, dplyr (>= 1.1.0)
-Depends: R (>= 3.6)
+Imports: lavaan, insight
+Depends: R (>= 3.5)
 ```
 
 ### Suggested Packages (Optional)
 Many functions require optional packages. The package uses `rlang::check_installed()` to prompt users to install needed packages when functions are called.
 
-**Key suggested packages**: flextable, ggplot2, effectsize, performance, testthat, styler, roxygen2
+**Key suggested packages**: rempsyc, flextable, lavaanPlot, tidySEM, DiagrammeRsvg, rsvg, png, webshot
 
 **ESSENTIAL for development**: reprex (mandatory for creating PR examples)
 
@@ -530,40 +533,37 @@ R --no-restore --no-save -e 'install.packages("pak", repos="https://r-lib.github
 #### Common Function-Specific Package Requirements
 **DO NOT install all of these - only install what you need for your specific function:**
 
-- **nice_table()**: flextable
-- **nice_scatter()**: ggplot2  
-- **nice_violin()**: ggplot2, boot, ggsignif
-- **nice_qq()**: ggplot2, qqplotr, ggrepel
-- **cormatrix_excel()**: correlation, openxlsx2
-- **nice_lm_slopes()**: effectsize
-- **overlap_circle()**: VennDiagram
-- **plot_outliers()**: ggplot2
+- **nice_fit()**: rempsyc (for nice_table formatting)
+- **nice_lavaanPlot()**: lavaanPlot, DiagrammeRsvg, rsvg, png, webshot  
+- **nice_tidySEM()**: tidySEM, tmvnsim
+- **nice_modindices()**: rempsyc (for nice_table formatting)
+- **cfa_fit_plot()**: base R plotting (no additional packages needed)
 
 #### Check Function Dependencies Before Installing
 ```bash
 # Find exactly which packages a function requires:
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 grep -A2 -B2 "rlang::check_installed\|requireNamespace" R/[function_file].R
 
 # Examples:
-# For nice_scatter.R: only requires ggplot2
-# For nice_table.R: only requires flextable  
-# For nice_violin.R: requires ggplot2, boot, ggsignif
+# For nice_lavaanPlot.R: requires lavaanPlot, DiagrammeRsvg, rsvg, png, webshot
+# For nice_fit.R: may require rempsyc for table formatting  
+# For nice_tidySEM.R: requires tidySEM, tmvnsim
 ```
 
 #### Targeted Installation Examples
 ```bash
-# Example 1: Working on nice_scatter() function
-R --no-restore --no-save -e 'install.packages("ggplot2", repos="https://cloud.r-project.org/")'
+# Example 1: Working on nice_lavaanPlot() function
+R --no-restore --no-save -e 'install.packages(c("lavaanPlot", "DiagrammeRsvg", "rsvg", "png", "webshot"), repos="https://cloud.r-project.org/")'
 
-# Example 2: Working on nice_table() function  
-R --no-restore --no-save -e 'install.packages("flextable", repos="https://cloud.r-project.org/")'
+# Example 2: Working on nice_fit() function  
+R --no-restore --no-save -e 'install.packages("rempsyc", repos="https://cloud.r-project.org/")'
 
-# Example 3: Working on nice_violin() function (multiple dependencies)
-R --no-restore --no-save -e 'install.packages(c("ggplot2", "boot", "ggsignif"), repos="https://cloud.r-project.org/")'
+# Example 3: Working on nice_tidySEM() function (multiple dependencies)
+R --no-restore --no-save -e 'install.packages(c("tidySEM", "tmvnsim"), repos="https://cloud.r-project.org/")'
 
-# Example 4: Working on cormatrix_excel() function
-R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), repos="https://cloud.r-project.org/")'
+# Example 4: Working on write_lavaan() function (core function, no additional packages needed)
+# No additional packages needed - uses only base R and lavaan/insight
 ```
 
 ## Code Quality and Best Practices
@@ -685,16 +685,16 @@ R --no-restore --no-save -e 'install.packages(c("correlation", "openxlsx2"), rep
 
 ### Version Numbering System
 
-The rempsyc package follows this versioning pattern:
-- **Major releases** (CRAN submissions): Two decimals (e.g., 0.1.9, 0.1.8, 0.1.7)
-- **Development versions** (between CRAN releases): Three decimals (e.g., 0.1.8.3, 0.1.8.2, 0.1.8.1)
+The lavaanExtra package follows this versioning pattern:
+- **Major releases** (CRAN submissions): Two decimals (e.g., 0.2.1, 0.2.0, 0.1.9)
+- **Development versions** (between CRAN releases): Three decimals (e.g., 0.2.1.1, 0.2.0.3, 0.2.0.2)
 
 ### When to Bump Versions
 
 **ALWAYS** bump the version for ANY change that affects the package:
-1. **Bug fixes**: Increment the third decimal (0.1.91 → 0.1.92)
-2. **New features**: Increment the third decimal (0.1.91 → 0.1.92) 
-3. **Breaking changes**: Increment the second decimal (0.1.91 → 0.2.0) - rare
+1. **Bug fixes**: Increment the third decimal (0.2.1 → 0.2.1.1)
+2. **New features**: Increment the third decimal (0.2.1 → 0.2.1.1) 
+3. **Breaking changes**: Increment the second decimal (0.2.1 → 0.3.0) - rare
 4. **Documentation-only changes**: Still increment third decimal for tracking
 
 ### Multiple Commits Within a Single PR
@@ -702,37 +702,37 @@ The rempsyc package follows this versioning pattern:
 **CRITICAL RULE**: If your PR involves multiple commits, use the same version number for ALL commits in that PR.
 
 **Correct approach for multi-commit PR**:
-1. **At the start of your PR work**: Bump version from 0.1.91 → 0.1.92 and update NEWS.md
+1. **At the start of your PR work**: Bump version from 0.2.1 → 0.2.1.1 and update NEWS.md
 2. **First commit**: Contains version bump + your first set of changes
-3. **Subsequent commits**: Use the same version (0.1.92) for any additional changes
+3. **Subsequent commits**: Use the same version (0.2.1.1) for any additional changes
 4. **Do NOT bump version again** until you start a new PR
 
 **Example of correct multi-commit PR**:
-- Commit 1: "Bump version to 0.1.92 and add new feature X"
-- Commit 2: "Fix bug in feature X (still version 0.1.92)" 
-- Commit 3: "Update documentation for feature X (still version 0.1.92)"
-- All commits use version 0.1.92, NEWS.md updated once in commit 1
+- Commit 1: "Bump version to 0.2.1.1 and add new feature X"
+- Commit 2: "Fix bug in feature X (still version 0.2.1.1)" 
+- Commit 3: "Update documentation for feature X (still version 0.2.1.1)"
+- All commits use version 0.2.1.1, NEWS.md updated once in commit 1
 
 **NEVER do this** (incorrect approach):
-- Commit 1: "Add feature X, bump to 0.1.92"
-- Commit 2: "Fix bug in feature X, bump to 0.1.93" ❌ WRONG
-- Commit 3: "Update docs, bump to 0.1.94" ❌ WRONG
+- Commit 1: "Add feature X, bump to 0.2.1.1"
+- Commit 2: "Fix bug in feature X, bump to 0.2.1.2" ❌ WRONG
+- Commit 3: "Update docs, bump to 0.2.1.3" ❌ WRONG
 
 ### How to Update Version Number
 
 1. **Edit the DESCRIPTION file**:
    ```bash
-   cd /home/runner/work/rempsyc/rempsyc
+   cd /home/runner/work/lavaanExtra/lavaanExtra
    # Find current version
    grep "Version:" DESCRIPTION
-   # Update to next version (example: 0.1.91 → 0.1.92)
+   # Update to next version (example: 0.2.1 → 0.2.1.1)
    ```
 
 2. **Version update pattern**:
    ```r
-   # Current version: 0.1.91
-   # For your PR: 0.1.92
-   # Next PR: 0.1.93
+   # Current version: 0.2.1
+   # For your PR: 0.2.1.1
+   # Next PR: 0.2.1.2
    # etc.
    ```
 
@@ -740,52 +740,52 @@ The rempsyc package follows this versioning pattern:
 
 **MANDATORY**: Add your changes to the top of NEWS.md following this exact format:
 
-1. **For first change after a major release** (e.g., after 0.1.9 was released):
+1. **For first change after a major release** (e.g., after 0.2.1 was released):
    ```markdown
-   # rempsyc 0.1.10
-   * CRAN submission (when ready)
+   # lavaanExtra 0.2.2
+   * Incoming ✨
    
-   ## rempsyc 0.1.9.1
+   ## lavaanExtra 0.2.1.1
    * Your change description here
    ```
 
-2. **For subsequent development changes** (when 0.1.9.1 already exists):
+2. **For subsequent development changes** (when 0.2.1.1 already exists):
    ```markdown
-   # rempsyc 0.1.10
-   * CRAN submission (when ready)
+   # lavaanExtra 0.2.2
+   * Incoming ✨
    
-   ## rempsyc 0.1.9.2
+   ## lavaanExtra 0.2.1.2
    * Your new change description here
    
-   ## rempsyc 0.1.9.1  
+   ## lavaanExtra 0.2.1.1  
    * Previous change description here
    ```
 
 3. **Change description guidelines**:
-   - Use function names in backticks: `nice_table()`
+   - Use function names in backticks: `write_lavaan()`
    - Be specific about what changed
-   - Include issue references if applicable: (#28)
+   - Include issue references if applicable: (#39)
    - Examples:
-     - `nice_table()`: fix bug with grouped tibbles leading to an error
-     - `nice_scatter()`: add new `color_by` argument for categorical coloring  
-     - `cormatrix_excel()` now relies entirely on `correlation::cormatrix_to_excel()` to reduce maintenance
+     - `nice_fit()`: fix bug with categorical variables leading to an error (#37)
+     - `write_lavaan()`: add new `threshold` argument for threshold operators  
+     - `nice_tidySEM()` now requires `tmvnsim` package for tidySEM compatibility
 
 ### Automated Version Management Workflow
 
 **Follow this exact sequence ONCE PER PR** (not per commit):
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 
 # Step 1: Check current version
 grep "Version:" DESCRIPTION
-grep -A5 "^# rempsyc" NEWS.md | head -10
+grep -A5 "^# lavaanExtra" NEWS.md | head -10
 
 # Step 2: Determine new version number
-# Current: 0.1.91 → New: 0.1.92 (example)
+# Current: 0.2.1 → New: 0.2.1.1 (example)
 
 # Step 3: Update DESCRIPTION file (ONCE per PR)
-sed -i 's/Version: 0.1.91/Version: 0.1.92/' DESCRIPTION
+sed -i 's/Version: 0.2.1/Version: 0.2.1.1/' DESCRIPTION
 
 # Step 4: Update NEWS.md (ONCE per PR - add entry at the top)
 # Use your preferred text editor or str_replace_editor
@@ -803,41 +803,41 @@ head -10 NEWS.md
 
 #### Example 1: Bug Fix
 ```markdown
-# In DESCRIPTION: Version: 0.1.91 → 0.1.92
+# In DESCRIPTION: Version: 0.2.1 → 0.2.1.1
 # In NEWS.md (add at top):
-## rempsyc 0.1.91.1  
-* `nice_table()`: fix column alignment issue with long variable names
+## lavaanExtra 0.2.1.1  
+* `nice_fit()`: fix bug with categorical variables leading to an error
 ```
 
 #### Example 2: New Feature  
 ```markdown
-# In DESCRIPTION: Version: 0.1.92 → 0.1.93
+# In DESCRIPTION: Version: 0.2.1.1 → 0.2.1.2
 # In NEWS.md (add at top):
-## rempsyc 0.1.92.1
-* `nice_scatter()`: add `theme_preset` argument for quick plot styling options
+## lavaanExtra 0.2.1.2
+* `write_lavaan()`: add `threshold` argument for threshold operators using "|" symbol
 ```
 
 #### Example 3: Multiple Changes
 ```markdown
-# In DESCRIPTION: Version: 0.1.93 → 0.1.94  
+# In DESCRIPTION: Version: 0.2.1.2 → 0.2.1.3  
 # In NEWS.md (add at top):
-## rempsyc 0.1.93.1
-* `nice_violin()`: improve error messages for invalid grouping variables
-* `plot_outliers()`: add support for custom outlier detection methods
-* Documentation updates for improved clarity across all visualization functions
+## lavaanExtra 0.2.1.3
+* `nice_tidySEM()`: improve compatibility with tidySEM latest version
+* `nice_modindices()`: add similarity scoring for item redundancy assessment
+* Documentation updates for improved clarity across visualization functions
 ```
 
 ### Before Submitting Your PR (Final Validation)
 **CRITICAL**: Always run this complete validation sequence to ensure workflow checks pass on first try. This should be done once before submitting your PR for review, not before every individual commit.
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 
 # 0. ENSURE: Version number and NEWS.md were already updated once at the beginning of this PR
 #    (Do NOT update them again if this is a subsequent commit in the same PR)
 
 # 1. Check for global variable binding issues first (look for "no visible binding" warnings)
-R --no-restore --no-save -e 'warnings(); R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
+R --no-restore --no-save -e 'warnings(); R CMD check lavaanExtra_*.tar.gz --no-manual --no-vignettes 2>&1 | grep -i "binding"'
 
 # 2. Lint code to identify style issues (20 seconds)
 R --no-restore --no-save -e 'library(lintr); lint_package()'
@@ -852,13 +852,13 @@ R --no-restore --no-save -e 'roxygen2::document()'
 R CMD build .
 
 # 6. Install  
-R CMD INSTALL rempsyc_*.tar.gz
+R CMD INSTALL lavaanExtra_*.tar.gz
 
 # 7. Test (11 seconds) 
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+R --no-restore --no-save -e 'library(testthat); library(lavaanExtra); test_local()'
 
 # 8. Final R CMD check for all issues (~30 seconds) - REQUIRED before PR submission
-_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vignettes
+_R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check lavaanExtra_*.tar.gz --no-manual --no-vignettes
 
 # 9. Look specifically for critical warnings that fail CI:
 # - "no visible binding for global variable"
@@ -904,16 +904,16 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
    
    # For BEFORE behavior (if modifying existing function):
    before_code <- "
-   library(rempsyc)
-   data(mtcars)
+   library(lavaanExtra)
+   latent <- list(visual = c('x1', 'x2', 'x3'))
    # [your code showing current behavior]
    "
    before_reprex <- reprex(input = before_code, venue = "gh", advertise = FALSE)
    
    # For AFTER behavior (with your changes):
    after_code <- "
-   library(rempsyc)
-   data(mtcars)
+   library(lavaanExtra)
+   latent <- list(visual = c('x1', 'x2', 'x3'))
    # [your code showing improved behavior]
    "
    after_reprex <- reprex(input = after_code, venue = "gh", advertise = FALSE)
@@ -927,26 +927,24 @@ _R_CHECK_FORCE_SUGGESTS_=FALSE R CMD check rempsyc_*.tar.gz --no-manual --no-vig
 **ESSENTIAL**: Always generate actual reprex with automatic imgur integration for plots:
 
 ```bash
-cd /home/runner/work/rempsyc/rempsyc
+cd /home/runner/work/lavaanExtra/lavaanExtra
 export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
-library(rempsyc)
+library(lavaanExtra)
 
-# Create ACTUAL reprex - plots automatically uploaded to imgur
+# Create ACTUAL reprex - SEM models and plots
 reprex_result <- reprex({
-  library(rempsyc)
-  library(ggplot2)
-
-  # Example: Create visualization with your function  
-  plot <- nice_scatter(
-    data = mtcars,
-    response = "mpg",
-    predictor = "wt", 
-    has.r = TRUE,
-    has.p = TRUE
+  library(lavaanExtra)
+  
+  # Example: Create SEM model syntax
+  latent <- list(
+    visual = c("x1", "x2", "x3"),
+    textual = c("x4", "x5", "x6")
   )
   
-  print(plot)
+  model <- write_lavaan(latent = latent)
+  cat("Generated lavaan model:\n")
+  cat(model)
   
 }, venue = "gh", advertise = TRUE, html_preview = FALSE)
 
@@ -1094,26 +1092,26 @@ cat(result, sep = "\n")
 export CLIPR_ALLOW=TRUE && R --no-restore --no-save -e '
 library(reprex)
 
-# Working reprex example with rempsyc
+# Working reprex example with lavaanExtra
 result <- reprex({
-  library(rempsyc)
+  library(lavaanExtra)
   
-  # Example with extract_duplicates function
-  df1 <- data.frame(
-    id = c(1, 2, 3, 1, 3),
-    score = c(NA, 85, 92, 88, 95)
+  # Example with write_lavaan function
+  latent <- list(
+    visual = c("x1", "x2", "x3"),
+    textual = c("x4", "x5", "x6")
   )
   
-  print("Original data:")
-  print(df1)
+  print("Latent variable specification:")
+  print(latent)
   
-  duplicates <- extract_duplicates(df1, id = "id")
-  print("Duplicates found:")
-  print(duplicates)
+  model <- write_lavaan(latent = latent)
+  print("Generated lavaan syntax:")
+  cat(model)
   
 }, venue = "gh", advertise = FALSE, html_preview = FALSE)
 
-cat("SUCCESS: rempsyc reprex working\n")
+cat("SUCCESS: lavaanExtra reprex working\n")
 cat(result, sep = "\n")
 '
 ```
@@ -1140,9 +1138,9 @@ export CLIPR_ALLOW=TRUE
 library(reprex)
 
 result <- reprex({
-  library(rempsyc)
+  library(lavaanExtra)
   
-  # Your rempsyc example here
+  # Your lavaanExtra example here
   # Keep it simple, avoid complex plots in reprex
   
 }, venue = "gh", advertise = FALSE, html_preview = FALSE)
@@ -1154,17 +1152,18 @@ The following are outputs from frequently used commands. Reference them instead 
 
 ### Repository Root Structure
 ```
-ls -la /home/runner/work/rempsyc/rempsyc/
+ls -la /home/runner/work/lavaanExtra/lavaanExtra/
 
 .Rbuildignore       - Files to exclude from package build
 .github/            - GitHub workflows and actions
 .gitignore          - Git ignore patterns
 CITATION.cff        - Citation metadata
 DESCRIPTION         - Package metadata and dependencies
-LICENSE.md          - Package license (GPL 3+)
+LICENSE             - Package license (MIT)
+LICENSE.md          - Package license text
 NAMESPACE           - Package exports (auto-generated)
 NEWS.md             - Change log
-R/                  - R source code (34+ files)
+R/                  - R source code (13+ files)
 README.Rmd          - Source for README (edit this, not README.md)
 README.md           - Main repository documentation
 TODOS.md            - Development roadmap
@@ -1172,21 +1171,27 @@ cran-comments.md    - CRAN submission notes
 docs/               - pkgdown documentation site
 inst/               - Package installation files
 man/                - Help documentation (auto-generated)
+paper/              - JOSS paper and documentation
+pkgdown/            - pkgdown website assets  
 tests/              - Test files (testthat framework)
 vignettes/          - R Markdown tutorials
 ```
 
 ### Core R Functions by File
 ```
-R/nice_t_test.R      - t-test analysis
-R/nice_table.R       - APA formatted tables  
-R/nice_scatter.R     - Scatter plot visualization (uses .data[[var]] notation)
-R/nice_violin.R      - Violin plot visualization
-R/extract_duplicates.R - Data cleaning utilities
-R/nice_na.R          - Missing data analysis
-R/format_value.R     - Value formatting (p, r, d values)
-R/scale_mad.R        - Robust standardization
-R/global_variables.R - DEPRECATED: Do not add to this file
+R/write_lavaan.R      - Vector-based lavaan syntax interpreter
+R/nice_fit.R          - Extract and format fit indices  
+R/nice_lavaanPlot.R   - Create publication-ready SEM diagrams
+R/nice_tidySEM.R      - tidySEM integration and formatting
+R/nice_modindices.R   - Modification indices with labels
+R/lavaan_extract.R    - Extract lavaan results with specific operators
+R/lavaan_reg.R        - Extract regression paths
+R/lavaan_defined.R    - Extract user-defined parameters (:= operator)
+R/lavaan_cov.R        - Extract covariances 
+R/lavaan_var.R        - Extract variances
+R/cfa_fit_plot.R      - CFA fit visualization
+R/utils.R             - Utility functions
+R/zzz.R               - Package startup functions
 ```
 
 ### Code Quality Examples
@@ -1252,21 +1257,21 @@ When packages can't be installed from CRAN:
 Before making any PR, verify locally:
 ```bash
 # Must show ZERO "no visible binding" warnings:
-R CMD check rempsyc_*.tar.gz 2>&1 | grep -i "binding"
+R CMD check lavaanExtra_*.tar.gz 2>&1 | grep -i "binding"
 
 # Must show ZERO "Codoc mismatches" warnings:  
-R CMD check rempsyc_*.tar.gz 2>&1 | grep -i "codoc"
+R CMD check lavaanExtra_*.tar.gz 2>&1 | grep -i "codoc"
 
-# All tests must pass (94+ passing tests expected):
-R --no-restore --no-save -e 'library(testthat); library(rempsyc); test_local()'
+# All tests must pass (40+ passing tests expected):
+R --no-restore --no-save -e 'library(testthat); library(lavaanExtra); test_local()'
 ```
 
 #### 5. PR Description Requirements  
 **CRITICAL**: Always include reprexes in PR descriptions to demonstrate code changes:
 ```r
 # Create examples showing before/after behavior:
-library(rempsyc)
-data(mtcars)
+library(lavaanExtra)
+latent <- list(visual = c("x1", "x2", "x3"))
 
 # BEFORE (if modifying existing function):
 # [show current behavior]
@@ -1279,8 +1284,8 @@ data(mtcars)
 
 - Package build: ~19 seconds
 - Package install: ~3 seconds  
-- Test suite: ~11 seconds (99 tests: 94 pass, 5 snapshot failures expected)
-- Linting: ~20 seconds (673 style issues - normal for existing codebase)
+- Test suite: ~11 seconds (40+ tests: most should pass)
+- Linting: ~20 seconds (style issues may be found)
 - Code styling: ~10-30 seconds depending on package size
 - Documentation update: ~5-15 seconds (roxygen2)
 - R CMD check: ~29 seconds (without suggested packages), 2-5 minutes (full check)
@@ -1290,4 +1295,4 @@ data(mtcars)
 
 **CRITICAL**: Never cancel builds or tests prematurely. Always wait for completion and set appropriate timeouts (60+ seconds for builds, 30+ seconds for tests, 10+ minutes for R CMD check).
 
-**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. The pre-configured environment installs only core development packages (~2-3 minutes); installing additional suggested packages takes 1-5 seconds each when needed, vs 2-10 minutes for all 22+ suggested packages at once.
+**PACKAGE INSTALLATION**: Use targeted installation (install only what the specific function needs) to avoid "The package installation is taking a long time" messages. The pre-configured environment installs only core development packages (~2-3 minutes); installing additional suggested packages takes 1-5 seconds each when needed, vs 2-10 minutes for all 15+ suggested packages at once.
