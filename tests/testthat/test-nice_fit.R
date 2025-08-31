@@ -93,4 +93,34 @@ test_that("nice_fit test categorical variable", {
   )
 })
 
+test_that("nice_fit cutoffs parameter works", {
+  skip_if_not_installed("rempsyc")
+  
+  # Test with cutoffs = TRUE (should have footer content)
+  result_with_cutoffs <- nice_fit(fit, nice_table = TRUE, cutoffs = TRUE, verbose = FALSE)
+  expect_s3_class(result_with_cutoffs, "flextable")
+  expect_gt(length(result_with_cutoffs$footer$content$data), 0)
+  
+  # Test with cutoffs = FALSE (should have no footer content)
+  result_without_cutoffs <- nice_fit(fit, nice_table = TRUE, cutoffs = FALSE, verbose = FALSE)
+  expect_s3_class(result_without_cutoffs, "flextable") 
+  expect_equal(length(result_without_cutoffs$footer$content$data), 0)
+})
+
+test_that("nice_fit cutoffs parameter defaults to guidelines value", {
+  skip_if_not_installed("rempsyc")
+  
+  # Test that cutoffs defaults to guidelines value
+  result_guidelines_true <- nice_fit(fit, nice_table = TRUE, guidelines = TRUE, verbose = FALSE)
+  result_cutoffs_true <- nice_fit(fit, nice_table = TRUE, cutoffs = TRUE, verbose = FALSE)
+  
+  # Both should have footer content when cutoffs/guidelines are TRUE
+  expect_gt(length(result_guidelines_true$footer$content$data), 0)
+  expect_gt(length(result_cutoffs_true$footer$content$data), 0)
+  
+  # Test that cutoffs can override guidelines
+  result_mixed <- nice_fit(fit, nice_table = TRUE, guidelines = TRUE, cutoffs = FALSE, verbose = FALSE)
+  expect_equal(length(result_mixed$footer$content$data), 0)
+})
+
 

@@ -9,14 +9,14 @@
 #'  biased (\doi{10.1007/s11336-016-9552-7}) in a noticeable
 #'  way for smaller samples (thanks to James Uanhoro for this change).
 #'
-#'  If using `guidelines = TRUE`, please carefully consider the following 2023
+#'  If using `guidelines = TRUE` or `cutoffs = TRUE`, please carefully consider the following 2023
 #'  quote from Terrence D. Jorgensen:
 #'
 #'  _I do not recommend including cutoffs in the table, as doing so would
 #'  perpetuate their misuse. Fit indices are not test statistics, and their
 #'  suggested cutoffs are not critical values associated with known Type I
 #'  error rates. Numerous simulation studies have shown how poorly cutoffs
-#'  perform in model selection (e.g., , Jorgensen et al. (2018). Instead of
+#'  perform in model selection (e.g., Jorgensen et al., 2018). Instead of
 #'  test statistics, fit indices were designed to be measures of effect size
 #'  (practical significance), which complement the chi-squared test of
 #'  statistical significance. The range of RMSEA interpretations above is more
@@ -34,6 +34,10 @@
 #' @param guidelines Logical, if `nice_table = TRUE`, whether to display
 #'  include reference values based on Schreiber (2017), Table 3, at the
 #'  bottom of the table.
+#' @param cutoffs Logical, if `nice_table = TRUE`, whether to display
+#'  suggested fit index cutoffs at the bottom of the table. Defaults to 
+#'  same value as `guidelines`. Setting this to `FALSE` provides a way to 
+#'  hide cutoffs while keeping other guideline information.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
 #'              significance stars (defaults to `FALSE`).
 #' @param verbose Logical, whether to display messages and warnings.
@@ -44,6 +48,10 @@
 #' @references Schreiber, J. B. (2017). Update to core reporting practices in
 #' structural equation modeling. *Research in social and administrative pharmacy*,
 #' *13*(3), 634-643. \doi{10.1016/j.sapharm.2016.06.006}
+#' 
+#' Jorgensen, T. D., Pornprasertmanit, S., Schoemann, A. M., & Rosseel, Y. (2018).
+#' Useful tools for structural equation modeling. *Structural Equation Modeling*, 
+#' *25*(1), 1-27. \doi{10.1037/met0000152}
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' x <- paste0("x", 1:9)
 #' (latent <- list(
@@ -68,6 +76,7 @@ nice_fit <- function(model,
                      model.labels,
                      nice_table = FALSE,
                      guidelines = TRUE,
+                     cutoffs = guidelines,
                      stars = FALSE,
                      verbose = TRUE) {
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
@@ -122,9 +131,9 @@ nice_fit <- function(model,
     table <- rempsyc::nice_table(x, stars = stars)
     table <- flextable::align(table, align = "center", part = "all")
 
-    if (isTRUE(guidelines)) {
+    if (isTRUE(cutoffs)) {
       values_to_add <- c(
-        Model = "Common guidelines",
+        Model = "Suggested cutoffs",
         chi2 = "\u2014",
         df = "\u2014",
         chi2.df = "< 2 or 3",

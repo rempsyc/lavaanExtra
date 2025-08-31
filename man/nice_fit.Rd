@@ -9,6 +9,7 @@ nice_fit(
   model.labels,
   nice_table = FALSE,
   guidelines = TRUE,
+  cutoffs = guidelines,
   stars = FALSE,
   verbose = TRUE
 )
@@ -26,6 +27,11 @@ is unnamed, defaults to generic numbering.}
 \item{guidelines}{Logical, if \code{nice_table = TRUE}, whether to display
 include reference values based on Schreiber (2017), Table 3, at the
 bottom of the table.}
+
+\item{cutoffs}{Logical, if \code{nice_table = TRUE}, whether to display
+suggested fit index cutoffs at the bottom of the table. Defaults to
+same value as \code{guidelines}. Setting this to \code{FALSE} provides a way to
+hide cutoffs while keeping other guideline information.}
 
 \item{stars}{Logical, if \code{nice_table = TRUE}, whether to display
 significance stars (defaults to \code{FALSE}).}
@@ -48,14 +54,14 @@ Note that \code{nice_fit} reports the unbiased SRMR through
 biased (\doi{10.1007/s11336-016-9552-7}) in a noticeable
 way for smaller samples (thanks to James Uanhoro for this change).
 
-If using \code{guidelines = TRUE}, please carefully consider the following 2023
+If using \code{guidelines = TRUE} or \code{cutoffs = TRUE}, please carefully consider the following 2023
 quote from Terrence D. Jorgensen:
 
 \emph{I do not recommend including cutoffs in the table, as doing so would
 perpetuate their misuse. Fit indices are not test statistics, and their
 suggested cutoffs are not critical values associated with known Type I
 error rates. Numerous simulation studies have shown how poorly cutoffs
-perform in model selection (e.g., , Jorgensen et al. (2018). Instead of
+perform in model selection (e.g., Jorgensen et al., 2018). Instead of
 test statistics, fit indices were designed to be measures of effect size
 (practical significance), which complement the chi-squared test of
 statistical significance. The range of RMSEA interpretations above is more
@@ -90,4 +96,8 @@ nice_fit(fit)
 Schreiber, J. B. (2017). Update to core reporting practices in
 structural equation modeling. \emph{Research in social and administrative pharmacy},
 \emph{13}(3), 634-643. \doi{10.1016/j.sapharm.2016.06.006}
+
+Jorgensen, T. D., Pornprasertmanit, S., Schoemann, A. M., & Rosseel, Y. (2018).
+Useful tools for structural equation modeling. \emph{Structural Equation Modeling},
+\emph{25}(1), 1-27. \doi{10.1037/met0000152}
 }

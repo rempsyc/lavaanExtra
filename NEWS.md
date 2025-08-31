@@ -1,8 +1,8 @@
 # lavaanExtra 0.2.2
 * Incoming ✨
 
-# lavaanExtra 0.2.1.1
-* Incoming ✨
+## lavaanExtra 0.2.1.1
+* `nice_fit()`: add `cutoffs` argument to control display of fit index cutoffs, addressing JOSS review feedback (#21)
 
 # lavaanExtra 0.2.1
 * New CRAN submission
