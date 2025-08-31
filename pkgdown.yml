@@ -1,5 +1,5 @@
 pandoc: 3.1.11
-pkgdown: 2.0.9
+pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   example: example.html
@@ -7,8 +7,7 @@ articles:
   indirect: indirect.html
   regression: regression.html
   write_lavaan: write_lavaan.html
-last_built: 2024-07-01T19:40Z
+last_built: 2025-08-31T03:23Z
 urls:
   reference: https://lavaanExtra.remi-theriault.com/reference
   article: https://lavaanExtra.remi-theriault.com/articles
-

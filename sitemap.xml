@@ -1,84 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/404.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/CONTRIBUTING.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/LICENSE-text.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/LICENSE.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/TODOS.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/example.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/fullworkflow.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/indirect.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/regression.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/articles/write_lavaan.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/cfa_fit_plot.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaanExtra-package.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_cov.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_defined.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_extract.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_reg.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_var.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/nice_fit.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/nice_lavaanPlot.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/nice_modindices.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/nice_tidySEM.html</loc>
-  </url>
-  <url>
-    <loc>https://lavaanExtra.remi-theriault.com/reference/write_lavaan.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://lavaanExtra.remi-theriault.com/404.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/CONTRIBUTING.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/LICENSE-text.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/LICENSE.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/TODOS.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/example.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/fullworkflow.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/index.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/indirect.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/regression.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/articles/write_lavaan.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/authors.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/copilot-instructions.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/index.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/news/index.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/cfa_fit_plot.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/index.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaanExtra-package.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_cov.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_defined.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_extract.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_reg.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/lavaan_var.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/nice_fit.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/nice_lavaanPlot.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/nice_modindices.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/nice_tidySEM.html</loc></url>
+<url><loc>https://lavaanExtra.remi-theriault.com/reference/write_lavaan.html</loc></url>
 </urlset>
+
