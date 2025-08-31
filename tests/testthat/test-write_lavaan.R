@@ -20,6 +20,9 @@ latent <- list(
 # Define indirect effects object
 indirect <- list(IV = IV, M = M, DV = DV)
 
+# Define total effects object
+total <- list(IV = IV, DV = DV)
+
 # Special cases
 intercept <- c("mpg", "cyl", "disp")
 constraint.equal <- list(b1 = "(b2 + b3)^2")
@@ -103,12 +106,75 @@ test_that("write_lavaan using custom", {
   expect_snapshot(cat(write_lavaan(custom = custom)))
 })
 
+test_that("write_lavaan using total effects", {
+  # Simple total effects
+  total_simple <- list(IV = "ageyr", DV = "speed")
+  mediation_simple <- list(speed = "visual", visual = "ageyr")
+  regression_simple <- list(speed = "ageyr")
+  expect_snapshot(cat(write_lavaan(
+    mediation = mediation_simple,
+    regression = regression_simple,
+    total = total_simple,
+    label = TRUE
+  )))
+})
+
+test_that("write_lavaan using total effects multiple IVs and DVs", {
+  # Multiple IVs and DVs
+  total_multi <- list(IV = c("ageyr", "grade"), DV = c("speed", "textual"))
+  mediation_multi <- list(speed = "visual", textual = "visual", visual = c("ageyr", "grade"))
+  regression_multi <- list(speed = c("ageyr", "grade"), textual = c("ageyr", "grade"))
+  expect_snapshot(cat(write_lavaan(
+    mediation = mediation_multi,
+    regression = regression_multi,
+    total = total_multi,
+    label = TRUE
+  )))
+})
+
+test_that("write_lavaan using total effects with letters", {
+  # Total effects with letter labeling
+  total_letters <- list(IV = "ageyr", DV = "speed")
+  mediation_letters <- list(speed = "visual", visual = "ageyr")
+  regression_letters <- list(speed = "ageyr")
+  expect_snapshot(cat(write_lavaan(
+    mediation = mediation_letters,
+    regression = regression_letters,
+    total = total_letters,
+    label = TRUE,
+    use.letters = TRUE
+  )))
+})
+
+test_that("write_lavaan using total effects direct only", {
+  # Total effects when only direct paths exist (no mediators)
+  total_direct <- list(IV = "ageyr", DV = "speed")
+  regression_direct <- list(speed = "ageyr")
+  expect_snapshot(cat(write_lavaan(
+    regression = regression_direct,
+    total = total_direct,
+    label = TRUE
+  )))
+})
+
+test_that("write_lavaan using total effects indirect only", {
+  # Total effects when only indirect paths exist (no direct paths)
+  total_indirect <- list(IV = "ageyr", DV = "speed") 
+  mediation_indirect <- list(speed = "visual", visual = "ageyr")
+  expect_snapshot(cat(write_lavaan(
+    mediation = mediation_indirect,
+    total = total_indirect,
+    label = TRUE
+  )))
+})
+
 test_that("write_lavaan using everything", {
   expect_snapshot(cat(write_lavaan(
     mediation = mediation,
     regression = regression,
     covariance = covariance,
     indirect = indirect,
+    total = total,
     latent = latent,
     intercept = intercept,
     threshold = threshold,

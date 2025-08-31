@@ -180,13 +180,121 @@
       
       y1 + y2 ~ f1 + f2 + x1 + x2
 
+# write_lavaan using total effects
+
+    Code
+      cat(write_lavaan(mediation = mediation_simple, regression = regression_simple,
+        total = total_simple, label = TRUE))
+    Output
+      ##################################################
+      # [-----------Mediations (named paths)-----------]
+      
+      speed ~ visual_speed*visual
+      visual ~ ageyr_visual*ageyr
+      
+      ##################################################
+      # [---------Regressions (Direct effects)---------]
+      
+      speed ~ ageyr
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := ageyr_speed + ageyr_visual * visual_speed
+      
+
+# write_lavaan using total effects multiple IVs and DVs
+
+    Code
+      cat(write_lavaan(mediation = mediation_multi, regression = regression_multi,
+        total = total_multi, label = TRUE))
+    Output
+      ##################################################
+      # [-----------Mediations (named paths)-----------]
+      
+      speed ~ visual_speed*visual
+      textual ~ visual_textual*visual
+      visual ~ ageyr_visual*ageyr + grade_visual*grade
+      
+      ##################################################
+      # [---------Regressions (Direct effects)---------]
+      
+      speed ~ ageyr + grade
+      textual ~ ageyr + grade
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := ageyr_speed + ageyr_visual * visual_speed
+      ageyr_total_textual := ageyr_textual + ageyr_visual * visual_textual
+      grade_total_speed := grade_speed + grade_visual * visual_speed
+      grade_total_textual := grade_textual + grade_visual * visual_textual
+      
+
+# write_lavaan using total effects with letters
+
+    Code
+      cat(write_lavaan(mediation = mediation_letters, regression = regression_letters,
+        total = total_letters, label = TRUE, use.letters = TRUE))
+    Output
+      ##################################################
+      # [-----------Mediations (named paths)-----------]
+      
+      speed ~ a_speed*visual
+      visual ~ a_visual*ageyr
+      
+      ##################################################
+      # [---------Regressions (Direct effects)---------]
+      
+      speed ~ ageyr
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := a_speed + a_visual * a_speed
+      
+
+# write_lavaan using total effects direct only
+
+    Code
+      cat(write_lavaan(regression = regression_direct, total = total_direct, label = TRUE))
+    Output
+      ##################################################
+      # [---------Regressions (Direct effects)---------]
+      
+      speed ~ ageyr
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := ageyr_speed
+      
+
+# write_lavaan using total effects indirect only
+
+    Code
+      cat(write_lavaan(mediation = mediation_indirect, total = total_indirect, label = TRUE))
+    Output
+      ##################################################
+      # [-----------Mediations (named paths)-----------]
+      
+      speed ~ visual_speed*visual
+      visual ~ ageyr_visual*ageyr
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := ageyr_visual * visual_speed
+      
+
 # write_lavaan using everything
 
     Code
       cat(write_lavaan(mediation = mediation, regression = regression, covariance = covariance,
-        indirect = indirect, latent = latent, intercept = intercept, threshold = threshold,
-        constraint.equal = constraint.equal, constraint.smaller = constraint.smaller,
-        constraint.larger = constraint.larger, custom = custom, label = TRUE))
+        indirect = indirect, total = total, latent = latent, intercept = intercept,
+        threshold = threshold, constraint.equal = constraint.equal,
+        constraint.smaller = constraint.smaller, constraint.larger = constraint.larger,
+        custom = custom, label = TRUE))
     Output
       ##################################################
       # [-----Latent variables (measurement model)-----]
@@ -221,6 +329,14 @@
       ageyr_visual_textual := ageyr_visual * visual_textual
       grade_visual_speed := grade_visual * visual_speed
       grade_visual_textual := grade_visual * visual_textual
+      
+      ##################################################
+      # [-----------Total effects (direct + indirect)----------]
+      
+      ageyr_total_speed := ageyr_speed + ageyr_visual * visual_speed
+      ageyr_total_textual := ageyr_textual + ageyr_visual * visual_textual
+      grade_total_speed := grade_speed + grade_visual * visual_speed
+      grade_total_textual := grade_textual + grade_visual * visual_textual
       
       ##################################################
       # [------------------Intercepts------------------]

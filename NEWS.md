@@ -1,8 +1,8 @@
 # lavaanExtra 0.2.2
 * Incoming ✨
 
-# lavaanExtra 0.2.1.1
-* Incoming ✨
+## lavaanExtra 0.2.1.1
+* `write_lavaan()`: add new `total` argument for automatic calculation of total effects (direct + indirect effects), particularly useful for time series and panel data models (#4)
 
 # lavaanExtra 0.2.1
 * New CRAN submission
