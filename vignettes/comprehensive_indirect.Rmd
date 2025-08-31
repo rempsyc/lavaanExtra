@@ -1,0 +1,277 @@
+---
+title: "Comprehensive Indirect Effects (x.boot-inspired)"
+author: "lavaanExtra Team"
+date: "`r Sys.Date()`"
+output:
+  rmarkdown::html_vignette:
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{Comprehensive Indirect Effects (x.boot-inspired)}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  eval = TRUE
+)
+```
+
+```{r setup, message=FALSE}
+library(lavaanExtra)
+library(lavaan)
+```
+
+## Overview
+
+This vignette demonstrates the new comprehensive indirect effects discovery feature in lavaanExtra, inspired by Christian Dorri's x.boot extension concept. This feature automatically identifies and generates syntax for ALL possible indirect effects in your structural equation model, eliminating the need for manual specification.
+
+## The Problem with Manual Indirect Effects
+
+Traditional approaches to indirect effects require you to manually specify each indirect pathway:
+
+```{r manual_approach, eval=FALSE}
+# Manual approach - easy to miss pathways or make errors
+manual_indirect <- list(
+  X_M1_Y = c("X_M1", "M1_Y"),
+  X_M2_Y = c("X_M2", "M2_Y"),
+  X_M1_M2_Y = c("X_M1", "M1_M2", "M2_Y")  # Easy to forget!
+)
+```
+
+With complex models containing multiple mediators and outcome variables, manually specifying all indirect effects becomes error-prone and time-consuming.
+
+## The x.boot-Inspired Solution
+
+The new comprehensive discovery approach automatically finds ALL indirect effects using graph traversal algorithms:
+
+```{r comprehensive_approach}
+# Comprehensive automatic discovery
+mediation <- list(
+  M1 = "X",
+  M2 = c("X", "M1"), 
+  Y = c("M1", "M2")
+)
+
+# Simply set indirect = TRUE for comprehensive discovery
+model <- write_lavaan(
+  mediation = mediation,
+  indirect = TRUE,  # Automatically discover ALL indirect effects
+  label = TRUE
+)
+
+cat(model)
+```
+
+## How It Works
+
+The comprehensive indirect effects discovery:
+
+1. **Parses your model** into a directed graph structure
+2. **Identifies all pathways** using depth-first search algorithms  
+3. **Finds indirect chains** of any length (with user-specified limits)
+4. **Generates lavaan syntax** for all discovered indirect effects
+5. **Provides performance safeguards** for complex models
+
+## Comparison: Traditional vs Comprehensive
+
+### Traditional Structured Approach
+
+The existing lavaanExtra approach requires structured IV/M/DV specification:
+
+```{r structured_approach}
+# Traditional structured approach
+IV <- c("ageyr", "grade")
+M <- "visual" 
+DV <- c("speed", "textual")
+
+mediation_structured <- list(
+  speed = M, 
+  textual = M, 
+  visual = IV
+)
+
+indirect_structured <- list(IV = IV, M = M, DV = DV)
+
+model_structured <- write_lavaan(
+  mediation = mediation_structured,
+  indirect = indirect_structured,
+  label = TRUE
+)
+
+cat(model_structured)
+```
+
+### Comprehensive Discovery Approach
+
+The new approach automatically discovers all pathways:
+
+```{r comprehensive_comparison}
+# Comprehensive discovery approach  
+model_comprehensive <- write_lavaan(
+  mediation = mediation_structured,
+  indirect = TRUE,  # Automatic comprehensive discovery
+  label = TRUE
+)
+
+cat(model_comprehensive)
+```
+
+## Advanced Usage
+
+### Controlling Discovery Parameters
+
+You can fine-tune the discovery process:
+
+```{r advanced_usage}
+# Advanced parameter control
+model_controlled <- write_lavaan(
+  mediation = mediation_structured,
+  indirect = TRUE,
+  label = TRUE,
+  auto_indirect_max_length = 4,    # Maximum chain length
+  auto_indirect_limit = 100        # Performance limit
+)
+```
+
+### Complex Multi-Level Models  
+
+The comprehensive approach excels with complex models:
+
+```{r complex_model}
+# Complex mediation model
+complex_mediation <- list(
+  M1 = c("X1", "X2"),
+  M2 = c("X1", "X2", "M1"),
+  M3 = c("M1", "M2"),
+  Y1 = c("X1", "M1", "M2", "M3"),
+  Y2 = c("X2", "M2", "M3")
+)
+
+complex_model <- write_lavaan(
+  mediation = complex_mediation,
+  indirect = TRUE,
+  label = TRUE,
+  auto_indirect_max_length = 5
+)
+
+# Count discovered indirect effects
+indirect_count <- length(gregexpr(":=", complex_model)[[1]])
+cat("Discovered", indirect_count, "indirect effects automatically!\n\n")
+
+# Show first few lines of the model
+cat(paste(head(strsplit(complex_model, "\n")[[1]], 15), collapse = "\n"))
+```
+
+## Using the Standalone Function
+
+You can also use the discovery function independently:
+
+```{r standalone_usage}
+# Define a model syntax
+model_syntax <- '
+  # Mediation paths
+  M1 ~ a1*X1 + a2*X2
+  M2 ~ b1*X1 + b2*X2 + b3*M1
+  Y ~ c1*X1 + c2*X2 + c3*M1 + c4*M2
+'
+
+# Discover all indirect effects
+all_indirect <- discover_all_indirect_effects(
+  model = model_syntax,
+  max_chain_length = 4
+)
+
+# View discovered effects
+str(all_indirect)
+```
+
+## Performance Considerations
+
+### Computational Complexity
+
+The comprehensive discovery can be computationally intensive for large models. Use these parameters to manage performance:
+
+- `auto_indirect_max_length`: Limits the length of indirect chains
+- `auto_indirect_limit`: Sets maximum number of effects to discover
+
+### Best Practices
+
+```{r best_practices, eval=FALSE}
+# For small-medium models (< 20 variables)
+write_lavaan(mediation = mediation, indirect = TRUE)
+
+# For larger models, use limits
+write_lavaan(
+  mediation = mediation, 
+  indirect = TRUE,
+  auto_indirect_max_length = 3,  # Shorter chains
+  auto_indirect_limit = 500      # Reasonable limit
+)
+
+# For very large models, consider the structured approach
+indirect_structured <- list(IV = IV, M = M, DV = DV)
+write_lavaan(mediation = mediation, indirect = indirect_structured)
+```
+
+## Comparison with Other Software
+
+This comprehensive approach provides functionality similar to:
+
+- **Amos**: Automatic indirect effects calculation
+- **Mplus**: Model indirect command
+- **LISREL**: Automatic effect decomposition
+
+But with the flexibility of lavaan's open-source ecosystem and lavaanExtra's modular syntax.
+
+## When to Use Each Approach
+
+### Use Comprehensive Discovery (`indirect = TRUE`) When:
+- You want to ensure no indirect effects are missed
+- Working with complex mediation models
+- Exploring models for unexpected pathways
+- You prefer automated approaches
+
+### Use Structured Approach (`indirect = list(IV, M, DV)`) When:
+- You have clear theoretical IV/M/DV structure  
+- Working with very large models (performance reasons)
+- You want to maintain existing workflows
+- You need backward compatibility
+
+### Use Manual Specification When:
+- You want specific indirect effects only
+- You have non-standard pathway definitions
+- Maximum control over included effects
+- Custom effect naming is required
+
+## Migration Guide
+
+Existing lavaanExtra code continues to work unchanged:
+
+```{r migration, eval=FALSE}
+# Existing code works exactly as before
+old_approach <- write_lavaan(
+  mediation = mediation,
+  indirect = list(IV = IV, M = M, DV = DV)
+)
+
+# New comprehensive approach is opt-in
+new_approach <- write_lavaan(
+  mediation = mediation,
+  indirect = TRUE  # New: comprehensive discovery
+)
+```
+
+## Conclusion
+
+The comprehensive indirect effects discovery feature brings lavaanExtra's automatic capabilities to the next level, providing:
+
+- **Complete coverage** of all indirect pathways
+- **Reduced specification errors** 
+- **Time savings** for complex models
+- **Research-friendly** comprehensive output
+- **Backward compatibility** with existing approaches
+
+This x.boot-inspired enhancement makes lavaanExtra more powerful while maintaining its ease of use and flexibility.

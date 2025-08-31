@@ -1,3 +1,14 @@
+# lavaanExtra 0.2.3
+* Incoming ✨
+
+## lavaanExtra 0.2.2
+* **Major Enhancement**: Added comprehensive indirect effects discovery (x.boot-inspired) to `write_lavaan()`
+* **New Function**: `discover_all_indirect_effects()` automatically identifies ALL possible indirect pathways in SEM models using graph traversal algorithms
+* **Enhanced `write_lavaan()`**: Now supports `indirect = TRUE` for comprehensive automatic indirect effects discovery, maintaining backward compatibility with existing approaches
+* **New Parameters**: Added `auto_indirect_max_length` and `auto_indirect_limit` to control performance and complexity of automatic discovery
+* **New Vignette**: Added comprehensive documentation for x.boot-inspired indirect effects functionality
+* This enhancement addresses the investigation request for Christian Dorri's x.boot extension concept, providing Amos-like comprehensive indirect effects discovery without manual specification requirements
+
 # lavaanExtra 0.2.2
 * Incoming ✨
 

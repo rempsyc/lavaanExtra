@@ -10,11 +10,13 @@
 #' @param covariance (Residual) (co)variance indicators (`~~` symbol:
 #'                   "is correlated with").
 #' @param indirect Indirect effect indicators (`:=` symbol: "indirect
-#'                 effect defined as"). If a named list is provided,
-#'                 with names "IV" (independent variables), "M" (mediator),
-#'                 and "DV" (dependent variables), `write_lavaan` attempts to
-#'                 write indirect effects automatically. In this case, the
-#'                 `mediation` argument must be specified too.
+#'                 effect defined as"). Can be:
+#'                 1) A named list with manual indirect effect definitions
+#'                 2) A named list with "IV", "M", "DV" for structured auto-generation
+#'                 3) `TRUE` to discover ALL indirect effects automatically (x.boot-inspired)
+#'                 4) `NULL` (default) for no indirect effects
+#'                 When using option 2, the `mediation` argument must be specified too.
+#'                 Option 3 uses comprehensive graph-based discovery.
 #' @param latent Latent variable indicators (`=~` symbol: "is measured by").
 #' @param intercept Intercept indicators (`~ 1` symbol: "intercept").
 #' @param threshold Threshold indicators (`|` symbol: "threshold").
@@ -28,6 +30,11 @@
 #'              mediation argument.
 #' @param use.letters Logical, for the labels, whether to use letters
 #'                    instead of the variable names.
+#' @param auto_indirect_max_length When using `indirect = TRUE`, the maximum 
+#'                    length of indirect effect chains to discover. Default is 5.
+#' @param auto_indirect_limit When using `indirect = TRUE`, the maximum number
+#'                    of indirect effects to discover (performance safeguard). 
+#'                    Default is 1000.
 #' @return A character string, representing the specified `lavaan` model.
 #' @seealso The corresponding vignette: <https://lavaanextra.remi-theriault.com/articles/write_lavaan.html>
 #' @export
@@ -41,6 +48,19 @@
 #'
 #' HS.model <- write_lavaan(latent = latent)
 #' cat(HS.model)
+#' 
+#' # Example with comprehensive indirect effects (x.boot-inspired)
+#' mediation <- list(textual = "visual", speed = "visual") 
+#' regression <- list(textual = "ageyr", speed = "ageyr")
+#' 
+#' # Automatically discover ALL indirect effects
+#' model_auto <- write_lavaan(
+#'   mediation = mediation,
+#'   regression = regression, 
+#'   indirect = TRUE,  # Enable comprehensive discovery
+#'   label = TRUE
+#' )
+#' cat(model_auto)
 #'
 #' library(lavaan)
 #' fit <- lavaan(HS.model,
@@ -61,7 +81,9 @@ write_lavaan <- function(mediation = NULL,
                          constraint.larger = NULL,
                          custom = NULL,
                          label = FALSE,
-                         use.letters = FALSE) {
+                         use.letters = FALSE,
+                         auto_indirect_max_length = 5,
+                         auto_indirect_limit = 1000) {
   constraint <- NULL
   hashtag <- sprintf("%s\n", paste0(rep("#", 50), collapse = ""))
   process_vars <- function(x,
@@ -95,9 +117,31 @@ write_lavaan <- function(mediation = NULL,
         "[-----Latent variables (measurement model)-----]"
     )
   }
-  #### AUTOMATIC INDIRECT EFFECTS!!! ####
+  #### AUTOMATIC INDIRECT EFFECTS (Enhanced x.boot-inspired) ####
   if (!is.null(indirect)) {
-    if (all(names(indirect) %in% c("IV", "M", "DV"))) {
+    # Option 1: Comprehensive automatic discovery (x.boot-inspired)
+    if (isTRUE(indirect)) {
+      # Build preliminary model to discover indirect effects
+      preliminary_model <- paste0(
+        if (!is.null(latent)) process_vars(latent, symbol = "=~", title = ""),
+        if (!is.null(mediation)) process_vars(mediation, symbol = "~", label = label, title = ""),
+        if (!is.null(regression)) process_vars(regression, symbol = "~", title = "")
+      )
+      
+      if (nchar(preliminary_model) > 0) {
+        indirect <- discover_all_indirect_effects(
+          model = preliminary_model,
+          max_chain_length = auto_indirect_max_length,
+          computational_limit = auto_indirect_limit
+        )
+      } else {
+        warning("No model structure provided for automatic indirect effect discovery")
+        indirect <- NULL
+      }
+    }
+    
+    # Option 2: Structured IV/M/DV automatic generation (existing functionality)
+    if (is.list(indirect) && all(names(indirect) %in% c("IV", "M", "DV"))) {
       x <- mediation
       labels <- names(x)
       if (isTRUE(use.letters)) {
@@ -127,11 +171,18 @@ write_lavaan <- function(mediation = NULL,
       stats::setNames(indirect.list, indirect.names)
       indirect <- stats::setNames(indirect.list, indirect.names)
     }
-    indirect <- process_vars(
-      indirect,
-      symbol = ":=", collapse = " * ", title =
-        "[--------Mediations (indirect effects)---------]"
-    )
+    
+    # Option 3: Manual specification (existing functionality)
+    # No additional processing needed - indirect is already a named list
+    
+    # Generate lavaan syntax for all options
+    if (!is.null(indirect) && length(indirect) > 0) {
+      indirect <- process_vars(
+        indirect,
+        symbol = ":=", collapse = " * ", title =
+          "[--------Mediations (indirect effects)---------]"
+      )
+    }
   }
   if (!is.null(mediation)) {
     mediation <- process_vars(
