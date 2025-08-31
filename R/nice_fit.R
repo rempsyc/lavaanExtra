@@ -9,14 +9,14 @@
 #'  biased (\doi{10.1007/s11336-016-9552-7}) in a noticeable
 #'  way for smaller samples (thanks to James Uanhoro for this change).
 #'
-#'  If using `guidelines = TRUE`, please carefully consider the following 2023
+#'  If using `guidelines = TRUE` or `cutoffs = TRUE`, please carefully consider the following 2023
 #'  quote from Terrence D. Jorgensen:
 #'
 #'  _I do not recommend including cutoffs in the table, as doing so would
 #'  perpetuate their misuse. Fit indices are not test statistics, and their
 #'  suggested cutoffs are not critical values associated with known Type I
 #'  error rates. Numerous simulation studies have shown how poorly cutoffs
-#'  perform in model selection (e.g., , Jorgensen et al. (2018). Instead of
+#'  perform in model selection (e.g., Jorgensen et al., 2018). Instead of
 #'  test statistics, fit indices were designed to be measures of effect size
 #'  (practical significance), which complement the chi-squared test of
 #'  statistical significance. The range of RMSEA interpretations above is more
@@ -48,6 +48,10 @@
 #' @references Schreiber, J. B. (2017). Update to core reporting practices in
 #' structural equation modeling. *Research in social and administrative pharmacy*,
 #' *13*(3), 634-643. \doi{10.1016/j.sapharm.2016.06.006}
+#' 
+#' Jorgensen, T. D., Pornprasertmanit, S., Schoemann, A. M., & Rosseel, Y. (2018).
+#' Useful tools for structural equation modeling. *Structural Equation Modeling*, 
+#' *25*(1), 1-27. \doi{10.1037/met0000152}
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
 #' x <- paste0("x", 1:9)
 #' (latent <- list(
