@@ -120,42 +120,46 @@ lavaan_extract <- function(fit,
     x_std <- lavaan::parameterEstimates(fit, standardized = TRUE)
     x_std <- x_std[which(x_std["op"] == operator), ]
     
-    # Combine: basic info from unstandardized + standardized estimates/CI from bootstrap
-    # Note: SE in bootstrap case represents unstandardized SE (lavaan limitation)
-    og.names <- c("lhs", "rhs", "est")
-    std.names <- c("std.all", "se", "z", "pvalue", "ci.lower", "ci.upper")
-    x <- x_unstd[og.names]
-    es <- x_std[std.names]
-    names(es) <- c("est.std", "se.std", "z.std", "pvalue.std", "ci.lower.std", "ci.upper.std")
+    # Get standardized coefficients from standardizedsolution for consistency
+    x_std_coef <- lavaan::standardizedsolution(fit, level = 0.95)
+    x_std_coef <- x_std_coef[which(x_std_coef["op"] == operator), ]
     
-    # Add unstandardized CI for reference
-    x$ci.lower <- x_unstd$ci.lower
-    x$ci.upper <- x_unstd$ci.upper
+    # Combine: basic info from unstandardized in original order: se, z, pvalue, est, ci.lower, ci.upper
+    og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
+    x <- x_unstd[og.names]
+    
+    # Create es dataframe for standardized info: est.std, ci.lower.std, ci.upper.std
+    es <- data.frame(
+      est.std = x_std_coef$est.std,
+      ci.lower.std = x_std$ci.lower,
+      ci.upper.std = x_std$ci.upper
+    )
     
   } else {
     # Use delta method for standardized estimates (consistent SE and CI)
     x_std <- lavaan::standardizedsolution(fit, level = 0.95)
     x_std <- x_std[which(x_std["op"] == operator), ]
     
-    # Combine: basic info from unstandardized + standardized estimates/SE/CI from delta
-    og.names <- c("lhs", "rhs", "est", "ci.lower", "ci.upper")
-    std.names <- c("est.std", "se", "z", "pvalue", "ci.lower", "ci.upper")
+    # Combine: basic info from unstandardized in original order: se, z, pvalue, est, ci.lower, ci.upper
+    og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
     x <- x_unstd[og.names]
-    es <- x_std[std.names]
-    names(es) <- c("est.std", "se.std", "z.std", "pvalue.std", "ci.lower.std", "ci.upper.std")
+    
+    # Create es dataframe for standardized info: est.std, ci.lower.std, ci.upper.std
+    es <- x_std[c("est.std", "ci.lower", "ci.upper")]
+    names(es)[2:3] <- paste0(names(es)[2:3], ".std")
   }
   
   new.names <- c(
-    lhs_name, rhs_name, "b", "CI_lower", "CI_upper",
-    "B", "SE", "Z", "p", "CI_lower_B", "CI_upper_B"
+    lhs_name, rhs_name, "SE", "Z", "p", "b", "CI_lower", "CI_upper", 
+    "B", "CI_lower_B", "CI_upper_B"
   )
 
   if (!is.null(diag) && diag == "exclude") {
     diag_rows <- which(x_unstd$lhs == x_unstd$rhs)
     x <- x[-diag_rows, ] # keep only off-diagonal elements
     es <- es[-diag_rows, ] # keep only off-diagonal elements
-    new.names[3:5] <- c("sigma", "CI_lower_sigma", "CI_upper_sigma")
-    new.names[6] <- "r"
+    new.names[6] <- "sigma"
+    new.names[9] <- "r"
     new.names[10:11] <- c("CI_lower_r", "CI_upper_r")
   }
 
