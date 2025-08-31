@@ -34,6 +34,10 @@
 #' @param guidelines Logical, if `nice_table = TRUE`, whether to display
 #'  include reference values based on Schreiber (2017), Table 3, at the
 #'  bottom of the table.
+#' @param cutoffs Logical, if `nice_table = TRUE`, whether to display
+#'  suggested fit index cutoffs at the bottom of the table. Defaults to 
+#'  same value as `guidelines`. Setting this to `FALSE` provides a way to 
+#'  hide cutoffs while keeping other guideline information.
 #' @param stars Logical, if `nice_table = TRUE`, whether to display
 #'              significance stars (defaults to `FALSE`).
 #' @param verbose Logical, whether to display messages and warnings.
@@ -68,6 +72,7 @@ nice_fit <- function(model,
                      model.labels,
                      nice_table = FALSE,
                      guidelines = TRUE,
+                     cutoffs = guidelines,
                      stars = FALSE,
                      verbose = TRUE) {
   if (inherits(model, "list") && all(unlist(lapply(model, inherits, "lavaan")))) {
@@ -122,9 +127,9 @@ nice_fit <- function(model,
     table <- rempsyc::nice_table(x, stars = stars)
     table <- flextable::align(table, align = "center", part = "all")
 
-    if (isTRUE(guidelines)) {
+    if (isTRUE(cutoffs)) {
       values_to_add <- c(
-        Model = "Common guidelines",
+        Model = "Suggested cutoffs",
         chi2 = "\u2014",
         df = "\u2014",
         chi2.df = "< 2 or 3",
