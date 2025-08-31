@@ -397,6 +397,70 @@ nice_tidySEM(fit, layout = indirect, hide_nonsig_edges = TRUE, label = labels)
 
 Etc.
 
+# Total Effects (Direct + Indirect)
+
+The `write_lavaan()` function can also calculate total effects automatically, which combine both direct and indirect effects. This is particularly useful for time series and panel data models where effects propagate across multiple time points.
+
+## Simple mediation with total effects
+
+```{r}
+# Simple mediation model
+mediation <- list(speed = "visual", visual = "ageyr")
+regression <- list(speed = "ageyr")
+
+# Define total effects
+total <- list(IV = "ageyr", DV = "speed")
+
+# Write the model with total effects
+model <- write_lavaan(
+  mediation = mediation,
+  regression = regression,
+  total = total,
+  label = TRUE
+)
+cat(model)
+```
+
+In this example, the total effect of `ageyr` on `speed` combines:
+- Direct effect: `ageyr_speed` (direct path from ageyr to speed)
+- Indirect effect: `ageyr_visual * visual_speed` (ageyr → visual → speed)
+
+## Complex time series models
+
+For more complex scenarios like cross-lagged panel models:
+
+```{r}
+# Cross-lagged panel model with multiple time points
+mediation <- list(
+  outcome_T2 = c("mediator_T1", "outcome_T1"),
+  outcome_T3 = c("mediator_T2", "outcome_T2"),
+  mediator_T1 = "predictor_T0",
+  mediator_T2 = c("mediator_T1", "predictor_T1")
+)
+
+regression <- list(
+  outcome_T2 = c("predictor_T0", "predictor_T1"),
+  outcome_T3 = c("predictor_T1", "predictor_T2"),
+  mediator_T2 = "predictor_T1"
+)
+
+# Calculate total effects across time points
+total <- list(
+  IV = c("predictor_T0", "predictor_T1"),
+  DV = c("outcome_T2", "outcome_T3")
+)
+
+model <- write_lavaan(
+  mediation = mediation,
+  regression = regression,
+  total = total,
+  label = TRUE
+)
+cat(model)
+```
+
+This automatically calculates all total effects, which would be extremely time-consuming to code manually for complex time series models.
+
 # Other scenarios
 
 If you experience any issues with other scenarios, please open a [GitHub issue](https://github.com/rempsyc/lavaanExtra/issues) with your example, and I will try to adapt the function to support that case. Thank you!
