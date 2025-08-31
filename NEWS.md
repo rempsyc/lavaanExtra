@@ -2,7 +2,7 @@
 * Incoming ✨
 
 # lavaanExtra 0.2.1.1
-* Incoming ✨
+* `lavaan_reg()` and `lavaan_defined()`: add `standardized_se` argument to allow bootstrap SE & CI for standardized coefficients (#38)
 
 # lavaanExtra 0.2.1
 * New CRAN submission

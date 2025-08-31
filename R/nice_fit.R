@@ -137,8 +137,9 @@ nice_fit <- function(model,
 
       if (all(c("aic", "bic") %in% names(x))) {
         values_to_add <- c(values_to_add,
-                           AIC = "Smaller",
-                           BIC = "Smaller")
+          AIC = "Smaller",
+          BIC = "Smaller"
+        )
       }
 
       table <- flextable::add_footer_row(table,
@@ -181,7 +182,7 @@ nice_fit_internal <- function(fit, verbose = TRUE) {
   x_srmr <- lavaan::lavResiduals(fit)$summary["usrmr", 1]
   if (!is.null(x_srmr)) {
     x[names(x) == "srmr"] <- x_srmr
-  } else if (verbose == TRUE){
+  } else if (verbose == TRUE) {
     message("Using standard SRMR (as unbiased SRMR is unavailable)")
   }
   chi2.df <- x$chisq / x$df

@@ -37,11 +37,12 @@
 #' lavaan_cov(fit)
 lavaan_cov <- function(fit, nice_table = FALSE, ...) {
   lavaan_extract(fit,
-                 operator = "~~",
-                 lhs_name = "Variable 1",
-                 rhs_name = "Variable 2",
-                 diag = "exclude",
-                 nice_table = nice_table)
+    operator = "~~",
+    lhs_name = "Variable 1",
+    rhs_name = "Variable 2",
+    diag = "exclude",
+    nice_table = nice_table
+  )
 }
 
 #' @export

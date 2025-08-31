@@ -37,14 +37,15 @@
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}
 
 nice_lavaanPlot <- function(
-    model, node_options = list(shape = "box", fontname = "Helvetica"),
-    edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
-    covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
-    graph_options = c(rankdir = "LR"), ...) {
+  model, node_options = list(shape = "box", fontname = "Helvetica"),
+  edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
+  covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
+  graph_options = c(rankdir = "LR"), ...
+) {
   insight::check_if_installed(
     c(
       "lavaanPlot", "DiagrammeRsvg",
-       "rsvg", "png", "webshot"
+      "rsvg", "png", "webshot"
     ),
     reason = "for this function."
   )

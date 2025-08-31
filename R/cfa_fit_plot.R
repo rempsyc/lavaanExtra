@@ -46,8 +46,9 @@
 #' }
 
 cfa_fit_plot <- function(
-    model, data, covs = FALSE, estimator = "MLR", remove.items = "",
-    print = TRUE, save.as.pdf = FALSE, file.name, ...) {
+  model, data, covs = FALSE, estimator = "MLR", remove.items = "",
+  print = TRUE, save.as.pdf = FALSE, file.name, ...
+) {
   insight::check_if_installed("lavaanPlot")
 
   if (missing(file.name) && isTRUE(save.as.pdf)) {

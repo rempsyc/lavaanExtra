@@ -205,7 +205,7 @@ flextable::save_as_image(table_temp,
 <img src="man/figures/README-saturated-1.png" width="100%" />
 
 ```{r correlation, results='hide'}
-# Get covariances/correlations and make them pretty with 
+# Get covariances/correlations and make them pretty with
 # the `rempsyc::nice_table` integration
 lavaan_cor(fit.sem, nice_table = TRUE)
 ```
