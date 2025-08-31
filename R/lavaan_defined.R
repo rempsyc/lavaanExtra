@@ -4,11 +4,19 @@
 #' @description Extract relevant user-defined parameters (e.g., indirect or
 #'  total effects) indices from lavaan model through
 #'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
-#'  Note: When using `standardized_se = "delta"` (default), standardized
-#'  standard errors and confidence intervals are computed using the delta
-#'  method. When using `standardized_se = "bootstrap"`, they are computed
-#'  using the bootstrap method (only available when the model was fitted
-#'  with bootstrap standard errors).
+#'  
+#'  **Uncertainty for standardized coefficients**: When `standardized_se = "delta"`, 
+#'  standard errors (SE) and confidence intervals (CI) for standardized coefficients 
+#'  are computed via the delta method (as in [lavaan::standardizedsolution]). 
+#'  When `standardized_se = "bootstrap"`, CIs for standardized coefficients are 
+#'  obtained from the bootstrap distribution of the standardized statistic 
+#'  (std.all) returned by [lavaan::parameterEstimates] with `standardized = TRUE`. 
+#'  In this case, lavaan reports SE for the corresponding unstandardized parameter; 
+#'  a bootstrap SE for standardized coefficients is not provided by lavaan. 
+#'  lavaanExtra preserves this behavior and labels the SE source in the output.
+#'  
+#'  The default `standardized_se = "model"` chooses "bootstrap" if the fitted 
+#'  model used `se = "bootstrap"` (and `bootstrap > 0`), and "delta" otherwise.
 #' @param fit lavaan fit object to extract fit indices from
 #' @param underscores_to_symbol Character to convert underscores
 #'  to arrows in the first column, like for indirect effects. Default to
@@ -21,10 +29,13 @@
 #'  expression (rhs).
 #' @param standardized_se Character string indicating the method to use for
 #'  computing standard errors and confidence intervals of standardized estimates.
-#'  Options are "delta" (default, uses delta method via
-#'  [lavaan::standardizedsolution]) or "bootstrap" (uses bootstrap method via
-#'  [lavaan::parameterEstimates] with `standardized = TRUE`, only available
-#'  when the model was fitted with bootstrap standard errors).
+#'  Options are "model" (default, auto-detects based on model fitting method), 
+#'  "delta" (uses delta method via [lavaan::standardizedsolution]), or 
+#'  "bootstrap" (uses bootstrap method via [lavaan::parameterEstimates] with 
+#'  `standardized = TRUE`, only available when the model was fitted with 
+#'  bootstrap standard errors). When `standardized_se = "model"`, the function
+#'  chooses "bootstrap" if the fitted model used `se = "bootstrap"` (and 
+#'  `bootstrap > 0`), and "delta" otherwise.
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
 #'                   reference values at the bottom of the table.
@@ -34,10 +45,12 @@
 #'         coefficient ("std.all"), corresponding p-value, as well
 #'         as the unstandardized regression coefficient ("est") and
 #'         its confidence interval ("ci.lower", "ci.upper"). When
-#'         `standardized_se = "delta"` (default), standardized SE and CI
+#'         `standardized_se = "delta"`, standardized SE and CI
 #'         are computed using the delta method. When `standardized_se =
-#'         "bootstrap"`, they are computed using bootstrap (only available
-#'         when model was fitted with bootstrap standard errors).
+#'         "bootstrap"`, standardized CI are computed using bootstrap 
+#'         and SE represents the unstandardized bootstrap SE (lavaan 
+#'         limitation). The SE computation method is stored as an 
+#'         attribute (`standardized_se_method`) for verification.
 #' @aliases lavaan_ind
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
@@ -73,7 +86,7 @@ lavaan_defined <- function(fit,
                            underscores_to_symbol = "\u2192",
                            lhs_name = "User-Defined Parameter",
                            rhs_name = "Paths",
-                           standardized_se = "delta",
+                           standardized_se = "model",
                            nice_table = FALSE,
                            ...) {
   lavaan_extract(fit,

@@ -105,6 +105,25 @@ test_that("lavaan_defined standardized_se validation", {
   # Test that invalid standardized_se values throw error
   expect_error(
     lavaan_defined(fit, standardized_se = "invalid"),
-    "standardized_se must be either 'delta' or 'bootstrap'"
+    "standardized_se must be one of 'delta', 'bootstrap', or 'model'"
   )
+})
+
+test_that("lavaan_defined model auto-detection", {
+  # Test that "model" option correctly detects delta method for regular fit
+  result_model <- lavaan_defined(fit, standardized_se = "model")
+  result_delta <- lavaan_defined(fit, standardized_se = "delta")
+  
+  expect_equal(result_model, result_delta)
+  expect_equal(attr(result_model, "standardized_se_method"), "delta")
+  
+  # Test that "model" option correctly detects bootstrap method for bootstrap fit
+  set.seed(123)
+  fit_bootstrap <- sem(HS.model, data = HolzingerSwineford1939, se = "bootstrap", bootstrap = 50)
+  
+  result_model_boot <- lavaan_defined(fit_bootstrap, standardized_se = "model")
+  result_bootstrap_explicit <- lavaan_defined(fit_bootstrap, standardized_se = "bootstrap")
+  
+  expect_equal(result_model_boot, result_bootstrap_explicit)
+  expect_equal(attr(result_model_boot, "standardized_se_method"), "bootstrap")
 })

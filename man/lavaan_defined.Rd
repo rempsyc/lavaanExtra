@@ -11,7 +11,7 @@ lavaan_defined(
   underscores_to_symbol = "→",
   lhs_name = "User-Defined Parameter",
   rhs_name = "Paths",
-  standardized_se = "delta",
+  standardized_se = "model",
   nice_table = FALSE,
   ...
 )
@@ -33,10 +33,13 @@ expression (rhs).}
 
 \item{standardized_se}{Character string indicating the method to use for
 computing standard errors and confidence intervals of standardized estimates.
-Options are "delta" (default, uses delta method via
-\link[lavaan:standardizedSolution]{lavaan::standardizedsolution}) or "bootstrap" (uses bootstrap method via
-\link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}, only available
-when the model was fitted with bootstrap standard errors).}
+Options are "model" (default, auto-detects based on model fitting method),
+"delta" (uses delta method via \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}), or
+"bootstrap" (uses bootstrap method via \link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with
+\code{standardized = TRUE}, only available when the model was fitted with
+bootstrap standard errors). When \code{standardized_se = "model"}, the function
+chooses "bootstrap" if the fitted model used \code{se = "bootstrap"} (and
+\code{bootstrap > 0}), and "delta" otherwise.}
 
 \item{nice_table}{Logical, whether to print the table as a
 \link[rempsyc:nice_table]{rempsyc::nice_table} as well as print the
@@ -50,19 +53,29 @@ corresponding paths ("rhs"), standardized regression
 coefficient ("std.all"), corresponding p-value, as well
 as the unstandardized regression coefficient ("est") and
 its confidence interval ("ci.lower", "ci.upper"). When
-\code{standardized_se = "delta"} (default), standardized SE and CI
-are computed using the delta method. When \code{standardized_se =  "bootstrap"}, they are computed using bootstrap (only available
-when model was fitted with bootstrap standard errors).
+\code{standardized_se = "delta"}, standardized SE and CI
+are computed using the delta method. When \code{standardized_se = "bootstrap"}, standardized CI are computed using bootstrap
+and SE represents the unstandardized bootstrap SE (lavaan
+limitation). The SE computation method is stored as an
+attribute (\code{standardized_se_method}) for verification.
 }
 \description{
 Extract relevant user-defined parameters (e.g., indirect or
 total effects) indices from lavaan model through
 \link[lavaan:parameterEstimates]{lavaan::parameterEstimates} and \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}.
-Note: When using \code{standardized_se = "delta"} (default), standardized
-standard errors and confidence intervals are computed using the delta
-method. When using \code{standardized_se = "bootstrap"}, they are computed
-using the bootstrap method (only available when the model was fitted
-with bootstrap standard errors).
+
+\strong{Uncertainty for standardized coefficients}: When \code{standardized_se = "delta"},
+standard errors (SE) and confidence intervals (CI) for standardized coefficients
+are computed via the delta method (as in \link[lavaan:standardizedSolution]{lavaan::standardizedsolution}).
+When \code{standardized_se = "bootstrap"}, CIs for standardized coefficients are
+obtained from the bootstrap distribution of the standardized statistic
+(std.all) returned by \link[lavaan:parameterEstimates]{lavaan::parameterEstimates} with \code{standardized = TRUE}.
+In this case, lavaan reports SE for the corresponding unstandardized parameter;
+a bootstrap SE for standardized coefficients is not provided by lavaan.
+lavaanExtra preserves this behavior and labels the SE source in the output.
+
+The default \code{standardized_se = "model"} chooses "bootstrap" if the fitted
+model used \code{se = "bootstrap"} (and \code{bootstrap > 0}), and "delta" otherwise.
 }
 \examples{
 \dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
