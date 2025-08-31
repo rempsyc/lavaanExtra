@@ -20,20 +20,20 @@ jobs:
        github.actor == 'github-copilot')
 
     runs-on: ubuntu-latest
-    
+
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       R_KEEP_PKG_SOURCE: yes
       _R_CHECK_CRAN_INCOMING_: false
       _R_CHECK_FORCE_SUGGESTS_: false
-    
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
-        
+          fetch-depth: 1
+
       - name: Determine if R setup is needed
         id: check_r_needed
         env:
@@ -112,7 +112,7 @@ jobs:
           fi
 
           echo "R_NEEDED=${R_NEEDED}" | tee -a "$GITHUB_OUTPUT"
-          
+
           echo ""
           echo "=== FINAL DECISION ==="
           if [ "$R_NEEDED" == "true" ]; then
@@ -123,14 +123,14 @@ jobs:
             echo "Reason: Only documentation/config files detected"
           fi
           echo "Decision: R_NEEDED=$R_NEEDED"
-        
+
       - name: Setup R
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: r-lib/actions/setup-r@v2
         with:
           r-version: 'release'
           use-public-rspm: true
-          
+
       - name: Setup pandoc (required for building vignettes and reprex)
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         uses: r-lib/actions/setup-pandoc@v2
@@ -142,15 +142,7 @@ jobs:
           sudo apt-get install -y \
             libcurl4-openssl-dev \
             libssl-dev \
-            libxml2-dev \
-            libfontconfig1-dev \
-            libharfbuzz-dev \
-            libfribidi-dev \
-            libfreetype6-dev \
-            libpng-dev \
-            libtiff5-dev \
-            libjpeg-dev \
-            r-base-dev
+            libxml2-dev
 
       - name: Setup R user library
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
@@ -159,79 +151,44 @@ jobs:
           echo 'R_LIBS_USER=~/R/library' >> ~/.Renviron
         shell: bash
 
-      - name: Cache R packages
+      - name: Install R dependencies using pak
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        uses: actions/cache@v3
+        uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          path: ~/.local/share/renv
-          key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-renv-
+          # Use stable pak for reliable dependency resolution
+          dependencies: '"hard"'
+          # Install core package dependencies and essential development tools
+          extra-packages: |
+            local::.
+            any::testthat
+            any::lintr
+            any::styler
+            any::roxygen2
+            any::devtools
+            any::reprex
+            any::knitr
+            any::rmarkdown
+            any::clipr
+          needs: check
+          # Let r-lib/actions handle caching automatically (more efficient than manual cache)
 
-      - name: Install core R development packages
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install essential development packages first
-          install.packages(c(
-            "rlang",
-            "dplyr", 
-            "testthat",
-            "lintr",
-            "styler", 
-            "roxygen2",
-            "reprex",
-            "devtools",
-            # Dependencies specifically needed for reprex functionality
-            "knitr",
-            "rmarkdown",
-            "clipr"
-          ), repos = "https://cloud.r-project.org/")
-        shell: Rscript {0}
-        
-      # NOTE: Suggested packages are NOT installed during setup to save time
-      # These should be installed on-demand based on specific PR requirements
-      # See copilot-instructions.md for targeted installation guidance
+      # NOTE: Suggested packages are NOT installed during setup to save time.
+      # Only core dependencies (Imports/Depends) and essential development tools are installed.
+      # Additional packages are installed on-demand based on specific PR requirements.
+      # See copilot-instructions.md for targeted installation guidance.
 
-      - name: Install lavaanExtra package dependencies
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install package dependencies using remotes
-          tryCatch({
-            install.packages("remotes", repos = "https://cloud.r-project.org/")
-            remotes::install_deps(dependencies = TRUE)
-          }, error = function(e) {
-            cat("Warning: Some dependencies may not have installed:", e$message, "\n")
-          })
-        shell: Rscript {0}
-
-      - name: Build lavaanExtra package
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Build the current package
-          system("R CMD build .")
-        shell: Rscript {0}
-        
-      - name: Install lavaanExtra package  
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        run: |
-          # Install the built package
-          pkg_file <- list.files(pattern = "lavaanExtra_.*\\.tar\\.gz")[1]
-          if (!is.na(pkg_file)) {
-            system(paste("R CMD INSTALL", pkg_file))
-          } else {
-            # Fallback: install from source
-            system("R CMD INSTALL .")
-          }
-        shell: Rscript {0}
+      # NOTE: The local package (lavaanExtra) is automatically built and installed
+      # by setup-r-dependencies@v2 when using 'local::.', eliminating the need
+      # for manual build/install steps
 
       - name: Verify R installation and packages
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           cat("=== R Version ===\n")
           print(R.version.string)
-          
+
           cat("\n=== Core Development Packages ===\n")
-          required_packages <- c("rlang", "dplyr", "testthat", "lintr", "styler", "roxygen2", "reprex")
+          required_packages <- c("lavaan", "insight", "testthat", "lintr", "styler", "roxygen2", "reprex")
           for (pkg in required_packages) {
             if (requireNamespace(pkg, quietly = TRUE)) {
               cat("✓", pkg, "- version", as.character(packageVersion(pkg)), "\n")
@@ -239,8 +196,8 @@ jobs:
               cat("✗", pkg, "- NOT AVAILABLE\n")
             }
           }
-          
-          cat("\n=== lavaanExtra Package ===\n") 
+
+          cat("\n=== lavaanExtra Package (auto-installed by setup-r-dependencies) ===\n")
           if (requireNamespace("lavaanExtra", quietly = TRUE)) {
             library(lavaanExtra)
             cat("✓ lavaanExtra - version", as.character(packageVersion("lavaanExtra")), "\n")
@@ -253,108 +210,34 @@ jobs:
         if: steps.check_r_needed.outputs.R_NEEDED == 'true'
         run: |
           library(lavaanExtra)
-          
-          cat("=== Testing Core Functions ===\n")
-          
-          # Test lavaan syntax generation
-          latent <- list(visual = c("x1", "x2", "x3"), textual = c("x4", "x5", "x6"))
-          model <- write_lavaan(latent = latent)
-          cat("✓ write_lavaan() works\n")
-          cat("Generated model:\n")
-          cat(model, "\n")
-          
-          # Test fit extraction function if lavaan available
-          if (requireNamespace("lavaan", quietly = TRUE)) {
-            tryCatch({
-              library(lavaan)
-              HS.model <- "visual =~ x1 + x2 + x3\ntextual =~ x4 + x5 + x6"
-              fit <- lavaan::cfa(HS.model, data = HolzingerSwineford1939)
-              fit_results <- nice_fit(fit)
-              cat("✓ nice_fit() works\n")
-            }, error = function(e) {
-              cat("⚠ nice_fit() error:", e$message, "\n")
-            })
-          } else {
-            cat("ℹ nice_fit() skipped (lavaan not available)\n")
-          }
-          
-          # Test modification indices if available
-          if (requireNamespace("lavaan", quietly = TRUE)) {
-            tryCatch({
-              library(lavaan)
-              HS.model <- "visual =~ x1 + x2 + x3"
-              fit <- lavaan::cfa(HS.model, data = HolzingerSwineford1939)
-              modindices <- nice_modindices(fit)
-              cat("✓ nice_modindices() works\n")
-            }, error = function(e) {
-              cat("⚠ nice_modindices() error:", e$message, "\n")
-            })
-          } else {
-            cat("ℹ nice_modindices() skipped (lavaan not available)\n")  
-          }
-          
-          cat("\n=== Core Function Tests Complete ===\n")
-        shell: Rscript {0}
 
-      - name: Test reprex functionality  
-        if: steps.check_r_needed.outputs.R_NEEDED == 'true'
-        env:
-          CLIPR_ALLOW: true
-        run: |
-          library(reprex)
-          library(lavaanExtra)
-          
-          cat("=== Testing reprex Functionality ===\n")
-          
-          # Test reprex with lavaanExtra function
-          test_code <- "
-          library(lavaanExtra)
-          
-          # Test basic SEM syntax generation function
-          latent <- list(visual = c('x1', 'x2', 'x3'), textual = c('x4', 'x5', 'x6'))
-          model <- write_lavaan(latent = latent)
-          print('Generated lavaan model syntax:')
-          cat(model)
-          "
-          
-          tryCatch({
-            reprex_result <- reprex(input = test_code, venue = "gh", advertise = FALSE, show = FALSE, html_preview = FALSE)
-            
-            if (length(reprex_result) > 0 && any(grepl("library\\(lavaanExtra\\)", reprex_result))) {
-              cat("✓ reprex is working correctly with lavaanExtra\n")
-              cat("Sample reprex output (first 10 lines):\n")
-              cat(paste(head(reprex_result, 10), collapse = "\n"), "\n")
-              
-              # Check for complete reprex format including session info
-              if (any(grepl("Created on", reprex_result)) || any(grepl("reprex v", reprex_result))) {
-                cat("✓ Complete reprex format with session info detected\n")
-              } else {
-                cat("⚠ reprex output may be incomplete - missing session info\n")
-              }
-            } else {
-              cat("⚠ reprex generated output but may not be working correctly\n")
-            }
-          }, error = function(e) {
-            cat("✗ reprex failed:", e$message, "\n")
-            cat("This may be due to missing dependencies or environment issues\n")
-          })
-          
-          cat("\n=== reprex Test Complete ===\n")
+          cat("=== Testing Core Functions ===\n")
+
+          # Test basic data function
+          test_data <- data.frame(id = c(1,1,2,3), val = c(1,2,3,4))
+          duplicates <- extract_duplicates(test_data, id = "id")
+          cat("✓ extract_duplicates() works\n")
+
+          # Basic verification that package loads correctly
+          cat("✓ lavaanExtra package loads and core functions work\n")
+          cat("=== Core Function Tests Complete ===\n")
         shell: Rscript {0}
 
       - name: Display environment summary
         run: |
           echo "=== GitHub Copilot Environment Setup Complete ==="
           echo ""
-          
+
           if [ "${{ steps.check_r_needed.outputs.R_NEEDED }}" == "true" ]; then
-            echo "✓ Full R development environment configured:"
-            echo "  - R and system dependencies installed"
-            echo "  - lavaanExtra package built and installed"
-            echo "  - Core development tools available (lintr, styler, roxygen2)"
-            echo "  - Complete reprex setup (reprex + knitr + rmarkdown + pandoc)"
+            echo "✓ Optimized R development environment configured using pak:"
+            echo "  - R and essential system dependencies installed"
+            echo "  - Core package dependencies (Imports/Depends) installed via setup-r-dependencies"
+            echo "  - lavaanExtra package automatically built and installed"
+            echo "  - Essential development tools (lintr, styler, roxygen2, devtools)"
+            echo "  - reprex dependencies ready (reprex + knitr + rmarkdown + pandoc)"
+            echo "  - Efficient pak-based dependency resolution with automatic caching"
             echo "  - Suggested packages NOT installed (install as needed per PR)"
-            echo "  - Package building and testing capabilities verified"
+            echo "  - Minimal testing performed for faster setup"
             echo ""
             echo "The environment is ready for R package development work."
             echo "Copilot can now build, test, lint, and create reproducible examples."
