@@ -17,7 +17,9 @@ write_lavaan(
   constraint.larger = NULL,
   custom = NULL,
   label = FALSE,
-  use.letters = FALSE
+  use.letters = FALSE,
+  auto_indirect_max_length = 5,
+  auto_indirect_limit = 1000
 )
 }
 \arguments{
@@ -32,11 +34,13 @@ can be optionally specified automatically with argument
 "is correlated with").}
 
 \item{indirect}{Indirect effect indicators (\verb{:=} symbol: "indirect
-effect defined as"). If a named list is provided,
-with names "IV" (independent variables), "M" (mediator),
-and "DV" (dependent variables), \code{write_lavaan} attempts to
-write indirect effects automatically. In this case, the
-\code{mediation} argument must be specified too.}
+effect defined as"). Can be:
+1) A named list with manual indirect effect definitions
+2) A named list with "IV", "M", "DV" for structured auto-generation
+3) \code{TRUE} to discover ALL indirect effects automatically (x.boot-inspired)
+4) \code{NULL} (default) for no indirect effects
+When using option 2, the \code{mediation} argument must be specified too.
+Option 3 uses comprehensive graph-based discovery.}
 
 \item{latent}{Latent variable indicators (\verb{=~} symbol: "is measured by").}
 
@@ -59,6 +63,13 @@ mediation argument.}
 
 \item{use.letters}{Logical, for the labels, whether to use letters
 instead of the variable names.}
+
+\item{auto_indirect_max_length}{When using \code{indirect = TRUE}, the maximum
+length of indirect effect chains to discover. Default is 5.}
+
+\item{auto_indirect_limit}{When using \code{indirect = TRUE}, the maximum number
+of indirect effects to discover (performance safeguard).
+Default is 1000.}
 }
 \value{
 A character string, representing the specified \code{lavaan} model.
@@ -77,6 +88,19 @@ x <- paste0("x", 1:9)
 
 HS.model <- write_lavaan(latent = latent)
 cat(HS.model)
+
+# Example with comprehensive indirect effects (x.boot-inspired)
+mediation <- list(textual = "visual", speed = "visual") 
+regression <- list(textual = "ageyr", speed = "ageyr")
+
+# Automatically discover ALL indirect effects
+model_auto <- write_lavaan(
+  mediation = mediation,
+  regression = regression, 
+  indirect = TRUE,  # Enable comprehensive discovery
+  label = TRUE
+)
+cat(model_auto)
 
 library(lavaan)
 fit <- lavaan(HS.model,

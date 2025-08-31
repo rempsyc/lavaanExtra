@@ -317,6 +317,15 @@ discover_all_indirect_effects <- function(model,
     valid_paths <- paths_from_node[sapply(paths_from_node, length) >= min_chain_length]
     
     if (length(valid_paths) > 0) {
+      # Respect computational limit - only add paths up to the limit
+      remaining_capacity <- computational_limit - path_count
+      if (length(valid_paths) > remaining_capacity) {
+        valid_paths <- valid_paths[1:remaining_capacity]
+        if (verbose) {
+          cat(sprintf("Truncating to respect computational limit of %d paths\n", computational_limit))
+        }
+      }
+      
       all_paths <- c(all_paths, valid_paths)
       path_count <- path_count + length(valid_paths)
       
