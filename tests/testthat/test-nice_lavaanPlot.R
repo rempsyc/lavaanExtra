@@ -78,4 +78,3 @@ test_that("nice_lavaanPlot different sem model", {
     c("grViz", "htmlwidget")
   )
 })
-

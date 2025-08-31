@@ -2,18 +2,18 @@
 #'
 #' @description Extract relevant indices from lavaan model through
 #'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
-#'  
-#'  **Uncertainty for standardized coefficients**: When `standardized_se = "delta"`, 
-#'  standard errors (SE) and confidence intervals (CI) for standardized coefficients 
-#'  are computed via the delta method (as in [lavaan::standardizedsolution]). 
-#'  When `standardized_se = "bootstrap"`, CIs for standardized coefficients are 
-#'  obtained from the bootstrap distribution of the standardized statistic 
-#'  (std.all) returned by [lavaan::parameterEstimates] with `standardized = TRUE`. 
-#'  In this case, lavaan reports SE for the corresponding unstandardized parameter; 
-#'  a bootstrap SE for standardized coefficients is not provided by lavaan. 
+#'
+#'  **Uncertainty for standardized coefficients**: When `standardized_se = "delta"`,
+#'  standard errors (SE) and confidence intervals (CI) for standardized coefficients
+#'  are computed via the delta method (as in [lavaan::standardizedsolution]).
+#'  When `standardized_se = "bootstrap"`, CIs for standardized coefficients are
+#'  obtained from the bootstrap distribution of the standardized statistic
+#'  (std.all) returned by [lavaan::parameterEstimates] with `standardized = TRUE`.
+#'  In this case, lavaan reports SE for the corresponding unstandardized parameter;
+#'  a bootstrap SE for standardized coefficients is not provided by lavaan.
 #'  lavaanExtra preserves this behavior and labels the SE source in the output.
-#'  
-#'  The default `standardized_se = "model"` chooses "bootstrap" if the fitted 
+#'
+#'  The default `standardized_se = "model"` chooses "bootstrap" if the fitted
 #'  model used `se = "bootstrap"` (and `bootstrap > 0`), and "delta" otherwise.
 #' @param fit lavaan fit object to extract fit indices from
 #' @param operator Which operator to subselect with.
@@ -30,12 +30,12 @@
 #'  exclude diagonal values (one of "exclude" or "include").
 #' @param standardized_se Character string indicating the method to use for
 #'  computing standard errors and confidence intervals of standardized estimates.
-#'  Options are "model" (default, auto-detects based on model fitting method), 
-#'  "delta" (uses delta method via [lavaan::standardizedsolution]), or 
-#'  "bootstrap" (uses bootstrap method via [lavaan::parameterEstimates] with 
-#'  `standardized = TRUE`, only available when the model was fitted with 
+#'  Options are "model" (default, auto-detects based on model fitting method),
+#'  "delta" (uses delta method via [lavaan::standardizedsolution]), or
+#'  "bootstrap" (uses bootstrap method via [lavaan::parameterEstimates] with
+#'  `standardized = TRUE`, only available when the model was fitted with
 #'  bootstrap standard errors). When `standardized_se = "model"`, the function
-#'  chooses "bootstrap" if the fitted model used `se = "bootstrap"` (and 
+#'  chooses "bootstrap" if the fitted model used `se = "bootstrap"` (and
 #'  `bootstrap > 0`), and "delta" otherwise.
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
@@ -48,9 +48,9 @@
 #'         its confidence interval ("ci.lower", "ci.upper"). When
 #'         `standardized_se = "delta"`, standardized SE and CI
 #'         are computed using the delta method. When `standardized_se =
-#'         "bootstrap"`, standardized CI are computed using bootstrap 
-#'         and SE represents the unstandardized bootstrap SE (lavaan 
-#'         limitation). The SE computation method is stored as an 
+#'         "bootstrap"`, standardized CI are computed using bootstrap
+#'         and SE represents the unstandardized bootstrap SE (lavaan
+#'         limitation). The SE computation method is stored as an
 #'         attribute (`standardized_se_method`) for verification.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
@@ -99,13 +99,13 @@ lavaan_extract <- function(fit,
   if (!standardized_se %in% c("delta", "bootstrap", "model")) {
     stop("standardized_se must be one of 'delta', 'bootstrap', or 'model'.")
   }
-  
+
   # Auto-detect method if "model" is specified
   if (standardized_se == "model") {
     # Check if model was fitted with bootstrap
     model_info <- lavaan::lavInspect(fit, "options")
-    if (!is.null(model_info$se) && model_info$se == "bootstrap" && 
-        !is.null(model_info$bootstrap) && model_info$bootstrap > 0) {
+    if (!is.null(model_info$se) && model_info$se == "bootstrap" &&
+      !is.null(model_info$bootstrap) && model_info$bootstrap > 0) {
       standardized_se <- "bootstrap"
     } else {
       standardized_se <- "delta"
@@ -114,43 +114,42 @@ lavaan_extract <- function(fit,
   # Get unstandardized estimates for basic info
   x_unstd <- lavaan::parameterEstimates(fit)
   x_unstd <- x_unstd[which(x_unstd["op"] == operator), ]
-  
+
   if (standardized_se == "bootstrap") {
     # Get standardized estimates with bootstrap SE/CI
     x_std <- lavaan::parameterEstimates(fit, standardized = TRUE)
     x_std <- x_std[which(x_std["op"] == operator), ]
-    
+
     # Get standardized coefficients from standardizedsolution for consistency
     x_std_coef <- lavaan::standardizedsolution(fit, level = 0.95)
     x_std_coef <- x_std_coef[which(x_std_coef["op"] == operator), ]
-    
+
     # Combine: basic info from unstandardized in original order: se, z, pvalue, est, ci.lower, ci.upper
     og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
     x <- x_unstd[og.names]
-    
+
     # Create es dataframe for standardized info: est.std, ci.lower.std, ci.upper.std
     es <- data.frame(
       est.std = x_std_coef$est.std,
       ci.lower.std = x_std$ci.lower,
       ci.upper.std = x_std$ci.upper
     )
-    
   } else {
     # Use delta method for standardized estimates (consistent SE and CI)
     x_std <- lavaan::standardizedsolution(fit, level = 0.95)
     x_std <- x_std[which(x_std["op"] == operator), ]
-    
+
     # Combine: basic info from unstandardized in original order: se, z, pvalue, est, ci.lower, ci.upper
     og.names <- c("lhs", "rhs", "se", "z", "pvalue", "est", "ci.lower", "ci.upper")
     x <- x_unstd[og.names]
-    
+
     # Create es dataframe for standardized info: est.std, ci.lower.std, ci.upper.std
     es <- x_std[c("est.std", "ci.lower", "ci.upper")]
     names(es)[2:3] <- paste0(names(es)[2:3], ".std")
   }
-  
+
   new.names <- c(
-    lhs_name, rhs_name, "SE", "Z", "p", "b", "CI_lower", "CI_upper", 
+    lhs_name, rhs_name, "SE", "Z", "p", "b", "CI_lower", "CI_upper",
     "B", "CI_lower_B", "CI_upper_B"
   )
 
@@ -166,7 +165,7 @@ lavaan_extract <- function(fit,
   # Combine unstandardized and standardized results consistently
   x <- cbind(x, es)
   names(x) <- new.names
-  
+
   # Add attribute to track SE computation method
   attr(x, "standardized_se_method") <- standardized_se
 

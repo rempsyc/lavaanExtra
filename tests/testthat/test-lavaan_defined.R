@@ -46,8 +46,8 @@ test_that("nice_fit as nice_table", {
 test_that("nice_fit total effects", {
   set.seed(1234)
   X <- rnorm(100)
-  M <- 0.5*X + rnorm(100)
-  Y <- 0.7*M + rnorm(100)
+  M <- 0.5 * X + rnorm(100)
+  Y <- 0.7 * M + rnorm(100)
   Data <- data.frame(X = X, Y = Y, M = M)
   mediation <- list(
     Y = "c*X",
@@ -84,18 +84,18 @@ test_that("lavaan_defined with bootstrap standardized_se", {
   # Test bootstrap SE for standardized estimates
   set.seed(123)
   fit_bootstrap <- sem(HS.model, data = HolzingerSwineford1939, se = "bootstrap", bootstrap = 50)
-  
+
   # Test that bootstrap method gives different results than delta method
   result_delta <- lavaan_defined(fit_bootstrap, standardized_se = "delta")
   result_bootstrap <- lavaan_defined(fit_bootstrap, standardized_se = "bootstrap")
-  
+
   # Check that results have same structure
   expect_equal(names(result_delta), names(result_bootstrap))
   expect_equal(nrow(result_delta), nrow(result_bootstrap))
-  
-  # Check that standardized coefficients are the same 
+
+  # Check that standardized coefficients are the same
   expect_equal(result_delta$B, result_bootstrap$B)
-  
+
   # Check that CI bounds are different (key feature being tested)
   expect_false(identical(result_delta$CI_lower_B, result_bootstrap$CI_lower_B))
   expect_false(identical(result_delta$CI_upper_B, result_bootstrap$CI_upper_B))
@@ -113,17 +113,17 @@ test_that("lavaan_defined model auto-detection", {
   # Test that "model" option correctly detects delta method for regular fit
   result_model <- lavaan_defined(fit, standardized_se = "model")
   result_delta <- lavaan_defined(fit, standardized_se = "delta")
-  
+
   expect_equal(result_model, result_delta)
   expect_equal(attr(result_model, "standardized_se_method"), "delta")
-  
+
   # Test that "model" option correctly detects bootstrap method for bootstrap fit
   set.seed(123)
   fit_bootstrap <- sem(HS.model, data = HolzingerSwineford1939, se = "bootstrap", bootstrap = 50)
-  
+
   result_model_boot <- lavaan_defined(fit_bootstrap, standardized_se = "model")
   result_bootstrap_explicit <- lavaan_defined(fit_bootstrap, standardized_se = "bootstrap")
-  
+
   expect_equal(result_model_boot, result_bootstrap_explicit)
   expect_equal(attr(result_model_boot, "standardized_se_method"), "bootstrap")
 })

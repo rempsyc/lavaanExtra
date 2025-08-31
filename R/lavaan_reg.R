@@ -2,29 +2,29 @@
 #'
 #' @description Extract relevant regression indices from lavaan model through
 #'  [lavaan::parameterEstimates] and [lavaan::standardizedsolution].
-#'  
-#'  **Uncertainty for standardized coefficients**: When `standardized_se = "delta"`, 
-#'  standard errors (SE) and confidence intervals (CI) for standardized coefficients 
-#'  are computed via the delta method (as in [lavaan::standardizedsolution]). 
-#'  When `standardized_se = "bootstrap"`, CIs for standardized coefficients are 
-#'  obtained from the bootstrap distribution of the standardized statistic 
-#'  (std.all) returned by [lavaan::parameterEstimates] with `standardized = TRUE`. 
-#'  In this case, lavaan reports SE for the corresponding unstandardized parameter; 
-#'  a bootstrap SE for standardized coefficients is not provided by lavaan. 
+#'
+#'  **Uncertainty for standardized coefficients**: When `standardized_se = "delta"`,
+#'  standard errors (SE) and confidence intervals (CI) for standardized coefficients
+#'  are computed via the delta method (as in [lavaan::standardizedsolution]).
+#'  When `standardized_se = "bootstrap"`, CIs for standardized coefficients are
+#'  obtained from the bootstrap distribution of the standardized statistic
+#'  (std.all) returned by [lavaan::parameterEstimates] with `standardized = TRUE`.
+#'  In this case, lavaan reports SE for the corresponding unstandardized parameter;
+#'  a bootstrap SE for standardized coefficients is not provided by lavaan.
 #'  lavaanExtra preserves this behavior and labels the SE source in the output.
-#'  
-#'  The default `standardized_se = "model"` chooses "bootstrap" if the fitted 
+#'
+#'  The default `standardized_se = "model"` chooses "bootstrap" if the fitted
 #'  model used `se = "bootstrap"` (and `bootstrap > 0`), and "delta" otherwise.
 #'
 #' @param fit lavaan fit object to extract fit indices from
 #' @param standardized_se Character string indicating the method to use for
 #'  computing standard errors and confidence intervals of standardized estimates.
-#'  Options are "model" (default, auto-detects based on model fitting method), 
-#'  "delta" (uses delta method via [lavaan::standardizedsolution]), or 
-#'  "bootstrap" (uses bootstrap method via [lavaan::parameterEstimates] with 
-#'  `standardized = TRUE`, only available when the model was fitted with 
+#'  Options are "model" (default, auto-detects based on model fitting method),
+#'  "delta" (uses delta method via [lavaan::standardizedsolution]), or
+#'  "bootstrap" (uses bootstrap method via [lavaan::parameterEstimates] with
+#'  `standardized = TRUE`, only available when the model was fitted with
 #'  bootstrap standard errors). When `standardized_se = "model"`, the function
-#'  chooses "bootstrap" if the fitted model used `se = "bootstrap"` (and 
+#'  chooses "bootstrap" if the fitted model used `se = "bootstrap"` (and
 #'  `bootstrap > 0`), and "delta" otherwise.
 #' @param nice_table Logical, whether to print the table as a
 #'                   [rempsyc::nice_table] as well as print the
@@ -36,9 +36,9 @@
 #'         ("est") and its confidence interval ("ci.lower", "ci.upper").
 #'         When `standardized_se = "delta"`, standardized SE and CI
 #'         are computed using the delta method. When `standardized_se =
-#'         "bootstrap"`, standardized CI are computed using bootstrap 
-#'         and SE represents the unstandardized bootstrap SE (lavaan 
-#'         limitation). The SE computation method is stored as an 
+#'         "bootstrap"`, standardized CI are computed using bootstrap
+#'         and SE represents the unstandardized bootstrap SE (lavaan
+#'         limitation). The SE computation method is stored as an
 #'         attribute (`standardized_se_method`) for verification.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE)
