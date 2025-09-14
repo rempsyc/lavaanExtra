@@ -1,6 +1,12 @@
 # lavaanExtra 0.2.2
 * Incoming ✨
 
+## lavaanExtra 0.2.1.2
+* Add comprehensive tests for `utils.R` (`get_dep_version()` function) achieving 100% coverage
+* Improve test coverage for `nice_fit()` with additional edge case tests  
+* Improve test coverage for `nice_modindices()` with comprehensive parameter testing
+* Overall package coverage increased from ~56% to ~58%
+
 # lavaanExtra 0.2.1.1
 * `lavaan_reg()` and `lavaan_defined()`: add `standardized_se` argument to allow bootstrap SE & CI for standardized coefficients (#38)
 

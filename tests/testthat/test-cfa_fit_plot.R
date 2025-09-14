@@ -65,4 +65,10 @@ test_that("cfa_fit_plot save as PDF error", {
   )
 })
 
+test_that("cfa_fit_plot save as PDF error", {
+  expect_error(
+    cfa_fit_plot(model, data, save.as.pdf = TRUE)
+  )
+})
+
 setwd(.old_wd)
