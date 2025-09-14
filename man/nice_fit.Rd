@@ -65,7 +65,7 @@ but at least they better respect the idea that (mis)fit is a matter of
 magnitude, not nearly so simple as "perfect or imperfect."}
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 x <- paste0("x", 1:9)
 (latent <- list(
   visual = x[1:3],
