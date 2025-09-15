@@ -345,7 +345,7 @@ cat(model)
 ```
 
 ## Example 7 (total effects)
-Source: https://web.archive.org/web/20250114164544/https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem%20From:%20inst/doc/example.html#structural-equation-modelling-sem
+Source: https://web.archive.org/web/20250114164544/https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem
 
 `lavaan`:
 ```{r}
