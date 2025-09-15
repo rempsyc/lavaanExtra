@@ -68,7 +68,7 @@ test_that("nice_modindices auto-labels", {
 
 test_that("nice_modindices without labels", {
   skip_if_not_installed("sjlabelled")
-  # Test the path when no labels are available 
+  # Test the path when no labels are available
   result <- nice_modindices(fit, maximum.number = 5)
   expect_s3_class(result, "data.frame")
   expect_equal(ncol(result), 4) # Should have 4 columns without labels
@@ -110,7 +110,7 @@ test_that("nice_modindices with labels as named vector", {
   # Test with labels as named vector instead of data.frame
   vector_labels <- c(
     x1 = "Label for x1",
-    x2 = "Label for x2", 
+    x2 = "Label for x2",
     x3 = "Label for x3"
   )
   result <- nice_modindices(fit, labels = vector_labels, maximum.number = 5)
@@ -124,7 +124,7 @@ test_that("nice_modindices handles empty labels", {
   x <- HolzingerSwineford1939
   x <- sjlabelled::set_label(x, label = rep("", ncol(x)))
   fit_empty <- sem(HS.model, data = x)
-  
+
   result <- nice_modindices(fit_empty, maximum.number = 5)
   expect_s3_class(result, "data.frame")
   expect_equal(ncol(result), 4) # Should not have label columns

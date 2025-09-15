@@ -9,7 +9,7 @@ test_that("get_dep_version returns correct version for existing package with ver
 })
 
 test_that("get_dep_version returns correct version for testthat with >= requirement", {
-  # Test with testthat which should have version requirement "3.0.0" from DESCRIPTION  
+  # Test with testthat which should have version requirement "3.0.0" from DESCRIPTION
   result <- lavaanExtra:::get_dep_version("testthat")
   expect_type(result, "character")
   expect_length(result, 1)
@@ -36,7 +36,7 @@ test_that("get_dep_version returns NA for packages without version requirements"
 test_that("get_dep_version handles packages not in Suggests field", {
   # Test with a package that doesn't exist in Suggests
   result <- lavaanExtra:::get_dep_version("nonexistent_package")
-  expect_type(result, "character") 
+  expect_type(result, "character")
   expect_length(result, 0)
 })
 
@@ -45,19 +45,19 @@ test_that("get_dep_version handles mixed cases", {
   result <- lavaanExtra:::get_dep_version(c("rempsyc", "flextable", "testthat"))
   expect_type(result, "character")
   expect_length(result, 3)
-  expect_equal(result[1], "0.1.6")  # has version requirement
-  expect_true(is.na(result[2]))     # no version requirement  
-  expect_equal(result[3], "3.0.0")  # has version requirement
+  expect_equal(result[1], "0.1.6") # has version requirement
+  expect_true(is.na(result[2])) # no version requirement
+  expect_equal(result[3], "3.0.0") # has version requirement
 })
 
 test_that("get_dep_version returns NA for packages without version requirement", {
-  # This tests the which.min(nchar()) logic - if there were packages like 
+  # This tests the which.min(nchar()) logic - if there were packages like
   # "rempsyc" and "rempsyc_extra", it should pick the shorter one
   # We'll test with "knitr" as it's unlikely to have conflicts
   result <- lavaanExtra:::get_dep_version("knitr")
   expect_type(result, "character")
   expect_length(result, 1)
-  expect_true(is.na(result))  # knitr has no version requirement in DESCRIPTION
+  expect_true(is.na(result)) # knitr has no version requirement in DESCRIPTION
 })
 
 test_that("get_dep_version handles empty input", {

@@ -13,8 +13,8 @@ status](https://www.r-pkg.org/badges/version/lavaanExtra)](https://cran.r-projec
 [![Codecov test
 coverage](https://codecov.io/gh/rempsyc/lavaanExtra/branch/main/graph/badge.svg)](https://app.codecov.io/gh/rempsyc/lavaanExtra?branch=main)
 [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://lifecycle.r-lib.org/articles/stages.html)
-[![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://shinyus.ipub.com/cranview/)
-[![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://shinyus.ipub.com/cranview/)
+[![downloads](https://cranlogs.r-pkg.org/badges/lavaanExtra)](https://hadley.shinyapps.io/cran-downloads/)
+[![total](https://cranlogs.r-pkg.org/badges/grand-total/lavaanExtra)](https://hadley.shinyapps.io/cran-downloads/)
 [![DOI](https://joss.theoj.org/papers/10.21105/joss.05701/status.svg)](https://doi.org/10.21105/joss.05701)
 [![sponsors](https://img.shields.io/github/sponsors/rempsyc)](https://github.com/sponsors/rempsyc)
 [![followers](https://img.shields.io/github/followers/rempsyc?style=social)](https://github.com/rempsyc?tab=followers)
@@ -138,14 +138,11 @@ cat(cfa.model)
 #> visual =~ x1 + x2 + x3
 #> textual =~ x4 + x5 + x6
 #> speed =~ x7 + x8 + x9
-```
-
-``` r
 
 # Fit the model fit and plot with `lavaanExtra::cfa_fit_plot`
 # to get the factor loadings visually (optionally as PDF)
 fit.cfa <- cfa_fit_plot(cfa.model, HolzingerSwineford1939)
-#> lavaan 0.6-18 ended normally after 35 iterations
+#> lavaan 0.6-19 ended normally after 35 iterations
 #> 
 #>   Estimator                                         ML
 #>   Optimization method                           NLMINB
@@ -335,9 +332,6 @@ cat(model)
 #> ageyr_visual_textual := ageyr_visual * visual_textual
 #> grade_visual_speed := grade_visual * visual_speed
 #> grade_visual_textual := grade_visual * visual_textual
-```
-
-``` r
 
 fit.sem <- sem(model, data = HolzingerSwineford1939)
 ```
@@ -350,7 +344,7 @@ lavaan_reg(fit.sem, nice_table = TRUE, highlight = TRUE)
 <img src="man/figures/README-saturated-1.png" width="100%" />
 
 ``` r
-# Get covariances/correlations and make them pretty with 
+# Get covariances/correlations and make them pretty with
 # the `rempsyc::nice_table` integration
 lavaan_cor(fit.sem, nice_table = TRUE)
 ```
