@@ -66,12 +66,11 @@ nice_modindices <- function(fit,
   rownames(x) <- NULL
 
   if (is.null(labels)) {
-    if (requireNamespace("sjlabelled", quietly = TRUE)) {
-      dat <- insight::get_data(fit)
-      labels <- sjlabelled::get_label(dat)
-      if (all(labels == "")) {
-        labels <- NULL
-      }
+    insight::check_if_installed("sjlabelled")
+    dat <- insight::get_data(fit)
+    labels <- sjlabelled::get_label(dat)
+    if (all(labels == "")) {
+      labels <- NULL
     }
   }
   if (!is.null(labels)) {

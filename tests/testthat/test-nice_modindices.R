@@ -67,6 +67,7 @@ test_that("nice_modindices auto-labels", {
 # Additional tests to improve coverage
 
 test_that("nice_modindices without labels", {
+  skip_if_not_installed("sjlabelled")
   # Test the path when no labels are available 
   result <- nice_modindices(fit, maximum.number = 5)
   expect_s3_class(result, "data.frame")
@@ -75,6 +76,7 @@ test_that("nice_modindices without labels", {
 })
 
 test_that("nice_modindices with sort = FALSE", {
+  skip_if_not_installed("sjlabelled")
   # Test the sort parameter
   result <- nice_modindices(fit, sort = FALSE, maximum.number = 5)
   expect_s3_class(result, "data.frame")
@@ -142,6 +144,7 @@ test_that("nice_modindices with no matching labels", {
 })
 
 test_that("nice_modindices with additional lavaan parameters", {
+  skip_if_not_installed("sjlabelled")
   # Test passing additional parameters to lavaan::modindices
   result <- nice_modindices(fit, minimum.value = 1, maximum.number = 3)
   expect_s3_class(result, "data.frame")
