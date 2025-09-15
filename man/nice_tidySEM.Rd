@@ -75,7 +75,7 @@ Make a quick and decent-looking \code{tidySEM} plot.
 }
 
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("tidySEM", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("tidySEM", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 # Calculate scale averages
 library(lavaan)
 data <- HolzingerSwineford1939

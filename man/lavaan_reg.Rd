@@ -54,7 +54,7 @@ The default \code{standardized_se = "model"} chooses "bootstrap" if the fitted
 model used \code{se = "bootstrap"} (and \code{bootstrap > 0}), and "delta" otherwise.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 x <- paste0("x", 1:9)
 (latent <- list(
   visual = x[1:3],
