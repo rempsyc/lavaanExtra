@@ -1,5 +1,18 @@
 ## Resubmission lavaanExtra 0.2.2
 
+> Thanks, we see:
+> 
+>    Found the following (possibly) invalid URLs:
+>      URL: 
+> https://web.archive.org/web/20250114164544/https://methodenlehre.github.io/SGSCLM-R-course/cfa-and-sem-with-lavaan.html#structural-equation-modelling-sem%20From:%20inst/doc/example.html#structural-equation-modelling-sem
+>        From: inst/doc/example.html
+>        Message: Invalid URL: '#' not allowed in fragment
+> 
+> This is a very complex URL and our logic cannot know where hashes have 
+> to be encoded, so please URLencode() hashes as appropriate yourself.
+
+Thanks, we corrected the URL.
+
 0 errors | 0 warnings | 0 notes
 
 ## Resubmission lavaanExtra 0.2.1
