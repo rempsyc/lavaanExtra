@@ -1,0 +1,142 @@
+# Extract relevant fit indices from lavaan model
+
+Compares fit from one or several lavaan models. Also optionally includes
+references values. The reference fit values are based on Schreiber
+(2017), Table 3.
+
+## Usage
+
+``` r
+nice_fit(
+  model,
+  model.labels,
+  nice_table = FALSE,
+  guidelines = TRUE,
+  stars = FALSE,
+  verbose = TRUE
+)
+```
+
+## Arguments
+
+- model:
+
+  lavaan model object(s) to extract fit indices from
+
+- model.labels:
+
+  Model labels to use. If a named list is provided for `model`, default
+  to the names of the list. Otherwise, if the list is unnamed, defaults
+  to generic numbering.
+
+- nice_table:
+
+  Logical, whether to print the table as a
+  [rempsyc::nice_table](https://rempsyc.remi-theriault.com/reference/nice_table.html).
+
+- guidelines:
+
+  Logical, if `nice_table = TRUE`, whether to display include reference
+  values based on Schreiber (2017), Table 3, at the bottom of the table.
+
+- stars:
+
+  Logical, if `nice_table = TRUE`, whether to display significance stars
+  (defaults to `FALSE`).
+
+- verbose:
+
+  Logical, whether to display messages and warnings.
+
+## Value
+
+A dataframe, representing select fit indices (chi2, df, chi2/df, p-value
+of the chi2 test, CFI, TLI, RMSEA and its 90% CI, unbiased SRMR, AIC,
+and BIC).
+
+## Details
+
+Note that `nice_fit` reports the unbiased SRMR through
+[`lavaan::lavResiduals()`](https://rdrr.io/pkg/lavaan/man/lavResiduals.html)
+because the standard SRMR is upwardly biased
+([doi:10.1007/s11336-016-9552-7](https://doi.org/10.1007/s11336-016-9552-7)
+) in a noticeable way for smaller samples (thanks to James Uanhoro for
+this change).
+
+If using `guidelines = TRUE`, please carefully consider the following
+2023 quote from Terrence D. Jorgensen:
+
+*I do not recommend including cutoffs in the table, as doing so would
+perpetuate their misuse. Fit indices are not test statistics, and their
+suggested cutoffs are not critical values associated with known Type I
+error rates. Numerous simulation studies have shown how poorly cutoffs
+perform in model selection (e.g., , Jorgensen et al. (2018). Instead of
+test statistics, fit indices were designed to be measures of effect size
+(practical significance), which complement the chi-squared test of
+statistical significance. The range of RMSEA interpretations above is
+more reminiscent of the range of small/medium/large effect sizes
+proposed by Cohen for use in power analyses, which are as arbitrary as
+alpha levels, but at least they better respect the idea that (mis)fit is
+a matter of magnitude, not nearly so simple as "perfect or imperfect."*
+
+## References
+
+Schreiber, J. B. (2017). Update to core reporting practices in
+structural equation modeling. *Research in social and administrative
+pharmacy*, *13*(3), 634-643.
+[doi:10.1016/j.sapharm.2016.06.006](https://doi.org/10.1016/j.sapharm.2016.06.006)
+
+## Examples
+
+``` r
+x <- paste0("x", 1:9)
+(latent <- list(
+  visual = x[1:3],
+  textual = x[4:6],
+  speed = x[7:9]
+))
+#> $visual
+#> [1] "x1" "x2" "x3"
+#> 
+#> $textual
+#> [1] "x4" "x5" "x6"
+#> 
+#> $speed
+#> [1] "x7" "x8" "x9"
+#> 
+
+(regression <- list(
+  ageyr = c("visual", "textual", "speed"),
+  grade = c("visual", "textual", "speed")
+))
+#> $ageyr
+#> [1] "visual"  "textual" "speed"  
+#> 
+#> $grade
+#> [1] "visual"  "textual" "speed"  
+#> 
+
+HS.model <- write_lavaan(latent = latent, regression = regression)
+cat(HS.model)
+#> ##################################################
+#> # [-----Latent variables (measurement model)-----]
+#> 
+#> visual =~ x1 + x2 + x3
+#> textual =~ x4 + x5 + x6
+#> speed =~ x7 + x8 + x9
+#> 
+#> ##################################################
+#> # [---------Regressions (Direct effects)---------]
+#> 
+#> ageyr ~ visual + textual + speed
+#> grade ~ visual + textual + speed
+#> 
+
+library(lavaan)
+fit <- sem(HS.model, data = HolzingerSwineford1939)
+nice_fit(fit)
+#>     Model   chisq df chi2.df pvalue   cfi   tli rmsea rmsea.ci.lower
+#> 1 Model 1 116.263 36    3.23      0 0.926 0.887 0.086          0.069
+#>   rmsea.ci.upper  srmr      aic      bic
+#> 1          0.104 0.052 8638.134 8749.248
+```

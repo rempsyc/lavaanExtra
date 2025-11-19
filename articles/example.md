@@ -1,0 +1,899 @@
+# Example lavaan models
+
+This article attempts to reproduce several different possible `lavaan`
+models. We start with the source itself: The lavaan project at
+<https://lavaan.ugent.be>. Let’s start by loading both packages.
+
+``` r
+library(lavaan)
+library(lavaanExtra)
+```
+
+## Example 1 (Model syntax 1):
+
+Source: <https://lavaan.ugent.be/tutorial/syntax1.html>
+
+`lavaan`:
+
+``` r
+myModel <- " # regressions
+             y1 + y2 ~ f1 + f2 + x1 + x2
+                  f1 ~ f2 + f3
+                  f2 ~ f3 + x1 + x2
+
+             # latent variable definitions
+               f1 =~ y1 + y2 + y3
+               f2 =~ y4 + y5 + y6
+               f3 =~ y7 + y8 + y9 + y10
+
+             # variances and covariances
+               y1 ~~ y1
+               y1 ~~ y2
+               f1 ~~ f2
+
+             # intercepts
+               y1 ~ 1
+               f1 ~ 1
+           "
+```
+
+`lavaanExtra`:
+
+``` r
+reg <- list(
+  y1 = c("f1", "f2", "x1", "x2"),
+  y2 = c("f1", "f2", "x1", "x2"),
+  f1 = c("f2", "f3"),
+  f2 = c("f3", "x1", "x2")
+)
+lat <- list(
+  f1 = paste0("y", 1:3),
+  f2 = paste0("y", 4:6),
+  f3 = paste0("y", 7:10)
+)
+cov <- list(
+  y1 = "y1",
+  y1 = "y2",
+  f1 = "f2"
+)
+int <- c("y1", "f1")
+myModel <- write_lavaan(
+  regression = reg,
+  latent = lat,
+  covariance = cov,
+  intercept = int
+)
+cat(myModel)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## f1 =~ y1 + y2 + y3
+    ## f2 =~ y4 + y5 + y6
+    ## f3 =~ y7 + y8 + y9 + y10
+    ## 
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## y1 ~ f1 + f2 + x1 + x2
+    ## y2 ~ f1 + f2 + x1 + x2
+    ## f1 ~ f2 + f3
+    ## f2 ~ f3 + x1 + x2
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## y1 ~~ y1
+    ## y1 ~~ y2
+    ## f1 ~~ f2
+    ## 
+    ## ##################################################
+    ## # [------------------Intercepts------------------]
+    ## 
+    ## y1 ~ 1
+    ## f1 ~ 1
+
+## Example 2 (A CFA example):
+
+Source: <https://lavaan.ugent.be/tutorial/cfa.html>
+
+`lavaan`:
+
+``` r
+HS.model <- " visual  =~ x1 + x2 + x3
+              textual =~ x4 + x5 + x6
+              speed   =~ x7 + x8 + x9 "
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
+myModel <- write_lavaan(latent = lat)
+cat(myModel)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + x2 + x3
+    ## textual =~ x4 + x5 + x6
+    ## speed =~ x7 + x8 + x9
+
+## Example 3 (A SEM example):
+
+Source: <https://lavaan.ugent.be/tutorial/sem.html>
+
+`lavaan`:
+
+``` r
+model <- "
+  # measurement model
+    ind60 =~ x1 + x2 + x3
+    dem60 =~ y1 + y2 + y3 + y4
+    dem65 =~ y5 + y6 + y7 + y8
+  # regressions
+    dem60 ~ ind60
+    dem65 ~ ind60 + dem60
+  # residual correlations
+    y1 ~~ y5
+    y2 ~~ y4 + y6
+    y3 ~~ y7
+    y4 ~~ y8
+    y6 ~~ y8
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  ind60 = paste0("x", 1:3),
+  dem60 = paste0("y", 1:4),
+  dem65 = paste0("y", 5:8)
+)
+reg <- list(
+  dem60 = "ind60",
+  dem65 = c("ind60", "dem60")
+)
+cov <- list(
+  y1 = "y5",
+  y2 = c("y4", "y6"),
+  y3 = "y7",
+  y4 = "y8",
+  y6 = "y8"
+)
+model <- write_lavaan(
+  latent = lat,
+  regression = reg,
+  covariance = cov
+)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## ind60 =~ x1 + x2 + x3
+    ## dem60 =~ y1 + y2 + y3 + y4
+    ## dem65 =~ y5 + y6 + y7 + y8
+    ## 
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## dem60 ~ ind60
+    ## dem65 ~ ind60 + dem60
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## y1 ~~ y5
+    ## y2 ~~ y4 + y6
+    ## y3 ~~ y7
+    ## y4 ~~ y8
+    ## y6 ~~ y8
+
+## Example 4 (Model syntax 2):
+
+Source: <https://lavaan.ugent.be/tutorial/syntax2.html>
+
+#### Example 4.1
+
+`lavaan`:
+
+``` r
+model <- "
+# three-factor model
+  visual =~ x1 + x2 + x3
+  textual =~ x4 + x5 + x6
+  speed   =~ NA*x7 + x8 + x9
+# orthogonal factors
+  visual ~~ 0*speed
+  textual ~~ 0*speed
+# fix variance of speed factor
+  speed ~~ 1*speed
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = c("NA*x7", "x8", "x9")
+)
+cov <- list(
+  visual = "0*speed",
+  textual = "0*speed",
+  speed = "1*speed"
+)
+model <- write_lavaan(latent = lat, covariance = cov)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + x2 + x3
+    ## textual =~ x4 + x5 + x6
+    ## speed =~ NA*x7 + x8 + x9
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## visual ~~ 0*speed
+    ## textual ~~ 0*speed
+    ## speed ~~ 1*speed
+
+#### Example 4.2
+
+`lavaan`:
+
+``` r
+model <- "
+visual  =~ x1 + start(0.8)*x2 + start(1.2)*x3
+textual =~ x4 + start(0.5)*x5 + start(1.0)*x6
+speed   =~ x7 + start(0.7)*x8 + start(1.8)*x9
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = c("x1", "start(0.8)*x2", "start(1.2)*x3"),
+  textual = c("x4", "start(0.5)*x5", "start(1.0)*x6"),
+  speed = c("x7", "start(0.7)*x8", "start(1.8)*x9")
+)
+model <- write_lavaan(latent = lat)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + start(0.8)*x2 + start(1.2)*x3
+    ## textual =~ x4 + start(0.5)*x5 + start(1.0)*x6
+    ## speed =~ x7 + start(0.7)*x8 + start(1.8)*x9
+
+#### Example 4.3
+
+`lavaan`:
+
+``` r
+model <- "
+f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(f = c("y1", "y2", "myLabel*y3", "start(0.5)*y3", "y4"))
+model <- write_lavaan(latent = lat)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## f =~ y1 + y2 + myLabel*y3 + start(0.5)*y3 + y4
+
+#### Example 4.4
+
+`lavaan`:
+
+``` r
+model <- "
+visual  =~ x1 + v2*x2 + v2*x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = c("x1", "v2*x2", "v2*x3"),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
+model <- write_lavaan(latent = lat)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + v2*x2 + v2*x3
+    ## textual =~ x4 + x5 + x6
+    ## speed =~ x7 + x8 + x9
+
+#### Example 4.5
+
+`lavaan`:
+
+``` r
+model <- '
+visual  =~ x1 + x2 + equal("visual=~x2")*x3
+textual =~ x4 + x5 + x6
+speed   =~ x7 + x8 + x9
+'
+sem(model, data = HolzingerSwineford1939)
+```
+
+    ## lavaan 0.6-20 ended normally after 36 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                        21
+    ##   Number of equality constraints                     1
+    ## 
+    ##   Number of observations                           301
+    ## 
+    ## Model Test User Model:
+    ##                                                       
+    ##   Test statistic                                87.971
+    ##   Degrees of freedom                                25
+    ##   P-value (Chi-square)                           0.000
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = c("x1", "x2", "equal('visual=~x2')*x3"),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
+model <- write_lavaan(latent = lat)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + x2 + equal('visual=~x2')*x3
+    ## textual =~ x4 + x5 + x6
+    ## speed =~ x7 + x8 + x9
+
+``` r
+sem(model, data = HolzingerSwineford1939)
+```
+
+    ## lavaan 0.6-20 ended normally after 36 iterations
+    ## 
+    ##   Estimator                                         ML
+    ##   Optimization method                           NLMINB
+    ##   Number of model parameters                        21
+    ##   Number of equality constraints                     1
+    ## 
+    ##   Number of observations                           301
+    ## 
+    ## Model Test User Model:
+    ##                                                       
+    ##   Test statistic                                87.971
+    ##   Degrees of freedom                                25
+    ##   P-value (Chi-square)                           0.000
+
+#### Example 4.6
+
+`lavaan`:
+
+``` r
+model.constr <- " # model with labeled parameters
+                    y ~ b1*x1 + b2*x2 + b3*x3
+                  # constraints
+                    b1 == (b2 + b3)^2
+                    b1 > exp(b2 + b3) "
+```
+
+`lavaanExtra`:
+
+``` r
+reg <- list(y = c("b1*x1", "b2*x2", "b3*x3"))
+cstr1 <- list(b1 = "(b2 + b3)^2")
+cstr2 <- list(b1 = "exp(b2 + b3)")
+model <- write_lavaan(
+  regression = reg, constraint.equal = cstr1,
+  constraint.larger = cstr2
+)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## y ~ b1*x1 + b2*x2 + b3*x3
+    ## 
+    ## ##################################################
+    ## # [-----------------Constraints------------------]
+    ## 
+    ## b1 == (b2 + b3)^2
+    ## b1 > exp(b2 + b3)
+
+## Example 5 (Mediation)
+
+Source: <https://lavaan.ugent.be/tutorial/mediation.html>
+
+`lavaan`:
+
+``` r
+model <- " # direct effect
+             Y ~ c*X
+           # mediator
+             M ~ a*X
+             Y ~ b*M
+           # indirect effect (a*b)
+             ab := a*b
+           # total effect
+             total := c + (a*b)
+         "
+```
+
+`lavaanExtra`:
+
+``` r
+mediation <- list(
+  Y = "c*X",
+  M = "a*X",
+  Y = "b*M"
+)
+indirect <- list(
+  ab = "a*b",
+  total = "c + (a*b)"
+)
+model <- write_lavaan(mediation = mediation, indirect = indirect)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----------Mediations (named paths)-----------]
+    ## 
+    ## Y ~ c*X
+    ## M ~ a*X
+    ## Y ~ b*M
+    ## 
+    ## ##################################################
+    ## # [--------Mediations (indirect effects)---------]
+    ## 
+    ## ab := a*b
+    ## total := c + (a*b)
+
+## Example 6 (Multilevel SEM)
+
+Source: <https://lavaan.ugent.be/tutorial/multilevel.html>
+
+`lavaan`:
+
+``` r
+model <- "
+    level: 1
+        fw =~ y1 + y2 + y3
+        fw ~ x1 + x2 + x3
+    level: 2
+        fb =~ y1 + y2 + y3
+        fb ~ w1 + w2
+"
+```
+
+`lavaanExtra`:
+
+``` r
+cus <-
+  "level: 1
+    fw =~ y1 + y2 + y3
+    fw ~ x1 + x2 + x3
+level: 2
+    fb =~ y1 + y2 + y3
+    fb ~ w1 + w2
+"
+model <- write_lavaan(custom = cus)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [------------Custom Specifications-------------]
+    ## 
+    ## level: 1
+    ##     fw =~ y1 + y2 + y3
+    ##     fw ~ x1 + x2 + x3
+    ## level: 2
+    ##     fb =~ y1 + y2 + y3
+    ##     fb ~ w1 + w2
+
+## Example 7 (total effects)
+
+Source:
+<https://methodenlehre.github.io/intro-to-rstats/cfa-and-sem-with-lavaan.html#estimating-indirect-and-total-effects>
+
+`lavaan`:
+
+``` r
+model_mediation <- "
+# Measurement model
+SUP_Parents =~ sup_parents_p1 + sup_parents_p2 + sup_parents_p3
+SUP_Friends =~ sup_friends_p1 + sup_friends_p2 + sup_friends_p3
+SE_Academic =~ se_acad_p1 + se_acad_p2 + se_acad_p3
+SE_Social =~ se_social_p1 + se_social_p2 + se_social_p3
+LS  =~ ls_p1 + ls_p2 + ls_p3
+
+# Structural model
+# Regressions
+SE_Academic ~ b1*SUP_Parents + b3*SUP_Friends
+SE_Social ~ b2*SUP_Parents + b4*SUP_Friends
+LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social
+
+# Residual covariances
+SE_Academic ~~ SE_Social
+
+# Indirect effects
+b1b7 := b1*b7
+b2b8 := b2*b8
+totalind_eltern := b1*b7 + b2*b8
+b3b7 := b3*b7
+b4b8 := b4*b8
+totalind_freunde := b3*b7 + b4*b8
+
+# Total effects
+total_eltern := b1*b7 + b2*b8 + b5
+total_freunde := b3*b7 + b4*b8 + b6
+"
+```
+
+`lavaanExtra`:
+
+``` r
+x <- c("sup_parents", "sup_friends", "se_acad", "se_social", "ls")
+y <- lapply(x, paste0, "_p", 1:3)
+y <- setNames(y, x)
+lat <- list(
+  SUP_Parents = y$sup_parents,
+  SUP_Friends = y$sup_friends,
+  SE_Academic = y$se_acad,
+  SE_Social = y$se_social,
+  LS = y$ls
+)
+
+b <- paste0("b", 1:8)
+d <- c(
+  rep(c("SUP_Parents", "SUP_Friends"), each = 2),
+  "SUP_Parents", "SUP_Friends", "SE_Academic", "SE_Social"
+)
+e <- paste0(b, "*", d)
+
+reg <- list(
+  SE_Academic = e[c(1, 3)],
+  SE_Social = e[c(2, 4)],
+  LS = e[c(5:8)]
+)
+
+cov <- list(SE_Academic = "SE_Social")
+
+ind <- list(
+  b1b7 = "b1*b7",
+  b2b8 = "b2*b8",
+  totalind_eltern = "b1*b7 + b2*b8",
+  b3b7 = "b3*b7",
+  b4b8 = "b4*b8",
+  totalind_freunde = "b3*b7 + b4*b8",
+  total_eltern = "b1*b7 + b2*b8 + b5",
+  total_freunde = "b3*b7 + b4*b8 + b6"
+)
+
+model <- write_lavaan(
+  regression = reg, covariance = cov,
+  indirect = ind, latent = lat
+)
+cat(model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## SUP_Parents =~ sup_parents_p1 + sup_parents_p2 + sup_parents_p3
+    ## SUP_Friends =~ sup_friends_p1 + sup_friends_p2 + sup_friends_p3
+    ## SE_Academic =~ se_acad_p1 + se_acad_p2 + se_acad_p3
+    ## SE_Social =~ se_social_p1 + se_social_p2 + se_social_p3
+    ## LS =~ ls_p1 + ls_p2 + ls_p3
+    ## 
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## SE_Academic ~ b1*SUP_Parents + b3*SUP_Friends
+    ## SE_Social ~ b2*SUP_Parents + b4*SUP_Friends
+    ## LS ~ b5*SUP_Parents + b6*SUP_Friends + b7*SE_Academic + b8*SE_Social
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## SE_Academic ~~ SE_Social
+    ## 
+    ## ##################################################
+    ## # [--------Mediations (indirect effects)---------]
+    ## 
+    ## b1b7 := b1*b7
+    ## b2b8 := b2*b8
+    ## totalind_eltern := b1*b7 + b2*b8
+    ## b3b7 := b3*b7
+    ## b4b8 := b4*b8
+    ## totalind_freunde := b3*b7 + b4*b8
+    ## total_eltern := b1*b7 + b2*b8 + b5
+    ## total_freunde := b3*b7 + b4*b8 + b6
+
+## Example 8 (intercepts)
+
+Source: <https://lavaan.ugent.be/tutorial/means.html>
+
+`lavaan`:
+
+``` r
+HS.model <- "
+# three-factor model
+  visual  =~ x1 + x2 + x3
+  textual =~ x4 + x5 + x6
+  speed   =~ x7 + x8 + x9
+# intercepts with fixed values
+  x1 + x2 + x3 + x4 ~ 0.5*1
+"
+```
+
+`lavaanExtra`:
+
+``` r
+lat <- list(
+  visual = paste0("x", 1:3),
+  textual = paste0("x", 4:6),
+  speed = paste0("x", 7:9)
+)
+
+cus <- "x1 + x2 + x3 + x4 ~ 0.5*1"
+
+HS.model <- write_lavaan(
+  latent = lat, custom = cus
+)
+cat(HS.model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## visual =~ x1 + x2 + x3
+    ## textual =~ x4 + x5 + x6
+    ## speed =~ x7 + x8 + x9
+    ## 
+    ## ##################################################
+    ## # [------------Custom Specifications-------------]
+    ## 
+    ## x1 + x2 + x3 + x4 ~ 0.5*1
+
+## Example 9 (thresholds)
+
+Source:
+<https://tdjorgensen.github.io/TDJorgensen/CatMeasEq/Jorgensen.CatMeasEq.pdf>
+
+`lavaan`:
+
+``` r
+mod2 <- "
+## LIR means
+  y2w1 ~ mean1*1
+  y2w2 ~ mean2*1
+## LIR (co)variances
+  y2w1 ~~ var1*y2w1 + y2w2
+  y2w2 ~~ var2*y2w2
+## thresholds link LIRs to observed items
+  y2w1 | thr1*t1
+  y2w2 | thr2*t1
+"
+```
+
+`lavaanExtra`:
+
+``` r
+reg <- list(
+  y2w1 = "mean1*1",
+  y2w2 = "mean2*1"
+)
+
+cov <- list(
+  y2w1 = c("var1*y2w1", "y2w2"),
+  y2w2 = "var2*y2w2"
+)
+
+thres <- list(
+  y2w1 = "thr1*t1",
+  y2w2 = "thr2*t1"
+)
+
+HS.model <- write_lavaan(
+  regression = reg,
+  covariance = cov,
+  threshold = thres
+)
+cat(HS.model)
+```
+
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## y2w1 ~ mean1*1
+    ## y2w2 ~ mean2*1
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## y2w1 ~~ var1*y2w1 + y2w2
+    ## y2w2 ~~ var2*y2w2
+    ## 
+    ## ##################################################
+    ## # [------------------Thresholds------------------]
+    ## 
+    ## y2w1 | thr1*t1
+    ## y2w2 | thr2*t1
+
+## Example 10 (longitudinal invariance)
+
+Source:
+<https://thechangelab.stanford.edu/tutorials/growth-modeling/modeling-change-latent-vars-ordinal-indicators-lavaan/>
+
+`lavaan`:
+
+``` r
+configural_invar <- " #opening quote
+#factor loadings
+  eta1 =~ 1*t1_sc + #for identification
+          t1_intp +
+          t1_ext
+  eta2 =~ 1*t2_sc + #for identification
+          t2_intp +
+          t2_ext
+  eta3 =~ 1*t4_sc + #for identification
+          t4_intp +
+          t4_ext
+
+#latent variable variances
+   eta1~~eta1
+   eta2~~eta2
+   eta3~~eta3
+
+#latent variable covariances
+   eta1~~eta2
+   eta1~~eta3
+   eta2~~eta3
+
+#latent variable means
+   eta1~0*1 #for scaling
+   eta2~0*1 #for scaling
+   eta3~0*1 #for scaling
+
+#propensity variances
+   t1_sc  ~~ 1*t1_sc
+   t1_intp~~ 1*t1_intp
+   t1_ext ~~ 1*t1_ext
+   t2_sc  ~~ 1*t2_sc
+   t2_intp~~ 1*t2_intp
+   t2_ext ~~ 1*t2_ext
+   t4_sc  ~~ 1*t4_sc
+   t4_intp~~ 1*t4_intp
+   t4_ext ~~ 1*t4_ext
+
+#unique covariances
+
+
+#observed variable intercepts/thresholds (4 categories = 3 thresholds)
+   t1_sc   |t1 + t2 + t3
+   t1_intp |t1 + t2 + t3
+   t1_ext  |t1 + t2 + t3
+   t2_sc   |t1 + t2 + t3
+   t2_intp |t1 + t2 + t3
+   t2_ext  |t1 + t2 + t3
+   t4_sc   |t1 + t2 + t3
+   t4_intp |t1 + t2 + t3
+   t4_ext  |t1 + t2 + t3
+" # closing quote
+```
+
+`lavaanExtra`:
+
+``` r
+eta <- paste0("eta", 1:3)
+t <- paste0("t", 1:4)
+term <- c("sc", "intp", "ext")
+tnames <- paste0(rep(t[c(1:2, 4)], each = 3), "_", term)
+tnames2 <- paste0("1*", tnames)
+
+lat <- list(
+  eta1 = c(tnames2[1], tnames[2:3]),
+  eta2 = c(tnames2[4], tnames[5:6]),
+  eta3 = c(tnames2[7], tnames[8:9])
+)
+
+cov <- as.list(c(eta, eta[2:3], eta[3], tnames2))
+names(cov) <- c(eta, eta[1], eta[1:2], tnames)
+
+thres <- rep(list(t[1:3]), 9)
+names(thres) <- tnames
+
+reg <- as.list(setNames(rep("0*1", 3), eta))
+
+HS.model <- write_lavaan(
+  regression = reg,
+  latent = lat,
+  covariance = cov,
+  threshold = thres
+)
+cat(HS.model)
+```
+
+    ## ##################################################
+    ## # [-----Latent variables (measurement model)-----]
+    ## 
+    ## eta1 =~ 1*t1_sc + t1_intp + t1_ext
+    ## eta2 =~ 1*t2_sc + t2_intp + t2_ext
+    ## eta3 =~ 1*t4_sc + t4_intp + t4_ext
+    ## 
+    ## ##################################################
+    ## # [---------Regressions (Direct effects)---------]
+    ## 
+    ## eta1 ~ 0*1
+    ## eta2 ~ 0*1
+    ## eta3 ~ 0*1
+    ## 
+    ## ##################################################
+    ## # [------------------Covariances-----------------]
+    ## 
+    ## eta1 ~~ eta1
+    ## eta2 ~~ eta2
+    ## eta3 ~~ eta3
+    ## eta1 ~~ eta2
+    ## eta1 ~~ eta3
+    ## eta2 ~~ eta3
+    ## t1_sc ~~ 1*t1_sc
+    ## t1_intp ~~ 1*t1_intp
+    ## t1_ext ~~ 1*t1_ext
+    ## t2_sc ~~ 1*t2_sc
+    ## t2_intp ~~ 1*t2_intp
+    ## t2_ext ~~ 1*t2_ext
+    ## t4_sc ~~ 1*t4_sc
+    ## t4_intp ~~ 1*t4_intp
+    ## t4_ext ~~ 1*t4_ext
+    ## 
+    ## ##################################################
+    ## # [------------------Thresholds------------------]
+    ## 
+    ## t1_sc | t1 + t2 + t3
+    ## t1_intp | t1 + t2 + t3
+    ## t1_ext | t1 + t2 + t3
+    ## t2_sc | t1 + t2 + t3
+    ## t2_intp | t1 + t2 + t3
+    ## t2_ext | t1 + t2 + t3
+    ## t4_sc | t1 + t2 + t3
+    ## t4_intp | t1 + t2 + t3
+    ## t4_ext | t1 + t2 + t3

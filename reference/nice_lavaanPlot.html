@@ -13,7 +13,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">lavaanExtra</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.2.2.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -66,6 +66,8 @@
 <span>  stars <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"regress"</span>, <span class="st">"latent"</span>, <span class="st">"covs"</span><span class="op">)</span>,</span>
 <span>  sig <span class="op">=</span> <span class="fl">0.05</span>,</span>
 <span>  graph_options <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>rankdir <span class="op">=</span> <span class="st">"LR"</span><span class="op">)</span>,</span>
+<span>  title <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  note <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  <span class="va">...</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -111,6 +113,20 @@ to .05). To plot all coefficients, set <code>sig</code> to 1.</p></dd>
 
 <dt id="arg-graph-options">graph_options<a class="anchor" aria-label="anchor" href="#arg-graph-options"></a></dt>
 <dd><p>Read from left to right, rather than from top to bottom.</p></dd>
+
+
+<dt id="arg-title">title<a class="anchor" aria-label="anchor" href="#arg-title"></a></dt>
+<dd><p>Optional title for the plot, positioned at the top. Plain text only;
+special characters like &lt;, &gt;, &amp; are automatically escaped for Graphviz
+compatibility. Note: This will override any <code>label</code> or <code>labelloc</code> settings
+in <code>graph_options</code>.</p></dd>
+
+
+<dt id="arg-note">note<a class="anchor" aria-label="anchor" href="#arg-note"></a></dt>
+<dd><p>Optional note or caption for the plot, positioned at the bottom when
+used alone, or displayed below the title with smaller font when both are
+provided. Plain text only; special characters are automatically escaped.
+Note: This will override any <code>label</code> or <code>labelloc</code> settings in <code>graph_options</code>.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -162,7 +178,11 @@ specified <code>lavaan</code> model.</p>
 <span class="r-in"><span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/lavaan/man/cfa.html" class="external-link">cfa</a></span><span class="op">(</span><span class="va">HS.model</span>, <span class="va">HolzingerSwineford1939</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">nice_lavaanPlot</span><span class="op">(</span><span class="va">fit</span><span class="op">)</span></span></span>
 <div id="htmlwidget-e5c8c404fe174e4c81bd" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n x1; x2; x3; x4; x5; x6; x7; x8; x9 \n node [shape = oval] \n visual; textual; speed \n \n edge [ color = black ] \n  visual->x1 [label = \"0.77***\"] visual->x2 [label = \"0.42***\"] visual->x3 [label = \"0.58***\"] textual->x4 [label = \"0.85***\"] textual->x5 [label = \"0.86***\"] textual->x6 [label = \"0.84***\"] speed->x7 [label = \"0.57***\"] speed->x8 [label = \"0.72***\"] speed->x9 [label = \"0.67***\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
+<script type="application/json" data-for="htmlwidget-e5c8c404fe174e4c81bd">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n x1; x2; x3; x4; x5; x6; x7; x8; x9 \n node [shape = oval] \n visual; textual; speed \n \n edge [ color = black ] \n  visual->x1 [label = \"0.77***\"] visual->x2 [label = \"0.42***\"] visual->x3 [label = \"0.58***\"] textual->x4 [label = \"0.85***\"] textual->x5 [label = \"0.86***\"] textual->x6 [label = \"0.84***\"] speed->x7 [label = \"0.57***\"] speed->x8 [label = \"0.72***\"] speed->x9 [label = \"0.67***\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script><span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># With title and note</span></span></span>
+<span class="r-in"><span><span class="fu">nice_lavaanPlot</span><span class="op">(</span><span class="va">fit</span>, title <span class="op">=</span> <span class="st">"Three-Factor CFA Model"</span>, note <span class="op">=</span> <span class="st">"Holzinger-Swineford Dataset"</span><span class="op">)</span></span></span>
+<div id="htmlwidget-36aa3d2a04d42bbc2145" style="width:700px;height:432.632880098888px;" class="grViz html-widget"></div>
+<script type="application/json" data-for="htmlwidget-36aa3d2a04d42bbc2145">{"x":{"diagram":" digraph plot { \n graph [ rankdir = LR, label = <<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\"><TR><TD><FONT POINT-SIZE=\"14\"><B>Three-Factor CFA Model<\/B><\/FONT><\/TD><\/TR><TR><TD HEIGHT=\"10\"><\/TD><\/TR><TR><TD><FONT POINT-SIZE=\"10\">Holzinger-Swineford Dataset<\/FONT><\/TD><\/TR><\/TABLE>>, labelloc = t ] \n node [ shape = box, fontname = Helvetica ] \n node [shape = box] \n x1; x2; x3; x4; x5; x6; x7; x8; x9 \n node [shape = oval] \n visual; textual; speed \n \n edge [ color = black ] \n  visual->x1 [label = \"0.77***\"] visual->x2 [label = \"0.42***\"] visual->x3 [label = \"0.58***\"] textual->x4 [label = \"0.85***\"] textual->x5 [label = \"0.86***\"] textual->x6 [label = \"0.84***\"] speed->x7 [label = \"0.57***\"] speed->x8 [label = \"0.72***\"] speed->x9 [label = \"0.67***\"] \n}","config":{"engine":"dot","options":null}},"evals":[],"jsHooks":[]}</script></code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
@@ -173,7 +193,7 @@ specified <code>lavaan</code> model.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
