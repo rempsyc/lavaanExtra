@@ -14,8 +14,9 @@
 #' @param sig Which significance threshold to use to plot coefficients (defaults
 #'  to .05). To plot all coefficients, set `sig` to 1.
 #' @param graph_options Read from left to right, rather than from top to bottom.
-#' @param title Optional title for the plot (HTML-safe Graphviz label).
-#' @param note Optional note or caption for the plot (HTML-safe Graphviz label).
+#' @param title Optional title for the plot, positioned at the top (HTML-safe Graphviz label).
+#' @param note Optional note or caption for the plot, positioned at the bottom when 
+#'              used alone, or as an external label when used with title (HTML-safe Graphviz label).
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -56,23 +57,26 @@ nice_lavaanPlot <- function(
   )
 
   # Construct HTML label if title or note is provided
-  if (!is.null(title) || !is.null(note)) {
-    label_parts <- character(0)
-    if (!is.null(title)) {
-      label_parts <- c(label_parts, title)
-    }
-    if (!is.null(note)) {
-      label_parts <- c(label_parts, note)
-    }
-    label <- paste0("<", paste(label_parts, collapse = "<br/><br/>"), ">")
-
-    # Merge label into graph_options
-    # Convert graph_options to list if it's a vector
-    if (!is.list(graph_options)) {
-      graph_options <- as.list(graph_options)
-    }
+  # Convert graph_options to list if it's a vector
+  if (!is.list(graph_options)) {
+    graph_options <- as.list(graph_options)
+  }
+  
+  if (!is.null(title) && !is.null(note)) {
+    # Both title and note: title at top, note at bottom
+    # Since Graphviz only allows one label, we use label for title at top
+    # and xlabel for note (which will be positioned separately by Graphviz)
+    graph_options$label <- paste0("<", title, ">")
     graph_options$labelloc <- "t"
-    graph_options$label <- label
+    graph_options$xlabel <- paste0("<", note, ">")
+  } else if (!is.null(title)) {
+    # Only title: position at top
+    graph_options$label <- paste0("<", title, ">")
+    graph_options$labelloc <- "t"
+  } else if (!is.null(note)) {
+    # Only note: position at bottom
+    graph_options$label <- paste0("<", note, ">")
+    graph_options$labelloc <- "b"
   }
 
   lavaanPlot::lavaanPlot(
