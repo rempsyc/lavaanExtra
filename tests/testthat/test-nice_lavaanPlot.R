@@ -103,10 +103,11 @@ test_that("nice_lavaanPlot with both title and note", {
   skip_if_not_installed("DiagrammeRsvg")
   result <- nice_lavaanPlot(fit.cfa, title = "My Title", note = "My Caption")
   expect_s3_class(result, c("grViz", "htmlwidget"))
-  # Check that title is in label at top and note is in xlabel
-  expect_true(grepl("<My Title>", result$x$diagram, fixed = TRUE))
+  # Check that title and note are both in HTML table format
+  expect_true(grepl("My Title", result$x$diagram, fixed = TRUE))
   expect_true(grepl("labelloc=\"t\"", result$x$diagram, fixed = FALSE))
-  expect_true(grepl("<My Caption>", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("My Caption", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("<TABLE", result$x$diagram, fixed = TRUE))
 })
 
 test_that("nice_lavaanPlot backward compatibility without title/note", {

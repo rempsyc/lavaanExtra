@@ -16,7 +16,8 @@
 #' @param graph_options Read from left to right, rather than from top to bottom.
 #' @param title Optional title for the plot, positioned at the top (HTML-safe Graphviz label).
 #' @param note Optional note or caption for the plot, positioned at the bottom when 
-#'              used alone, or as an external label when used with title (HTML-safe Graphviz label).
+#'              used alone, or displayed below the title with smaller font when both are provided 
+#'              (HTML-safe Graphviz label).
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -63,12 +64,16 @@ nice_lavaanPlot <- function(
   }
   
   if (!is.null(title) && !is.null(note)) {
-    # Both title and note: title at top, note at bottom
-    # Since Graphviz only allows one label, we use label for title at top
-    # and xlabel for note (which will be positioned separately by Graphviz)
-    graph_options$label <- paste0("<", title, ">")
+    # Both title and note: create HTML table for visual separation
+    # Title at top of label block, note at bottom with smaller font
+    graph_options$label <- paste0(
+      "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\">",
+      "<TR><TD><FONT POINT-SIZE=\"14\"><B>", title, "</B></FONT></TD></TR>",
+      "<TR><TD HEIGHT=\"10\"></TD></TR>",  # Small spacer
+      "<TR><TD><FONT POINT-SIZE=\"10\">", note, "</FONT></TD></TR>",
+      "</TABLE>>"
+    )
     graph_options$labelloc <- "t"
-    graph_options$xlabel <- paste0("<", note, ">")
   } else if (!is.null(title)) {
     # Only title: position at top
     graph_options$label <- paste0("<", title, ">")

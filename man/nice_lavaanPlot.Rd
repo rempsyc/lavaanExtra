@@ -44,7 +44,8 @@ to .05). To plot all coefficients, set \code{sig} to 1.}
 \item{title}{Optional title for the plot, positioned at the top (HTML-safe Graphviz label).}
 
 \item{note}{Optional note or caption for the plot, positioned at the bottom when
-used alone, or as an external label when used with title (HTML-safe Graphviz label).}
+used alone, or displayed below the title with smaller font when both are provided
+(HTML-safe Graphviz label).}
 
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
