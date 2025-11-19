@@ -1,6 +1,9 @@
 # lavaanExtra 0.2.2
 * New CRAN submission
 
+## lavaanExtra 0.2.2.1
+* `nice_lavaanPlot()`: add `title` and `note` arguments for HTML-safe Graphviz labels to display titles and captions without DOT parser errors
+
 # lavaanExtra 0.2.1.1
 * `lavaan_reg()` and `lavaan_defined()`: add `standardized_se` argument to allow bootstrap SE & CI for standardized coefficients (#38)
 

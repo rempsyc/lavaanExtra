@@ -14,6 +14,8 @@ nice_lavaanPlot(
   stars = c("regress", "latent", "covs"),
   sig = 0.05,
   graph_options = c(rankdir = "LR"),
+  title = NULL,
+  note = NULL,
   ...
 )
 }
@@ -38,6 +40,16 @@ Defaults to TRUE.}
 to .05). To plot all coefficients, set \code{sig} to 1.}
 
 \item{graph_options}{Read from left to right, rather than from top to bottom.}
+
+\item{title}{Optional title for the plot, positioned at the top. Plain text only;
+special characters like <, >, & are automatically escaped for Graphviz
+compatibility. Note: This will override any \code{label} or \code{labelloc} settings
+in \code{graph_options}.}
+
+\item{note}{Optional note or caption for the plot, positioned at the bottom when
+used alone, or displayed below the title with smaller font when both are
+provided. Plain text only; special characters are automatically escaped.
+Note: This will override any \code{label} or \code{labelloc} settings in \code{graph_options}.}
 
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
@@ -69,5 +81,8 @@ cat(HS.model)
 library(lavaan)
 fit <- cfa(HS.model, HolzingerSwineford1939)
 nice_lavaanPlot(fit)
+
+# With title and note
+nice_lavaanPlot(fit, title = "Three-Factor CFA Model", note = "Holzinger-Swineford Dataset")
 \dontshow{\}) # examplesIf}
 }
