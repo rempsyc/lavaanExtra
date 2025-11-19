@@ -84,8 +84,8 @@ test_that("nice_lavaanPlot with title only", {
   skip_if_not_installed("DiagrammeRsvg")
   result <- nice_lavaanPlot(fit.cfa, title = "My Model Title")
   expect_s3_class(result, c("grViz", "htmlwidget"))
-  # Check that the HTML label is constructed correctly
-  expect_true(grepl("<My Model Title>", result$x$diagram, fixed = TRUE))
+  # Check that the title is present in the HTML table
+  expect_true(grepl("My Model Title", result$x$diagram, fixed = TRUE))
 })
 
 test_that("nice_lavaanPlot with note only", {
@@ -114,4 +114,96 @@ test_that("nice_lavaanPlot backward compatibility without title/note", {
   # Should work exactly as before when title and note are not provided
   result_old <- nice_lavaanPlot(fit.cfa)
   expect_s3_class(result_old, c("grViz", "htmlwidget"))
+})
+
+test_that("nice_lavaanPlot with fit_stats = TRUE", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, fit_stats = TRUE)
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that fit statistics are present in the diagram
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("TLI", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("RMSEA", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("SRMR", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with specific fit_stats", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, fit_stats = c("cfi", "rmsea"))
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that specified fit statistics are present
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("RMSEA", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with title and fit_stats", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = "CFA Model", 
+    fit_stats = TRUE
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that both title and fit stats are present
+  expect_true(grepl("CFA Model", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with title, note, and fit_stats", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = "CFA Model", 
+    note = "Test Data",
+    fit_stats = TRUE
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that all elements are present
+  expect_true(grepl("CFA Model", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("Test Data", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with fit_stats only (no title)", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, fit_stats = c("chisq", "df", "pvalue"))
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that fit statistics are present
+  expect_true(grepl("CHISQ", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("DF", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("PVALUE", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with multiple fit_stats_type", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  # Fit model with robust estimator to get scaled/robust indices
+  fit_robust <- sem(HS.model, HolzingerSwineford1939, estimator = "MLR")
+  result <- nice_lavaanPlot(fit_robust, 
+    fit_stats = TRUE,
+    fit_stats_type = c("regular", "scaled", "robust")
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that type labels are present
+  expect_true(grepl("Regular:", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("Scaled:", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("Robust:", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with single fit_stats_type", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  # With single type, no type label should be added
+  result <- nice_lavaanPlot(fit.cfa, 
+    fit_stats = TRUE,
+    fit_stats_type = "regular"
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Should not have type label when only one type
+  expect_false(grepl("Regular:", result$x$diagram, fixed = TRUE))
+  # But should have fit indices
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
 })
