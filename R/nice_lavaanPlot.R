@@ -110,6 +110,14 @@ nice_lavaanPlot <- function(
       stop("fit_stats must be TRUE, FALSE, NULL, or a character vector of fit index names")
     }
     
+    # Check for unrecognized fit indices
+    # Remove suffixes to get base fit measure names
+    base_fit_names <- unique(sub("\\.(scaled|robust)$", "", names(all_fit_measures)))
+    unknown_indices <- setdiff(indices_to_show, base_fit_names)
+    if (length(unknown_indices) > 0) {
+      warning("Unrecognized fit indices: ", paste(unknown_indices, collapse = ", "))
+    }
+    
     # Helper function to format a single fit value
     format_fit_value <- function(idx, val) {
       if (is.numeric(val) && !is.na(val)) {
@@ -185,10 +193,10 @@ nice_lavaanPlot <- function(
     graph_options <- as.list(graph_options)
   }
 
-  # Warn if title/note will override existing label or labelloc
-  if (!is.null(title) || !is.null(note)) {
+  # Warn if title/note/fit_stats will override existing label or labelloc
+  if (!is.null(title) || !is.null(note) || !is.null(fit_stats)) {
     if (!is.null(graph_options$label) || !is.null(graph_options$labelloc)) {
-      warning("title/note parameters override graph_options$label and graph_options$labelloc")
+      warning("title/note/fit_stats parameters override graph_options$label and graph_options$labelloc")
     }
   }
 
