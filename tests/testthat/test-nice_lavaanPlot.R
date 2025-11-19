@@ -78,3 +78,38 @@ test_that("nice_lavaanPlot different sem model", {
     c("grViz", "htmlwidget")
   )
 })
+
+test_that("nice_lavaanPlot with title only", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, title = "My Model Title")
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that the HTML label is constructed correctly
+  expect_true(grepl("<My Model Title>", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with note only", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, note = "This is a caption")
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that the HTML label is constructed correctly
+  expect_true(grepl("<This is a caption>", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with both title and note", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, title = "My Title", note = "My Caption")
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that the HTML label is constructed with <br/><br/> separator
+  expect_true(grepl("<My Title<br/><br/>My Caption>", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot backward compatibility without title/note", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  # Should work exactly as before when title and note are not provided
+  result_old <- nice_lavaanPlot(fit.cfa)
+  expect_s3_class(result_old, c("grViz", "htmlwidget"))
+})
