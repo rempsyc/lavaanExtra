@@ -14,6 +14,8 @@ nice_lavaanPlot(
   stars = c("regress", "latent", "covs"),
   sig = 0.05,
   graph_options = c(rankdir = "LR"),
+  title = NULL,
+  note = NULL,
   ...
 )
 }
@@ -39,6 +41,10 @@ to .05). To plot all coefficients, set \code{sig} to 1.}
 
 \item{graph_options}{Read from left to right, rather than from top to bottom.}
 
+\item{title}{Optional title for the plot (HTML-safe Graphviz label).}
+
+\item{note}{Optional note or caption for the plot (HTML-safe Graphviz label).}
+
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
@@ -55,7 +61,7 @@ Make a quick and decent-looking \code{lavaanPlot}.
 }
 
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x <- paste0("x", 1:9)
 (latent <- list(
   visual = x[1:3],
@@ -69,5 +75,8 @@ cat(HS.model)
 library(lavaan)
 fit <- cfa(HS.model, HolzingerSwineford1939)
 nice_lavaanPlot(fit)
+
+# With title and note
+nice_lavaanPlot(fit, title = "Three-Factor CFA Model", note = "Holzinger-Swineford Dataset")
 \dontshow{\}) # examplesIf}
 }

@@ -67,7 +67,7 @@ A character string, representing the specified \code{lavaan} model.
 Vector-based lavaan syntax interpreter.
 }
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x <- paste0("x", 1:9)
 (latent <- list(
   visual = x[1:3],

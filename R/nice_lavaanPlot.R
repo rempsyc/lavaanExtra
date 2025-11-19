@@ -54,7 +54,7 @@ nice_lavaanPlot <- function(
     ),
     reason = "for this function."
   )
-  
+
   # Construct HTML label if title or note is provided
   if (!is.null(title) || !is.null(note)) {
     label_parts <- character(0)
@@ -65,7 +65,7 @@ nice_lavaanPlot <- function(
       label_parts <- c(label_parts, note)
     }
     label <- paste0("<", paste(label_parts, collapse = "<br/><br/>"), ">")
-    
+
     # Merge label into graph_options
     # Convert graph_options to list if it's a vector
     if (!is.list(graph_options)) {
@@ -74,7 +74,7 @@ nice_lavaanPlot <- function(
     graph_options$labelloc <- "t"
     graph_options$label <- label
   }
-  
+
   lavaanPlot::lavaanPlot(
     model = model,
     node_options = node_options,
