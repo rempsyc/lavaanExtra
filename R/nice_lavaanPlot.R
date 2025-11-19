@@ -27,6 +27,12 @@
 #'              vector, displays only the specified fit indices (e.g., `c("cfi", "rmsea")`).
 #'              Available indices include: "chisq", "df", "pvalue", "cfi", "tli", "rmsea",
 #'              "srmr", "aic", "bic". Defaults to `NULL` (no fit statistics displayed).
+#' @param fit_stats_type Character vector specifying which types of fit statistics to display
+#'              when using robust estimators. Options are `"regular"` (standard fit indices),
+#'              `"scaled"` (scaled fit indices), and `"robust"` (robust fit indices).
+#'              Defaults to `c("regular", "scaled", "robust")` to show all available types.
+#'              Each type is displayed on a separate line. Only applicable when the model
+#'              uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -54,6 +60,11 @@
 #'
 #' # With specific fit statistics
 #' nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pvalue"))
+#'
+#' # With robust estimator showing multiple fit statistic types
+#' fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
+#' nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
+#'                 fit_stats_type = c("regular", "scaled", "robust"))
 #' @section Illustrations:
 #'
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}
@@ -63,7 +74,7 @@ nice_lavaanPlot <- function(
   edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
   covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
   graph_options = c(rankdir = "LR"), title = NULL, note = NULL,
-  fit_stats = NULL, ...
+  fit_stats = NULL, fit_stats_type = c("regular", "scaled", "robust"), ...
 ) {
   insight::check_if_installed(
     c(
@@ -85,9 +96,9 @@ nice_lavaanPlot <- function(
   # Extract and format fit statistics if requested
   fit_stats_text <- NULL
   if (!is.null(fit_stats)) {
-    # Get fit indices from model
-    fit_data <- nice_fit(model, verbose = FALSE)
-
+    # Get all fit measures directly from lavaan
+    all_fit_measures <- lavaan::fitMeasures(model)
+    
     # Determine which indices to display
     if (isTRUE(fit_stats)) {
       # Default set of fit indices
@@ -98,37 +109,73 @@ nice_lavaanPlot <- function(
     } else {
       stop("fit_stats must be TRUE, FALSE, NULL, or a character vector of fit index names")
     }
-
-    # Filter available indices
-    available_indices <- tolower(names(fit_data))
-    indices_to_show <- intersect(indices_to_show, available_indices)
-
-    if (length(indices_to_show) > 0) {
-      # Format fit statistics as text
-      fit_values <- sapply(indices_to_show, function(idx) {
-        val <- fit_data[[idx]]
-        if (is.numeric(val)) {
-          # Format based on typical ranges for each index
-          if (idx %in% c("chisq", "aic", "bic")) {
-            formatted <- sprintf("%.2f", val)
-          } else if (idx %in% c("df")) {
-            formatted <- sprintf("%.0f", val)
-          } else if (idx %in% c("pvalue")) {
-            formatted <- if (val < 0.001) "&lt; .001" else sprintf("%.3f", val)
-          } else {
-            # CFI, TLI, RMSEA, SRMR - typically 3 decimal places
-            formatted <- sprintf("%.3f", val)
-          }
+    
+    # Helper function to format a single fit value
+    format_fit_value <- function(idx, val) {
+      if (is.numeric(val) && !is.na(val)) {
+        # Format based on typical ranges for each index
+        if (idx %in% c("chisq", "aic", "bic")) {
+          formatted <- sprintf("%.2f", val)
+        } else if (idx %in% c("df")) {
+          formatted <- sprintf("%.0f", val)
+        } else if (idx %in% c("pvalue")) {
+          formatted <- if (val < 0.001) "&lt; .001" else sprintf("%.3f", val)
         } else {
-          formatted <- as.character(val)
+          # CFI, TLI, RMSEA, SRMR - typically 3 decimal places
+          formatted <- sprintf("%.3f", val)
         }
-        formatted
-      })
-
-      # Create fit stats display text
-      # Format as "CFI = 0.931, TLI = 0.896, RMSEA = 0.092, SRMR = 0.058"
-      fit_parts <- paste0(toupper(indices_to_show), " = ", fit_values)
-      fit_stats_text <- paste(fit_parts, collapse = ", ")
+      } else {
+        formatted <- as.character(val)
+      }
+      formatted
+    }
+    
+    # Determine which types to show (regular, scaled, robust)
+    fit_stats_type <- match.arg(fit_stats_type, 
+                                 choices = c("regular", "scaled", "robust"), 
+                                 several.ok = TRUE)
+    
+    # Build lines of fit statistics for each type
+    fit_lines <- character(0)
+    
+    for (type in fit_stats_type) {
+      # Determine suffix for this type
+      suffix <- if (type == "regular") "" else paste0(".", type)
+      
+      # Get values for this type
+      type_values <- character(0)
+      type_has_values <- FALSE
+      
+      for (idx in indices_to_show) {
+        # Try to get the fit measure with the appropriate suffix
+        fit_name <- paste0(idx, suffix)
+        
+        if (fit_name %in% names(all_fit_measures)) {
+          val <- all_fit_measures[[fit_name]]
+          if (!is.na(val)) {
+            formatted_val <- format_fit_value(idx, val)
+            type_values <- c(type_values, paste0(toupper(idx), " = ", formatted_val))
+            type_has_values <- TRUE
+          }
+        }
+      }
+      
+      # Only add this line if we found values for this type
+      if (type_has_values && length(type_values) > 0) {
+        # Add type label if we're showing multiple types
+        if (length(fit_stats_type) > 1) {
+          type_label <- paste0(toupper(substring(type, 1, 1)), 
+                              substring(type, 2), ": ")
+        } else {
+          type_label <- ""
+        }
+        fit_lines <- c(fit_lines, paste0(type_label, paste(type_values, collapse = ", ")))
+      }
+    }
+    
+    # Combine all lines with line breaks
+    if (length(fit_lines) > 0) {
+      fit_stats_text <- paste(fit_lines, collapse = "\n")
     }
   }
 
@@ -178,10 +225,16 @@ nice_lavaanPlot <- function(
     }
 
     if (has_fit_stats) {
-      html_rows <- c(
-        html_rows,
-        "<TR><TD><FONT POINT-SIZE=\"9\">", fit_stats_text, "</FONT></TD></TR>"
-      )
+      # Split fit_stats_text by newline to handle multiple types
+      fit_stats_lines <- strsplit(fit_stats_text, "\n", fixed = TRUE)[[1]]
+      
+      # Add each line as a separate row
+      for (i in seq_along(fit_stats_lines)) {
+        html_rows <- c(
+          html_rows,
+          "<TR><TD><FONT POINT-SIZE=\"9\">", fit_stats_lines[i], "</FONT></TD></TR>"
+        )
+      }
     }
 
     # Combine into full HTML table

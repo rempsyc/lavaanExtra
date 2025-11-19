@@ -176,3 +176,34 @@ test_that("nice_lavaanPlot with fit_stats only (no title)", {
   expect_true(grepl("DF", result$x$diagram, fixed = TRUE))
   expect_true(grepl("PVALUE", result$x$diagram, fixed = TRUE))
 })
+
+test_that("nice_lavaanPlot with multiple fit_stats_type", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  # Fit model with robust estimator to get scaled/robust indices
+  fit_robust <- sem(HS.model, HolzingerSwineford1939, estimator = "MLR")
+  result <- nice_lavaanPlot(fit_robust, 
+    fit_stats = TRUE,
+    fit_stats_type = c("regular", "scaled", "robust")
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that type labels are present
+  expect_true(grepl("Regular:", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("Scaled:", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("Robust:", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with single fit_stats_type", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  # With single type, no type label should be added
+  result <- nice_lavaanPlot(fit.cfa, 
+    fit_stats = TRUE,
+    fit_stats_type = "regular"
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Should not have type label when only one type
+  expect_false(grepl("Regular:", result$x$diagram, fixed = TRUE))
+  # But should have fit indices
+  expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
+})

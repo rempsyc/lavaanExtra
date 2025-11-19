@@ -17,6 +17,7 @@ nice_lavaanPlot(
   title = NULL,
   note = NULL,
   fit_stats = NULL,
+  fit_stats_type = c("regular", "scaled", "robust"),
   ...
 )
 }
@@ -58,6 +59,13 @@ vector, displays only the specified fit indices (e.g., \code{c("cfi", "rmsea")})
 Available indices include: "chisq", "df", "pvalue", "cfi", "tli", "rmsea",
 "srmr", "aic", "bic". Defaults to \code{NULL} (no fit statistics displayed).}
 
+\item{fit_stats_type}{Character vector specifying which types of fit statistics to display
+when using robust estimators. Options are \code{"regular"} (standard fit indices),
+\code{"scaled"} (scaled fit indices), and \code{"robust"} (robust fit indices).
+Defaults to \code{c("regular", "scaled", "robust")} to show all available types.
+Each type is displayed on a separate line. Only applicable when the model
+uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.}
+
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
@@ -97,5 +105,10 @@ nice_lavaanPlot(fit, title = "Three-Factor CFA Model", fit_stats = TRUE)
 
 # With specific fit statistics
 nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pvalue"))
+
+# With robust estimator showing multiple fit statistic types
+fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
+nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
+                fit_stats_type = c("regular", "scaled", "robust"))
 \dontshow{\}) # examplesIf}
 }
