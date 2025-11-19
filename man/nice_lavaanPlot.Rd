@@ -41,11 +41,15 @@ to .05). To plot all coefficients, set \code{sig} to 1.}
 
 \item{graph_options}{Read from left to right, rather than from top to bottom.}
 
-\item{title}{Optional title for the plot, positioned at the top (HTML-safe Graphviz label).}
+\item{title}{Optional title for the plot, positioned at the top. Plain text only;
+special characters like <, >, & are automatically escaped for Graphviz
+compatibility. Note: This will override any \code{label} or \code{labelloc} settings
+in \code{graph_options}.}
 
 \item{note}{Optional note or caption for the plot, positioned at the bottom when
-used alone, or displayed below the title with smaller font when both are provided
-(HTML-safe Graphviz label).}
+used alone, or displayed below the title with smaller font when both are
+provided. Plain text only; special characters are automatically escaped.
+Note: This will override any \code{label} or \code{labelloc} settings in \code{graph_options}.}
 
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
