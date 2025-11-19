@@ -1,6 +1,9 @@
 # lavaanExtra 0.2.2
 * New CRAN submission
 
+## lavaanExtra 0.2.2.2
+* `nice_lavaanPlot()`: add `fit_stats` argument to optionally display fit statistics (CFI, TLI, RMSEA, SRMR, etc.) directly on the plot
+
 ## lavaanExtra 0.2.2.1
 * `nice_lavaanPlot()`: add `title` and `note` arguments for HTML-safe Graphviz labels to display titles and captions without DOT parser errors
 

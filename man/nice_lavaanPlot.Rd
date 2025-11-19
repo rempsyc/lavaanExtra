@@ -16,6 +16,7 @@ nice_lavaanPlot(
   graph_options = c(rankdir = "LR"),
   title = NULL,
   note = NULL,
+  fit_stats = NULL,
   ...
 )
 }
@@ -51,6 +52,12 @@ used alone, or displayed below the title with smaller font when both are
 provided. Plain text only; special characters are automatically escaped.
 Note: This will override any \code{label} or \code{labelloc} settings in \code{graph_options}.}
 
+\item{fit_stats}{Logical or character vector. If \code{TRUE}, displays a default set of fit
+statistics (CFI, TLI, RMSEA, SRMR) at the bottom of the plot. If a character
+vector, displays only the specified fit indices (e.g., \code{c("cfi", "rmsea")}).
+Available indices include: "chisq", "df", "pvalue", "cfi", "tli", "rmsea",
+"srmr", "aic", "bic". Defaults to \code{NULL} (no fit statistics displayed).}
+
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
@@ -84,5 +91,11 @@ nice_lavaanPlot(fit)
 
 # With title and note
 nice_lavaanPlot(fit, title = "Three-Factor CFA Model", note = "Holzinger-Swineford Dataset")
+
+# With fit statistics
+nice_lavaanPlot(fit, title = "Three-Factor CFA Model", fit_stats = TRUE)
+
+# With specific fit statistics
+nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pvalue"))
 \dontshow{\}) # examplesIf}
 }
