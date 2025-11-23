@@ -119,7 +119,7 @@ nice_lavaanPlot <- function(
   title_size = 14,
   note_size = 10,
   fit_stats_size = 9,
-  wrap_width = 60,
+  wrap_width = NULL,
   ...
 ) {
   insight::check_if_installed(
@@ -304,16 +304,16 @@ nice_lavaanPlot <- function(
     html_rows <- character(0)
 
     if (has_title) {
-      # Apply wrapping if requested, then escape
-      title_text <- wrap_text(title, wrap_width, title_size)
-      title_escaped <- html_escape(title_text)
+      # Escape first, then apply wrapping (so <BR/> tags aren't escaped)
+      title_escaped <- html_escape(title)
+      title_text <- wrap_text(title_escaped, wrap_width, title_size)
       html_rows <- c(
         html_rows,
         paste0(
           "<TR><TD><FONT POINT-SIZE=\"",
           title_size,
           "\"><B>",
-          title_escaped,
+          title_text,
           "</B></FONT></TD></TR>"
         )
       )
@@ -323,16 +323,16 @@ nice_lavaanPlot <- function(
     }
 
     if (has_note) {
-      # Apply wrapping if requested, then escape
-      note_text <- wrap_text(note, wrap_width, note_size)
-      note_escaped <- html_escape(note_text)
+      # Escape first, then apply wrapping (so <BR/> tags aren't escaped)
+      note_escaped <- html_escape(note)
+      note_text <- wrap_text(note_escaped, wrap_width, note_size)
       html_rows <- c(
         html_rows,
         paste0(
           "<TR><TD><FONT POINT-SIZE=\"",
           note_size,
           "\">",
-          note_escaped,
+          note_text,
           "</FONT></TD></TR>"
         )
       )
@@ -347,20 +347,20 @@ nice_lavaanPlot <- function(
 
       # Add each line as a separate row, with wrapping if requested
       for (i in seq_along(fit_stats_lines)) {
-        # Apply wrapping to each fit stats line, then escape
+        # Escape first, then apply wrapping (so <BR/> tags aren't escaped)
+        escaped_line <- html_escape(fit_stats_lines[i])
         wrapped_line <- wrap_text(
-          fit_stats_lines[i],
+          escaped_line,
           wrap_width,
           fit_stats_size
         )
-        escaped_line <- html_escape(wrapped_line)
         html_rows <- c(
           html_rows,
           paste0(
             "<TR><TD><FONT POINT-SIZE=\"",
             fit_stats_size,
             "\">",
-            escaped_line,
+            wrapped_line,
             "</FONT></TD></TR>"
           )
         )
