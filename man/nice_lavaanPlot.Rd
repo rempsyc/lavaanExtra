@@ -91,7 +91,8 @@ A 20\% safety margin is applied to prevent text cutoff.}
 }
 \value{
 A lavaanPlot, of classes \code{c("grViz", "htmlwidget")}, representing the
-specified \code{lavaan} model.
+specified \code{lavaan} model. Use \code{\link[=save_plot]{save_plot()}} to export the plot to PNG,
+PDF, SVG, or JPG formats.
 }
 \description{
 Make a quick and decent-looking \code{lavaanPlot}.
@@ -144,13 +145,13 @@ nice_lavaanPlot(fit, title = long_title, fit_stats = TRUE, wrap_width = 60)
 # Wrapping adapts to font size - larger fonts wrap at fewer characters
 nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
 
-# For saving with save_png without title cutoff, consider adjusting
-# the width parameter and/or using graph_options like margin
+# Save plot to file
 \dontrun{
-library(DiagrammeRsvg)
-plot <- nice_lavaanPlot(fit, title = "My Very Long Title That Might Get Cut Off")
-DiagrammeRsvg::export_svg(plot) |> charToRaw() |>
-  rsvg::rsvg_png("myplot.png", width = 1200)
+plot <- nice_lavaanPlot(fit)
+save_plot(plot, "my_plot.png")    # PNG format
+save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
+save_plot(plot, "my_plot.svg")    # SVG format (lossless)
+save_plot(plot, "my_plot.jpg")    # JPG format
 }
 \dontshow{\}) # examplesIf}
 }

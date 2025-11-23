@@ -1,6 +1,6 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package 'lavaan'
-Version: 0.2.2.3
+Version: 0.2.2.4
 Date: 2025-11-23
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
@@ -23,6 +23,7 @@ Suggests:
     lavaanPlot,
     DiagrammeRsvg,
     rsvg,
+    ggplot2,
     png,
     webshot,
     tidySEM,
@@ -36,7 +37,8 @@ Suggests:
     rmarkdown,
     markdown,
     covr,
-    spelling
+    spelling,
+    xml2
 Config/testthat/edition: 3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

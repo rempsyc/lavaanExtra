@@ -2,6 +2,9 @@
 
 * In progress
 
+## lavaanExtra 0.2.2.4
+* Add `save_plot()` function to export/save plots from `nice_lavaanPlot()` and `nice_tidySEM()` with multiple format options (PNG, PDF, SVG, JPG)
+
 ## lavaanExtra 0.2.2.3
 * `nice_lavaanPlot()`: add `title_size`, `note_size`, and `fit_stats_size` arguments to allow customization of font sizes for titles, notes, and fit statistics (useful for large diagrams where default sizes are too small to read)
 * `nice_lavaanPlot()`: add `wrap_width` argument to automatically wrap long text (title, note, fit statistics) at word boundaries, with intelligent adjustment based on font size to prevent text cutoff

@@ -42,13 +42,14 @@
 #'              is too small to read.
 #' @param wrap_width Numeric value or `NULL`. Specifies the maximum character width
 #'              before text is automatically wrapped to the next line. The wrapping is intelligent,
-#'              breaking at word boundaries. Defaults to `60` which works well for most plots. 
+#'              breaking at word boundaries. Defaults to `60` which works well for most plots.
 #'              Set to `NULL` to disable automatic text wrapping. The actual wrapping is adjusted
 #'              based on font size - larger fonts will wrap at proportionally fewer characters.
 #'              A 20% safety margin is applied to prevent text cutoff.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
-#'         specified `lavaan` model.
+#'         specified `lavaan` model. Use [save_plot()] to export the plot to PNG,
+#'         PDF, SVG, or JPG formats.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)
 #' x <- paste0("x", 1:9)
@@ -91,13 +92,13 @@
 #' # Wrapping adapts to font size - larger fonts wrap at fewer characters
 #' nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
 #'
-#' # For saving with save_png without title cutoff, consider adjusting
-#' # the width parameter and/or using graph_options like margin
+#' # Save plot to file
 #' \dontrun{
-#' library(DiagrammeRsvg)
-#' plot <- nice_lavaanPlot(fit, title = "My Very Long Title That Might Get Cut Off")
-#' DiagrammeRsvg::export_svg(plot) |> charToRaw() |>
-#'   rsvg::rsvg_png("myplot.png", width = 1200)
+#' plot <- nice_lavaanPlot(fit)
+#' save_plot(plot, "my_plot.png")    # PNG format
+#' save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
+#' save_plot(plot, "my_plot.svg")    # SVG format (lossless)
+#' save_plot(plot, "my_plot.jpg")    # JPG format
 #' }
 #' @section Illustrations:
 #'
@@ -152,7 +153,7 @@ nice_lavaanPlot <- function(
     # Adjust wrap width based on font size ratio
     # Larger fonts need proportionally fewer characters per line
     adjusted_width <- max_width * (base_font_size / font_size)
-    
+
     # Add padding/safety margin (reduce by 20%) to prevent text cutoff
     # This accounts for variable character widths and rendering differences
     adjusted_width <- adjusted_width * 0.8

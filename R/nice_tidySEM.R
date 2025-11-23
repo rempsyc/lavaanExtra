@@ -32,7 +32,8 @@
 #'             as needed.
 #' @param ... Arguments to be passed to [tidySEM::prepare_graph].
 #' @return A tidySEM plot, of class ggplot, representing the specified
-#'         `lavaan` model.
+#'         `lavaan` model. Use [save_plot()] to export the plot to PNG,
+#'         PDF, SVG, or JPG formats.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("tidySEM", quietly = TRUE)
 #' # Calculate scale averages
@@ -63,6 +64,13 @@
 #' # Plot model
 #' \donttest{
 #' nice_tidySEM(fit, layout = structure)
+#' }
+#'
+#' # Save plot to file
+#' \dontrun{
+#' plot <- nice_tidySEM(fit, layout = structure)
+#' save_plot(plot, "my_plot.png")    # PNG format
+#' save_plot(plot, "my_plot.pdf")    # PDF format
 #' }
 #' @section Illustrations:
 #'
