@@ -117,7 +117,7 @@ save_plot <- function(
       filename = filename,
       plot = plot,
       width = ifelse(is.null(width), NA, width),
-      height = ifelse(is.null(width), NA, height),
+      height = ifelse(is.null(height), NA, height),
       units = units,
       dpi = dpi,
       ...
