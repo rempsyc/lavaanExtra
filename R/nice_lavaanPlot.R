@@ -119,7 +119,7 @@ nice_lavaanPlot <- function(
   title_size = 14,
   note_size = 10,
   fit_stats_size = 9,
-  wrap_width = NULL,
+  wrap_width = 60,
   ...
 ) {
   insight::check_if_installed(
