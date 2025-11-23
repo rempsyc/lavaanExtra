@@ -9,13 +9,19 @@
 #' @param filename The path where the file should be saved, including the file extension
 #'                 (e.g., "myplot.png", "myplot.pdf", "myplot.svg", "myplot.jpg").
 #'                 The file format is determined by the extension.
-#' @param width The width of the output image in pixels. If `NULL` (default), uses the
-#'              SVG's natural dimensions which automatically crops to content including
-#'              title, note, and fit statistics.
-#' @param height The height of the output image in pixels. If `NULL` (default), uses the
-#'               SVG's natural dimensions which automatically crops to content.
-#' @param dpi Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
-#'            from `nice_tidySEM()`. Defaults to 300.
+#' @param width The width of the output image. Units are specified by the `units` parameter.
+#'              If `NULL` (default for grViz objects), uses the SVG's natural dimensions
+#'              which automatically crops to content. For ggplot objects, defaults to 7 (inches).
+#' @param height The height of the output image. Units are specified by the `units` parameter.
+#'               If `NULL` (default for grViz objects), uses the SVG's natural dimensions.
+#'               For ggplot objects, defaults to 5 (inches).
+#' @param units Units for width and height. One of "in" (inches, default), "cm" (centimeters),
+#'              "mm" (millimeters), or "px" (pixels). For ggplot objects, this is passed
+#'              directly to `ggplot2::ggsave()`. For grViz objects, units are converted to
+#'              pixels using the `dpi` parameter.
+#' @param dpi Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
+#'            Defaults to 300. Used for unit conversion for grViz objects and passed to
+#'            `ggplot2::ggsave()` for ggplot objects.
 #' @param ... Additional arguments passed to the underlying save functions
 #'            (`ggplot2::ggsave()` for ggplot objects or `rsvg::rsvg_*()` functions
 #'            for grViz objects).
@@ -26,14 +32,14 @@
 #'   proper display across all formats (especially for titles and fit statistics)
 #' - By default (no width/height specified), all formats use the SVG's natural dimensions,
 #'   which automatically crops to the actual content including title, note, and fit statistics
-#' - All dimension parameters are in **pixels** (not inches) for consistency across formats
+#' - Dimension units are specified by the `units` parameter and converted to pixels internally
 #' - For PNG: SVG is rendered directly to PNG using `rsvg::rsvg_png()`
 #' - For JPG: SVG is rendered to raster array using `rsvg::rsvg()` and saved with `grDevices::jpeg()`
-#' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()` (also uses pixels)
+#' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
 #' - For SVG: The SVG string is saved directly to file
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
-#' - The plot is saved using `ggplot2::ggsave()` with the specified format
+#' - The plot is saved using `ggplot2::ggsave()` with the specified format and units
 #'
 #' @return Invisibly returns the path to the saved file.
 #' @export
@@ -66,17 +72,35 @@
 #' # Save as JPG
 #' save_plot(plot, "myplot.jpg")
 #'
-#' # Custom dimensions
-#' save_plot(plot, "myplot_large.png", width = 2400, height = 1800)
+#' # Custom dimensions with different units
+#' save_plot(plot, "myplot_large.png", width = 10, height = 7.5, units = "in")
+#' save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
+#' save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
 #' }
+# Helper function to convert dimensions to pixels
+convert_to_pixels <- function(value, units = "in", dpi = 300) {
+  if (is.null(value)) return(NULL)
+  
+  switch(units,
+    "in" = value * dpi,
+    "cm" = value * dpi / 2.54,
+    "mm" = value * dpi / 25.4,
+    "px" = value,
+    stop("units must be one of 'in', 'cm', 'mm', or 'px'")
+  )
+}
+
 save_plot <- function(
   plot,
   filename,
   width = NULL,
   height = NULL,
+  units = c("in", "cm", "mm", "px"),
   dpi = 300,
   ...
 ) {
+  # Match units argument
+  units <- match.arg(units)
   # Determine file format from extension
   ext <- tolower(tools::file_ext(filename))
 
@@ -98,20 +122,23 @@ save_plot <- function(
   if (is_ggplot) {
     insight::check_if_installed("ggplot2", reason = "to save ggplot objects.")
 
-    # Set default dimensions for ggplot (in inches)
+    # Set default dimensions for ggplot (in the specified units)
     if (is.null(width)) {
-      width <- 7
+      width <- if (units == "in") 7 else convert_to_pixels(7, "in", dpi) / dpi * 
+        switch(units, "cm" = 2.54, "mm" = 25.4, "px" = dpi, 1)
     }
     if (is.null(height)) {
-      height <- 5
+      height <- if (units == "in") 5 else convert_to_pixels(5, "in", dpi) / dpi * 
+        switch(units, "cm" = 2.54, "mm" = 25.4, "px" = dpi, 1)
     }
 
-    # Use ggsave for all formats
+    # Use ggsave for all formats - pass units directly to ggsave
     ggplot2::ggsave(
       filename = filename,
       plot = plot,
       width = width,
       height = height,
+      units = units,
       dpi = dpi,
       ...
     )
@@ -126,6 +153,10 @@ save_plot <- function(
       c("DiagrammeRsvg", "rsvg"),
       reason = "to save grViz/lavaanPlot objects."
     )
+
+    # Convert dimensions to pixels for grViz objects
+    width_px <- convert_to_pixels(width, units, dpi)
+    height_px <- convert_to_pixels(height, units, dpi)
 
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
@@ -146,40 +177,40 @@ save_plot <- function(
     # which automatically crops to content (including title, note, fit stats, etc.)
 
     if (ext == "pdf") {
-      # Render to PDF (dimensions in pixels, same as PNG/JPG)
+      # Render to PDF (dimensions in pixels)
       # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width) && is.null(height)) {
+      if (is.null(width_px) && is.null(height_px)) {
         rsvg::rsvg_pdf(
           charToRaw(svg_string),
           file = filename,
           ...
         )
       } else {
-        # Use specified dimensions (in pixels)
+        # Use specified dimensions (converted to pixels)
         rsvg::rsvg_pdf(
           charToRaw(svg_string),
           file = filename,
-          width = if (is.null(width)) 1200 else width,
-          height = if (is.null(height)) 900 else height,
+          width = if (is.null(width_px)) 1200 else width_px,
+          height = if (is.null(height_px)) 900 else height_px,
           ...
         )
       }
     } else if (ext == "png") {
       # Render to PNG (dimensions in pixels)
       # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width) && is.null(height)) {
+      if (is.null(width_px) && is.null(height_px)) {
         rsvg::rsvg_png(
           charToRaw(svg_string),
           file = filename,
           ...
         )
       } else {
-        # Use specified dimensions
+        # Use specified dimensions (converted to pixels)
         rsvg::rsvg_png(
           charToRaw(svg_string),
           file = filename,
-          width = if (is.null(width)) 1200 else width,
-          height = if (is.null(height)) 900 else height,
+          width = if (is.null(width_px)) 1200 else width_px,
+          height = if (is.null(height_px)) 900 else height_px,
           ...
         )
       }
@@ -190,7 +221,7 @@ save_plot <- function(
 
       # Render SVG to bitmap array
       # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width) && is.null(height)) {
+      if (is.null(width_px) && is.null(height_px)) {
         img_data <- rsvg::rsvg(
           charToRaw(svg_string),
           ...
@@ -198,8 +229,8 @@ save_plot <- function(
       } else {
         img_data <- rsvg::rsvg(
           charToRaw(svg_string),
-          width = if (is.null(width)) 1200 else width,
-          height = if (is.null(height)) 900 else height,
+          width = if (is.null(width_px)) 1200 else width_px,
+          height = if (is.null(height_px)) 900 else height_px,
           ...
         )
       }
@@ -299,7 +330,7 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
     h_padding <- orig_viewBox[3] * padding_pct
     v_padding <- orig_viewBox[4] * padding_pct
     
-    bg_rect <- xml2::xml_new_root("rect")
+    bg_rect <- xml2::read_xml("<rect/>")
     xml2::xml_attr(bg_rect, "x") <- as.character(orig_viewBox[1] - h_padding)
     xml2::xml_attr(bg_rect, "y") <- as.character(orig_viewBox[2] - v_padding)
     xml2::xml_attr(bg_rect, "width") <- as.character(orig_viewBox[3] + 2 * h_padding)
