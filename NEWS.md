@@ -2,6 +2,9 @@
 
 * In progress
 
+## lavaanExtra 0.2.2.3
+* Add `save_plot()` function to export/save plots from `nice_lavaanPlot()` and `nice_tidySEM()` with multiple format options (PNG, PDF, SVG, JPG)
+
 ## lavaanExtra 0.2.2.2
 * `nice_lavaanPlot()`: add `fit_stats` and `fit_stats_type` arguments to optionally display fit statistics (CFI, TLI, RMSEA, SRMR, etc.) directly on the plot, with support for regular/scaled/robust types when using robust estimators
 
