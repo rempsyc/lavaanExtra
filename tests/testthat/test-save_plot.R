@@ -19,24 +19,24 @@ test_that("save_plot rejects unsupported formats", {
   plot <- nice_lavaanPlot(fit.cfa)
 
   expect_error(
-    save_plot(plot, "test.txt"),
+    save_plot(plot, "test.txt", verbose = FALSE),
     "Unsupported file format"
   )
 
   expect_error(
-    save_plot(plot, "test.docx"),
+    save_plot(plot, "test.docx", verbose = FALSE),
     "Unsupported file format"
   )
 })
 
 test_that("save_plot rejects invalid plot objects", {
   expect_error(
-    save_plot(list(), "test.png"),
+    save_plot(list(), "test.png", verbose = FALSE),
     "plot must be either a ggplot object"
   )
 
   expect_error(
-    save_plot(data.frame(), "test.png"),
+    save_plot(data.frame(), "test.png", verbose = FALSE),
     "plot must be either a ggplot object"
   )
 })
@@ -50,7 +50,7 @@ test_that("save_plot works with nice_lavaanPlot - PNG", {
   plot <- nice_lavaanPlot(fit.cfa)
 
   tmp_file <- tempfile(fileext = ".png")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)
@@ -68,7 +68,7 @@ test_that("save_plot works with nice_lavaanPlot - PDF", {
   plot <- nice_lavaanPlot(fit.cfa)
 
   tmp_file <- tempfile(fileext = ".pdf")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)
@@ -85,7 +85,7 @@ test_that("save_plot works with nice_lavaanPlot - SVG", {
   plot <- nice_lavaanPlot(fit.cfa)
 
   tmp_file <- tempfile(fileext = ".svg")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)
@@ -108,7 +108,7 @@ test_that("save_plot works with nice_lavaanPlot - JPG", {
   plot <- nice_lavaanPlot(fit.cfa)
 
   tmp_file <- tempfile(fileext = ".jpg")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)
@@ -129,8 +129,8 @@ test_that("save_plot respects custom dimensions for nice_lavaanPlot", {
   tmp_file1 <- tempfile(fileext = ".png")
   tmp_file2 <- tempfile(fileext = ".png")
 
-  save_plot(plot, tmp_file1, width = 800, height = 600, units = "px")
-  save_plot(plot, tmp_file2, width = 1600, height = 1200, units = "px")
+  save_plot(plot, tmp_file1, width = 800, height = 600, units = "px", verbose = FALSE)
+  save_plot(plot, tmp_file2, width = 1600, height = 1200, units = "px", verbose = FALSE)
 
   # Larger dimensions should generally result in larger files
   size1 <- file.info(tmp_file1)$size
@@ -172,7 +172,7 @@ test_that("save_plot works with nice_tidySEM - PNG", {
   plot <- create_tidysem_plot()
 
   tmp_file <- tempfile(fileext = ".png")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)
@@ -189,7 +189,7 @@ test_that("save_plot works with nice_tidySEM - PDF", {
   plot <- create_tidysem_plot()
 
   tmp_file <- tempfile(fileext = ".pdf")
-  result <- save_plot(plot, tmp_file)
+  result <- save_plot(plot, tmp_file, verbose = FALSE)
 
   expect_true(file.exists(tmp_file))
   expect_equal(result, tmp_file)

@@ -22,6 +22,8 @@
 #' @param dpi Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
 #'            Defaults to 300. Used for unit conversion for grViz objects and passed to
 #'            `ggplot2::ggsave()` for ggplot objects.
+#' @param verbose Logical. If `TRUE` (default), prints a message indicating where the file
+#'                was saved. Set to `FALSE` to suppress messages.
 #' @param ... Additional arguments passed to the underlying save functions
 #'            (`ggplot2::ggsave()` for ggplot objects or `rsvg::rsvg_*()` functions
 #'            for grViz objects).
@@ -84,6 +86,7 @@ save_plot <- function(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
+  verbose = TRUE,
   ...
 ) {
   # Match units argument
@@ -113,14 +116,16 @@ save_plot <- function(
     ggplot2::ggsave(
       filename = filename,
       plot = plot,
-      width = ifelse(is.null(width), NA, width),
-      height = ifelse(is.null(width), NA, height),
+      width = width,
+      height = height,
       units = units,
       dpi = dpi,
       ...
     )
 
-    message("Plot saved to: ", filename)
+    if (verbose) {
+      message("Plot saved to: ", filename)
+    }
     return(invisible(filename))
   }
 
@@ -145,7 +150,9 @@ save_plot <- function(
     if (ext == "svg") {
       # Save SVG directly
       writeLines(svg_string, filename)
-      message("Plot saved to: ", filename)
+      if (verbose) {
+        message("Plot saved to: ", filename)
+      }
       return(invisible(filename))
     }
 
@@ -167,8 +174,8 @@ save_plot <- function(
         rsvg::rsvg_pdf(
           charToRaw(svg_string),
           file = filename,
-          width = if (is.null(width_px)) 1200 else width_px,
-          height = if (is.null(height_px)) 900 else height_px,
+          width = width_px,
+          height = height_px,
           ...
         )
       }
@@ -186,8 +193,8 @@ save_plot <- function(
         rsvg::rsvg_png(
           charToRaw(svg_string),
           file = filename,
-          width = if (is.null(width_px)) 1200 else width_px,
-          height = if (is.null(height_px)) 900 else height_px,
+          width = width_px,
+          height = height_px,
           ...
         )
       }
@@ -206,8 +213,8 @@ save_plot <- function(
       } else {
         img_data <- rsvg::rsvg(
           charToRaw(svg_string),
-          width = if (is.null(width_px)) 1200 else width_px,
-          height = if (is.null(height_px)) 900 else height_px,
+          width = width_px,
+          height = height_px,
           ...
         )
       }
@@ -239,7 +246,9 @@ save_plot <- function(
       grDevices::dev.off()
     }
 
-    message("Plot saved to: ", filename)
+    if (verbose) {
+      message("Plot saved to: ", filename)
+    }
     return(invisible(filename))
   }
 }
