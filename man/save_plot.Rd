@@ -40,7 +40,8 @@ the plot type and applies the appropriate saving method.
 For plots from \code{nice_lavaanPlot()} (grViz/htmlwidget objects):
 \itemize{
 \item The plot is first converted to SVG using \code{DiagrammeRsvg::export_svg()}
-\item Automatically adds 5\% padding to prevent text cutoff (especially for titles and fit statistics)
+\item Automatically adds 5\% padding and a white background to prevent text cutoff and ensure
+proper display across all formats (especially for titles and fit statistics)
 \item By default (no width/height specified), all formats use the SVG's natural dimensions,
 which automatically crops to the actual content including title, note, and fit statistics
 \item All dimension parameters are in \strong{pixels} (not inches) for consistency across formats
