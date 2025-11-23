@@ -129,8 +129,8 @@ test_that("save_plot respects custom dimensions for nice_lavaanPlot", {
   tmp_file1 <- tempfile(fileext = ".png")
   tmp_file2 <- tempfile(fileext = ".png")
 
-  save_plot(plot, tmp_file1, width = 800, height = 600)
-  save_plot(plot, tmp_file2, width = 1600, height = 1200)
+  save_plot(plot, tmp_file1, width = 800, height = 600, units = "px")
+  save_plot(plot, tmp_file2, width = 1600, height = 1200, units = "px")
 
   # Larger dimensions should generally result in larger files
   size1 <- file.info(tmp_file1)$size

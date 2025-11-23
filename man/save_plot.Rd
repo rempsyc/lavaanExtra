@@ -4,7 +4,15 @@
 \alias{save_plot}
 \title{Save a lavaanExtra plot to file}
 \usage{
-save_plot(plot, filename, width = NULL, height = NULL, dpi = 300, ...)
+save_plot(
+  plot,
+  filename,
+  width = NULL,
+  height = NULL,
+  units = c("in", "cm", "mm", "px"),
+  dpi = 300,
+  ...
+)
 }
 \arguments{
 \item{plot}{A plot object from \code{nice_lavaanPlot()} (class \code{c("grViz", "htmlwidget")})
@@ -14,15 +22,22 @@ or \code{nice_tidySEM()} (class \code{ggplot}).}
 (e.g., "myplot.png", "myplot.pdf", "myplot.svg", "myplot.jpg").
 The file format is determined by the extension.}
 
-\item{width}{The width of the output image in pixels. If \code{NULL} (default), uses the
-SVG's natural dimensions which automatically crops to content including
-title, note, and fit statistics.}
+\item{width}{The width of the output image. Units are specified by the \code{units} parameter.
+If \code{NULL} (default for grViz objects), uses the SVG's natural dimensions
+which automatically crops to content. For ggplot objects, defaults to 7 (inches).}
 
-\item{height}{The height of the output image in pixels. If \code{NULL} (default), uses the
-SVG's natural dimensions which automatically crops to content.}
+\item{height}{The height of the output image. Units are specified by the \code{units} parameter.
+If \code{NULL} (default for grViz objects), uses the SVG's natural dimensions.
+For ggplot objects, defaults to 5 (inches).}
 
-\item{dpi}{Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
-from \code{nice_tidySEM()}. Defaults to 300.}
+\item{units}{Units for width and height. One of "in" (inches, default), "cm" (centimeters),
+"mm" (millimeters), or "px" (pixels). For ggplot objects, this is passed
+directly to \code{ggplot2::ggsave()}. For grViz objects, units are converted to
+pixels using the \code{dpi} parameter.}
+
+\item{dpi}{Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
+Defaults to 300. Used for unit conversion for grViz objects and passed to
+\code{ggplot2::ggsave()} for ggplot objects.}
 
 \item{...}{Additional arguments passed to the underlying save functions
 (\code{ggplot2::ggsave()} for ggplot objects or \verb{rsvg::rsvg_*()} functions
@@ -44,16 +59,16 @@ For plots from \code{nice_lavaanPlot()} (grViz/htmlwidget objects):
 proper display across all formats (especially for titles and fit statistics)
 \item By default (no width/height specified), all formats use the SVG's natural dimensions,
 which automatically crops to the actual content including title, note, and fit statistics
-\item All dimension parameters are in \strong{pixels} (not inches) for consistency across formats
+\item Dimension units are specified by the \code{units} parameter and converted to pixels internally
 \item For PNG: SVG is rendered directly to PNG using \code{rsvg::rsvg_png()}
 \item For JPG: SVG is rendered to raster array using \code{rsvg::rsvg()} and saved with \code{grDevices::jpeg()}
-\item For PDF: SVG is rendered to PDF using \code{rsvg::rsvg_pdf()} (also uses pixels)
+\item For PDF: SVG is rendered to PDF using \code{rsvg::rsvg_pdf()}
 \item For SVG: The SVG string is saved directly to file
 }
 
 For plots from \code{nice_tidySEM()} (ggplot objects):
 \itemize{
-\item The plot is saved using \code{ggplot2::ggsave()} with the specified format
+\item The plot is saved using \code{ggplot2::ggsave()} with the specified format and units
 }
 }
 \examples{
@@ -86,8 +101,10 @@ save_plot(plot, "myplot.svg")
 # Save as JPG
 save_plot(plot, "myplot.jpg")
 
-# Custom dimensions
-save_plot(plot, "myplot_large.png", width = 2400, height = 1800)
+# Custom dimensions with different units
+save_plot(plot, "myplot_large.png", width = 10, height = 7.5, units = "in")
+save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
+save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
 }
 \dontshow{\}) # examplesIf}
 }

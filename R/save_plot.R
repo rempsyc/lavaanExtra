@@ -77,19 +77,6 @@
 #' save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
 #' save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
 #' }
-# Helper function to convert dimensions to pixels
-convert_to_pixels <- function(value, units = "in", dpi = 300) {
-  if (is.null(value)) return(NULL)
-  
-  switch(units,
-    "in" = value * dpi,
-    "cm" = value * dpi / 2.54,
-    "mm" = value * dpi / 25.4,
-    "px" = value,
-    stop("units must be one of 'in', 'cm', 'mm', or 'px'")
-  )
-}
-
 save_plot <- function(
   plot,
   filename,
@@ -122,22 +109,12 @@ save_plot <- function(
   if (is_ggplot) {
     insight::check_if_installed("ggplot2", reason = "to save ggplot objects.")
 
-    # Set default dimensions for ggplot (in the specified units)
-    if (is.null(width)) {
-      width <- if (units == "in") 7 else convert_to_pixels(7, "in", dpi) / dpi * 
-        switch(units, "cm" = 2.54, "mm" = 25.4, "px" = dpi, 1)
-    }
-    if (is.null(height)) {
-      height <- if (units == "in") 5 else convert_to_pixels(5, "in", dpi) / dpi * 
-        switch(units, "cm" = 2.54, "mm" = 25.4, "px" = dpi, 1)
-    }
-
     # Use ggsave for all formats - pass units directly to ggsave
     ggplot2::ggsave(
       filename = filename,
       plot = plot,
-      width = width,
-      height = height,
+      width = ifelse(is.null(width), NA, width),
+      height = ifelse(is.null(width), NA, height),
       units = units,
       dpi = dpi,
       ...
@@ -267,6 +244,22 @@ save_plot <- function(
   }
 }
 
+# Helper function to convert dimensions to pixels
+convert_to_pixels <- function(value, units = "in", dpi = 300) {
+  if (is.null(value)) {
+    return(NULL)
+  }
+
+  switch(
+    units,
+    "in" = value * dpi,
+    "cm" = value * dpi / 2.54,
+    "mm" = value * dpi / 25.4,
+    "px" = value,
+    stop("units must be one of 'in', 'cm', 'mm', or 'px'")
+  )
+}
+
 # Helper function to add padding to SVG to prevent text cutoff
 add_svg_padding <- function(svg_string, padding_pct = 0.05) {
   # Use xml2 to parse and modify the SVG
@@ -279,7 +272,7 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
   width_attr <- xml2::xml_attr(svg_doc, "width")
   height_attr <- xml2::xml_attr(svg_doc, "height")
   viewBox_attr <- xml2::xml_attr(svg_doc, "viewBox")
-  
+
   # Store original viewBox for background rectangle
   orig_viewBox <- NULL
 
@@ -322,21 +315,25 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
     xml2::xml_attr(svg_doc, "width") <- paste0(new_width, width_unit)
     xml2::xml_attr(svg_doc, "height") <- paste0(new_height, height_unit)
   }
-  
+
   # Add a white background rectangle as the first child element
   # This ensures the background is white instead of transparent
   if (!is.null(orig_viewBox)) {
     # Create background rectangle that covers the entire new viewBox
     h_padding <- orig_viewBox[3] * padding_pct
     v_padding <- orig_viewBox[4] * padding_pct
-    
+
     bg_rect <- xml2::read_xml("<rect/>")
     xml2::xml_attr(bg_rect, "x") <- as.character(orig_viewBox[1] - h_padding)
     xml2::xml_attr(bg_rect, "y") <- as.character(orig_viewBox[2] - v_padding)
-    xml2::xml_attr(bg_rect, "width") <- as.character(orig_viewBox[3] + 2 * h_padding)
-    xml2::xml_attr(bg_rect, "height") <- as.character(orig_viewBox[4] + 2 * v_padding)
+    xml2::xml_attr(bg_rect, "width") <- as.character(
+      orig_viewBox[3] + 2 * h_padding
+    )
+    xml2::xml_attr(bg_rect, "height") <- as.character(
+      orig_viewBox[4] + 2 * v_padding
+    )
     xml2::xml_attr(bg_rect, "fill") <- "white"
-    
+
     # Insert as first child of the SVG root
     first_child <- xml2::xml_child(svg_doc, 1)
     xml2::xml_add_sibling(first_child, bg_rect, .where = "before")

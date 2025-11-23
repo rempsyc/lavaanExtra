@@ -23,6 +23,7 @@ Suggests:
     lavaanPlot,
     DiagrammeRsvg,
     rsvg,
+    ggplot2,
     png,
     webshot,
     tidySEM,
