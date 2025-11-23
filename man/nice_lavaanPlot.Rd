@@ -18,6 +18,10 @@ nice_lavaanPlot(
   note = NULL,
   fit_stats = NULL,
   fit_stats_type = c("regular", "scaled", "robust"),
+  title_size = 14,
+  note_size = 10,
+  fit_stats_size = 9,
+  wrap_width = 60,
   ...
 )
 }
@@ -66,6 +70,23 @@ Defaults to \code{c("regular", "scaled", "robust")} to show all available types.
 Each type is displayed on a separate line. Only applicable when the model
 uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.}
 
+\item{title_size}{Numeric value specifying the font size in points for the title text.
+Defaults to 14.}
+
+\item{note_size}{Numeric value specifying the font size in points for the note/caption text.
+Defaults to 10.}
+
+\item{fit_stats_size}{Numeric value specifying the font size in points for the fit statistics text.
+Defaults to 9. Increase this value for larger diagrams where the default size
+is too small to read.}
+
+\item{wrap_width}{Numeric value or \code{NULL}. Specifies the maximum character width
+before text is automatically wrapped to the next line. The wrapping is intelligent,
+breaking at word boundaries. Defaults to \code{60} which works well for most plots.
+Set to \code{NULL} to disable automatic text wrapping. The actual wrapping is adjusted
+based on font size - larger fonts will wrap at proportionally fewer characters.
+A 20\% safety margin is applied to prevent text cutoff.}
+
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
@@ -111,6 +132,18 @@ nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pval
 fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
 nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
                 fit_stats_type = c("regular", "scaled", "robust"))
+
+# With custom font sizes (useful for large diagrams)
+nice_lavaanPlot(fit, title = "Three-Factor CFA Model",
+                fit_stats = TRUE,
+                title_size = 18, fit_stats_size = 12)
+
+# With automatic text wrapping for long titles
+long_title <- "A Very Long Title That Would Otherwise Be Cut Off When Displayed"
+nice_lavaanPlot(fit, title = long_title, fit_stats = TRUE, wrap_width = 60)
+
+# Wrapping adapts to font size - larger fonts wrap at fewer characters
+nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
 
 # Save plot to file
 \dontrun{
