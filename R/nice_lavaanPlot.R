@@ -378,8 +378,9 @@ nice_lavaanPlot <- function(
     }
 
     # Combine into full HTML table
+    # BALIGN="CENTER" centers the table itself within the label space
     graph_options$label <- paste0(
-      "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\">",
+      "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" BALIGN=\"CENTER\">",
       paste(html_rows, collapse = ""),
       "</TABLE>>"
     )
