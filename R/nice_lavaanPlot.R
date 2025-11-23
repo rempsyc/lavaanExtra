@@ -103,17 +103,32 @@
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}
 
 nice_lavaanPlot <- function(
-  model, node_options = list(shape = "box", fontname = "Helvetica"),
-  edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
-  covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
-  graph_options = c(rankdir = "LR"), title = NULL, note = NULL,
-  fit_stats = NULL, fit_stats_type = c("regular", "scaled", "robust"),
-  title_size = 14, note_size = 10, fit_stats_size = 9, wrap_width = NULL, ...
+  model,
+  node_options = list(shape = "box", fontname = "Helvetica"),
+  edge_options = c(color = "black"),
+  coefs = TRUE,
+  stand = TRUE,
+  covs = FALSE,
+  stars = c("regress", "latent", "covs"),
+  sig = .05,
+  graph_options = c(rankdir = "LR"),
+  title = NULL,
+  note = NULL,
+  fit_stats = NULL,
+  fit_stats_type = c("regular", "scaled", "robust"),
+  title_size = 14,
+  note_size = 10,
+  fit_stats_size = 9,
+  wrap_width = 60,
+  ...
 ) {
   insight::check_if_installed(
     c(
-      "lavaanPlot", "DiagrammeRsvg",
-      "rsvg", "png", "webshot"
+      "lavaanPlot",
+      "DiagrammeRsvg",
+      "rsvg",
+      "png",
+      "webshot"
     ),
     reason = "for this function."
   )
@@ -126,25 +141,25 @@ nice_lavaanPlot <- function(
     text <- gsub("\"", "&quot;", text, fixed = TRUE)
     text
   }
-  
+
   # Text wrapping function that accounts for font size
   wrap_text <- function(text, max_width, font_size, base_font_size = 10) {
     if (is.null(max_width) || is.null(text) || nchar(text) == 0) {
       return(text)
     }
-    
+
     # Adjust wrap width based on font size ratio
     # Larger fonts need proportionally fewer characters per line
     adjusted_width <- max_width * (base_font_size / font_size)
-    adjusted_width <- max(20, round(adjusted_width))  # Minimum of 20 chars
-    
+    adjusted_width <- max(20, round(adjusted_width)) # Minimum of 20 chars
+
     # Use insight::format_message for intelligent wrapping
     wrapped <- insight::format_message(text, line_length = adjusted_width)
-    
+
     # Convert newlines to HTML breaks, trimming leading spaces from wrapped lines
     lines <- strsplit(wrapped, "\n", fixed = TRUE)[[1]]
     lines <- trimws(lines, which = "left")
-    
+
     # Join with HTML break tags
     paste(lines, collapse = "<BR/>")
   }
@@ -154,7 +169,7 @@ nice_lavaanPlot <- function(
   if (!is.null(fit_stats)) {
     # Get all fit measures directly from lavaan
     all_fit_measures <- lavaan::fitMeasures(model)
-    
+
     # Determine which indices to display
     if (isTRUE(fit_stats)) {
       # Default set of fit indices
@@ -163,17 +178,26 @@ nice_lavaanPlot <- function(
       # User-specified indices
       indices_to_show <- tolower(fit_stats)
     } else {
-      stop("fit_stats must be TRUE, FALSE, NULL, or a character vector of fit index names")
+      stop(
+        "fit_stats must be TRUE, FALSE, NULL, or a character vector of fit index names"
+      )
     }
-    
+
     # Check for unrecognized fit indices
     # Remove suffixes to get base fit measure names
-    base_fit_names <- unique(sub("\\.(scaled|robust)$", "", names(all_fit_measures)))
+    base_fit_names <- unique(sub(
+      "\\.(scaled|robust)$",
+      "",
+      names(all_fit_measures)
+    ))
     unknown_indices <- setdiff(indices_to_show, base_fit_names)
     if (length(unknown_indices) > 0) {
-      warning("Unrecognized fit indices: ", paste(unknown_indices, collapse = ", "))
+      warning(
+        "Unrecognized fit indices: ",
+        paste(unknown_indices, collapse = ", ")
+      )
     }
-    
+
     # Helper function to format a single fit value
     format_fit_value <- function(idx, val) {
       if (is.numeric(val) && !is.na(val)) {
@@ -193,50 +217,61 @@ nice_lavaanPlot <- function(
       }
       formatted
     }
-    
+
     # Determine which types to show (regular, scaled, robust)
-    fit_stats_type <- match.arg(fit_stats_type, 
-                                 choices = c("regular", "scaled", "robust"), 
-                                 several.ok = TRUE)
-    
+    fit_stats_type <- match.arg(
+      fit_stats_type,
+      choices = c("regular", "scaled", "robust"),
+      several.ok = TRUE
+    )
+
     # Build lines of fit statistics for each type
     fit_lines <- character(0)
-    
+
     for (type in fit_stats_type) {
       # Determine suffix for this type
       suffix <- if (type == "regular") "" else paste0(".", type)
-      
+
       # Get values for this type
       type_values <- character(0)
       type_has_values <- FALSE
-      
+
       for (idx in indices_to_show) {
         # Try to get the fit measure with the appropriate suffix
         fit_name <- paste0(idx, suffix)
-        
+
         if (fit_name %in% names(all_fit_measures)) {
           val <- all_fit_measures[[fit_name]]
           if (!is.na(val)) {
             formatted_val <- format_fit_value(idx, val)
-            type_values <- c(type_values, paste0(toupper(idx), " = ", formatted_val))
+            type_values <- c(
+              type_values,
+              paste0(toupper(idx), " = ", formatted_val)
+            )
             type_has_values <- TRUE
           }
         }
       }
-      
+
       # Only add this line if we found values for this type
       if (type_has_values && length(type_values) > 0) {
         # Add type label if we're showing multiple types
         if (length(fit_stats_type) > 1) {
-          type_label <- paste0(toupper(substring(type, 1, 1)), 
-                              substring(type, 2), ": ")
+          type_label <- paste0(
+            toupper(substring(type, 1, 1)),
+            substring(type, 2),
+            ": "
+          )
         } else {
           type_label <- ""
         }
-        fit_lines <- c(fit_lines, paste0(type_label, paste(type_values, collapse = ", ")))
+        fit_lines <- c(
+          fit_lines,
+          paste0(type_label, paste(type_values, collapse = ", "))
+        )
       }
     }
-    
+
     # Combine all lines with line breaks
     if (length(fit_lines) > 0) {
       fit_stats_text <- paste(fit_lines, collapse = "\n")
@@ -252,7 +287,9 @@ nice_lavaanPlot <- function(
   # Warn if title/note/fit_stats will override existing label or labelloc
   if (!is.null(title) || !is.null(note) || !is.null(fit_stats)) {
     if (!is.null(graph_options$label) || !is.null(graph_options$labelloc)) {
-      warning("title/note/fit_stats parameters override graph_options$label and graph_options$labelloc")
+      warning(
+        "title/note/fit_stats parameters override graph_options$label and graph_options$labelloc"
+      )
     }
   }
 
@@ -272,7 +309,13 @@ nice_lavaanPlot <- function(
       title_escaped <- html_escape(title_text)
       html_rows <- c(
         html_rows,
-        paste0("<TR><TD><FONT POINT-SIZE=\"", title_size, "\"><B>", title_escaped, "</B></FONT></TD></TR>")
+        paste0(
+          "<TR><TD><FONT POINT-SIZE=\"",
+          title_size,
+          "\"><B>",
+          title_escaped,
+          "</B></FONT></TD></TR>"
+        )
       )
       if (has_note || has_fit_stats) {
         html_rows <- c(html_rows, "<TR><TD HEIGHT=\"10\"></TD></TR>") # Spacer
@@ -285,7 +328,13 @@ nice_lavaanPlot <- function(
       note_escaped <- html_escape(note_text)
       html_rows <- c(
         html_rows,
-        paste0("<TR><TD><FONT POINT-SIZE=\"", note_size, "\">", note_escaped, "</FONT></TD></TR>")
+        paste0(
+          "<TR><TD><FONT POINT-SIZE=\"",
+          note_size,
+          "\">",
+          note_escaped,
+          "</FONT></TD></TR>"
+        )
       )
       if (has_fit_stats) {
         html_rows <- c(html_rows, "<TR><TD HEIGHT=\"10\"></TD></TR>") # Spacer
@@ -295,15 +344,25 @@ nice_lavaanPlot <- function(
     if (has_fit_stats) {
       # Split fit_stats_text by newline to handle multiple types
       fit_stats_lines <- strsplit(fit_stats_text, "\n", fixed = TRUE)[[1]]
-      
+
       # Add each line as a separate row, with wrapping if requested
       for (i in seq_along(fit_stats_lines)) {
         # Apply wrapping to each fit stats line, then escape
-        wrapped_line <- wrap_text(fit_stats_lines[i], wrap_width, fit_stats_size)
+        wrapped_line <- wrap_text(
+          fit_stats_lines[i],
+          wrap_width,
+          fit_stats_size
+        )
         escaped_line <- html_escape(wrapped_line)
         html_rows <- c(
           html_rows,
-          paste0("<TR><TD><FONT POINT-SIZE=\"", fit_stats_size, "\">", escaped_line, "</FONT></TD></TR>")
+          paste0(
+            "<TR><TD><FONT POINT-SIZE=\"",
+            fit_stats_size,
+            "\">",
+            escaped_line,
+            "</FONT></TD></TR>"
+          )
         )
       }
     }
