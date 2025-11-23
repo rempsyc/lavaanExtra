@@ -116,8 +116,8 @@ save_plot <- function(
     ggplot2::ggsave(
       filename = filename,
       plot = plot,
-      width = width,
-      height = height,
+      width = ifelse(is.null(width), NA, width),
+      height = ifelse(is.null(width), NA, height),
       units = units,
       dpi = dpi,
       ...

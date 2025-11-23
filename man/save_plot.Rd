@@ -11,6 +11,7 @@ save_plot(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
+  verbose = TRUE,
   ...
 )
 }
@@ -38,6 +39,9 @@ pixels using the \code{dpi} parameter.}
 \item{dpi}{Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
 Defaults to 300. Used for unit conversion for grViz objects and passed to
 \code{ggplot2::ggsave()} for ggplot objects.}
+
+\item{verbose}{Logical. If \code{TRUE} (default), prints a message indicating where the file
+was saved. Set to \code{FALSE} to suppress messages.}
 
 \item{...}{Additional arguments passed to the underlying save functions
 (\code{ggplot2::ggsave()} for ggplot objects or \verb{rsvg::rsvg_*()} functions
