@@ -35,7 +35,8 @@
 #'              uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
-#'         specified `lavaan` model.
+#'         specified `lavaan` model. Use [save_plot()] to export the plot to PNG,
+#'         PDF, SVG, or JPG formats.
 #' @export
 #' @examplesIf requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)
 #' x <- paste0("x", 1:9)
@@ -65,6 +66,15 @@
 #' fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
 #' nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
 #'                 fit_stats_type = c("regular", "scaled", "robust"))
+#'
+#' # Save plot to file
+#' \dontrun{
+#' plot <- nice_lavaanPlot(fit)
+#' save_plot(plot, "my_plot.png")    # PNG format
+#' save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
+#' save_plot(plot, "my_plot.svg")    # SVG format (lossless)
+#' save_plot(plot, "my_plot.jpg")    # JPG format
+#' }
 #' @section Illustrations:
 #'
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}

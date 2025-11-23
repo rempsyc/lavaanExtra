@@ -70,7 +70,8 @@ uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.}
 }
 \value{
 A lavaanPlot, of classes \code{c("grViz", "htmlwidget")}, representing the
-specified \code{lavaan} model.
+specified \code{lavaan} model. Use \code{\link[=save_plot]{save_plot()}} to export the plot to PNG,
+PDF, SVG, or JPG formats.
 }
 \description{
 Make a quick and decent-looking \code{lavaanPlot}.
@@ -110,5 +111,14 @@ nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pval
 fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
 nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
                 fit_stats_type = c("regular", "scaled", "robust"))
+
+# Save plot to file
+\dontrun{
+plot <- nice_lavaanPlot(fit)
+save_plot(plot, "my_plot.png")    # PNG format
+save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
+save_plot(plot, "my_plot.svg")    # SVG format (lossless)
+save_plot(plot, "my_plot.jpg")    # JPG format
+}
 \dontshow{\}) # examplesIf}
 }

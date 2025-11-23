@@ -63,7 +63,8 @@ as needed.}
 }
 \value{
 A tidySEM plot, of class ggplot, representing the specified
-\code{lavaan} model.
+\code{lavaan} model. Use \code{\link[=save_plot]{save_plot()}} to export the plot to PNG,
+PDF, SVG, or JPG formats.
 }
 \description{
 Make a quick and decent-looking \code{tidySEM} plot.
@@ -104,6 +105,13 @@ fit <- sem(model, data)
 # Plot model
 \donttest{
 nice_tidySEM(fit, layout = structure)
+}
+
+# Save plot to file
+\dontrun{
+plot <- nice_tidySEM(fit, layout = structure)
+save_plot(plot, "my_plot.png")    # PNG format
+save_plot(plot, "my_plot.pdf")    # PDF format
 }
 \dontshow{\}) # examplesIf}
 }

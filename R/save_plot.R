@@ -65,27 +65,27 @@
 save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ...) {
   # Determine file format from extension
   ext <- tolower(tools::file_ext(filename))
-  
+
   if (!ext %in% c("png", "pdf", "svg", "jpg", "jpeg")) {
     stop("Unsupported file format. Use .png, .pdf, .svg, .jpg, or .jpeg")
   }
-  
+
   # Detect plot type
   is_ggplot <- inherits(plot, "ggplot")
   is_grViz <- inherits(plot, c("grViz", "htmlwidget"))
-  
+
   if (!is_ggplot && !is_grViz) {
     stop("plot must be either a ggplot object (from nice_tidySEM) or a grViz object (from nice_lavaanPlot)")
   }
-  
+
   # Handle ggplot objects (from nice_tidySEM)
   if (is_ggplot) {
     insight::check_if_installed("ggplot2", reason = "to save ggplot objects.")
-    
+
     # Set default dimensions for ggplot (in inches)
     if (is.null(width)) width <- 7
     if (is.null(height)) height <- 5
-    
+
     # Use ggsave for all formats
     ggplot2::ggsave(
       filename = filename,
@@ -95,33 +95,33 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
       dpi = dpi,
       ...
     )
-    
+
     message("Plot saved to: ", filename)
     return(invisible(filename))
   }
-  
+
   # Handle grViz objects (from nice_lavaanPlot)
   if (is_grViz) {
     insight::check_if_installed(
       c("DiagrammeRsvg", "rsvg"),
       reason = "to save grViz/lavaanPlot objects."
     )
-    
+
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
-    
+
     if (ext == "svg") {
       # Save SVG directly
       writeLines(svg_string, filename)
       message("Plot saved to: ", filename)
       return(invisible(filename))
     }
-    
+
     # For other formats, we need to render the SVG
     # Set default dimensions for raster formats (in pixels)
     if (is.null(width)) width <- if (ext == "pdf") 7 else 1200
     if (is.null(height)) height <- if (ext == "pdf") 5 else 900
-    
+
     if (ext == "pdf") {
       # Render to PDF
       rsvg::rsvg_pdf(
@@ -144,14 +144,14 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
       # Render to JPEG
       # rsvg doesn't have direct JPEG support, so render to PNG array first
       insight::check_if_installed("png", reason = "to save JPEG images.")
-      
+
       img_data <- rsvg::rsvg(
         charToRaw(svg_string),
         width = width,
         height = height,
         ...
       )
-      
+
       # Write PNG array as JPEG using grDevices
       grDevices::jpeg(
         filename = filename,
@@ -166,7 +166,7 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
       graphics::rasterImage(img_data, 0, 0, 1, 1, interpolate = TRUE)
       grDevices::dev.off()
     }
-    
+
     message("Plot saved to: ", filename)
     return(invisible(filename))
   }
