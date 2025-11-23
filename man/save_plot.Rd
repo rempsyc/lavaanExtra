@@ -14,11 +14,12 @@ or \code{nice_tidySEM()} (class \code{ggplot}).}
 (e.g., "myplot.png", "myplot.pdf", "myplot.svg", "myplot.jpg").
 The file format is determined by the extension.}
 
-\item{width}{The width of the output image in pixels (for PNG/JPG) or inches (for PDF).
-Defaults to 1200 for raster formats and 10 for PDF.}
+\item{width}{The width of the output image in pixels. If \code{NULL} (default), uses the
+SVG's natural dimensions which automatically crops to content including
+title, note, and fit statistics.}
 
-\item{height}{The height of the output image in pixels (for PNG/JPG) or inches (for PDF).
-Defaults to 900 for raster formats and 7.5 for PDF.}
+\item{height}{The height of the output image in pixels. If \code{NULL} (default), uses the
+SVG's natural dimensions which automatically crops to content.}
 
 \item{dpi}{Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
 from \code{nice_tidySEM()}. Defaults to 300.}

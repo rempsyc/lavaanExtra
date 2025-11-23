@@ -9,10 +9,11 @@
 #' @param filename The path where the file should be saved, including the file extension
 #'                 (e.g., "myplot.png", "myplot.pdf", "myplot.svg", "myplot.jpg").
 #'                 The file format is determined by the extension.
-#' @param width The width of the output image in pixels (for PNG/JPG) or inches (for PDF).
-#'              Defaults to 1200 for raster formats and 10 for PDF.
-#' @param height The height of the output image in pixels (for PNG/JPG) or inches (for PDF).
-#'               Defaults to 900 for raster formats and 7.5 for PDF.
+#' @param width The width of the output image in pixels. If `NULL` (default), uses the
+#'              SVG's natural dimensions which automatically crops to content including
+#'              title, note, and fit statistics.
+#' @param height The height of the output image in pixels. If `NULL` (default), uses the
+#'               SVG's natural dimensions which automatically crops to content.
 #' @param dpi Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
 #'            from `nice_tidySEM()`. Defaults to 300.
 #' @param ... Additional arguments passed to the underlying save functions
@@ -21,9 +22,12 @@
 #'
 #' @details For plots from `nice_lavaanPlot()` (grViz/htmlwidget objects):
 #' - The plot is first converted to SVG using `DiagrammeRsvg::export_svg()`
+#' - By default (no width/height specified), all formats use the SVG's natural dimensions,
+#'   which automatically crops to the actual content including title, note, and fit statistics
+#' - All dimension parameters are in **pixels** (not inches) for consistency across formats
 #' - For PNG: SVG is rendered directly to PNG using `rsvg::rsvg_png()`
 #' - For JPG: SVG is rendered to raster array using `rsvg::rsvg()` and saved with `grDevices::jpeg()`
-#' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
+#' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()` (also uses pixels)
 #' - For SVG: The SVG string is saved directly to file
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
@@ -119,44 +123,67 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
     }
 
     # For other formats, we need to render the SVG
-    # Set default dimensions based on format
-    if (is.null(width)) {
-      width <- if (ext == "pdf") 10 else 1200
-    }
-    if (is.null(height)) {
-      height <- if (ext == "pdf") 7.5 else 900
-    }
-
+    # If dimensions are not specified, rsvg will use the SVG's natural dimensions
+    # which automatically crops to content (including title, note, fit stats, etc.)
+    
     if (ext == "pdf") {
-      # Render to PDF (dimensions in inches)
-      rsvg::rsvg_pdf(
-        charToRaw(svg_string),
-        file = filename,
-        width = width,
-        height = height,
-        ...
-      )
+      # Render to PDF (dimensions in pixels, same as PNG/JPG)
+      # If no dimensions specified, uses SVG's natural size for perfect cropping
+      if (is.null(width) && is.null(height)) {
+        rsvg::rsvg_pdf(
+          charToRaw(svg_string),
+          file = filename,
+          ...
+        )
+      } else {
+        # Use specified dimensions (in pixels)
+        rsvg::rsvg_pdf(
+          charToRaw(svg_string),
+          file = filename,
+          width = if (is.null(width)) 1200 else width,
+          height = if (is.null(height)) 900 else height,
+          ...
+        )
+      }
     } else if (ext == "png") {
       # Render to PNG (dimensions in pixels)
-      rsvg::rsvg_png(
-        charToRaw(svg_string),
-        file = filename,
-        width = width,
-        height = height,
-        ...
-      )
+      # If no dimensions specified, uses SVG's natural size for perfect cropping
+      if (is.null(width) && is.null(height)) {
+        rsvg::rsvg_png(
+          charToRaw(svg_string),
+          file = filename,
+          ...
+        )
+      } else {
+        # Use specified dimensions
+        rsvg::rsvg_png(
+          charToRaw(svg_string),
+          file = filename,
+          width = if (is.null(width)) 1200 else width,
+          height = if (is.null(height)) 900 else height,
+          ...
+        )
+      }
     } else if (ext %in% c("jpg", "jpeg")) {
       # Render to JPEG (dimensions in pixels)
       # rsvg doesn't have direct JPEG support, so we render to array and save as JPEG
       insight::check_if_installed("png", reason = "to save JPEG images.")
 
-      # Render SVG to bitmap array (returns RGBA array with values 0-1)
-      img_data <- rsvg::rsvg(
-        charToRaw(svg_string),
-        width = width,
-        height = height,
-        ...
-      )
+      # Render SVG to bitmap array
+      # If no dimensions specified, uses SVG's natural size for perfect cropping
+      if (is.null(width) && is.null(height)) {
+        img_data <- rsvg::rsvg(
+          charToRaw(svg_string),
+          ...
+        )
+      } else {
+        img_data <- rsvg::rsvg(
+          charToRaw(svg_string),
+          width = if (is.null(width)) 1200 else width,
+          height = if (is.null(height)) 900 else height,
+          ...
+        )
+      }
 
       # Get actual dimensions from the rendered image
       img_height <- dim(img_data)[1]
