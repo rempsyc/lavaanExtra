@@ -207,3 +207,36 @@ test_that("nice_lavaanPlot with single fit_stats_type", {
   # But should have fit indices
   expect_true(grepl("CFI", result$x$diagram, fixed = TRUE))
 })
+
+test_that("nice_lavaanPlot with custom font sizes", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = "Test Title",
+    note = "Test Note",
+    fit_stats = TRUE,
+    title_size = 18,
+    note_size = 12,
+    fit_stats_size = 14
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that custom font sizes are present in the diagram
+  expect_true(grepl("POINT-SIZE=\"18\"", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("POINT-SIZE=\"12\"", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("POINT-SIZE=\"14\"", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot with default font sizes", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = "Test Title",
+    note = "Test Note",
+    fit_stats = TRUE
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that default font sizes are present (title: 14, note: 10, fit_stats: 9)
+  expect_true(grepl("POINT-SIZE=\"14\"", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("POINT-SIZE=\"10\"", result$x$diagram, fixed = TRUE))
+  expect_true(grepl("POINT-SIZE=\"9\"", result$x$diagram, fixed = TRUE))
+})

@@ -33,6 +33,13 @@
 #'              Defaults to `c("regular", "scaled", "robust")` to show all available types.
 #'              Each type is displayed on a separate line. Only applicable when the model
 #'              uses a robust estimator (e.g., MLR, MLM) that provides scaled/robust versions.
+#' @param title_size Numeric value specifying the font size in points for the title text.
+#'              Defaults to 14.
+#' @param note_size Numeric value specifying the font size in points for the note/caption text.
+#'              Defaults to 10.
+#' @param fit_stats_size Numeric value specifying the font size in points for the fit statistics text.
+#'              Defaults to 9. Increase this value for larger diagrams where the default size
+#'              is too small to read.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -65,6 +72,20 @@
 #' fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
 #' nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
 #'                 fit_stats_type = c("regular", "scaled", "robust"))
+#'
+#' # With custom font sizes (useful for large diagrams)
+#' nice_lavaanPlot(fit, title = "Three-Factor CFA Model",
+#'                 fit_stats = TRUE,
+#'                 title_size = 18, fit_stats_size = 12)
+#'
+#' # For saving with save_png without title cutoff, consider adjusting
+#' # the width parameter and/or using graph_options like margin
+#' \dontrun{
+#' library(DiagrammeRsvg)
+#' plot <- nice_lavaanPlot(fit, title = "My Very Long Title That Might Get Cut Off")
+#' DiagrammeRsvg::export_svg(plot) |> charToRaw() |>
+#'   rsvg::rsvg_png("myplot.png", width = 1200)
+#' }
 #' @section Illustrations:
 #'
 #' \if{html}{\figure{lavaanPlot.png}{options: width="400"}}
@@ -74,7 +95,8 @@ nice_lavaanPlot <- function(
   edge_options = c(color = "black"), coefs = TRUE, stand = TRUE,
   covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
   graph_options = c(rankdir = "LR"), title = NULL, note = NULL,
-  fit_stats = NULL, fit_stats_type = c("regular", "scaled", "robust"), ...
+  fit_stats = NULL, fit_stats_type = c("regular", "scaled", "robust"),
+  title_size = 14, note_size = 10, fit_stats_size = 9, ...
 ) {
   insight::check_if_installed(
     c(
@@ -214,7 +236,7 @@ nice_lavaanPlot <- function(
       title_escaped <- html_escape(title)
       html_rows <- c(
         html_rows,
-        "<TR><TD><FONT POINT-SIZE=\"14\"><B>", title_escaped, "</B></FONT></TD></TR>"
+        paste0("<TR><TD><FONT POINT-SIZE=\"", title_size, "\"><B>", title_escaped, "</B></FONT></TD></TR>")
       )
       if (has_note || has_fit_stats) {
         html_rows <- c(html_rows, "<TR><TD HEIGHT=\"10\"></TD></TR>") # Spacer
@@ -225,7 +247,7 @@ nice_lavaanPlot <- function(
       note_escaped <- html_escape(note)
       html_rows <- c(
         html_rows,
-        "<TR><TD><FONT POINT-SIZE=\"10\">", note_escaped, "</FONT></TD></TR>"
+        paste0("<TR><TD><FONT POINT-SIZE=\"", note_size, "\">", note_escaped, "</FONT></TD></TR>")
       )
       if (has_fit_stats) {
         html_rows <- c(html_rows, "<TR><TD HEIGHT=\"10\"></TD></TR>") # Spacer
@@ -240,7 +262,7 @@ nice_lavaanPlot <- function(
       for (i in seq_along(fit_stats_lines)) {
         html_rows <- c(
           html_rows,
-          "<TR><TD><FONT POINT-SIZE=\"9\">", fit_stats_lines[i], "</FONT></TD></TR>"
+          paste0("<TR><TD><FONT POINT-SIZE=\"", fit_stats_size, "\">", fit_stats_lines[i], "</FONT></TD></TR>")
         )
       }
     }

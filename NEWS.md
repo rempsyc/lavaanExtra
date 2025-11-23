@@ -2,6 +2,9 @@
 
 * In progress
 
+## lavaanExtra 0.2.2.3
+* `nice_lavaanPlot()`: add `title_size`, `note_size`, and `fit_stats_size` arguments to allow customization of font sizes for titles, notes, and fit statistics (useful for large diagrams where default sizes are too small to read)
+
 ## lavaanExtra 0.2.2.2
 * `nice_lavaanPlot()`: add `fit_stats` and `fit_stats_type` arguments to optionally display fit statistics (CFI, TLI, RMSEA, SRMR, etc.) directly on the plot, with support for regular/scaled/robust types when using robust estimators
 
