@@ -15,10 +15,10 @@ or \code{nice_tidySEM()} (class \code{ggplot}).}
 The file format is determined by the extension.}
 
 \item{width}{The width of the output image in pixels (for PNG/JPG) or inches (for PDF).
-Defaults to 1200 for raster formats and 7 for vector formats.}
+Defaults to 1200 for raster formats and 10 for PDF.}
 
 \item{height}{The height of the output image in pixels (for PNG/JPG) or inches (for PDF).
-Defaults to 900 for raster formats and 5 for vector formats.}
+Defaults to 900 for raster formats and 7.5 for PDF.}
 
 \item{dpi}{Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
 from \code{nice_tidySEM()}. Defaults to 300.}

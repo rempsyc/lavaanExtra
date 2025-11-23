@@ -10,9 +10,9 @@
 #'                 (e.g., "myplot.png", "myplot.pdf", "myplot.svg", "myplot.jpg").
 #'                 The file format is determined by the extension.
 #' @param width The width of the output image in pixels (for PNG/JPG) or inches (for PDF).
-#'              Defaults to 1200 for raster formats and 7 for vector formats.
+#'              Defaults to 1200 for raster formats and 10 for PDF.
 #' @param height The height of the output image in pixels (for PNG/JPG) or inches (for PDF).
-#'               Defaults to 900 for raster formats and 5 for vector formats.
+#'               Defaults to 900 for raster formats and 7.5 for PDF.
 #' @param dpi Dots per inch for raster formats (PNG/JPG). Only used for ggplot objects
 #'            from `nice_tidySEM()`. Defaults to 300.
 #' @param ... Additional arguments passed to the underlying save functions
@@ -121,14 +121,14 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
     # For other formats, we need to render the SVG
     # Set default dimensions based on format
     if (is.null(width)) {
-      width <- if (ext == "pdf") 7 else 1200
+      width <- if (ext == "pdf") 10 else 1200
     }
     if (is.null(height)) {
-      height <- if (ext == "pdf") 5 else 900
+      height <- if (ext == "pdf") 7.5 else 900
     }
 
     if (ext == "pdf") {
-      # Render to PDF
+      # Render to PDF (dimensions in inches)
       rsvg::rsvg_pdf(
         charToRaw(svg_string),
         file = filename,
@@ -137,7 +137,7 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
         ...
       )
     } else if (ext == "png") {
-      # Render to PNG
+      # Render to PNG (dimensions in pixels)
       rsvg::rsvg_png(
         charToRaw(svg_string),
         file = filename,
@@ -146,10 +146,11 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
         ...
       )
     } else if (ext %in% c("jpg", "jpeg")) {
-      # Render to JPEG
-      # rsvg doesn't have direct JPEG support, so render to PNG array first
+      # Render to JPEG (dimensions in pixels)
+      # rsvg doesn't have direct JPEG support, so we render to array and save as JPEG
       insight::check_if_installed("png", reason = "to save JPEG images.")
 
+      # Render SVG to bitmap array (returns RGBA array with values 0-1)
       img_data <- rsvg::rsvg(
         charToRaw(svg_string),
         width = width,
@@ -157,18 +158,30 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
         ...
       )
 
-      # Write PNG array as JPEG using grDevices
+      # Get actual dimensions from the rendered image
+      img_height <- dim(img_data)[1]
+      img_width <- dim(img_data)[2]
+
+      # Create JPEG device with exact dimensions
       grDevices::jpeg(
         filename = filename,
-        width = width,
-        height = height,
+        width = img_width,
+        height = img_height,
         units = "px",
         quality = 95
       )
-      # Draw the image data
-      graphics::par(mar = c(0, 0, 0, 0), xaxs = "i", yaxs = "i")
-      graphics::plot.new()
-      graphics::rasterImage(img_data, 0, 0, 1, 1, interpolate = TRUE)
+      
+      # Use grid graphics which doesn't add margins
+      grid::grid.newpage()
+      grid::grid.raster(
+        img_data,
+        x = 0.5,
+        y = 0.5,
+        width = 1,
+        height = 1,
+        interpolate = TRUE
+      )
+      
       grDevices::dev.off()
     }
 
