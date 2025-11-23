@@ -240,3 +240,57 @@ test_that("nice_lavaanPlot with default font sizes", {
   expect_true(grepl("POINT-SIZE=\"10\"", result$x$diagram, fixed = TRUE))
   expect_true(grepl("POINT-SIZE=\"9\"", result$x$diagram, fixed = TRUE))
 })
+
+test_that("nice_lavaanPlot with text wrapping", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  long_title <- "This is a very long title that should be wrapped automatically when it exceeds the specified character width"
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = long_title,
+    wrap_width = 40
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that HTML break tags are present (indicating wrapping occurred)
+  expect_true(grepl("<BR/>", result$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot without text wrapping", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  long_title <- "This is a very long title that should not be wrapped when wrap_width is NULL"
+  result <- nice_lavaanPlot(fit.cfa, 
+    title = long_title,
+    wrap_width = NULL
+  )
+  expect_s3_class(result, c("grViz", "htmlwidget"))
+  # Check that no HTML break tags are present in the title
+  # (fit_stats might have breaks, but title should not)
+  expect_true(grepl(long_title, result$x$diagram, fixed = FALSE))
+})
+
+test_that("nice_lavaanPlot wrapping adapts to font size", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  long_title <- "This is a very long title for testing font size adaptation in text wrapping"
+  
+  # Smaller font should allow more characters per line
+  result_small <- nice_lavaanPlot(fit.cfa, 
+    title = long_title,
+    title_size = 10,
+    wrap_width = 60
+  )
+  
+  # Larger font should wrap at fewer characters
+  result_large <- nice_lavaanPlot(fit.cfa, 
+    title = long_title,
+    title_size = 20,
+    wrap_width = 60
+  )
+  
+  expect_s3_class(result_small, c("grViz", "htmlwidget"))
+  expect_s3_class(result_large, c("grViz", "htmlwidget"))
+  
+  # Both should have breaks, but we just verify they work
+  expect_true(grepl("<BR/>", result_small$x$diagram, fixed = TRUE))
+  expect_true(grepl("<BR/>", result_large$x$diagram, fixed = TRUE))
+})

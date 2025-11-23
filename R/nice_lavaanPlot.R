@@ -40,6 +40,11 @@
 #' @param fit_stats_size Numeric value specifying the font size in points for the fit statistics text.
 #'              Defaults to 9. Increase this value for larger diagrams where the default size
 #'              is too small to read.
+#' @param wrap_width Numeric value or `NULL`. If numeric, specifies the maximum character width
+#'              before text is automatically wrapped to the next line. The wrapping is intelligent,
+#'              breaking at word boundaries. A value of `60` works well for most plots. Set to
+#'              `NULL` (default) to disable automatic text wrapping. The actual wrapping is adjusted
+#'              based on font size - larger fonts will wrap at proportionally fewer characters.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -78,6 +83,13 @@
 #'                 fit_stats = TRUE,
 #'                 title_size = 18, fit_stats_size = 12)
 #'
+#' # With automatic text wrapping for long titles
+#' long_title <- "A Very Long Title That Would Otherwise Be Cut Off When Displayed"
+#' nice_lavaanPlot(fit, title = long_title, fit_stats = TRUE, wrap_width = 60)
+#'
+#' # Wrapping adapts to font size - larger fonts wrap at fewer characters
+#' nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
+#'
 #' # For saving with save_png without title cutoff, consider adjusting
 #' # the width parameter and/or using graph_options like margin
 #' \dontrun{
@@ -96,7 +108,7 @@ nice_lavaanPlot <- function(
   covs = FALSE, stars = c("regress", "latent", "covs"), sig = .05,
   graph_options = c(rankdir = "LR"), title = NULL, note = NULL,
   fit_stats = NULL, fit_stats_type = c("regular", "scaled", "robust"),
-  title_size = 14, note_size = 10, fit_stats_size = 9, ...
+  title_size = 14, note_size = 10, fit_stats_size = 9, wrap_width = NULL, ...
 ) {
   insight::check_if_installed(
     c(
@@ -113,6 +125,28 @@ nice_lavaanPlot <- function(
     text <- gsub(">", "&gt;", text, fixed = TRUE)
     text <- gsub("\"", "&quot;", text, fixed = TRUE)
     text
+  }
+  
+  # Text wrapping function that accounts for font size
+  wrap_text <- function(text, max_width, font_size, base_font_size = 10) {
+    if (is.null(max_width) || is.null(text) || nchar(text) == 0) {
+      return(text)
+    }
+    
+    # Adjust wrap width based on font size ratio
+    # Larger fonts need proportionally fewer characters per line
+    adjusted_width <- max_width * (base_font_size / font_size)
+    adjusted_width <- max(20, round(adjusted_width))  # Minimum of 20 chars
+    
+    # Use insight::format_message for intelligent wrapping
+    wrapped <- insight::format_message(text, line_length = adjusted_width)
+    
+    # Convert newlines to HTML breaks, trimming leading spaces from wrapped lines
+    lines <- strsplit(wrapped, "\n", fixed = TRUE)[[1]]
+    lines <- trimws(lines, which = "left")
+    
+    # Join with HTML break tags
+    paste(lines, collapse = "<BR/>")
   }
 
   # Extract and format fit statistics if requested
@@ -233,7 +267,9 @@ nice_lavaanPlot <- function(
     html_rows <- character(0)
 
     if (has_title) {
-      title_escaped <- html_escape(title)
+      # Apply wrapping if requested, then escape
+      title_text <- wrap_text(title, wrap_width, title_size)
+      title_escaped <- html_escape(title_text)
       html_rows <- c(
         html_rows,
         paste0("<TR><TD><FONT POINT-SIZE=\"", title_size, "\"><B>", title_escaped, "</B></FONT></TD></TR>")
@@ -244,7 +280,9 @@ nice_lavaanPlot <- function(
     }
 
     if (has_note) {
-      note_escaped <- html_escape(note)
+      # Apply wrapping if requested, then escape
+      note_text <- wrap_text(note, wrap_width, note_size)
+      note_escaped <- html_escape(note_text)
       html_rows <- c(
         html_rows,
         paste0("<TR><TD><FONT POINT-SIZE=\"", note_size, "\">", note_escaped, "</FONT></TD></TR>")
@@ -258,11 +296,14 @@ nice_lavaanPlot <- function(
       # Split fit_stats_text by newline to handle multiple types
       fit_stats_lines <- strsplit(fit_stats_text, "\n", fixed = TRUE)[[1]]
       
-      # Add each line as a separate row
+      # Add each line as a separate row, with wrapping if requested
       for (i in seq_along(fit_stats_lines)) {
+        # Apply wrapping to each fit stats line, then escape
+        wrapped_line <- wrap_text(fit_stats_lines[i], wrap_width, fit_stats_size)
+        escaped_line <- html_escape(wrapped_line)
         html_rows <- c(
           html_rows,
-          paste0("<TR><TD><FONT POINT-SIZE=\"", fit_stats_size, "\">", fit_stats_lines[i], "</FONT></TD></TR>")
+          paste0("<TR><TD><FONT POINT-SIZE=\"", fit_stats_size, "\">", escaped_line, "</FONT></TD></TR>")
         )
       }
     }

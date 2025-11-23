@@ -21,6 +21,7 @@ nice_lavaanPlot(
   title_size = 14,
   note_size = 10,
   fit_stats_size = 9,
+  wrap_width = NULL,
   ...
 )
 }
@@ -79,6 +80,12 @@ Defaults to 10.}
 Defaults to 9. Increase this value for larger diagrams where the default size
 is too small to read.}
 
+\item{wrap_width}{Numeric value or \code{NULL}. If numeric, specifies the maximum character width
+before text is automatically wrapped to the next line. The wrapping is intelligent,
+breaking at word boundaries. A value of \code{60} works well for most plots. Set to
+\code{NULL} (default) to disable automatic text wrapping. The actual wrapping is adjusted
+based on font size - larger fonts will wrap at proportionally fewer characters.}
+
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }
 \value{
@@ -128,6 +135,13 @@ nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
 nice_lavaanPlot(fit, title = "Three-Factor CFA Model",
                 fit_stats = TRUE,
                 title_size = 18, fit_stats_size = 12)
+
+# With automatic text wrapping for long titles
+long_title <- "A Very Long Title That Would Otherwise Be Cut Off When Displayed"
+nice_lavaanPlot(fit, title = long_title, fit_stats = TRUE, wrap_width = 60)
+
+# Wrapping adapts to font size - larger fonts wrap at fewer characters
+nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
 
 # For saving with save_png without title cutoff, consider adjusting
 # the width parameter and/or using graph_options like margin
