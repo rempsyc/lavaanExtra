@@ -294,3 +294,34 @@ test_that("nice_lavaanPlot wrapping adapts to font size", {
   expect_true(grepl("<BR/>", result_small$x$diagram, fixed = TRUE))
   expect_true(grepl("<BR/>", result_large$x$diagram, fixed = TRUE))
 })
+
+test_that("nice_lavaanPlot centers title, note, and fit_stats", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+  
+  # Test title only
+  result_title <- nice_lavaanPlot(fit.cfa, title = "Test Title")
+  expect_s3_class(result_title, c("grViz", "htmlwidget"))
+  expect_true(grepl("ALIGN=\"CENTER\"", result_title$x$diagram, fixed = TRUE))
+  
+  # Test title and note
+  result_both <- nice_lavaanPlot(fit.cfa, 
+    title = "Test Title", 
+    note = "Test Note"
+  )
+  expect_s3_class(result_both, c("grViz", "htmlwidget"))
+  # Should have 2 occurrences (one for title, one for note)
+  align_count <- length(gregexpr("ALIGN=\"CENTER\"", result_both$x$diagram, fixed = TRUE)[[1]])
+  expect_equal(align_count, 2)
+  
+  # Test title, note, and fit_stats
+  result_all <- nice_lavaanPlot(fit.cfa, 
+    title = "Test Title", 
+    note = "Test Note",
+    fit_stats = TRUE
+  )
+  expect_s3_class(result_all, c("grViz", "htmlwidget"))
+  # Should have 3 occurrences (title, note, fit_stats)
+  align_count_all <- length(gregexpr("ALIGN=\"CENTER\"", result_all$x$diagram, fixed = TRUE)[[1]])
+  expect_equal(align_count_all, 3)
+})

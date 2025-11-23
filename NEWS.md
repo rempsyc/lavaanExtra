@@ -2,6 +2,9 @@
 
 * In progress
 
+## lavaanExtra 0.2.2.5
+* `nice_lavaanPlot()`: improve title, note, and fit statistics centering by adding ALIGN="CENTER" to HTML table cells
+
 ## lavaanExtra 0.2.2.4
 * Add `save_plot()` function to export/save plots from `nice_lavaanPlot()` and `nice_tidySEM()` with multiple format options (PNG, PDF, SVG, JPG)
 
