@@ -386,6 +386,8 @@ nice_lavaanPlot <- function(
 
     # Position label at top if title is present, otherwise at bottom
     graph_options$labelloc <- if (has_title) "t" else "b"
+    # Center the label horizontally
+    graph_options$labeljust <- "c"
   }
 
   lavaanPlot::lavaanPlot(

@@ -303,6 +303,8 @@ test_that("nice_lavaanPlot centers title, note, and fit_stats", {
   result_title <- nice_lavaanPlot(fit.cfa, title = "Test Title")
   expect_s3_class(result_title, c("grViz", "htmlwidget"))
   expect_true(grepl("ALIGN=\"CENTER\"", result_title$x$diagram, fixed = TRUE))
+  # Check that labeljust is set to center the label horizontally
+  expect_true(grepl("labeljust = c", result_title$x$diagram, fixed = TRUE))
   
   # Test title and note
   result_both <- nice_lavaanPlot(fit.cfa, 
@@ -313,6 +315,8 @@ test_that("nice_lavaanPlot centers title, note, and fit_stats", {
   # Should have 2 occurrences (one for title, one for note)
   align_count <- length(gregexpr("ALIGN=\"CENTER\"", result_both$x$diagram, fixed = TRUE)[[1]])
   expect_equal(align_count, 2)
+  # Check labeljust
+  expect_true(grepl("labeljust = c", result_both$x$diagram, fixed = TRUE))
   
   # Test title, note, and fit_stats
   result_all <- nice_lavaanPlot(fit.cfa, 
@@ -324,4 +328,6 @@ test_that("nice_lavaanPlot centers title, note, and fit_stats", {
   # Should have 3 occurrences (title, note, fit_stats)
   align_count_all <- length(gregexpr("ALIGN=\"CENTER\"", result_all$x$diagram, fixed = TRUE)[[1]])
   expect_equal(align_count_all, 3)
+  # Check labeljust
+  expect_true(grepl("labeljust = c", result_all$x$diagram, fixed = TRUE))
 })
