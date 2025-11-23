@@ -68,61 +68,14 @@
 #' # Custom dimensions
 #' save_plot(plot, "myplot_large.png", width = 2400, height = 1800)
 #' }
-# Helper function to add padding to SVG to prevent text cutoff
-add_svg_padding <- function(svg_string, padding_pct = 0.05) {
-  # Use xml2 to parse and modify the SVG
-  insight::check_if_installed("xml2", reason = "to add padding to SVG.")
-  
-  # Parse SVG
-  svg_doc <- xml2::read_xml(svg_string)
-  
-  # Get current dimensions
-  width_attr <- xml2::xml_attr(svg_doc, "width")
-  height_attr <- xml2::xml_attr(svg_doc, "height")
-  viewBox_attr <- xml2::xml_attr(svg_doc, "viewBox")
-  
-  # If viewBox exists, adjust it to add padding
-  if (!is.na(viewBox_attr)) {
-    vb_parts <- as.numeric(strsplit(viewBox_attr, " ")[[1]])
-    
-    # Calculate padding (as percentage of dimensions)
-    h_padding <- vb_parts[3] * padding_pct
-    v_padding <- vb_parts[4] * padding_pct
-    
-    # Adjust viewBox: shift origin and increase dimensions
-    new_viewBox <- sprintf("%f %f %f %f",
-                          vb_parts[1] - h_padding,      # shift left
-                          vb_parts[2] - v_padding,      # shift up
-                          vb_parts[3] + 2 * h_padding,  # increase width
-                          vb_parts[4] + 2 * v_padding)  # increase height
-    
-    xml2::xml_attr(svg_doc, "viewBox") <- new_viewBox
-  }
-  
-  # If width/height attributes exist, increase them proportionally
-  if (!is.na(width_attr) && !is.na(height_attr)) {
-    # Extract numeric values (handles both "300" and "300pt" formats)
-    orig_width <- as.numeric(gsub("[^0-9.]", "", width_attr))
-    orig_height <- as.numeric(gsub("[^0-9.]", "", height_attr))
-    
-    # Get unit suffix if present
-    width_unit <- gsub("[0-9.]", "", width_attr)
-    height_unit <- gsub("[0-9.]", "", height_attr)
-    
-    # Calculate new dimensions
-    new_width <- orig_width * (1 + 2 * padding_pct)
-    new_height <- orig_height * (1 + 2 * padding_pct)
-    
-    # Apply new dimensions with original units
-    xml2::xml_attr(svg_doc, "width") <- paste0(new_width, width_unit)
-    xml2::xml_attr(svg_doc, "height") <- paste0(new_height, height_unit)
-  }
-  
-  # Return modified SVG as string
-  as.character(svg_doc)
-}
-
-save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ...) {
+save_plot <- function(
+  plot,
+  filename,
+  width = NULL,
+  height = NULL,
+  dpi = 300,
+  ...
+) {
   # Determine file format from extension
   ext <- tolower(tools::file_ext(filename))
 
@@ -135,7 +88,9 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
   is_grViz <- inherits(plot, c("grViz", "htmlwidget"))
 
   if (!is_ggplot && !is_grViz) {
-    stop("plot must be either a ggplot object (from nice_tidySEM) or a grViz object (from nice_lavaanPlot)")
+    stop(
+      "plot must be either a ggplot object (from nice_tidySEM) or a grViz object (from nice_lavaanPlot)"
+    )
   }
 
   # Handle ggplot objects (from nice_tidySEM)
@@ -143,8 +98,12 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
     insight::check_if_installed("ggplot2", reason = "to save ggplot objects.")
 
     # Set default dimensions for ggplot (in inches)
-    if (is.null(width)) width <- 7
-    if (is.null(height)) height <- 5
+    if (is.null(width)) {
+      width <- 7
+    }
+    if (is.null(height)) {
+      height <- 5
+    }
 
     # Use ggsave for all formats
     ggplot2::ggsave(
@@ -169,7 +128,7 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
 
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
-    
+
     # Add horizontal padding to prevent text cutoff
     # This is especially important when title, note, or fit_stats are present
     svg_string <- add_svg_padding(svg_string, padding_pct = 0.05)
@@ -184,7 +143,7 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
     # For other formats, we need to render the SVG
     # If dimensions are not specified, rsvg will use the SVG's natural dimensions
     # which automatically crops to content (including title, note, fit stats, etc.)
-    
+
     if (ext == "pdf") {
       # Render to PDF (dimensions in pixels, same as PNG/JPG)
       # If no dimensions specified, uses SVG's natural size for perfect cropping
@@ -256,7 +215,7 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
         units = "px",
         quality = 95
       )
-      
+
       # Use grid graphics which doesn't add margins
       grid::grid.newpage()
       grid::grid.raster(
@@ -267,11 +226,67 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
         height = 1,
         interpolate = TRUE
       )
-      
+
       grDevices::dev.off()
     }
 
     message("Plot saved to: ", filename)
     return(invisible(filename))
   }
+}
+
+# Helper function to add padding to SVG to prevent text cutoff
+add_svg_padding <- function(svg_string, padding_pct = 0.05) {
+  # Use xml2 to parse and modify the SVG
+  insight::check_if_installed("xml2", reason = "to add padding to SVG.")
+
+  # Parse SVG
+  svg_doc <- xml2::read_xml(svg_string)
+
+  # Get current dimensions
+  width_attr <- xml2::xml_attr(svg_doc, "width")
+  height_attr <- xml2::xml_attr(svg_doc, "height")
+  viewBox_attr <- xml2::xml_attr(svg_doc, "viewBox")
+
+  # If viewBox exists, adjust it to add padding
+  if (!is.na(viewBox_attr)) {
+    vb_parts <- as.numeric(strsplit(viewBox_attr, " ")[[1]])
+
+    # Calculate padding (as percentage of dimensions)
+    h_padding <- vb_parts[3] * padding_pct
+    v_padding <- vb_parts[4] * padding_pct
+
+    # Adjust viewBox: shift origin and increase dimensions
+    new_viewBox <- sprintf(
+      "%f %f %f %f",
+      vb_parts[1] - h_padding, # shift left
+      vb_parts[2] - v_padding, # shift up
+      vb_parts[3] + 2 * h_padding, # increase width
+      vb_parts[4] + 2 * v_padding
+    ) # increase height
+
+    xml2::xml_attr(svg_doc, "viewBox") <- new_viewBox
+  }
+
+  # If width/height attributes exist, increase them proportionally
+  if (!is.na(width_attr) && !is.na(height_attr)) {
+    # Extract numeric values (handles both "300" and "300pt" formats)
+    orig_width <- as.numeric(gsub("[^0-9.]", "", width_attr))
+    orig_height <- as.numeric(gsub("[^0-9.]", "", height_attr))
+
+    # Get unit suffix if present
+    width_unit <- gsub("[0-9.]", "", width_attr)
+    height_unit <- gsub("[0-9.]", "", height_attr)
+
+    # Calculate new dimensions
+    new_width <- orig_width * (1 + 2 * padding_pct)
+    new_height <- orig_height * (1 + 2 * padding_pct)
+
+    # Apply new dimensions with original units
+    xml2::xml_attr(svg_doc, "width") <- paste0(new_width, width_unit)
+    xml2::xml_attr(svg_doc, "height") <- paste0(new_height, height_unit)
+  }
+
+  # Return modified SVG as string
+  as.character(svg_doc)
 }

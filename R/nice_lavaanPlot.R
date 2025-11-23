@@ -42,7 +42,7 @@
 #'              is too small to read.
 #' @param wrap_width Numeric value or `NULL`. Specifies the maximum character width
 #'              before text is automatically wrapped to the next line. The wrapping is intelligent,
-#'              breaking at word boundaries. Defaults to `60` which works well for most plots. 
+#'              breaking at word boundaries. Defaults to `60` which works well for most plots.
 #'              Set to `NULL` to disable automatic text wrapping. The actual wrapping is adjusted
 #'              based on font size - larger fonts will wrap at proportionally fewer characters.
 #'              A 20% safety margin is applied to prevent text cutoff.
@@ -121,7 +121,7 @@ nice_lavaanPlot <- function(
   title_size = 14,
   note_size = 10,
   fit_stats_size = 9,
-  wrap_width = 60,
+  wrap_width = 40,
   ...
 ) {
   insight::check_if_installed(
@@ -153,7 +153,7 @@ nice_lavaanPlot <- function(
     # Adjust wrap width based on font size ratio
     # Larger fonts need proportionally fewer characters per line
     adjusted_width <- max_width * (base_font_size / font_size)
-    
+
     # Add padding/safety margin (reduce by 20%) to prevent text cutoff
     # This accounts for variable character widths and rendering differences
     adjusted_width <- adjusted_width * 0.8
