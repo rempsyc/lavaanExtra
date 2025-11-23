@@ -80,11 +80,12 @@ Defaults to 10.}
 Defaults to 9. Increase this value for larger diagrams where the default size
 is too small to read.}
 
-\item{wrap_width}{Numeric value or \code{NULL}. If numeric, specifies the maximum character width
+\item{wrap_width}{Numeric value or \code{NULL}. Specifies the maximum character width
 before text is automatically wrapped to the next line. The wrapping is intelligent,
-breaking at word boundaries. A value of \code{60} works well for most plots. Set to
-\code{NULL} (default) to disable automatic text wrapping. The actual wrapping is adjusted
-based on font size - larger fonts will wrap at proportionally fewer characters.}
+breaking at word boundaries. Defaults to \code{60} which works well for most plots.
+Set to \code{NULL} to disable automatic text wrapping. The actual wrapping is adjusted
+based on font size - larger fonts will wrap at proportionally fewer characters.
+A 20\% safety margin is applied to prevent text cutoff.}
 
 \item{...}{Arguments to be passed to function \link[lavaanPlot:lavaanPlot]{lavaanPlot::lavaanPlot}.}
 }

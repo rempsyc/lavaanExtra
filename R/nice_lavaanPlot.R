@@ -40,11 +40,12 @@
 #' @param fit_stats_size Numeric value specifying the font size in points for the fit statistics text.
 #'              Defaults to 9. Increase this value for larger diagrams where the default size
 #'              is too small to read.
-#' @param wrap_width Numeric value or `NULL`. If numeric, specifies the maximum character width
+#' @param wrap_width Numeric value or `NULL`. Specifies the maximum character width
 #'              before text is automatically wrapped to the next line. The wrapping is intelligent,
-#'              breaking at word boundaries. A value of `60` works well for most plots. Set to
-#'              `NULL` (default) to disable automatic text wrapping. The actual wrapping is adjusted
+#'              breaking at word boundaries. Defaults to `60` which works well for most plots. 
+#'              Set to `NULL` to disable automatic text wrapping. The actual wrapping is adjusted
 #'              based on font size - larger fonts will wrap at proportionally fewer characters.
+#'              A 20% safety margin is applied to prevent text cutoff.
 #' @param ... Arguments to be passed to function [lavaanPlot::lavaanPlot].
 #' @return A lavaanPlot, of classes `c("grViz", "htmlwidget")`, representing the
 #'         specified `lavaan` model.
@@ -151,6 +152,10 @@ nice_lavaanPlot <- function(
     # Adjust wrap width based on font size ratio
     # Larger fonts need proportionally fewer characters per line
     adjusted_width <- max_width * (base_font_size / font_size)
+    
+    # Add padding/safety margin (reduce by 20%) to prevent text cutoff
+    # This accounts for variable character widths and rendering differences
+    adjusted_width <- adjusted_width * 0.8
     adjusted_width <- max(20, round(adjusted_width)) # Minimum of 20 chars
 
     # Use insight::format_message for intelligent wrapping
