@@ -22,7 +22,8 @@
 #'
 #' @details For plots from `nice_lavaanPlot()` (grViz/htmlwidget objects):
 #' - The plot is first converted to SVG using `DiagrammeRsvg::export_svg()`
-#' - Automatically adds 5% padding to prevent text cutoff (especially for titles and fit statistics)
+#' - Automatically adds 5% padding and a white background to prevent text cutoff and ensure
+#'   proper display across all formats (especially for titles and fit statistics)
 #' - By default (no width/height specified), all formats use the SVG's natural dimensions,
 #'   which automatically crops to the actual content including title, note, and fit statistics
 #' - All dimension parameters are in **pixels** (not inches) for consistency across formats
@@ -247,10 +248,14 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
   width_attr <- xml2::xml_attr(svg_doc, "width")
   height_attr <- xml2::xml_attr(svg_doc, "height")
   viewBox_attr <- xml2::xml_attr(svg_doc, "viewBox")
+  
+  # Store original viewBox for background rectangle
+  orig_viewBox <- NULL
 
   # If viewBox exists, adjust it to add padding
   if (!is.na(viewBox_attr)) {
     vb_parts <- as.numeric(strsplit(viewBox_attr, " ")[[1]])
+    orig_viewBox <- vb_parts
 
     # Calculate padding (as percentage of dimensions)
     h_padding <- vb_parts[3] * padding_pct
@@ -285,6 +290,25 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
     # Apply new dimensions with original units
     xml2::xml_attr(svg_doc, "width") <- paste0(new_width, width_unit)
     xml2::xml_attr(svg_doc, "height") <- paste0(new_height, height_unit)
+  }
+  
+  # Add a white background rectangle as the first child element
+  # This ensures the background is white instead of transparent
+  if (!is.null(orig_viewBox)) {
+    # Create background rectangle that covers the entire new viewBox
+    h_padding <- orig_viewBox[3] * padding_pct
+    v_padding <- orig_viewBox[4] * padding_pct
+    
+    bg_rect <- xml2::xml_new_root("rect")
+    xml2::xml_attr(bg_rect, "x") <- as.character(orig_viewBox[1] - h_padding)
+    xml2::xml_attr(bg_rect, "y") <- as.character(orig_viewBox[2] - v_padding)
+    xml2::xml_attr(bg_rect, "width") <- as.character(orig_viewBox[3] + 2 * h_padding)
+    xml2::xml_attr(bg_rect, "height") <- as.character(orig_viewBox[4] + 2 * v_padding)
+    xml2::xml_attr(bg_rect, "fill") <- "white"
+    
+    # Insert as first child of the SVG root
+    first_child <- xml2::xml_child(svg_doc, 1)
+    xml2::xml_add_sibling(first_child, bg_rect, .where = "before")
   }
 
   # Return modified SVG as string
