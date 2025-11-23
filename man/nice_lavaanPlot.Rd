@@ -104,7 +104,7 @@ Make a quick and decent-looking \code{lavaanPlot}.
 }
 
 \examples{
-\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+\dontshow{if (requireNamespace("lavaan", quietly = TRUE) && requireNamespace("lavaanPlot", quietly = TRUE) && requireNamespace("DiagrammeRsvg", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 x <- paste0("x", 1:9)
 (latent <- list(
   visual = x[1:3],
@@ -130,13 +130,17 @@ nice_lavaanPlot(fit, fit_stats = c("cfi", "tli", "rmsea", "srmr", "chisq", "pval
 
 # With robust estimator showing multiple fit statistic types
 fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
-nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
-                fit_stats_type = c("regular", "scaled", "robust"))
+nice_lavaanPlot(fit_robust,
+  title = "CFA Model", fit_stats = TRUE,
+  fit_stats_type = c("regular", "scaled", "robust")
+)
 
 # With custom font sizes (useful for large diagrams)
-nice_lavaanPlot(fit, title = "Three-Factor CFA Model",
-                fit_stats = TRUE,
-                title_size = 18, fit_stats_size = 12)
+nice_lavaanPlot(fit,
+  title = "Three-Factor CFA Model",
+  fit_stats = TRUE,
+  title_size = 18, fit_stats_size = 12
+)
 
 # With automatic text wrapping for long titles
 long_title <- "A Very Long Title That Would Otherwise Be Cut Off When Displayed"
@@ -148,10 +152,10 @@ nice_lavaanPlot(fit, title = long_title, title_size = 18, wrap_width = 60)
 # Save plot to file
 \dontrun{
 plot <- nice_lavaanPlot(fit)
-save_plot(plot, "my_plot.png")    # PNG format
-save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
-save_plot(plot, "my_plot.svg")    # SVG format (lossless)
-save_plot(plot, "my_plot.jpg")    # JPG format
+save_plot(plot, "my_plot.png") # PNG format
+save_plot(plot, "my_plot.pdf") # PDF format (lossless)
+save_plot(plot, "my_plot.svg") # SVG format (lossless)
+save_plot(plot, "my_plot.jpg") # JPG format
 }
 \dontshow{\}) # examplesIf}
 }
