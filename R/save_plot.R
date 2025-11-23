@@ -32,8 +32,9 @@
 #' - The plot is first converted to SVG using `DiagrammeRsvg::export_svg()`
 #' - Automatically adds 5% padding and a white background to prevent text cutoff and ensure
 #'   proper display across all formats (especially for titles and fit statistics)
-#' - By default (no width/height specified), all formats use the SVG's natural dimensions,
-#'   which automatically crops to the actual content including title, note, and fit statistics
+#' - By default (no width/height specified), PNG/JPG/PDF use the SVG's intrinsic viewBox dimensions
+#'   to ensure pixel-perfect centering that matches the SVG output. This prevents rsvg from
+#'   guessing dimensions inconsistently across formats.
 #' - Dimension units are specified by the `units` parameter and converted to pixels internally
 #' - For PNG: SVG is rendered directly to PNG using `rsvg::rsvg_png()`
 #' - For JPG: SVG is rendered to raster array using `rsvg::rsvg()` and saved with `grDevices::jpeg()`
@@ -157,8 +158,24 @@ save_plot <- function(
     }
 
     # For other formats, we need to render the SVG
-    # If dimensions are not specified, rsvg will use the SVG's natural dimensions
-    # which automatically crops to content (including title, note, fit stats, etc.)
+    # Extract intrinsic dimensions from SVG viewBox to ensure consistent rasterization
+    # This prevents rsvg from guessing dimensions inconsistently for PNG/JPG
+    if (is.null(width_px) || is.null(height_px)) {
+      insight::check_if_installed("xml2", reason = "to extract SVG dimensions.")
+      doc <- xml2::read_xml(svg_string)
+      vb <- xml2::xml_attr(doc, "viewBox")
+      
+      if (!is.na(vb)) {
+        # viewBox format: "minx miny width height"
+        vb_nums <- as.numeric(strsplit(vb, " +")[[1]])
+        svg_w <- vb_nums[3]
+        svg_h <- vb_nums[4]
+        
+        # Use SVG intrinsic dimensions if not manually specified
+        if (is.null(width_px)) width_px <- svg_w
+        if (is.null(height_px)) height_px <- svg_h
+      }
+    }
 
     if (ext == "pdf") {
       # Render to PDF (dimensions in pixels)

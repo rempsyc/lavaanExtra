@@ -61,8 +61,9 @@ For plots from \code{nice_lavaanPlot()} (grViz/htmlwidget objects):
 \item The plot is first converted to SVG using \code{DiagrammeRsvg::export_svg()}
 \item Automatically adds 5\% padding and a white background to prevent text cutoff and ensure
 proper display across all formats (especially for titles and fit statistics)
-\item By default (no width/height specified), all formats use the SVG's natural dimensions,
-which automatically crops to the actual content including title, note, and fit statistics
+\item By default (no width/height specified), PNG/JPG/PDF use the SVG's intrinsic viewBox dimensions
+to ensure pixel-perfect centering that matches the SVG output. This prevents rsvg from
+guessing dimensions inconsistently across formats.
 \item Dimension units are specified by the \code{units} parameter and converted to pixels internally
 \item For PNG: SVG is rendered directly to PNG using \code{rsvg::rsvg_png()}
 \item For JPG: SVG is rendered to raster array using \code{rsvg::rsvg()} and saved with \code{grDevices::jpeg()}
