@@ -21,8 +21,9 @@
 #'
 #' @details For plots from `nice_lavaanPlot()` (grViz/htmlwidget objects):
 #' - The plot is first converted to SVG using `DiagrammeRsvg::export_svg()`
-#' - For PNG and JPG: SVG is rendered using `rsvg::rsvg()` and saved with `png::writePNG()` or `grDevices::jpeg()`
-#' - For PDF: SVG is rendered using `rsvg::rsvg_pdf()`
+#' - For PNG: SVG is rendered directly to PNG using `rsvg::rsvg_png()`
+#' - For JPG: SVG is rendered to raster array using `rsvg::rsvg()` and saved with `grDevices::jpeg()`
+#' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
 #' - For SVG: The SVG string is saved directly to file
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
@@ -118,9 +119,13 @@ save_plot <- function(plot, filename, width = NULL, height = NULL, dpi = 300, ..
     }
 
     # For other formats, we need to render the SVG
-    # Set default dimensions for raster formats (in pixels)
-    if (is.null(width)) width <- if (ext == "pdf") 7 else 1200
-    if (is.null(height)) height <- if (ext == "pdf") 5 else 900
+    # Set default dimensions based on format
+    if (is.null(width)) {
+      width <- if (ext == "pdf") 7 else 1200
+    }
+    if (is.null(height)) {
+      height <- if (ext == "pdf") 5 else 900
+    }
 
     if (ext == "pdf") {
       # Render to PDF

@@ -39,8 +39,9 @@ the plot type and applies the appropriate saving method.
 For plots from \code{nice_lavaanPlot()} (grViz/htmlwidget objects):
 \itemize{
 \item The plot is first converted to SVG using \code{DiagrammeRsvg::export_svg()}
-\item For PNG and JPG: SVG is rendered using \code{rsvg::rsvg()} and saved with \code{png::writePNG()} or \code{grDevices::jpeg()}
-\item For PDF: SVG is rendered using \code{rsvg::rsvg_pdf()}
+\item For PNG: SVG is rendered directly to PNG using \code{rsvg::rsvg_png()}
+\item For JPG: SVG is rendered to raster array using \code{rsvg::rsvg()} and saved with \code{grDevices::jpeg()}
+\item For PDF: SVG is rendered to PDF using \code{rsvg::rsvg_pdf()}
 \item For SVG: The SVG string is saved directly to file
 }
 
