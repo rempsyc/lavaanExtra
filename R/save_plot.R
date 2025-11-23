@@ -162,63 +162,33 @@ save_plot <- function(
 
     if (ext == "pdf") {
       # Render to PDF (dimensions in pixels)
-      # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width_px) && is.null(height_px)) {
-        rsvg::rsvg_pdf(
-          charToRaw(svg_string),
-          file = filename,
-          ...
-        )
-      } else {
-        # Use specified dimensions (converted to pixels)
-        rsvg::rsvg_pdf(
-          charToRaw(svg_string),
-          file = filename,
-          width = width_px,
-          height = height_px,
-          ...
-        )
-      }
+      rsvg::rsvg_pdf(
+        charToRaw(svg_string),
+        file = filename,
+        width = width_px,
+        height = height_px,
+        ...
+      )
     } else if (ext == "png") {
       # Render to PNG (dimensions in pixels)
-      # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width_px) && is.null(height_px)) {
-        rsvg::rsvg_png(
-          charToRaw(svg_string),
-          file = filename,
-          ...
-        )
-      } else {
-        # Use specified dimensions (converted to pixels)
-        rsvg::rsvg_png(
-          charToRaw(svg_string),
-          file = filename,
-          width = width_px,
-          height = height_px,
-          ...
-        )
-      }
+      rsvg::rsvg_png(
+        charToRaw(svg_string),
+        file = filename,
+        width = width_px,
+        height = height_px,
+        ...
+      )
     } else if (ext %in% c("jpg", "jpeg")) {
       # Render to JPEG (dimensions in pixels)
       # rsvg doesn't have direct JPEG support, so we render to array and save as JPEG
       insight::check_if_installed("png", reason = "to save JPEG images.")
-
       # Render SVG to bitmap array
-      # If no dimensions specified, uses SVG's natural size for perfect cropping
-      if (is.null(width_px) && is.null(height_px)) {
-        img_data <- rsvg::rsvg(
-          charToRaw(svg_string),
-          ...
-        )
-      } else {
-        img_data <- rsvg::rsvg(
-          charToRaw(svg_string),
-          width = width_px,
-          height = height_px,
-          ...
-        )
-      }
-
+      img_data <- rsvg::rsvg(
+        charToRaw(svg_string),
+        width = width_px,
+        height = height_px,
+        ...
+      )
       # Get actual dimensions from the rendered image
       img_height <- dim(img_data)[1]
       img_width <- dim(img_data)[2]
