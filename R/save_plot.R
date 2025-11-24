@@ -30,8 +30,7 @@
 #'
 #' @details For plots from `nice_lavaanPlot()` (grViz/htmlwidget objects):
 #' - The plot is first converted to SVG using `DiagrammeRsvg::export_svg()`
-#' - Automatically adds 5% padding and a white background to prevent text cutoff and ensure
-#'   proper display across all formats (especially for titles and fit statistics)
+#' - Graphviz centering attributes (ALIGN, BALIGN, labeljust, center) ensure proper centering
 #' - By default (no width/height specified), PNG/JPG/PDF use the SVG's intrinsic viewBox dimensions
 #'   to ensure pixel-perfect centering that matches the SVG output. This prevents rsvg from
 #'   guessing dimensions inconsistently across formats.
@@ -144,9 +143,9 @@ save_plot <- function(
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
 
-    # Add horizontal padding to prevent text cutoff
-    # This is especially important when title, note, or fit_stats are present
-    svg_string <- add_svg_padding(svg_string, padding_pct = 0.05)
+    # NOTE: Padding disabled - Graphviz centering attributes handle layout correctly
+    # Adding padding was shifting the viewBox and breaking centering
+    # svg_string <- add_svg_padding(svg_string, padding_pct = 0.05)
 
     if (ext == "svg") {
       # Save SVG directly
@@ -281,11 +280,12 @@ add_svg_padding <- function(svg_string, padding_pct = 0.05) {
     h_padding <- vb_parts[3] * padding_pct
     v_padding <- vb_parts[4] * padding_pct
 
-    # Adjust viewBox: shift origin and increase dimensions
+    # Adjust viewBox: center the content by shifting origin proportionally
+    # This keeps content centered when padding is added
     new_viewBox <- sprintf(
       "%f %f %f %f",
-      vb_parts[1] - h_padding, # shift left
-      vb_parts[2] - v_padding, # shift up
+      vb_parts[1] - h_padding, # shift left by padding amount
+      vb_parts[2] - v_padding, # shift up by padding amount
       vb_parts[3] + 2 * h_padding, # increase width
       vb_parts[4] + 2 * v_padding
     ) # increase height
