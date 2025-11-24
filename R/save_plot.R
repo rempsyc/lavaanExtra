@@ -145,7 +145,7 @@ save_plot <- function(
 
     # NOTE: Padding disabled - Graphviz centering attributes handle layout correctly
     # Adding padding was shifting the viewBox and breaking centering
-    # svg_string <- add_svg_padding(svg_string, padding_pct = 0.05)
+    svg_string <- add_svg_padding(svg_string, padding_pct = 0.10)
 
     if (ext == "svg") {
       # Save SVG directly
@@ -163,15 +163,17 @@ save_plot <- function(
       insight::check_if_installed("xml2", reason = "to extract SVG dimensions.")
       doc <- xml2::read_xml(svg_string)
       vb <- xml2::xml_attr(doc, "viewBox")
-      
+
       if (!is.na(vb)) {
         # viewBox format: "minx miny width height"
         vb_nums <- as.numeric(strsplit(vb, " +")[[1]])
         svg_w <- vb_nums[3]
         svg_h <- vb_nums[4]
-        
+
         # Use SVG intrinsic dimensions if not manually specified
-        if (is.null(width_px)) width_px <- svg_w
+        if (is.null(width_px)) {
+          width_px <- svg_w
+        }
         if (is.null(height_px)) height_px <- svg_h
       }
     }
@@ -255,86 +257,56 @@ convert_to_pixels <- function(value, units = "in", dpi = 300) {
   )
 }
 
-# Helper function to add padding to SVG to prevent text cutoff
-add_svg_padding <- function(svg_string, padding_pct = 0.05) {
-  # Use xml2 to parse and modify the SVG
+# Helper: add horizontal padding to an SVG by expanding its viewBox width only
+add_svg_padding <- function(
+  svg_string,
+  padding_pct = 0.10,
+  add_background = TRUE
+) {
   insight::check_if_installed("xml2", reason = "to add padding to SVG.")
+  doc <- xml2::read_xml(svg_string)
 
-  # Parse SVG
-  svg_doc <- xml2::read_xml(svg_string)
-
-  # Get current dimensions
-  width_attr <- xml2::xml_attr(svg_doc, "width")
-  height_attr <- xml2::xml_attr(svg_doc, "height")
-  viewBox_attr <- xml2::xml_attr(svg_doc, "viewBox")
-
-  # Store original viewBox for background rectangle
-  orig_viewBox <- NULL
-
-  # If viewBox exists, adjust it to add padding
-  if (!is.na(viewBox_attr)) {
-    vb_parts <- as.numeric(strsplit(viewBox_attr, " ")[[1]])
-    orig_viewBox <- vb_parts
-
-    # Calculate padding (as percentage of dimensions)
-    h_padding <- vb_parts[3] * padding_pct
-    v_padding <- vb_parts[4] * padding_pct
-
-    # Adjust viewBox: center the content by shifting origin proportionally
-    # This keeps content centered when padding is added
-    new_viewBox <- sprintf(
-      "%f %f %f %f",
-      vb_parts[1] - h_padding, # shift left by padding amount
-      vb_parts[2] - v_padding, # shift up by padding amount
-      vb_parts[3] + 2 * h_padding, # increase width
-      vb_parts[4] + 2 * v_padding
-    ) # increase height
-
-    xml2::xml_attr(svg_doc, "viewBox") <- new_viewBox
+  vb_attr <- xml2::xml_attr(doc, "viewBox")
+  if (is.na(vb_attr)) {
+    return(svg_string)
   }
 
-  # If width/height attributes exist, increase them proportionally
-  if (!is.na(width_attr) && !is.na(height_attr)) {
-    # Extract numeric values (handles both "300" and "300pt" formats)
-    orig_width <- as.numeric(gsub("[^0-9.]", "", width_attr))
-    orig_height <- as.numeric(gsub("[^0-9.]", "", height_attr))
-
-    # Get unit suffix if present
-    width_unit <- gsub("[0-9.]", "", width_attr)
-    height_unit <- gsub("[0-9.]", "", height_attr)
-
-    # Calculate new dimensions
-    new_width <- orig_width * (1 + 2 * padding_pct)
-    new_height <- orig_height * (1 + 2 * padding_pct)
-
-    # Apply new dimensions with original units
-    xml2::xml_attr(svg_doc, "width") <- paste0(new_width, width_unit)
-    xml2::xml_attr(svg_doc, "height") <- paste0(new_height, height_unit)
+  # viewBox = "min_x min_y width height"
+  vb <- as.numeric(strsplit(vb_attr, "[ ,]+")[[1]])
+  if (length(vb) != 4L || any(is.na(vb))) {
+    return(svg_string)
   }
 
-  # Add a white background rectangle as the first child element
-  # This ensures the background is white instead of transparent
-  if (!is.null(orig_viewBox)) {
-    # Create background rectangle that covers the entire new viewBox
-    h_padding <- orig_viewBox[3] * padding_pct
-    v_padding <- orig_viewBox[4] * padding_pct
+  x <- vb[1]
+  y <- vb[2]
+  w <- vb[3]
+  h <- vb[4]
 
-    bg_rect <- xml2::read_xml("<rect/>")
-    xml2::xml_attr(bg_rect, "x") <- as.character(orig_viewBox[1] - h_padding)
-    xml2::xml_attr(bg_rect, "y") <- as.character(orig_viewBox[2] - v_padding)
-    xml2::xml_attr(bg_rect, "width") <- as.character(
-      orig_viewBox[3] + 2 * h_padding
-    )
-    xml2::xml_attr(bg_rect, "height") <- as.character(
-      orig_viewBox[4] + 2 * v_padding
-    )
-    xml2::xml_attr(bg_rect, "fill") <- "white"
+  # Horizontal padding only
+  hp <- w * padding_pct
+  new_x <- x - hp
+  new_w <- w + 2 * hp
+  new_vb <- sprintf("%f %f %f %f", new_x, y, new_w, h)
 
-    # Insert as first child of the SVG root
-    first_child <- xml2::xml_child(svg_doc, 1)
-    xml2::xml_add_sibling(first_child, bg_rect, .where = "before")
+  # Update viewBox (same height, wider width)
+  xml2::xml_attr(doc, "viewBox") <- new_vb
+
+  if (add_background) {
+    # White background covering the new horizontal extent, same height
+    bg <- xml2::read_xml("<rect/>")
+    xml2::xml_attr(bg, "x") <- as.character(new_x)
+    xml2::xml_attr(bg, "y") <- as.character(y)
+    xml2::xml_attr(bg, "width") <- as.character(new_w)
+    xml2::xml_attr(bg, "height") <- as.character(h)
+    xml2::xml_attr(bg, "fill") <- "white"
+
+    first_child <- xml2::xml_child(doc, 1)
+    if (is.null(first_child)) {
+      xml2::xml_add_child(doc, bg)
+    } else {
+      xml2::xml_add_sibling(first_child, bg, .where = "before")
+    }
   }
 
-  # Return modified SVG as string
-  as.character(svg_doc)
+  as.character(doc)
 }

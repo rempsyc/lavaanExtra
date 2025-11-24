@@ -393,32 +393,37 @@ nice_lavaanPlot <- function(
     graph_options$center <- "true"
   }
 
+  #  # --- buildCall + grViz backend ------------------------------------------
+  insight::check_if_installed(
+    c("lavaanPlot", "DiagrammeR"),
+    reason = "to create and render SEM/CFA plots."
+  )
+
+  # Optional: allow width/height for HTML display (does NOT affect export_svg)
+  extra_args <- list(...)
+  widget_width <- if ("width" %in% names(extra_args)) extra_args$width else NULL
+  widget_height <- if ("height" %in% names(extra_args)) {
+    extra_args$height
+  } else {
+    NULL
+  }
+
   # Use lavaanPlot's internal buildCall() to generate Graphviz DOT syntax
-  # This gives us full control over graph_options without widget wrapper limitations
-  insight::check_if_installed("lavaanPlot", reason = "to create SEM/CFA plots.")
-  insight::check_if_installed("DiagrammeR", reason = "to render Graphviz plots.")
-  
   plot_call <- lavaanPlot:::buildCall(
     model = model,
     name = "plot",
-    labels = NULL,  # Let lavaanPlot handle default labeling
+    labels = NULL, # let lavaanPlot handle default labeling
     node_options = node_options,
     edge_options = edge_options,
     coefs = coefs,
     stand = stand,
     covs = covs,
     stars = stars,
-    graph_options = graph_options,
+    graph_options = graph_options, # includes our title/note/fit_stats label
     sig = sig
   )
-  
-  # Extract widget dimensions from ... if provided (for HTML display only)
-  extra_args <- list(...)
-  widget_width <- extra_args$width %||% NULL
-  widget_height <- extra_args$height %||% NULL
-  
-  # Render as grViz htmlwidget
-  # Note: width/height affect HTML display only, not save_plot() exports
+
+  # Render as a grViz htmlwidget
   DiagrammeR::grViz(
     plot_call,
     width = widget_width,
