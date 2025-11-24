@@ -393,8 +393,15 @@ nice_lavaanPlot <- function(
     graph_options$center <- "true"
   }
 
-  lavaanPlot::lavaanPlot(
+  # Use lavaanPlot's internal buildCall() to generate Graphviz DOT syntax
+  # This gives us full control over graph_options without widget wrapper limitations
+  insight::check_if_installed("lavaanPlot", reason = "to create SEM/CFA plots.")
+  insight::check_if_installed("DiagrammeR", reason = "to render Graphviz plots.")
+  
+  plot_call <- lavaanPlot:::buildCall(
     model = model,
+    name = "plot",
+    labels = NULL,  # Let lavaanPlot handle default labeling
     node_options = node_options,
     edge_options = edge_options,
     coefs = coefs,
@@ -402,7 +409,19 @@ nice_lavaanPlot <- function(
     covs = covs,
     stars = stars,
     graph_options = graph_options,
-    sig = sig,
-    ...
+    sig = sig
+  )
+  
+  # Extract widget dimensions from ... if provided (for HTML display only)
+  extra_args <- list(...)
+  widget_width <- extra_args$width %||% NULL
+  widget_height <- extra_args$height %||% NULL
+  
+  # Render as grViz htmlwidget
+  # Note: width/height affect HTML display only, not save_plot() exports
+  DiagrammeR::grViz(
+    plot_call,
+    width = widget_width,
+    height = widget_height
   )
 }

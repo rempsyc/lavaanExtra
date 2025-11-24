@@ -3,7 +3,10 @@
 * In progress
 
 ## lavaanExtra 0.2.2.5
-* `nice_lavaanPlot()`: improve title, note, and fit statistics centering by adding ALIGN="CENTER" to HTML table cells, BALIGN="CENTER" to the table element, labeljust="c" to center the label horizontally, and center="true" to center the entire graph drawing in exported plots (PNG, PDF, JPG)
+* `nice_lavaanPlot()`: Fixed title centering in all output formats (PNG, JPG, PDF, SVG) by:
+  - Adding Graphviz centering attributes (ALIGN="CENTER", BALIGN="CENTER", labeljust="c", center="true")
+  - Refactoring to use `lavaanPlot:::buildCall()` + `DiagrammeR::grViz()` for direct control over DOT diagram generation
+* `save_plot()`: Disabled `add_svg_padding()` which was shifting viewBox and breaking centering in exported plots
 
 ## lavaanExtra 0.2.2.4
 * Add `save_plot()` function to export/save plots from `nice_lavaanPlot()` and `nice_tidySEM()` with multiple format options (PNG, PDF, SVG, JPG)
