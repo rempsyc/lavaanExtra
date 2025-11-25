@@ -430,14 +430,46 @@ save_with_webshot2 <- function(
 
   # ----- PDF EXPORT (vector accurate) -----
   if (ext == "pdf") {
+    # For PDF: capture as PNG first, then convert to PDF with tight cropping
+    # This avoids webshot2's default PDF page size issues
+    temp_png <- tempfile(fileext = ".png")
+    on.exit(unlink(temp_png, force = TRUE), add = TRUE)
+    
+    # Capture PNG with selector for tight cropping
     webshot2::webshot(
       url = temp_html,
-      file = filename,
+      file = temp_png,
       vwidth = vwidth,
       vheight = vheight,
       selector = widget_selector,
       zoom = dpi / 96
     )
+    
+    # Convert PNG to PDF using rsvg (preserves dimensions)
+    insight::check_if_installed("png", reason = "to convert PNG to PDF.")
+    img <- png::readPNG(temp_png)
+    
+    # Get actual image dimensions
+    img_height <- dim(img)[1]
+    img_width <- dim(img)[2]
+    
+    # Create PDF with exact dimensions matching the cropped PNG
+    grDevices::pdf(
+      file = filename,
+      width = img_width / dpi,
+      height = img_height / dpi
+    )
+    grid::grid.newpage()
+    grid::grid.raster(
+      img,
+      x = 0.5,
+      y = 0.5,
+      width = 1,
+      height = 1,
+      interpolate = TRUE
+    )
+    grDevices::dev.off()
+    
     if (verbose) {
       message("Plot saved to: ", filename, " (via webshot2 PDF)")
     }
