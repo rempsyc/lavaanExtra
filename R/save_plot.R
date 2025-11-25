@@ -433,7 +433,7 @@ save_with_webshot2 <- function(
     # Convert SVG dimensions to inches for Chromium PDF (1 pt ≈ 1/72 inch)
     paper_w_in <- svg_w / 72
     paper_h_in <- svg_h / 72
-    
+
     # Use webshot2 with pdf_options to set exact page size matching SVG
     webshot2::webshot(
       url = temp_html,
@@ -452,9 +452,13 @@ save_with_webshot2 <- function(
         printBackground = TRUE
       )
     )
-    
+
     if (verbose) {
-      message("Plot saved to: ", filename, " (vector PDF via webshot2 with exact page size)")
+      message(
+        "Plot saved to: ",
+        filename,
+        " (vector PDF via webshot2 with exact page size)"
+      )
     }
     return(invisible(filename))
   }
