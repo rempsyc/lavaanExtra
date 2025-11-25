@@ -152,7 +152,7 @@ save_plot <- function(
 
     # Use webshot engine for pixel-perfect browser rendering (PNG/JPG only)
     if (engine == "webshot" && ext %in% c("png", "jpg", "jpeg")) {
-      return(save_with_webshot(
+      return(save_with_webshot2(
         plot,
         filename,
         width_px,
@@ -339,7 +339,7 @@ add_svg_padding <- function(
 }
 
 # Helper: save grViz plot using webshot (browser-based pixel-perfect rendering)
-save_with_webshot <- function(
+save_with_webshot2 <- function(
   plot,
   filename,
   width_px = NULL,
@@ -348,92 +348,89 @@ save_with_webshot <- function(
   verbose = TRUE
 ) {
   insight::check_if_installed(
-    c("webshot", "htmlwidgets"),
-    reason = "to save plots using webshot engine (browser-based rendering)."
+    c("webshot2", "htmlwidgets"),
+    reason = "to export grViz plots using browser-based rendering."
   )
 
-  # Create a temporary HTML file to render the widget
+  ext <- tolower(tools::file_ext(filename))
+
+  # Temporary HTML file
   temp_html <- tempfile(fileext = ".html")
-  temp_png <- tempfile(fileext = ".png")
+  on.exit(unlink(temp_html, force = TRUE), add = TRUE)
 
-  on.exit(
-    {
-      unlink(temp_html, force = TRUE)
-      unlink(temp_png, force = TRUE)
-    },
-    add = TRUE
-  )
-
-  # Save the htmlwidget to HTML
+  # Save widget as HTML
   htmlwidgets::saveWidget(
     widget = plot,
     file = temp_html,
     selfcontained = TRUE
   )
 
-  # Calculate viewport size for webshot
-  # Default viewport: 992x744 is a reasonable size that accommodates most plots
-  # without excessive whitespace (roughly 10.3"x7.75" at 96 DPI, 4:3 aspect ratio)
-  vwidth <- if (!is.null(width_px)) as.integer(width_px) else 992L
-  vheight <- if (!is.null(height_px)) as.integer(height_px) else 744L
+  # Compute viewport size for webshot2
+  vwidth <- if (!is.null(width_px)) as.integer(width_px) else 1200L
+  vheight <- if (!is.null(height_px)) as.integer(height_px) else 1800L
 
-  # Determine output format
-  ext <- tolower(tools::file_ext(filename))
+  # ----- PDF EXPORT (vector accurate) -----
+  if (ext == "pdf") {
+    webshot2::webshot(
+      url = temp_html,
+      file = filename,
+      vwidth = vwidth,
+      vheight = vheight,
+      zoom = dpi / 96
+    )
+    if (verbose) {
+      message("Plot saved to: ", filename, " (via webshot2 PDF)")
+    }
+    return(invisible(filename))
+  }
 
-  # Standard screen DPI for zoom calculation
-  screen_dpi <- 96
+  # ----- PNG EXPORT -----
+  if (ext == "png") {
+    webshot2::webshot(
+      url = temp_html,
+      file = filename,
+      vwidth = vwidth,
+      vheight = vheight,
+      zoom = dpi / 96
+    )
+    if (verbose) {
+      message("Plot saved to: ", filename, " (via webshot2 PNG)")
+    }
+    return(invisible(filename))
+  }
 
-  # Use webshot to capture the rendered HTML
-  # selector ".grViz" targets the specific DiagrammeR grViz container
-  webshot::webshot(
-    url = temp_html,
-    file = temp_png,
-    vwidth = vwidth,
-    vheight = vheight,
-    selector = ".grViz",
-    expand = c(10, 10, 10, 10), # 10px padding on each side for cleaner edges
-    zoom = dpi / screen_dpi # Scale for higher DPI output (e.g., 300/96 ≈ 3.125x)
-  )
-
-  # JPEG quality setting (0-100, higher = better quality but larger file)
-  jpeg_quality <- 95
-
-  # Convert to JPG if needed
+  # ----- JPEG EXPORT -----
   if (ext %in% c("jpg", "jpeg")) {
-    insight::check_if_installed("png", reason = "to convert PNG to JPEG.")
+    temp_png <- tempfile(fileext = ".png")
+    on.exit(unlink(temp_png, force = TRUE), add = TRUE)
 
-    # Read PNG and save as JPEG
+    # First capture PNG
+    webshot2::webshot(
+      url = temp_html,
+      file = temp_png,
+      vwidth = vwidth,
+      vheight = vheight,
+      zoom = dpi / 96
+    )
+
+    insight::check_if_installed("png", reason = "to convert PNG to JPEG.")
     img <- png::readPNG(temp_png)
-    img_height <- dim(img)[1]
-    img_width <- dim(img)[2]
 
     grDevices::jpeg(
       filename = filename,
-      width = img_width,
-      height = img_height,
+      width = dim(img)[2],
+      height = dim(img)[1],
       units = "px",
-      quality = jpeg_quality
+      quality = 95
     )
-
-    grid::grid.newpage()
-    grid::grid.raster(
-      img,
-      x = 0.5,
-      y = 0.5,
-      width = 1,
-      height = 1,
-      interpolate = TRUE
-    )
-
+    grid::grid.raster(img)
     grDevices::dev.off()
-  } else {
-    # For PNG, just copy the temp file
-    file.copy(temp_png, filename, overwrite = TRUE)
+
+    if (verbose) {
+      message("Plot saved to: ", filename, " (via webshot2 JPEG)")
+    }
+    return(invisible(filename))
   }
 
-  if (verbose) {
-    message("Plot saved to: ", filename, " (using webshot engine)")
-  }
-
-  invisible(filename)
+  stop("Unsupported format for webshot2 export: ", ext)
 }
