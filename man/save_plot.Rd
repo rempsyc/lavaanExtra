@@ -11,7 +11,7 @@ save_plot(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
-  engine = c("rsvg", "webshot"),
+  engine = c("webshot", "rsvg"),
   verbose = TRUE,
   ...
 )

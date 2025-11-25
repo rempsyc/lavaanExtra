@@ -99,7 +99,7 @@ save_plot <- function(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
-  engine = c("rsvg", "webshot"),
+  engine = c("webshot", "rsvg"),
   verbose = TRUE,
   ...
 ) {
@@ -152,7 +152,14 @@ save_plot <- function(
 
     # Use webshot engine for pixel-perfect browser rendering (PNG/JPG only)
     if (engine == "webshot" && ext %in% c("png", "jpg", "jpeg")) {
-      return(save_with_webshot(plot, filename, width_px, height_px, dpi, verbose))
+      return(save_with_webshot(
+        plot,
+        filename,
+        width_px,
+        height_px,
+        dpi,
+        verbose
+      ))
     }
 
     # Use rsvg engine (default)
@@ -349,10 +356,13 @@ save_with_webshot <- function(
   temp_html <- tempfile(fileext = ".html")
   temp_png <- tempfile(fileext = ".png")
 
-  on.exit({
-    unlink(temp_html, force = TRUE)
-    unlink(temp_png, force = TRUE)
-  }, add = TRUE)
+  on.exit(
+    {
+      unlink(temp_html, force = TRUE)
+      unlink(temp_png, force = TRUE)
+    },
+    add = TRUE
+  )
 
   # Save the htmlwidget to HTML
   htmlwidgets::saveWidget(
