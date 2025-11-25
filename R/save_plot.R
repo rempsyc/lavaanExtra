@@ -358,7 +358,7 @@ save_with_webshot2 <- function(
 ) {
   ext <- tolower(tools::file_ext(filename))
 
-  # SVG doesn't need webshot2 - return FALSE to let main function handle it via rsvg
+  # SVG doesn't need webshot2 - return NULL to let main function handle it via rsvg
   if (ext == "svg") {
     return(NULL)
   }
@@ -372,16 +372,41 @@ save_with_webshot2 <- function(
   temp_html <- tempfile(fileext = ".html")
   on.exit(unlink(temp_html, force = TRUE), add = TRUE)
 
-  # Save widget as HTML
+  # Save widget as HTML with inline CSS to collapse page margins
+  # and shrink-wrap the widget (prevents huge white margins)
   htmlwidgets::saveWidget(
     widget = plot,
     file = temp_html,
     selfcontained = TRUE
   )
 
+  # Inject CSS to collapse body margins and shrink-wrap the widget
+  # This prevents the huge white margins around the graph
+  html_content <- readLines(temp_html, warn = FALSE)
+  css_inject <- paste0(
+    "<style>",
+    "html, body { margin: 0 !important; padding: 0 !important; ",
+    "width: auto !important; height: auto !important; overflow: hidden !important; }",
+    ".html-widget { display: inline-block !important; }",
+    "</style>"
+  )
+  # Insert CSS right after <head> tag
+  html_content <- gsub(
+    "(<head[^>]*>)",
+    paste0("\\1\n", css_inject),
+    html_content,
+    ignore.case = TRUE
+  )
+  writeLines(html_content, temp_html)
+
   # Compute viewport size for webshot2
+  # Use reasonable defaults that are large enough for most plots
   vwidth <- if (!is.null(width_px)) as.integer(width_px) else 1200L
   vheight <- if (!is.null(height_px)) as.integer(height_px) else 1800L
+
+  # Use selector to capture only the widget, not the whole page
+  # This crops to just the graph content
+  widget_selector <- "div.html-widget"
 
   # ----- PDF EXPORT (vector accurate) -----
   if (ext == "pdf") {
@@ -390,6 +415,7 @@ save_with_webshot2 <- function(
       file = filename,
       vwidth = vwidth,
       vheight = vheight,
+      selector = widget_selector,
       zoom = dpi / 96
     )
     if (verbose) {
@@ -405,6 +431,7 @@ save_with_webshot2 <- function(
       file = filename,
       vwidth = vwidth,
       vheight = vheight,
+      selector = widget_selector,
       zoom = dpi / 96
     )
     if (verbose) {
@@ -418,12 +445,13 @@ save_with_webshot2 <- function(
     temp_png <- tempfile(fileext = ".png")
     on.exit(unlink(temp_png, force = TRUE), add = TRUE)
 
-    # First capture PNG
+    # First capture PNG with selector
     webshot2::webshot(
       url = temp_html,
       file = temp_png,
       vwidth = vwidth,
       vheight = vheight,
+      selector = widget_selector,
       zoom = dpi / 96
     )
 
