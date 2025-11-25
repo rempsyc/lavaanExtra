@@ -428,50 +428,33 @@ save_with_webshot2 <- function(
   # Use selector to capture only the widget, not the whole page
   widget_selector <- "div.html-widget"
 
-  # ----- PDF EXPORT (vector accurate) -----
+  # ----- PDF EXPORT (vector-based with exact page size) -----
   if (ext == "pdf") {
-    # For PDF: capture as PNG first, then convert to PDF with tight cropping
-    # This avoids webshot2's default PDF page size issues
-    temp_png <- tempfile(fileext = ".png")
-    on.exit(unlink(temp_png, force = TRUE), add = TRUE)
+    # Convert SVG dimensions to inches for Chromium PDF (1 pt ≈ 1/72 inch)
+    paper_w_in <- svg_w / 72
+    paper_h_in <- svg_h / 72
     
-    # Capture PNG with selector for tight cropping
+    # Use webshot2 with pdf_options to set exact page size matching SVG
     webshot2::webshot(
       url = temp_html,
-      file = temp_png,
+      file = filename,
       vwidth = vwidth,
       vheight = vheight,
       selector = widget_selector,
-      zoom = dpi / 96
+      zoom = dpi / 96,
+      pdf_options = list(
+        paperWidth = paper_w_in,
+        paperHeight = paper_h_in,
+        marginTop = 0,
+        marginBottom = 0,
+        marginLeft = 0,
+        marginRight = 0,
+        printBackground = TRUE
+      )
     )
-    
-    # Convert PNG to PDF using rsvg (preserves dimensions)
-    insight::check_if_installed("png", reason = "to convert PNG to PDF.")
-    img <- png::readPNG(temp_png)
-    
-    # Get actual image dimensions
-    img_height <- dim(img)[1]
-    img_width <- dim(img)[2]
-    
-    # Create PDF with exact dimensions matching the cropped PNG
-    grDevices::pdf(
-      file = filename,
-      width = img_width / dpi,
-      height = img_height / dpi
-    )
-    grid::grid.newpage()
-    grid::grid.raster(
-      img,
-      x = 0.5,
-      y = 0.5,
-      width = 1,
-      height = 1,
-      interpolate = TRUE
-    )
-    grDevices::dev.off()
     
     if (verbose) {
-      message("Plot saved to: ", filename, " (via webshot2 PDF)")
+      message("Plot saved to: ", filename, " (vector PDF via webshot2 with exact page size)")
     }
     return(invisible(filename))
   }
