@@ -11,6 +11,7 @@ save_plot(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
+  engine = c("rsvg", "webshot"),
   verbose = TRUE,
   ...
 )
@@ -40,6 +41,13 @@ pixels using the \code{dpi} parameter.}
 Defaults to 300. Used for unit conversion for grViz objects and passed to
 \code{ggplot2::ggsave()} for ggplot objects.}
 
+\item{engine}{Rendering engine for grViz objects. One of "rsvg" (default) or "webshot".
+"rsvg" uses the rsvg library to render SVG to PNG/JPG/PDF, but may have
+font rendering differences compared to browser display due to font substitution.
+"webshot" uses a headless browser (PhantomJS) to capture pixel-perfect
+screenshots that match exactly what you see in the RStudio viewer.
+Use "webshot" when precise font rendering is critical.}
+
 \item{verbose}{Logical. If \code{TRUE} (default), prints a message indicating where the file
 was saved. Set to \code{FALSE} to suppress messages.}
 
@@ -68,6 +76,15 @@ guessing dimensions inconsistently across formats.
 \item For JPG: SVG is rendered to raster array using \code{rsvg::rsvg()} and saved with \code{grDevices::jpeg()}
 \item For PDF: SVG is rendered to PDF using \code{rsvg::rsvg_pdf()}
 \item For SVG: The SVG string is saved directly to file
+}
+
+When \code{engine = "webshot"}:
+\itemize{
+\item Uses a headless browser (PhantomJS via webshot package) to render the SVG
+\item Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
+\item Avoids font substitution issues that can cause text misalignment with rsvg
+\item Requires the webshot package and PhantomJS (\code{webshot::install_phantomjs()})
+\item Only supports PNG and JPG formats; for PDF, falls back to rsvg
 }
 
 For plots from \code{nice_tidySEM()} (ggplot objects):

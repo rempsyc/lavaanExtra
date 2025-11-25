@@ -22,6 +22,12 @@
 #' @param dpi Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
 #'            Defaults to 300. Used for unit conversion for grViz objects and passed to
 #'            `ggplot2::ggsave()` for ggplot objects.
+#' @param engine Rendering engine for grViz objects. One of "rsvg" (default) or "webshot".
+#'               "rsvg" uses the rsvg library to render SVG to PNG/JPG/PDF, but may have
+#'               font rendering differences compared to browser display due to font substitution.
+#'               "webshot" uses a headless browser (PhantomJS) to capture pixel-perfect
+#'               screenshots that match exactly what you see in the RStudio viewer.
+#'               Use "webshot" when precise font rendering is critical.
 #' @param verbose Logical. If `TRUE` (default), prints a message indicating where the file
 #'                was saved. Set to `FALSE` to suppress messages.
 #' @param ... Additional arguments passed to the underlying save functions
@@ -39,6 +45,13 @@
 #' - For JPG: SVG is rendered to raster array using `rsvg::rsvg()` and saved with `grDevices::jpeg()`
 #' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
 #' - For SVG: The SVG string is saved directly to file
+#'
+#' When `engine = "webshot"`:
+#' - Uses a headless browser (PhantomJS via webshot package) to render the SVG
+#' - Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
+#' - Avoids font substitution issues that can cause text misalignment with rsvg
+#' - Requires the webshot package and PhantomJS (`webshot::install_phantomjs()`)
+#' - Only supports PNG and JPG formats; for PDF, falls back to rsvg
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
 #' - The plot is saved using `ggplot2::ggsave()` with the specified format and units
@@ -86,11 +99,13 @@ save_plot <- function(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
+  engine = c("rsvg", "webshot"),
   verbose = TRUE,
   ...
 ) {
   # Match units argument
   units <- match.arg(units)
+  engine <- match.arg(engine)
   # Determine file format from extension
   ext <- tolower(tools::file_ext(filename))
 
@@ -131,14 +146,20 @@ save_plot <- function(
 
   # Handle grViz objects (from nice_lavaanPlot)
   if (is_grViz) {
+    # Convert dimensions to pixels for grViz objects
+    width_px <- convert_to_pixels(width, units, dpi)
+    height_px <- convert_to_pixels(height, units, dpi)
+
+    # Use webshot engine for pixel-perfect browser rendering (PNG/JPG only)
+    if (engine == "webshot" && ext %in% c("png", "jpg", "jpeg")) {
+      return(save_with_webshot(plot, filename, width_px, height_px, dpi, verbose))
+    }
+
+    # Use rsvg engine (default)
     insight::check_if_installed(
       c("DiagrammeRsvg", "rsvg"),
       reason = "to save grViz/lavaanPlot objects."
     )
-
-    # Convert dimensions to pixels for grViz objects
-    width_px <- convert_to_pixels(width, units, dpi)
-    height_px <- convert_to_pixels(height, units, dpi)
 
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
@@ -309,4 +330,94 @@ add_svg_padding <- function(
   }
 
   as.character(doc)
+}
+
+# Helper: save grViz plot using webshot (browser-based pixel-perfect rendering)
+save_with_webshot <- function(
+  plot,
+  filename,
+  width_px = NULL,
+  height_px = NULL,
+  dpi = 300,
+  verbose = TRUE
+) {
+  insight::check_if_installed(
+    c("webshot", "htmlwidgets"),
+    reason = "to save plots using webshot engine (browser-based rendering)."
+  )
+
+  # Create a temporary HTML file to render the widget
+  temp_html <- tempfile(fileext = ".html")
+  temp_png <- tempfile(fileext = ".png")
+
+  on.exit({
+    unlink(temp_html, force = TRUE)
+    unlink(temp_png, force = TRUE)
+  }, add = TRUE)
+
+  # Save the htmlwidget to HTML
+  htmlwidgets::saveWidget(
+    widget = plot,
+    file = temp_html,
+    selfcontained = TRUE
+  )
+
+  # Calculate viewport size for webshot
+  # If dimensions not specified, use reasonable defaults
+  vwidth <- if (!is.null(width_px)) as.integer(width_px) else 992L
+  vheight <- if (!is.null(height_px)) as.integer(height_px) else 744L
+
+  # Determine output format
+  ext <- tolower(tools::file_ext(filename))
+
+  # Use webshot to capture the rendered HTML
+  # selector = NULL captures the entire page; we'll let the widget fill the viewport
+  webshot::webshot(
+    url = temp_html,
+    file = temp_png,
+    vwidth = vwidth,
+    vheight = vheight,
+    selector = ".grViz",
+    expand = c(10, 10, 10, 10), # Add small padding around the captured element
+    zoom = dpi / 96 # Scale for higher DPI output
+  )
+
+  # Convert to JPG if needed
+  if (ext %in% c("jpg", "jpeg")) {
+    insight::check_if_installed("png", reason = "to convert PNG to JPEG.")
+
+    # Read PNG and save as JPEG
+    img <- png::readPNG(temp_png)
+    img_height <- dim(img)[1]
+    img_width <- dim(img)[2]
+
+    grDevices::jpeg(
+      filename = filename,
+      width = img_width,
+      height = img_height,
+      units = "px",
+      quality = 95
+    )
+
+    grid::grid.newpage()
+    grid::grid.raster(
+      img,
+      x = 0.5,
+      y = 0.5,
+      width = 1,
+      height = 1,
+      interpolate = TRUE
+    )
+
+    grDevices::dev.off()
+  } else {
+    # For PNG, just copy the temp file
+    file.copy(temp_png, filename, overwrite = TRUE)
+  }
+
+  if (verbose) {
+    message("Plot saved to: ", filename, " (using webshot engine)")
+  }
+
+  invisible(filename)
 }
