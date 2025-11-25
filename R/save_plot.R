@@ -364,30 +364,51 @@ save_with_webshot2 <- function(
   }
 
   insight::check_if_installed(
-    c("webshot2", "htmlwidgets"),
+    c("webshot2", "htmlwidgets", "DiagrammeRsvg", "xml2"),
     reason = "to export grViz plots using browser-based rendering."
   )
+
+  # --- Extract SVG dimensions from Graphviz (uses viz.js, no librsvg font issues) ---
+  svg_str <- DiagrammeRsvg::export_svg(plot)
+  doc <- xml2::read_xml(svg_str)
+
+  # Get dimensions from viewBox or width/height attributes
+  vb <- xml2::xml_attr(doc, "viewBox")
+  if (!is.na(vb)) {
+    nums <- as.numeric(strsplit(vb, "\\s+")[[1]])
+    svg_w <- nums[3]
+    svg_h <- nums[4]
+  } else {
+    w_attr <- xml2::xml_attr(doc, "width")
+    h_attr <- xml2::xml_attr(doc, "height")
+    svg_w <- as.numeric(gsub("[^0-9.]", "", w_attr))
+    svg_h <- as.numeric(gsub("[^0-9.]", "", h_attr))
+  }
+
+  # Convert from SVG units to CSS pixels (approximate conversion for viewport)
+  # SVG units are roughly 96 DPI, CSS px are 96 DPI, so factor ~1.0–1.2 works
+  svg_w_px <- as.integer(svg_w * 1.1)  # Add 10% buffer for safety
+  svg_h_px <- as.integer(svg_h * 1.1)
 
   # Temporary HTML file
   temp_html <- tempfile(fileext = ".html")
   on.exit(unlink(temp_html, force = TRUE), add = TRUE)
 
-  # Save widget as HTML with inline CSS to collapse page margins
-  # and shrink-wrap the widget (prevents huge white margins)
+  # Save widget as HTML
   htmlwidgets::saveWidget(
     widget = plot,
     file = temp_html,
     selfcontained = TRUE
   )
 
-  # Inject CSS to collapse body margins and shrink-wrap the widget
-  # This prevents the huge white margins around the graph
+  # Inject CSS to collapse page margins and force widget to shrink-wrap SVG
   html_content <- readLines(temp_html, warn = FALSE)
   css_inject <- paste0(
     "<style>",
     "html, body { margin: 0 !important; padding: 0 !important; ",
     "width: auto !important; height: auto !important; overflow: hidden !important; }",
-    ".html-widget { display: inline-block !important; }",
+    ".html-widget { display: inline-block !important; width: auto !important; height: auto !important; }",
+    ".html-widget svg { display: block !important; }",
     "</style>"
   )
   # Insert CSS right after <head> tag
@@ -399,13 +420,12 @@ save_with_webshot2 <- function(
   )
   writeLines(html_content, temp_html)
 
-  # Compute viewport size for webshot2
-  # Use reasonable defaults that are large enough for most plots
-  vwidth <- if (!is.null(width_px)) as.integer(width_px) else 1200L
-  vheight <- if (!is.null(height_px)) as.integer(height_px) else 1800L
+  # Set viewport dimensions based on SVG size (with buffer)
+  # Use user-specified dimensions if provided, otherwise use SVG-derived dimensions
+  vwidth <- if (!is.null(width_px)) as.integer(width_px) else svg_w_px
+  vheight <- if (!is.null(height_px)) as.integer(height_px) else svg_h_px
 
   # Use selector to capture only the widget, not the whole page
-  # This crops to just the graph content
   widget_selector <- "div.html-widget"
 
   # ----- PDF EXPORT (vector accurate) -----
