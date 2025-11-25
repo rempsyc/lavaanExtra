@@ -6,11 +6,12 @@
 * `nice_lavaanPlot()`: Fixed title centering in all output formats (PNG, JPG, PDF, SVG) by:
   - Adding Graphviz centering attributes (ALIGN="CENTER", BALIGN="CENTER", labeljust="c", center="true")
   - Refactoring to use `lavaanPlot:::buildCall()` + `DiagrammeR::grViz()` for direct control over DOT diagram generation
-* `save_plot()`: Added `engine` parameter with options "rsvg" (default) or "webshot":
-  - "rsvg" uses librsvg for SVG rendering (fast, may have font substitution differences)
-  - "webshot" uses a headless browser (PhantomJS) for pixel-perfect rendering that matches RStudio viewer exactly
-  - Use `engine = "webshot"` when precise font rendering is critical (avoids librsvg font substitution issues)
-* `save_plot()`: Disabled `add_svg_padding()` which was shifting viewBox and breaking centering in exported plots
+* `save_plot()`: Added `use_webshot` parameter (default `TRUE`) for browser-based rendering:
+  - When `TRUE`, uses webshot2 package (headless Chrome via chromote) for pixel-perfect rendering that matches RStudio viewer exactly
+  - Avoids librsvg font substitution issues (Helvetica → DejaVu Sans) that cause text misalignment
+  - Supports PNG, JPG, and PDF formats; SVG uses rsvg directly
+  - Set `use_webshot = FALSE` to use rsvg rendering instead (faster but may have font differences)
+* `save_plot()`: Re-enabled `add_svg_padding()` with horizontal-only padding to provide margin around plot content
 
 ## lavaanExtra 0.2.2.4
 * Add `save_plot()` function to export/save plots from `nice_lavaanPlot()` and `nice_tidySEM()` with multiple format options (PNG, PDF, SVG, JPG)

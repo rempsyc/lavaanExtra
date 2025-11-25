@@ -22,12 +22,12 @@
 #' @param dpi Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
 #'            Defaults to 300. Used for unit conversion for grViz objects and passed to
 #'            `ggplot2::ggsave()` for ggplot objects.
-#' @param engine Rendering engine for grViz objects. One of "rsvg" (default) or "webshot".
-#'               "rsvg" uses the rsvg library to render SVG to PNG/JPG/PDF, but may have
-#'               font rendering differences compared to browser display due to font substitution.
-#'               "webshot" uses a headless browser (PhantomJS) to capture pixel-perfect
-#'               screenshots that match exactly what you see in the RStudio viewer.
-#'               Use "webshot" when precise font rendering is critical.
+#' @param use_webshot Logical. If `TRUE` (default), uses browser-based rendering via
+#'               webshot2 package (headless Chrome) for pixel-perfect screenshots that match
+#'               exactly what you see in the RStudio viewer. This avoids font substitution
+#'               issues that can cause text misalignment with librsvg.
+#'               If `FALSE`, uses rsvg library to render SVG to PNG/JPG/PDF, which may have
+#'               font rendering differences compared to browser display.
 #' @param verbose Logical. If `TRUE` (default), prints a message indicating where the file
 #'                was saved. Set to `FALSE` to suppress messages.
 #' @param ... Additional arguments passed to the underlying save functions
@@ -46,12 +46,16 @@
 #' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
 #' - For SVG: The SVG string is saved directly to file
 #'
-#' When `engine = "webshot"`:
-#' - Uses a headless browser (PhantomJS via webshot package) to render the SVG
+#' When `use_webshot = TRUE` (default):
+#' - Uses a headless browser (Chrome via webshot2/chromote) to render the SVG
 #' - Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
 #' - Avoids font substitution issues that can cause text misalignment with rsvg
-#' - Requires the webshot package and PhantomJS (`webshot::install_phantomjs()`)
-#' - Only supports PNG and JPG formats; for PDF, falls back to rsvg
+#' - Requires the webshot2 package (`install.packages("webshot2")`)
+#' - Supports PNG, JPG, and PDF formats
+#'
+#' When `use_webshot = FALSE`:
+#' - Uses rsvg library for SVG rendering (faster but may have font differences)
+#' - May experience font substitution (e.g., Helvetica → DejaVu Sans) causing text misalignment
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
 #' - The plot is saved using `ggplot2::ggsave()` with the specified format and units
@@ -99,13 +103,12 @@ save_plot <- function(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
-  engine = c("webshot", "rsvg"),
+  use_webshot = TRUE,
   verbose = TRUE,
   ...
 ) {
   # Match units argument
   units <- match.arg(units)
-  engine <- match.arg(engine)
   # Determine file format from extension
   ext <- tolower(tools::file_ext(filename))
 
@@ -150,19 +153,25 @@ save_plot <- function(
     width_px <- convert_to_pixels(width, units, dpi)
     height_px <- convert_to_pixels(height, units, dpi)
 
-    # Use webshot engine for pixel-perfect browser rendering (PNG/JPG only)
-    if (engine == "webshot" && ext %in% c("png", "jpg", "jpeg")) {
-      return(save_with_webshot2(
+    # Use webshot2 engine for pixel-perfect browser rendering (default)
+    # Returns NULL for SVG format which doesn't need webshot2
+    if (isTRUE(use_webshot)) {
+      result <- save_with_webshot2(
         plot,
         filename,
         width_px,
         height_px,
         dpi,
         verbose
-      ))
+      )
+      # If webshot2 handled the file, we're done
+      if (!is.null(result)) {
+        return(result)
+      }
+      # Otherwise fall through to rsvg handling (for SVG format)
     }
 
-    # Use rsvg engine (default)
+    # Use rsvg engine (fallback or when use_webshot = FALSE)
     insight::check_if_installed(
       c("DiagrammeRsvg", "rsvg"),
       reason = "to save grViz/lavaanPlot objects."
@@ -338,7 +347,7 @@ add_svg_padding <- function(
   as.character(doc)
 }
 
-# Helper: save grViz plot using webshot (browser-based pixel-perfect rendering)
+# Helper: save grViz plot using webshot2 (browser-based pixel-perfect rendering)
 save_with_webshot2 <- function(
   plot,
   filename,
@@ -347,12 +356,17 @@ save_with_webshot2 <- function(
   dpi = 300,
   verbose = TRUE
 ) {
+  ext <- tolower(tools::file_ext(filename))
+
+  # SVG doesn't need webshot2 - return FALSE to let main function handle it via rsvg
+  if (ext == "svg") {
+    return(NULL)
+  }
+
   insight::check_if_installed(
     c("webshot2", "htmlwidgets"),
     reason = "to export grViz plots using browser-based rendering."
   )
-
-  ext <- tolower(tools::file_ext(filename))
 
   # Temporary HTML file
   temp_html <- tempfile(fileext = ".html")
