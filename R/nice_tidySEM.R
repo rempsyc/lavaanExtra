@@ -69,25 +69,27 @@
 #' # Save plot to file
 #' \dontrun{
 #' plot <- nice_tidySEM(fit, layout = structure)
-#' save_plot(plot, "my_plot.png")    # PNG format
-#' save_plot(plot, "my_plot.pdf")    # PDF format
+#' save_plot(plot, "my_plot.png") # PNG format
+#' save_plot(plot, "my_plot.pdf") # PDF format
 #' }
 #' @section Illustrations:
 #'
 #' \if{html}{\figure{nice_tidySEM.png}{options: width="400"}}
 
-nice_tidySEM <- function(fit,
-                         layout = NULL,
-                         hide_nonsig_edges = FALSE,
-                         hide_var = TRUE,
-                         hide_cov = FALSE,
-                         hide_mean = TRUE,
-                         est_std = TRUE,
-                         label,
-                         label_location = NULL,
-                         reduce_items = NULL,
-                         plot = TRUE,
-                         ...) {
+nice_tidySEM <- function(
+  fit,
+  layout = NULL,
+  hide_nonsig_edges = FALSE,
+  hide_var = TRUE,
+  hide_cov = FALSE,
+  hide_mean = TRUE,
+  est_std = TRUE,
+  label,
+  label_location = NULL,
+  reduce_items = NULL,
+  plot = TRUE,
+  ...
+) {
   insight::check_if_installed(c("tidySEM", "tmvnsim"))
 
   # We are forced to reimport some tidySEM functions manually here...
@@ -101,7 +103,10 @@ nice_tidySEM <- function(fit,
 
   # Function starts here
   structure <- layout
-  if (all(c("IV", "M", "DV") %in% names(structure)) && length(names(structure)) == 3) {
+  if (
+    all(c("IV", "M", "DV") %in% names(structure)) &&
+      length(names(structure)) == 3
+  ) {
     sx <- function(x) {
       rep("", x)
     }

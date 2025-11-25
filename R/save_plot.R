@@ -387,7 +387,7 @@ save_with_webshot2 <- function(
 
   # Convert from SVG units to CSS pixels (approximate conversion for viewport)
   # SVG units are roughly 96 DPI, CSS px are 96 DPI, so factor ~1.0–1.2 works
-  svg_w_px <- as.integer(svg_w * 1.1)  # Add 10% buffer for safety
+  svg_w_px <- as.integer(svg_w * 1.1) # Add 10% buffer for safety
   svg_h_px <- as.integer(svg_h * 1.1)
 
   # Temporary HTML file
