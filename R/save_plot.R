@@ -164,8 +164,7 @@ save_plot <- function(
     # Convert to SVG first
     svg_string <- DiagrammeRsvg::export_svg(plot)
 
-    # NOTE: Padding disabled - Graphviz centering attributes handle layout correctly
-    # Adding padding was shifting the viewBox and breaking centering
+    # Add horizontal padding to provide margin around the plot content
     svg_string <- add_svg_padding(svg_string, padding_pct = 0.10)
 
     if (ext == "svg") {
@@ -363,24 +362,31 @@ save_with_webshot <- function(
   )
 
   # Calculate viewport size for webshot
-  # If dimensions not specified, use reasonable defaults
+  # Default viewport: 992x744 is a reasonable size that accommodates most plots
+  # without excessive whitespace (roughly 10.3"x7.75" at 96 DPI, 4:3 aspect ratio)
   vwidth <- if (!is.null(width_px)) as.integer(width_px) else 992L
   vheight <- if (!is.null(height_px)) as.integer(height_px) else 744L
 
   # Determine output format
   ext <- tolower(tools::file_ext(filename))
 
+  # Standard screen DPI for zoom calculation
+  screen_dpi <- 96
+
   # Use webshot to capture the rendered HTML
-  # selector = NULL captures the entire page; we'll let the widget fill the viewport
+  # selector ".grViz" targets the specific DiagrammeR grViz container
   webshot::webshot(
     url = temp_html,
     file = temp_png,
     vwidth = vwidth,
     vheight = vheight,
     selector = ".grViz",
-    expand = c(10, 10, 10, 10), # Add small padding around the captured element
-    zoom = dpi / 96 # Scale for higher DPI output
+    expand = c(10, 10, 10, 10), # 10px padding on each side for cleaner edges
+    zoom = dpi / screen_dpi # Scale for higher DPI output (e.g., 300/96 ≈ 3.125x)
   )
+
+  # JPEG quality setting (0-100, higher = better quality but larger file)
+  jpeg_quality <- 95
 
   # Convert to JPG if needed
   if (ext %in% c("jpg", "jpeg")) {
@@ -396,7 +402,7 @@ save_with_webshot <- function(
       width = img_width,
       height = img_height,
       units = "px",
-      quality = 95
+      quality = jpeg_quality
     )
 
     grid::grid.newpage()
