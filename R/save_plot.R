@@ -162,7 +162,7 @@ save_plot <- function(
         width_px,
         height_px,
         dpi,
-        verbose
+        verbose = verbose
       )
       # If webshot2 handled the file, we're done
       if (!is.null(result)) {
@@ -428,38 +428,45 @@ save_with_webshot2 <- function(
   # Use selector to capture only the widget, not the whole page
   widget_selector <- "div.html-widget"
 
-  # ----- PDF EXPORT (vector-based with exact page size) -----
+  # ----- PDF EXPORT (true vector, tight crop using SVG viewBox) -----
   if (ext == "pdf") {
-    # Convert SVG dimensions to inches for Chromium PDF (1 pt ≈ 1/72 inch)
-    paper_w_in <- svg_w / 72
-    paper_h_in <- svg_h / 72
+    insight::check_if_installed(
+      c("DiagrammeRsvg", "xml2", "rsvg"),
+      reason = "to export grViz/lavaanPlot objects as vector PDFs."
+    )
 
-    # Use webshot2 with pdf_options to set exact page size matching SVG
-    webshot2::webshot(
-      url = temp_html,
+    # 1) Convert widget to raw SVG
+    svg_txt <- DiagrammeRsvg::export_svg(plot)
+
+    # 2) Extract viewBox geometry
+    doc <- xml2::read_xml(svg_txt)
+    vb <- xml2::xml_attr(doc, "viewBox")
+    vb_vals <- as.numeric(strsplit(vb, " +")[[1]])
+
+    if (length(vb_vals) != 4 || any(is.na(vb_vals))) {
+      stop("SVG viewBox not found or invalid — cannot compute vector PDF size.")
+    }
+
+    # viewBox = x y width height
+    svg_w <- vb_vals[3] # Graphviz width in pt-ish units
+    svg_h <- vb_vals[4]
+
+    # 3) Direct vector PDF write — **no PDF device**, no webshot
+    rsvg::rsvg_pdf(
+      charToRaw(svg_txt),
       file = filename,
-      vwidth = vwidth,
-      vheight = vheight,
-      selector = widget_selector,
-      zoom = dpi / 96,
-      pdf_options = list(
-        paperWidth = paper_w_in,
-        paperHeight = paper_h_in,
-        marginTop = 0,
-        marginBottom = 0,
-        marginLeft = 0,
-        marginRight = 0,
-        printBackground = TRUE
-      )
+      width = svg_w,
+      height = svg_h * 0.9
     )
 
     if (verbose) {
       message(
         "Plot saved to: ",
         filename,
-        " (vector PDF via webshot2 with exact page size)"
+        " (vector PDF via SVG viewBox; perfectly cropped)"
       )
     }
+
     return(invisible(filename))
   }
 
