@@ -21,6 +21,7 @@ Suggests:
     rempsyc (> 0.1.6),
     flextable,
     lavaanPlot,
+    DiagrammeR,
     DiagrammeRsvg,
     rsvg,
     ggplot2,

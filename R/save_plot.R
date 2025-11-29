@@ -511,6 +511,7 @@ save_with_webshot2 <- function(
       units = "px",
       quality = 95
     )
+    grid::grid.newpage()
     grid::grid.raster(img)
     grDevices::dev.off()
 

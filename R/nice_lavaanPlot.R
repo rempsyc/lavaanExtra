@@ -131,7 +131,8 @@ nice_lavaanPlot <- function(
   insight::check_if_installed(
     c(
       "lavaanPlot",
-      "DiagrammeRsvg"
+      "DiagrammeRsvg",
+      "DiagrammeR"
     ),
     reason = "for this function."
   )
@@ -390,11 +391,7 @@ nice_lavaanPlot <- function(
     graph_options$center <- "true"
   }
 
-  #  # --- buildCall + grViz backend ------------------------------------------
-  insight::check_if_installed(
-    c("lavaanPlot", "DiagrammeR"),
-    reason = "to create and render SEM/CFA plots."
-  )
+  # --- buildCall + grViz backend ------------------------------------------
 
   # Optional: allow width/height for HTML display (does NOT affect export_svg)
   extra_args <- list(...)
