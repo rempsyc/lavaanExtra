@@ -460,7 +460,9 @@ save_with_webshot2 <- function(
     vb_vals <- as.numeric(strsplit(vb, " +")[[1]])
 
     if (length(vb_vals) != 4 || any(is.na(vb_vals))) {
-      stop("SVG viewBox not found or invalid -- cannot compute vector PDF size.")
+      stop(
+        "SVG viewBox not found or invalid -- cannot compute vector PDF size."
+      )
     }
 
     # viewBox = x y width height

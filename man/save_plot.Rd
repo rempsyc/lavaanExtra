@@ -11,7 +11,7 @@ save_plot(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
-  use_webshot = TRUE,
+  use_webshot = FALSE,
   verbose = TRUE,
   ...
 )
@@ -41,11 +41,11 @@ pixels using the \code{dpi} parameter.}
 Defaults to 300. Used for unit conversion for grViz objects and passed to
 \code{ggplot2::ggsave()} for ggplot objects.}
 
-\item{use_webshot}{Logical. If \code{TRUE} (default), uses browser-based rendering via
+\item{use_webshot}{Logical. If \code{TRUE}, uses browser-based rendering via
 webshot2 package (headless Chrome) for pixel-perfect screenshots that match
 exactly what you see in the RStudio viewer. This avoids font substitution
 issues that can cause text misalignment with librsvg.
-If \code{FALSE}, uses rsvg library to render SVG to PNG/JPG/PDF, which may have
+If \code{FALSE} (default), uses rsvg library to render SVG to PNG/JPG/PDF, which may have
 font rendering differences compared to browser display.}
 
 \item{verbose}{Logical. If \code{TRUE} (default), prints a message indicating where the file
@@ -78,7 +78,7 @@ guessing dimensions inconsistently across formats.
 \item For SVG: The SVG string is saved directly to file
 }
 
-When \code{use_webshot = TRUE} (default):
+When \code{use_webshot = TRUE}:
 \itemize{
 \item Uses a headless browser (Chrome via webshot2/chromote) to render the SVG
 \item Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
@@ -87,7 +87,7 @@ When \code{use_webshot = TRUE} (default):
 \item Supports PNG, JPG, and PDF formats
 }
 
-When \code{use_webshot = FALSE}:
+When \code{use_webshot = FALSE} (default):
 \itemize{
 \item Uses rsvg library for SVG rendering (faster but may have font differences)
 \item May experience font substitution (e.g., Helvetica -> DejaVu Sans) causing text misalignment
