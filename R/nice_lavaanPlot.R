@@ -403,7 +403,8 @@ nice_lavaanPlot <- function(
   }
 
   # Use lavaanPlot's internal buildCall() to generate Graphviz DOT syntax
-  plot_call <- lavaanPlot:::buildCall(
+  buildCall <- utils::getFromNamespace("buildCall", "lavaanPlot")
+  plot_call <- buildCall(
     model = model,
     name = "plot",
     labels = NULL, # let lavaanPlot handle default labeling
