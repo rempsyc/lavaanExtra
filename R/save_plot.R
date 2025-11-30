@@ -22,11 +22,11 @@
 #' @param dpi Dots per inch for converting units to pixels and for raster formats (PNG/JPG).
 #'            Defaults to 300. Used for unit conversion for grViz objects and passed to
 #'            `ggplot2::ggsave()` for ggplot objects.
-#' @param use_webshot Logical. If `TRUE` (default), uses browser-based rendering via
+#' @param use_webshot Logical. If `TRUE`, uses browser-based rendering via
 #'               webshot2 package (headless Chrome) for pixel-perfect screenshots that match
 #'               exactly what you see in the RStudio viewer. This avoids font substitution
 #'               issues that can cause text misalignment with librsvg.
-#'               If `FALSE`, uses rsvg library to render SVG to PNG/JPG/PDF, which may have
+#'               If `FALSE` (default), uses rsvg library to render SVG to PNG/JPG/PDF, which may have
 #'               font rendering differences compared to browser display.
 #' @param verbose Logical. If `TRUE` (default), prints a message indicating where the file
 #'                was saved. Set to `FALSE` to suppress messages.
@@ -46,14 +46,14 @@
 #' - For PDF: SVG is rendered to PDF using `rsvg::rsvg_pdf()`
 #' - For SVG: The SVG string is saved directly to file
 #'
-#' When `use_webshot = TRUE` (default):
+#' When `use_webshot = TRUE`:
 #' - Uses a headless browser (Chrome via webshot2/chromote) to render the SVG
 #' - Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
 #' - Avoids font substitution issues that can cause text misalignment with rsvg
 #' - Requires the webshot2 package (`install.packages("webshot2")`)
 #' - Supports PNG, JPG, and PDF formats
 #'
-#' When `use_webshot = FALSE`:
+#' When `use_webshot = FALSE` (default):
 #' - Uses rsvg library for SVG rendering (faster but may have font differences)
 #' - May experience font substitution (e.g., Helvetica -> DejaVu Sans) causing text misalignment
 #'
@@ -119,7 +119,7 @@ save_plot <- function(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
-  use_webshot = TRUE,
+  use_webshot = FALSE,
   verbose = TRUE,
   ...
 ) {
