@@ -90,7 +90,7 @@ When \code{use_webshot = TRUE} (default):
 When \code{use_webshot = FALSE}:
 \itemize{
 \item Uses rsvg library for SVG rendering (faster but may have font differences)
-\item May experience font substitution (e.g., Helvetica → DejaVu Sans) causing text misalignment
+\item May experience font substitution (e.g., Helvetica -> DejaVu Sans) causing text misalignment
 }
 
 For plots from \code{nice_tidySEM()} (ggplot objects):
@@ -117,21 +117,37 @@ fit <- cfa(HS.model, HolzingerSwineford1939)
 plot <- nice_lavaanPlot(fit)
 
 # Save as PNG (default)
-save_plot(plot, "myplot.png")
+tmp_png <- tempfile(fileext = ".png")
+save_plot(plot, tmp_png)
+unlink(tmp_png)
 
 # Save as PDF (lossless)
-save_plot(plot, "myplot.pdf")
+tmp_pdf <- tempfile(fileext = ".pdf")
+save_plot(plot, tmp_pdf)
+unlink(tmp_pdf)
 
 # Save as SVG (lossless)
-save_plot(plot, "myplot.svg")
+tmp_svg <- tempfile(fileext = ".svg")
+save_plot(plot, tmp_svg)
+unlink(tmp_svg)
 
 # Save as JPG
-save_plot(plot, "myplot.jpg")
+tmp_jpg <- tempfile(fileext = ".jpg")
+save_plot(plot, tmp_jpg)
+unlink(tmp_jpg)
 
 # Custom dimensions with different units
-save_plot(plot, "myplot_large.png", width = 10, height = 7.5, units = "in")
-save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
-save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
+tmp_in <- tempfile(fileext = ".png")
+save_plot(plot, tmp_in, width = 10, height = 7.5, units = "in")
+unlink(tmp_in)
+
+tmp_cm <- tempfile(fileext = ".pdf")
+save_plot(plot, tmp_cm, width = 20, height = 15, units = "cm")
+unlink(tmp_cm)
+
+tmp_px <- tempfile(fileext = ".jpg")
+save_plot(plot, tmp_px, width = 2400, height = 1800, units = "px")
+unlink(tmp_px)
 }
 \dontshow{\}) # examplesIf}
 }
