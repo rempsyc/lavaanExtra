@@ -55,7 +55,7 @@
 #'
 #' When `use_webshot = FALSE`:
 #' - Uses rsvg library for SVG rendering (faster but may have font differences)
-#' - May experience font substitution (e.g., Helvetica → DejaVu Sans) causing text misalignment
+#' - May experience font substitution (e.g., Helvetica -> DejaVu Sans) causing text misalignment
 #'
 #' For plots from `nice_tidySEM()` (ggplot objects):
 #' - The plot is saved using `ggplot2::ggsave()` with the specified format and units
@@ -80,21 +80,37 @@
 #' plot <- nice_lavaanPlot(fit)
 #'
 #' # Save as PNG (default)
-#' save_plot(plot, "myplot.png")
+#' tmp_png <- tempfile(fileext = ".png")
+#' save_plot(plot, tmp_png)
+#' unlink(tmp_png)
 #'
 #' # Save as PDF (lossless)
-#' save_plot(plot, "myplot.pdf")
+#' tmp_pdf <- tempfile(fileext = ".pdf")
+#' save_plot(plot, tmp_pdf)
+#' unlink(tmp_pdf)
 #'
 #' # Save as SVG (lossless)
-#' save_plot(plot, "myplot.svg")
+#' tmp_svg <- tempfile(fileext = ".svg")
+#' save_plot(plot, tmp_svg)
+#' unlink(tmp_svg)
 #'
 #' # Save as JPG
-#' save_plot(plot, "myplot.jpg")
+#' tmp_jpg <- tempfile(fileext = ".jpg")
+#' save_plot(plot, tmp_jpg)
+#' unlink(tmp_jpg)
 #'
 #' # Custom dimensions with different units
-#' save_plot(plot, "myplot_large.png", width = 10, height = 7.5, units = "in")
-#' save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
-#' save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
+#' tmp_in <- tempfile(fileext = ".png")
+#' save_plot(plot, tmp_in, width = 10, height = 7.5, units = "in")
+#' unlink(tmp_in)
+#'
+#' tmp_cm <- tempfile(fileext = ".pdf")
+#' save_plot(plot, tmp_cm, width = 20, height = 15, units = "cm")
+#' unlink(tmp_cm)
+#'
+#' tmp_px <- tempfile(fileext = ".jpg")
+#' save_plot(plot, tmp_px, width = 2400, height = 1800, units = "px")
+#' unlink(tmp_px)
 #' }
 save_plot <- function(
   plot,
@@ -386,7 +402,7 @@ save_with_webshot2 <- function(
   }
 
   # Convert from SVG units to CSS pixels (approximate conversion for viewport)
-  # SVG units are roughly 96 DPI, CSS px are 96 DPI, so factor ~1.0–1.2 works
+  # SVG units are roughly 96 DPI, CSS px are 96 DPI, so factor ~1.0-1.2 works
   svg_w_px <- as.integer(svg_w * 1.1) # Add 10% buffer for safety
   svg_h_px <- as.integer(svg_h * 1.1)
 
@@ -444,14 +460,14 @@ save_with_webshot2 <- function(
     vb_vals <- as.numeric(strsplit(vb, " +")[[1]])
 
     if (length(vb_vals) != 4 || any(is.na(vb_vals))) {
-      stop("SVG viewBox not found or invalid — cannot compute vector PDF size.")
+      stop("SVG viewBox not found or invalid -- cannot compute vector PDF size.")
     }
 
     # viewBox = x y width height
     svg_w <- vb_vals[3] # Graphviz width in pt-ish units
     svg_h <- vb_vals[4]
 
-    # 3) Direct vector PDF write — **no PDF device**, no webshot
+    # 3) Direct vector PDF write -- **no PDF device**, no webshot
     rsvg::rsvg_pdf(
       charToRaw(svg_txt),
       file = filename,
