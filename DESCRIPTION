@@ -1,6 +1,6 @@
 Package: lavaanExtra
 Title: Convenience Functions for Package 'lavaan'
-Version: 0.2.2.4
+Version: 0.2.2.5
 Date: 2025-11-23
 Authors@R: 
     person("Rémi", "Thériault", , "remi.theriault@mail.mcgill.ca", role = c("aut", "cre"),
@@ -21,11 +21,13 @@ Suggests:
     rempsyc (> 0.1.6),
     flextable,
     lavaanPlot,
+    DiagrammeR,
     DiagrammeRsvg,
     rsvg,
     ggplot2,
     png,
-    webshot,
+    webshot2,
+    htmlwidgets,
     tidySEM,
     tmvnsim,
     knitr,

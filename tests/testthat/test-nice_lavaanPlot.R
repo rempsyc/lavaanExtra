@@ -17,9 +17,12 @@ HS.model <- write_lavaan(latent = latent)
 
 fit.cfa <- cfa(HS.model, HolzingerSwineford1939)
 fit.sem <- sem(HS.model, HolzingerSwineford1939)
-fit.lavaan <- lavaan(HS.model, HolzingerSwineford1939,
+fit.lavaan <- lavaan(
+  HS.model,
+  HolzingerSwineford1939,
   auto.var = TRUE,
-  auto.fix.first = TRUE, auto.cov.lv.x = TRUE
+  auto.fix.first = TRUE,
+  auto.cov.lv.x = TRUE
 )
 
 HS.model2 <- write_lavaan(
@@ -29,8 +32,11 @@ HS.model2 <- write_lavaan(
 )
 
 label <- list(
-  ageyr = "Age", speed = "Speed", grade = "Grade",
-  visual = "Visual", textual = "Textual"
+  ageyr = "Age",
+  speed = "Speed",
+  grade = "Grade",
+  visual = "Visual",
+  textual = "Textual"
 )
 
 data <- HolzingerSwineford1939
@@ -141,10 +147,7 @@ test_that("nice_lavaanPlot with specific fit_stats", {
 test_that("nice_lavaanPlot with title and fit_stats", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
-  result <- nice_lavaanPlot(fit.cfa, 
-    title = "CFA Model", 
-    fit_stats = TRUE
-  )
+  result <- nice_lavaanPlot(fit.cfa, title = "CFA Model", fit_stats = TRUE)
   expect_s3_class(result, c("grViz", "htmlwidget"))
   # Check that both title and fit stats are present
   expect_true(grepl("CFA Model", result$x$diagram, fixed = TRUE))
@@ -154,8 +157,9 @@ test_that("nice_lavaanPlot with title and fit_stats", {
 test_that("nice_lavaanPlot with title, note, and fit_stats", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
-  result <- nice_lavaanPlot(fit.cfa, 
-    title = "CFA Model", 
+  result <- nice_lavaanPlot(
+    fit.cfa,
+    title = "CFA Model",
     note = "Test Data",
     fit_stats = TRUE
   )
@@ -182,7 +186,8 @@ test_that("nice_lavaanPlot with multiple fit_stats_type", {
   skip_if_not_installed("DiagrammeRsvg")
   # Fit model with robust estimator to get scaled/robust indices
   fit_robust <- sem(HS.model, HolzingerSwineford1939, estimator = "MLR")
-  result <- nice_lavaanPlot(fit_robust, 
+  result <- nice_lavaanPlot(
+    fit_robust,
     fit_stats = TRUE,
     fit_stats_type = c("regular", "scaled", "robust")
   )
@@ -197,7 +202,8 @@ test_that("nice_lavaanPlot with single fit_stats_type", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
   # With single type, no type label should be added
-  result <- nice_lavaanPlot(fit.cfa, 
+  result <- nice_lavaanPlot(
+    fit.cfa,
     fit_stats = TRUE,
     fit_stats_type = "regular"
   )
@@ -211,7 +217,8 @@ test_that("nice_lavaanPlot with single fit_stats_type", {
 test_that("nice_lavaanPlot with custom font sizes", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
-  result <- nice_lavaanPlot(fit.cfa, 
+  result <- nice_lavaanPlot(
+    fit.cfa,
     title = "Test Title",
     note = "Test Note",
     fit_stats = TRUE,
@@ -229,7 +236,8 @@ test_that("nice_lavaanPlot with custom font sizes", {
 test_that("nice_lavaanPlot with default font sizes", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
-  result <- nice_lavaanPlot(fit.cfa, 
+  result <- nice_lavaanPlot(
+    fit.cfa,
     title = "Test Title",
     note = "Test Note",
     fit_stats = TRUE
@@ -245,10 +253,7 @@ test_that("nice_lavaanPlot with text wrapping", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
   long_title <- "This is a very long title that should be wrapped automatically when it exceeds the specified character width"
-  result <- nice_lavaanPlot(fit.cfa, 
-    title = long_title,
-    wrap_width = 40
-  )
+  result <- nice_lavaanPlot(fit.cfa, title = long_title, wrap_width = 40)
   expect_s3_class(result, c("grViz", "htmlwidget"))
   # Check that HTML break tags are present (indicating wrapping occurred)
   expect_true(grepl("<BR/>", result$x$diagram, fixed = TRUE))
@@ -258,10 +263,7 @@ test_that("nice_lavaanPlot without text wrapping", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
   long_title <- "This is a very long title that should not be wrapped when wrap_width is NULL"
-  result <- nice_lavaanPlot(fit.cfa, 
-    title = long_title,
-    wrap_width = NULL
-  )
+  result <- nice_lavaanPlot(fit.cfa, title = long_title, wrap_width = NULL)
   expect_s3_class(result, c("grViz", "htmlwidget"))
   # Check that no HTML break tags are present in the title
   # (fit_stats might have breaks, but title should not)
@@ -272,25 +274,83 @@ test_that("nice_lavaanPlot wrapping adapts to font size", {
   skip_if_not_installed("lavaanPlot")
   skip_if_not_installed("DiagrammeRsvg")
   long_title <- "This is a very long title for testing font size adaptation in text wrapping"
-  
+
   # Smaller font should allow more characters per line
-  result_small <- nice_lavaanPlot(fit.cfa, 
+  result_small <- nice_lavaanPlot(
+    fit.cfa,
     title = long_title,
     title_size = 10,
     wrap_width = 60
   )
-  
+
   # Larger font should wrap at fewer characters
-  result_large <- nice_lavaanPlot(fit.cfa, 
+  result_large <- nice_lavaanPlot(
+    fit.cfa,
     title = long_title,
     title_size = 20,
     wrap_width = 60
   )
-  
+
   expect_s3_class(result_small, c("grViz", "htmlwidget"))
   expect_s3_class(result_large, c("grViz", "htmlwidget"))
-  
+
   # Both should have breaks, but we just verify they work
   expect_true(grepl("<BR/>", result_small$x$diagram, fixed = TRUE))
   expect_true(grepl("<BR/>", result_large$x$diagram, fixed = TRUE))
+})
+
+test_that("nice_lavaanPlot centers title, note, and fit_stats", {
+  skip_if_not_installed("lavaanPlot")
+  skip_if_not_installed("DiagrammeRsvg")
+
+  # Test title only
+  result_title <- nice_lavaanPlot(fit.cfa, title = "Test Title")
+  expect_s3_class(result_title, c("grViz", "htmlwidget"))
+  expect_true(grepl("ALIGN=\"CENTER\"", result_title$x$diagram, fixed = TRUE))
+  # Check that labeljust is set to center the label horizontally
+  expect_true(grepl("labeljust = c", result_title$x$diagram, fixed = TRUE))
+  # Check that BALIGN centers the table itself
+  expect_true(grepl("BALIGN=\"CENTER\"", result_title$x$diagram, fixed = TRUE))
+  # Check that center=true centers the graph on the page
+  expect_true(grepl("center = true", result_title$x$diagram, fixed = TRUE))
+
+  # Test title and note
+  result_both <- nice_lavaanPlot(
+    fit.cfa,
+    title = "Test Title",
+    note = "Test Note"
+  )
+  expect_s3_class(result_both, c("grViz", "htmlwidget"))
+  # Should have at least 2 occurrences (one for title, one for note)
+  align_count <- length(gregexpr(
+    "ALIGN=\"CENTER\"",
+    result_both$x$diagram,
+    fixed = TRUE
+  )[[1]])
+  expect_gte(align_count, 2)
+  # Check labeljust, BALIGN, and center
+  expect_true(grepl("labeljust = c", result_both$x$diagram, fixed = TRUE))
+  expect_true(grepl("BALIGN=\"CENTER\"", result_both$x$diagram, fixed = TRUE))
+  expect_true(grepl("center = true", result_both$x$diagram, fixed = TRUE))
+
+  # Test title, note, and fit_stats
+  result_all <- nice_lavaanPlot(
+    fit.cfa,
+    title = "Test Title",
+    note = "Test Note",
+    fit_stats = TRUE
+  )
+  expect_s3_class(result_all, c("grViz", "htmlwidget"))
+  # Should have at least 3 occurrences (title, note, and fit_stats lines)
+  # fit_stats generates multiple rows, each with ALIGN="CENTER"
+  align_count_all <- length(gregexpr(
+    "ALIGN=\"CENTER\"",
+    result_all$x$diagram,
+    fixed = TRUE
+  )[[1]])
+  expect_gte(align_count_all, 3)
+  # Check labeljust, BALIGN, and center
+  expect_true(grepl("labeljust = c", result_all$x$diagram, fixed = TRUE))
+  expect_true(grepl("BALIGN=\"CENTER\"", result_all$x$diagram, fixed = TRUE))
+  expect_true(grepl("center = true", result_all$x$diagram, fixed = TRUE))
 })

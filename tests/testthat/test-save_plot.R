@@ -129,13 +129,15 @@ test_that("save_plot respects custom dimensions for nice_lavaanPlot", {
   tmp_file1 <- tempfile(fileext = ".png")
   tmp_file2 <- tempfile(fileext = ".png")
 
+  # Use use_webshot = FALSE to test rsvg path which respects custom dimensions
   save_plot(
     plot,
     tmp_file1,
     width = 800,
     height = 600,
     units = "px",
-    verbose = FALSE
+    verbose = FALSE,
+    use_webshot = FALSE
   )
   save_plot(
     plot,
@@ -143,7 +145,8 @@ test_that("save_plot respects custom dimensions for nice_lavaanPlot", {
     width = 1600,
     height = 1200,
     units = "px",
-    verbose = FALSE
+    verbose = FALSE,
+    use_webshot = FALSE
   )
 
   # Larger dimensions should generally result in larger files

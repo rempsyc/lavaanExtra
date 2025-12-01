@@ -77,13 +77,17 @@
 #'
 #' # With robust estimator showing multiple fit statistic types
 #' fit_robust <- cfa(HS.model, HolzingerSwineford1939, estimator = "MLR")
-#' nice_lavaanPlot(fit_robust, title = "CFA Model", fit_stats = TRUE,
-#'                 fit_stats_type = c("regular", "scaled", "robust"))
+#' nice_lavaanPlot(fit_robust,
+#'   title = "CFA Model", fit_stats = TRUE,
+#'   fit_stats_type = c("regular", "scaled", "robust")
+#' )
 #'
 #' # With custom font sizes (useful for large diagrams)
-#' nice_lavaanPlot(fit, title = "Three-Factor CFA Model",
-#'                 fit_stats = TRUE,
-#'                 title_size = 18, fit_stats_size = 12)
+#' nice_lavaanPlot(fit,
+#'   title = "Three-Factor CFA Model",
+#'   fit_stats = TRUE,
+#'   title_size = 18, fit_stats_size = 12
+#' )
 #'
 #' # With automatic text wrapping for long titles
 #' long_title <- "A Very Long Title That Would Otherwise Be Cut Off When Displayed"
@@ -95,10 +99,10 @@
 #' # Save plot to file
 #' \dontrun{
 #' plot <- nice_lavaanPlot(fit)
-#' save_plot(plot, "my_plot.png")    # PNG format
-#' save_plot(plot, "my_plot.pdf")    # PDF format (lossless)
-#' save_plot(plot, "my_plot.svg")    # SVG format (lossless)
-#' save_plot(plot, "my_plot.jpg")    # JPG format
+#' save_plot(plot, "my_plot.png") # PNG format
+#' save_plot(plot, "my_plot.pdf") # PDF format (lossless)
+#' save_plot(plot, "my_plot.svg") # SVG format (lossless)
+#' save_plot(plot, "my_plot.jpg") # JPG format
 #' }
 #' @section Illustrations:
 #'
@@ -128,9 +132,7 @@ nice_lavaanPlot <- function(
     c(
       "lavaanPlot",
       "DiagrammeRsvg",
-      "rsvg",
-      "png",
-      "webshot"
+      "DiagrammeR"
     ),
     reason = "for this function."
   )
@@ -316,7 +318,7 @@ nice_lavaanPlot <- function(
       html_rows <- c(
         html_rows,
         paste0(
-          "<TR><TD><FONT POINT-SIZE=\"",
+          "<TR><TD ALIGN=\"CENTER\"><FONT POINT-SIZE=\"",
           title_size,
           "\"><B>",
           title_text,
@@ -335,7 +337,7 @@ nice_lavaanPlot <- function(
       html_rows <- c(
         html_rows,
         paste0(
-          "<TR><TD><FONT POINT-SIZE=\"",
+          "<TR><TD ALIGN=\"CENTER\"><FONT POINT-SIZE=\"",
           note_size,
           "\">",
           note_text,
@@ -363,7 +365,7 @@ nice_lavaanPlot <- function(
         html_rows <- c(
           html_rows,
           paste0(
-            "<TR><TD><FONT POINT-SIZE=\"",
+            "<TR><TD ALIGN=\"CENTER\"><FONT POINT-SIZE=\"",
             fit_stats_size,
             "\">",
             wrapped_line,
@@ -374,26 +376,52 @@ nice_lavaanPlot <- function(
     }
 
     # Combine into full HTML table
+    # BALIGN="CENTER" centers the table itself within the label space
     graph_options$label <- paste0(
-      "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\">",
+      "<<TABLE BORDER=\"0\" CELLBORDER=\"0\" CELLSPACING=\"0\" BALIGN=\"CENTER\">",
       paste(html_rows, collapse = ""),
       "</TABLE>>"
     )
 
     # Position label at top if title is present, otherwise at bottom
     graph_options$labelloc <- if (has_title) "t" else "b"
+    # Center the label horizontally
+    graph_options$labeljust <- "c"
+    # Center the entire graph drawing on the page
+    graph_options$center <- "true"
   }
 
-  lavaanPlot::lavaanPlot(
+  # --- buildCall + grViz backend ------------------------------------------
+
+  # Optional: allow width/height for HTML display (does NOT affect export_svg)
+  extra_args <- list(...)
+  widget_width <- if ("width" %in% names(extra_args)) extra_args$width else NULL
+  widget_height <- if ("height" %in% names(extra_args)) {
+    extra_args$height
+  } else {
+    NULL
+  }
+
+  # Use lavaanPlot's internal buildCall() to generate Graphviz DOT syntax
+  buildCall <- utils::getFromNamespace("buildCall", "lavaanPlot")
+  plot_call <- buildCall(
     model = model,
+    name = "plot",
+    labels = NULL, # let lavaanPlot handle default labeling
     node_options = node_options,
     edge_options = edge_options,
     coefs = coefs,
     stand = stand,
     covs = covs,
     stars = stars,
-    graph_options = graph_options,
-    sig = sig,
-    ...
+    graph_options = graph_options, # includes our title/note/fit_stats label
+    sig = sig
+  )
+
+  # Render as a grViz htmlwidget
+  DiagrammeR::grViz(
+    plot_call,
+    width = widget_width,
+    height = widget_height
   )
 }

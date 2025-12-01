@@ -11,6 +11,7 @@ save_plot(
   height = NULL,
   units = c("in", "cm", "mm", "px"),
   dpi = 300,
+  use_webshot = FALSE,
   verbose = TRUE,
   ...
 )
@@ -40,6 +41,13 @@ pixels using the \code{dpi} parameter.}
 Defaults to 300. Used for unit conversion for grViz objects and passed to
 \code{ggplot2::ggsave()} for ggplot objects.}
 
+\item{use_webshot}{Logical. If \code{TRUE}, uses browser-based rendering via
+webshot2 package (headless Chrome) for pixel-perfect screenshots that match
+exactly what you see in the RStudio viewer. This avoids font substitution
+issues that can cause text misalignment with librsvg.
+If \code{FALSE} (default), uses rsvg library to render SVG to PNG/JPG/PDF, which may have
+font rendering differences compared to browser display.}
+
 \item{verbose}{Logical. If \code{TRUE} (default), prints a message indicating where the file
 was saved. Set to \code{FALSE} to suppress messages.}
 
@@ -59,15 +67,30 @@ the plot type and applies the appropriate saving method.
 For plots from \code{nice_lavaanPlot()} (grViz/htmlwidget objects):
 \itemize{
 \item The plot is first converted to SVG using \code{DiagrammeRsvg::export_svg()}
-\item Automatically adds 5\% padding and a white background to prevent text cutoff and ensure
-proper display across all formats (especially for titles and fit statistics)
-\item By default (no width/height specified), all formats use the SVG's natural dimensions,
-which automatically crops to the actual content including title, note, and fit statistics
+\item Graphviz centering attributes (ALIGN, BALIGN, labeljust, center) ensure proper centering
+\item By default (no width/height specified), PNG/JPG/PDF use the SVG's intrinsic viewBox dimensions
+to ensure pixel-perfect centering that matches the SVG output. This prevents rsvg from
+guessing dimensions inconsistently across formats.
 \item Dimension units are specified by the \code{units} parameter and converted to pixels internally
 \item For PNG: SVG is rendered directly to PNG using \code{rsvg::rsvg_png()}
 \item For JPG: SVG is rendered to raster array using \code{rsvg::rsvg()} and saved with \code{grDevices::jpeg()}
 \item For PDF: SVG is rendered to PDF using \code{rsvg::rsvg_pdf()}
 \item For SVG: The SVG string is saved directly to file
+}
+
+When \code{use_webshot = TRUE}:
+\itemize{
+\item Uses a headless browser (Chrome via webshot2/chromote) to render the SVG
+\item Produces pixel-perfect output that matches exactly what you see in the RStudio viewer
+\item Avoids font substitution issues that can cause text misalignment with rsvg
+\item Requires the webshot2 package (\code{install.packages("webshot2")})
+\item Supports PNG, JPG, and PDF formats
+}
+
+When \code{use_webshot = FALSE} (default):
+\itemize{
+\item Uses rsvg library for SVG rendering (faster but may have font differences)
+\item May experience font substitution (e.g., Helvetica -> DejaVu Sans) causing text misalignment
 }
 
 For plots from \code{nice_tidySEM()} (ggplot objects):
@@ -94,21 +117,37 @@ fit <- cfa(HS.model, HolzingerSwineford1939)
 plot <- nice_lavaanPlot(fit)
 
 # Save as PNG (default)
-save_plot(plot, "myplot.png")
+tmp_png <- tempfile(fileext = ".png")
+save_plot(plot, tmp_png)
+unlink(tmp_png)
 
 # Save as PDF (lossless)
-save_plot(plot, "myplot.pdf")
+tmp_pdf <- tempfile(fileext = ".pdf")
+save_plot(plot, tmp_pdf)
+unlink(tmp_pdf)
 
 # Save as SVG (lossless)
-save_plot(plot, "myplot.svg")
+tmp_svg <- tempfile(fileext = ".svg")
+save_plot(plot, tmp_svg)
+unlink(tmp_svg)
 
 # Save as JPG
-save_plot(plot, "myplot.jpg")
+tmp_jpg <- tempfile(fileext = ".jpg")
+save_plot(plot, tmp_jpg)
+unlink(tmp_jpg)
 
 # Custom dimensions with different units
-save_plot(plot, "myplot_large.png", width = 10, height = 7.5, units = "in")
-save_plot(plot, "myplot_cm.pdf", width = 20, height = 15, units = "cm")
-save_plot(plot, "myplot_px.jpg", width = 2400, height = 1800, units = "px")
+tmp_in <- tempfile(fileext = ".png")
+save_plot(plot, tmp_in, width = 10, height = 7.5, units = "in")
+unlink(tmp_in)
+
+tmp_cm <- tempfile(fileext = ".pdf")
+save_plot(plot, tmp_cm, width = 20, height = 15, units = "cm")
+unlink(tmp_cm)
+
+tmp_px <- tempfile(fileext = ".jpg")
+save_plot(plot, tmp_px, width = 2400, height = 1800, units = "px")
+unlink(tmp_px)
 }
 \dontshow{\}) # examplesIf}
 }

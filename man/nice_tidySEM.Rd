@@ -110,8 +110,8 @@ nice_tidySEM(fit, layout = structure)
 # Save plot to file
 \dontrun{
 plot <- nice_tidySEM(fit, layout = structure)
-save_plot(plot, "my_plot.png")    # PNG format
-save_plot(plot, "my_plot.pdf")    # PDF format
+save_plot(plot, "my_plot.png") # PNG format
+save_plot(plot, "my_plot.pdf") # PDF format
 }
 \dontshow{\}) # examplesIf}
 }
